@@ -1,6 +1,6 @@
 package se.liu.antos931jakos322.TowerDefence;
 
-public abstract class Entity
+public interface Entity
 {
-
+    public void draw();
 }
