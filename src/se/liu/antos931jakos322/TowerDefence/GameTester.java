@@ -6,7 +6,8 @@ public class GameTester
     Map map = new Map(10,10);
     map.hardCodedMap();
     map.hardRoad();
-    mapViewer viewer = new mapViewer(map);
-    viewer.viewMap();
+    MapViewer viewer = new MapViewer(map);
+    //viewer.viewMapText();
+    viewer.show();
     }
 }
