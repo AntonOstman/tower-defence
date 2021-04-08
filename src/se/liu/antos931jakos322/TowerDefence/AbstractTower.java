@@ -11,7 +11,5 @@ public abstract class AbstractTower implements Entity
         this.color = Color.blue;
     }
 
-    @Override public void draw() {
 
-    }
 }

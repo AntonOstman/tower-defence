@@ -31,7 +31,7 @@ public class MapComponent extends JComponent
 	final Graphics2D g2d = (Graphics2D) g;
 
 	for (AbstractTower tower: map.getTowers()) {
-	tower.draw();
+	tower.draw(g2d, 30);
 	}
 
 	for (int y = 0; y < mapY; y++) {
@@ -39,6 +39,10 @@ public class MapComponent extends JComponent
 		Tile currentTile = map.getTile(x,y);
 		currentTile.drawTile(g2d,MARGIN,TILE_SIZE);
 	    }
+	}
+
+	for(Enemy enemy : map.getEnemies()){
+	    enemy.draw(g2d, 30);
 	}
     }
 
