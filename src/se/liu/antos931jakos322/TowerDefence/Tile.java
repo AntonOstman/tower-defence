@@ -1,12 +1,14 @@
 package se.liu.antos931jakos322.TowerDefence;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Random;
+import java.util.List;
 
 public class Tile
 {
-    private Entity[] entities;
+    private List<Entity> entities;
     private tileType type;
     private Color tileColor;
     private int posX;
@@ -15,7 +17,7 @@ public class Tile
     private final static EnumMap<tileType, Color> TILE_COLOR = createColorMap();
 
     public Tile(int posX, int posY, final Entity[] entities, final tileType type) {
-	this.entities = entities;
+	this.entities = new ArrayList<>();
 	this.type = type;
 	this.tileColor = randomNuance(TILE_COLOR.get(type));
 	this.posX = posX;
@@ -26,9 +28,8 @@ public class Tile
 	return type;
     }
 
-    public void addEntity(){
-
-
+    public void addEntity(Entity entity){
+        entities.add(entity);
     }
     public void drawTile(final Graphics2D g2d, final int MARGIN, final int TILE_SIZE){
 
