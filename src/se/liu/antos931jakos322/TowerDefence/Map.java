@@ -8,9 +8,7 @@ public class Map
     private Tile[][] tiles;
     private int width, height;
     private List<AbstractTower> towers = new ArrayList<>();
-
-
-
+    
     public Map(final int width, final int height) {
 
 	this.width = width;
