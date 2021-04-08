@@ -4,12 +4,13 @@ import java.awt.*;
 
 public class ArrowTower extends AbstractTower
 {
-    public ArrowTower(final Point pos) {
-	super(pos);
+    public ArrowTower(final Point pos, final Color color) {
+	super(pos, color);
+
     }
 
     @Override public void draw() {
-	super.draw();
+
 
     }
 }

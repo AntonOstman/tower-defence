@@ -2,6 +2,8 @@ package se.liu.antos931jakos322.TowerDefence;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapComponent extends JComponent
 {
@@ -28,10 +30,14 @@ public class MapComponent extends JComponent
 
 	final Graphics2D g2d = (Graphics2D) g;
 
+	for (AbstractTower tower: map.getTowers()) {
+	tower.draw();
+	}
+
 	for (int y = 0; y < mapY; y++) {
 	    for (int x = 0; x < mapX; x++) {
 		Tile currentTile = map.getTile(x,y);
-		currentTile.drawTile(g2d,0,30);
+		currentTile.drawTile(g2d,MARGIN,TILE_SIZE);
 	    }
 	}
     }

@@ -1,12 +1,14 @@
 package se.liu.antos931jakos322.TowerDefence;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 public class Map
 {
     private Tile[][] tiles;
     private int width, height;
-    private List<AbstractTower> towers;
+    private List<AbstractTower> towers = new ArrayList<>();
+
 
 
     public Map(final int width, final int height) {
@@ -58,6 +60,10 @@ public class Map
 
     public int getHeight() {
 	return height;
+    }
+
+    public List<AbstractTower> getTowers() {
+	return towers;
     }
 
     @Override public String toString() {
