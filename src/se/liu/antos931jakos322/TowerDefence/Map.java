@@ -1,14 +1,16 @@
 package se.liu.antos931jakos322.TowerDefence;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 public class Map
 {
     private Tile[][] tiles;
     private int width, height;
-    private List<AbstractTower> towers = new ArrayList<>();
-    
+
+    private List<AbstractTower> towers;
+    private List<Enemy> enemies;
+
+
     public Map(final int width, final int height) {
 
 	this.width = width;
@@ -16,9 +18,17 @@ public class Map
 	this.tiles = new Tile[height][width];
     }
 
-    public void addEntity(Entity entity,int x,int y){
+    public List<AbstractTower> getTowers() {
+	return towers;
+    }
+
+    public void addEntity(Entity entity, int x, int y){
         Tile currentTile = tiles[x][y];
         currentTile.addEntity(entity);
+    }
+
+    public List<Enemy> getEnemies() {
+	return enemies;
     }
 
     public void hardCodedMap(){
@@ -58,10 +68,6 @@ public class Map
 
     public int getHeight() {
 	return height;
-    }
-
-    public List<AbstractTower> getTowers() {
-	return towers;
     }
 
     @Override public String toString() {
