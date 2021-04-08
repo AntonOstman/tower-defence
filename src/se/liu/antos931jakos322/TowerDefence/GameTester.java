@@ -9,5 +9,6 @@ public class GameTester
     MapViewer viewer = new MapViewer(map);
     //viewer.viewMapText();
     viewer.show();
+
     }
 }

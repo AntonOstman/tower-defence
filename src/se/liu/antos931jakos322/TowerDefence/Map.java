@@ -1,17 +1,24 @@
 package se.liu.antos931jakos322.TowerDefence;
 
 import java.awt.*;
-
+import java.util.List;
 public class Map
 {
     private Tile[][] tiles;
     private int width, height;
+    private List<AbstractTower> towers;
+
 
     public Map(final int width, final int height) {
 
 	this.width = width;
 	this.height = height;
 	this.tiles = new Tile[height][width];
+    }
+
+    public void addEntity(Entity entity,int x,int y){
+        Tile currentTile = tiles[x][y];
+        currentTile.addEntity(entity);
     }
 
     public void hardCodedMap(){
