@@ -1,6 +1,7 @@
 package se.liu.antos931jakos322.TowerDefence;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 public class Map
 {
@@ -16,8 +17,18 @@ public class Map
 	this.width = width;
 	this.height = height;
 	this.tiles = new Tile[height][width];
+	this.enemies = new ArrayList<>();
+	this.towers = new ArrayList<>();
+	addEnemy();
     }
 
+    public void tick(){
+
+    }
+    public void addEnemy(){
+        enemies.add(new GenericEnemy(new Point(5,5)));
+        towers.add(new ArrowTower(new Point(4,3)));
+    }
     public List<AbstractTower> getTowers() {
 	return towers;
     }
