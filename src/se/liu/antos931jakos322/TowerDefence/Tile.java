@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Tile
 {
-    private Entity entity;
+    private Entity[] entities;
     private tileType type;
     private Color tileColor;
     private int posX;
@@ -14,8 +14,8 @@ public class Tile
 
     private final static EnumMap<tileType, Color> TILE_COLOR = createColorMap();
 
-    public Tile(int posX, int posY, final Entity entity, final tileType type) {
-	this.entity = entity;
+    public Tile(int posX, int posY, final Entity[] entities, final tileType type) {
+	this.entities = entities;
 	this.type = type;
 	this.tileColor = randomNuance(TILE_COLOR.get(type));
 	this.posX = posX;
@@ -26,6 +26,10 @@ public class Tile
 	return type;
     }
 
+    public void addEntity(){
+
+
+    }
     public void drawTile(final Graphics2D g2d, final int MARGIN, final int TILE_SIZE){
 
 	g2d.setColor(tileColor);
