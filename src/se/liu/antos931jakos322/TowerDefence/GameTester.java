@@ -8,6 +8,7 @@ public class GameTester
     map.hardRoad();
     MapViewer viewer = new MapViewer(map);
     //viewer.viewMapText();
+        // hejsan
     viewer.show();
 
     }
