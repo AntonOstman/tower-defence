@@ -26,16 +26,12 @@ public class MapComponent extends JComponent
     @Override protected void paintComponent(final Graphics g) {
 	super.paintComponent(g);
 
-
 	final Graphics2D g2d = (Graphics2D) g;
-
 
 	for (int y = 0; y < mapY; y++) {
 	    for (int x = 0; x < mapX; x++) {
-	        Tile currentTile = map.getTile(x,y);
-	        Color tileColor = currentTile.getTileColor();
-		g2d.setColor(tileColor);
-		g2d.fillRect(x * (MARGIN + TILE_SIZE), y * (MARGIN+TILE_SIZE), TILE_SIZE, TILE_SIZE);
+		Tile currentTile = map.getTile(x,y);
+		currentTile.drawTile(g2d,0,30);
 	    }
 	}
     }

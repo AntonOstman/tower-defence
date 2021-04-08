@@ -9,20 +9,27 @@ public class Tile
     private Entity entity;
     private tileType type;
     private Color tileColor;
+    private int posX;
+    private int posY;
+
     private final static EnumMap<tileType, Color> TILE_COLOR = createColorMap();
 
-    public Tile(final Entity entity, final tileType type) {
+    public Tile(int posX, int posY, final Entity entity, final tileType type) {
 	this.entity = entity;
 	this.type = type;
 	this.tileColor = randomNuance(TILE_COLOR.get(type));
-
+	this.posX = posX;
+	this.posY = posY;
     }
 
     public tileType getType() {
 	return type;
     }
 
-    public void drawTile(final Graphics2D g, int x, int y){
+    public void drawTile(final Graphics2D g2d, final int MARGIN, final int TILE_SIZE){
+
+	g2d.setColor(tileColor);
+	g2d.fillRect(posX * (MARGIN + TILE_SIZE), posY * (MARGIN+TILE_SIZE), TILE_SIZE, TILE_SIZE);
 
     }
 
