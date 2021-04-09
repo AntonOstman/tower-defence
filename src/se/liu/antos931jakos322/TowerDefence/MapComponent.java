@@ -10,7 +10,7 @@ public class MapComponent extends JComponent
     private Map map;
     final int mapX;
     final int mapY;
-    final static int TILE_SIZE = 20;
+    final static int TILE_SIZE = 50;
     final static int MARGIN = 0;
 
     public MapComponent(final Map map) {

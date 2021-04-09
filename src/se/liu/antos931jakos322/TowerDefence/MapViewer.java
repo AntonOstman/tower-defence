@@ -20,14 +20,14 @@ public class MapViewer
 	int mapY = map.getDimension().y;
         for (int y = 0; y < mapY; y++) {
 	    for (int x = 0; x < mapX; x++) {
-		System.out.print(map.getTile(x, y));
+		//System.out.print(map.getTile(x, y));
 	    }
-	    System.out.println();
+	    //System.out.println();
 	}
 }
     public void show(){
 	MapComponent mapComponent = new MapComponent(map);
-	System.out.println(map);
+	//System.out.println(map);
 	frame.setLayout(new BorderLayout());
 	frame.add(mapComponent, BorderLayout.CENTER);
 	frame.pack();

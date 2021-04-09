@@ -22,6 +22,7 @@ public class GameTester
     final Action DoOneStep = new AbstractAction() {
         @Override public void actionPerformed(final ActionEvent e) {
             map.tick();
+            viewer.show();
         }
     };
 
