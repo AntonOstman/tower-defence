@@ -1,4 +1,6 @@
-package se.liu.antos931jakos322.TowerDefence;
+package se.liu.antos931jakos322.towerDefence;
+
+
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -9,7 +11,7 @@ public class Map
     private List<Point> path = new ArrayList<>();
     private int width, height;
 
-    private List<AbstractTower> towers;
+    private List<Tower> towers;
     private List<Enemy> enemies;
 
 
@@ -52,7 +54,7 @@ public class Map
     }
 
     public void activateTowers(){
-        for (AbstractTower tower: towers){
+        for (Tower tower: towers){
             Enemy closestEnemy = getClosestEnemy(tower.getPosistion());
             if (tower.isFatalAttack(closestEnemy)){
                 enemyCleanUp(closestEnemy);
@@ -78,11 +80,11 @@ public class Map
     public void addEnemy(Enemy enemy){
         enemies.add(enemy);
     }
-    public void addTower(AbstractTower tower){
+    public void addTower(Tower tower){
         towers.add(tower);
     }
 
-    public List<AbstractTower> getTowers() {
+    public List<Tower> getTowers() {
 	return towers;
     }
 

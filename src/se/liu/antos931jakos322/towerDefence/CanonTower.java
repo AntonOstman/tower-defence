@@ -1,8 +1,14 @@
-package se.liu.antos931jakos322.TowerDefence;
+package se.liu.antos931jakos322.towerDefence;
 
 import java.awt.*;
 
-public class CanonTower extends AbstractTower
+/**
+ *
+ * A canon tower does damage to all enemies on a tile
+ *
+ */
+
+public class CanonTower extends Tower
 {
 
 
@@ -12,7 +18,6 @@ public class CanonTower extends AbstractTower
     }
 
     @Override public boolean isFatalAttack(final Enemy enemy) {
-
 
         return super.isFatalAttack(enemy);
     }

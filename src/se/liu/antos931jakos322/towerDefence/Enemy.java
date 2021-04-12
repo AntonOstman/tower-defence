@@ -1,7 +1,14 @@
-package se.liu.antos931jakos322.TowerDefence;
+package se.liu.antos931jakos322.towerDefence;
+
+
+/**
+ * An abstract class with the core elements of an enemy
+ * An enemy object wanders the map path with the intent of damaging the player
+ *
+ */
+
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Enemy implements Entity

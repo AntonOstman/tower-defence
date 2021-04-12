@@ -1,4 +1,4 @@
-package se.liu.antos931jakos322.TowerDefence;
+package se.liu.antos931jakos322.towerDefence;
 
 import javax.swing.*;
 import java.awt.*;

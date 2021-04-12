@@ -1,17 +1,21 @@
-package se.liu.antos931jakos322.TowerDefence;
+package se.liu.antos931jakos322.towerDefence;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+
+/**
+ * A graphics component used for drawing the map and objects on it.
+ *
+ *
+ */
 
 public class MapComponent extends JComponent
 {
     private Map map;
-    final int mapX;
-    final int mapY;
-    final static int TILE_SIZE = 50;
-    final static int MARGIN = 0;
+    private final int mapX;
+    private final int mapY;
+    private final static int TILE_SIZE = 50;
+    private final static int MARGIN = 0;
 
     public MapComponent(final Map map) {
 	this.map = map;
@@ -38,7 +42,7 @@ public class MapComponent extends JComponent
 		currentTile.drawTile(g2d,MARGIN,TILE_SIZE);
 	    }
 	}
-	for (AbstractTower tower: map.getTowers()) {
+	for (Tower tower: map.getTowers()) {
 	    tower.draw(g2d, TILE_SIZE);
 	}
 	for(Enemy enemy : map.getEnemies()){

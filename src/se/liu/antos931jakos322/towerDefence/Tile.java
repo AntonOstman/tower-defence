@@ -1,4 +1,4 @@
-package se.liu.antos931jakos322.TowerDefence;
+package se.liu.antos931jakos322.towerDefence;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -13,12 +13,12 @@ public class Tile
     private Color tileColor;
     private int posX;
     private int posY;
-
-    private final static EnumMap<tileType, Color> TILE_COLOR = createColorMap();
+    private EnumMap<tileType, Color> TILE_COLOR;
 
     public Tile(int posX, int posY, final Entity[] entities, final tileType type) {
 	this.entities = new ArrayList<>();
 	this.type = type;
+	this.TILE_COLOR = createColorMap();
 	this.tileColor = randomNuance(TILE_COLOR.get(type));
 	this.posX = posX;
 	this.posY = posY;
@@ -47,6 +47,8 @@ public class Tile
     }
 
     public Color randomNuance(Color color){
+        // changes the given colors nuances a bit
+
 	Random rnd = new Random();
 	int randomInt = rnd.nextInt(50);
 	int newRed = 0;
