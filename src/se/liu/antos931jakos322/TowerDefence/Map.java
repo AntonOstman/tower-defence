@@ -20,18 +20,19 @@ public class Map
 	this.tiles = new Tile[height][width];
 	this.enemies = new ArrayList<>();
 	this.towers = new ArrayList<>();
-	addEnemy();
     }
+
+
 
     public Enemy getClosestEnemy(Point towerPos){
         Enemy closestEnemy = null;
-        if (!enemies.isEmpty()){
 
-            double closestDistance = Double.POSITIVE_INFINITY;
+        if (!enemies.isEmpty()){
+            double closestDistance = Double.POSITIVE_INFINITY; // starting distance
 
 	    for(Enemy enemy: enemies){
                 Point enemyPos = enemy.getPoint();
-                double currentDistance = Math.pow((enemyPos.x),2) + Math.pow((enemyPos.y),2);
+                double currentDistance = HelperFunctions.pythagoras(enemyPos.x, enemyPos.y);
 
 		if(currentDistance < closestDistance){
 		    closestEnemy = enemy;
@@ -74,18 +75,13 @@ public class Map
         activateTowers();
 	enemyMove();
     }
-    public void addEnemy(){
-        enemies.add(new GenericEnemy(new Point(9,9)));
-        towers.add(new CanonTower(new Point(4,3)));
-
-        enemies.add(new GenericEnemy(new Point(1,4)));
-	towers.add(new ArrowTower(new Point(2,3)));
-
-	//enemies.add(new GenericEnemy(new Point(3,3)));
-	towers.add(new ArrowTower(new Point(4,6)));
-
-
+    public void addEnemy(Enemy enemy){
+        enemies.add(enemy);
     }
+    public void addTower(AbstractTower tower){
+        towers.add(tower);
+    }
+
     public List<AbstractTower> getTowers() {
 	return towers;
     }
