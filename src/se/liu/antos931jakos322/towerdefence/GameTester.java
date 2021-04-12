@@ -1,8 +1,14 @@
-package se.liu.antos931jakos322.towerDefence;
+package se.liu.antos931jakos322.towerdefence;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+
+/**
+ *
+ * Starts the game and controls what happens in the game
+ *
+ */
 
 public class GameTester
 {

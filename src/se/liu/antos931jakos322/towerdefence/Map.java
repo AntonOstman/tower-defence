@@ -1,6 +1,10 @@
-package se.liu.antos931jakos322.towerDefence;
+package se.liu.antos931jakos322.towerdefence;
 
-
+/**
+ *
+ * Map on which the player places towers and enemies walk with the intent to damage
+ *
+ */
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -100,25 +104,25 @@ public class Map
     public void hardCodedMap(){
 	for (int h = 0; h < height; h++) {
 	    for (int w = 0; w < width; w++) {
-		tiles[h][w] = new Tile(w,h,null, tileType.grass);
+		tiles[h][w] = new Tile(w, h, null, TileType.GRASS);
 	    }
 	}
     }
 
 
     public void hardRoad(){
-        tiles[5][0] = new Tile(0,5,null, tileType.roado);
-	tiles[5][1] = new Tile(1,5,null, tileType.roado);
-	tiles[5][2] = new Tile(2,5,null, tileType.roado);
-	tiles[5][3] = new Tile(3,5,null, tileType.roado);
-	tiles[5][4] = new Tile(4,5,null, tileType.roado);
-	tiles[5][5] = new Tile(5,5,null, tileType.roado);
-	tiles[6][5] = new Tile(5,6,null, tileType.roado);
-	tiles[7][5] = new Tile(5,7,null, tileType.roado);
-	tiles[7][6] = new Tile(6,7,null, tileType.roado);
-	tiles[7][7] = new Tile(7,7,null, tileType.roado);
-	tiles[7][8] = new Tile(8,7,null, tileType.roado);
-	tiles[7][9] = new Tile(9,7,null, tileType.roado);
+        tiles[5][0] = new Tile(0, 5, null, TileType.ROADO);
+	tiles[5][1] = new Tile(1, 5, null, TileType.ROADO);
+	tiles[5][2] = new Tile(2, 5, null, TileType.ROADO);
+	tiles[5][3] = new Tile(3, 5, null, TileType.ROADO);
+	tiles[5][4] = new Tile(4, 5, null, TileType.ROADO);
+	tiles[5][5] = new Tile(5, 5, null, TileType.ROADO);
+	tiles[6][5] = new Tile(5, 6, null, TileType.ROADO);
+	tiles[7][5] = new Tile(5, 7, null, TileType.ROADO);
+	tiles[7][6] = new Tile(6, 7, null, TileType.ROADO);
+	tiles[7][7] = new Tile(7, 7, null, TileType.ROADO);
+	tiles[7][8] = new Tile(8, 7, null, TileType.ROADO);
+	tiles[7][9] = new Tile(9, 7, null, TileType.ROADO);
 	path.add(new Point(0,5));
 	path.add(new Point(1,5));
 	path.add(new Point(2,5));

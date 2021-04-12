@@ -1,8 +1,14 @@
-package se.liu.antos931jakos322.towerDefence;
+package se.liu.antos931jakos322.towerdefence;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ *
+ * Starts the GUI on which the player interacts with and can view the game
+ *
+ *
+ */
 public class MapViewer
 {
     private Map map;

@@ -1,4 +1,11 @@
-package se.liu.antos931jakos322.towerDefence;
+package se.liu.antos931jakos322.towerdefence;
+
+/**
+ *
+ * Class with various helper functions
+ *
+ */
+
 
 public class HelperFunctions
 {

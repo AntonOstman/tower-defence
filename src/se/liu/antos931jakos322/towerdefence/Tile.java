@@ -1,4 +1,11 @@
-package se.liu.antos931jakos322.towerDefence;
+package se.liu.antos931jakos322.towerdefence;
+
+
+/**
+ *
+ * A tile which
+ *
+ */
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -9,13 +16,13 @@ import java.util.List;
 public class Tile
 {
     private List<Entity> entities;
-    private tileType type;
+    private TileType type;
     private Color tileColor;
     private int posX;
     private int posY;
-    private EnumMap<tileType, Color> TILE_COLOR;
+    private EnumMap<TileType, Color> TILE_COLOR;
 
-    public Tile(int posX, int posY, final Entity[] entities, final tileType type) {
+    public Tile(int posX, int posY, final Entity[] entities, final TileType type) {
 	this.entities = new ArrayList<>();
 	this.type = type;
 	this.TILE_COLOR = createColorMap();
@@ -24,7 +31,7 @@ public class Tile
 	this.posY = posY;
     }
 
-    public tileType getType() {
+    public TileType getType() {
 	return type;
     }
 
@@ -74,12 +81,12 @@ public class Tile
 	return newColor;
     }
 
-    private static EnumMap<tileType, Color> createColorMap(){
+    private static EnumMap<TileType, Color> createColorMap(){
 
-        EnumMap<tileType, Color> tileColors = new EnumMap<>(tileType.class);
+        EnumMap<TileType, Color> tileColors = new EnumMap<>(TileType.class);
 
-        tileColors.put(tileType.grass , Color.GREEN);
-	tileColors.put(tileType.roado, Color.BLACK);
+        tileColors.put(TileType.GRASS, Color.GREEN);
+	tileColors.put(TileType.ROADO, Color.BLACK);
 
         return tileColors;
     }

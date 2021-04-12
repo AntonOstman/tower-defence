@@ -1,4 +1,4 @@
-package se.liu.antos931jakos322.towerDefence;
+package se.liu.antos931jakos322.towerdefence;
 
 
 /**
@@ -9,20 +9,32 @@ package se.liu.antos931jakos322.towerDefence;
 
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Enemy implements Entity
 {
     protected int level;
-    protected int[] path;
+    protected List<Point> path;
     protected Point point;
     protected int health;
     protected int pathIndex;
 
-    public Enemy(final Point point) {
+
+    protected Color color;
+
+
+    protected Enemy(final Point point) {
 	this.point = point;
 	this.health = 100;
 	this.pathIndex = 0;
+	this.color = Color.red;
+	this.path = new ArrayList<>();
+    }
+
+    public void draw(final Graphics2D g2d, final int tileSize) {
+	g2d.setColor(color);
+	g2d.fillOval(point.x * tileSize, point.y * tileSize, tileSize / 2, tileSize / 2);
     }
 
     public int getHealth(){
