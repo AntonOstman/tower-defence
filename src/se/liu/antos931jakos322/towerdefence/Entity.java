@@ -10,4 +10,5 @@ import java.awt.*;
 public interface Entity
 {
     public void draw(final Graphics2D g2d, final int tileSize);
+    public Point getPosition();
 }

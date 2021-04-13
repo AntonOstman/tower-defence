@@ -19,7 +19,7 @@ public class Map
     private List<Tower> towers;
     private List<Enemy> enemies;
     private int health = 100;
-
+    private List<MapListener> mapListeners;
 
     public Map(final int width, final int height) {
 
@@ -28,9 +28,17 @@ public class Map
 	this.tiles = new Tile[height][width];
 	this.enemies = new ArrayList<>();
 	this.towers = new ArrayList<>();
+	this.mapListeners = new ArrayList<>();
+    }
+    public void addListener(MapListener listener){
+        mapListeners.add(listener);
     }
 
-
+    public void notifyListeners(){
+        for(MapListener listener: mapListeners){
+            listener.mapChanged();
+	}
+    }
 
     public Enemy getClosestEnemy(Point towerPos){
         Enemy closestEnemy = null;
@@ -39,7 +47,7 @@ public class Map
             double closestDistance = Double.POSITIVE_INFINITY; // starting distance
 
 	    for(Enemy enemy: enemies){
-                Point enemyPos = enemy.getPoint();
+                Point enemyPos = enemy.getPosition();
                 double currentDistance = HelperFunctions.pythagoras(enemyPos.x, enemyPos.y);
 
 		if(currentDistance < closestDistance){
@@ -55,13 +63,9 @@ public class Map
     }
 
 
-    public void removeEnemy(Entity enemy){
-        enemies.remove(enemy);
-    }
-
     public void activateTowers(){
         for (Tower tower: towers){
-            Enemy closestEnemy = getClosestEnemy(tower.getPosistion());
+            Enemy closestEnemy = getClosestEnemy(tower.getPosition());
             if (tower.isFatalAttack(closestEnemy)){
                 enemyCleanUp(closestEnemy);
 	    }
@@ -97,6 +101,7 @@ public class Map
     public void tick(){
         activateTowers();
 	enemyMove();
+	notifyListeners();
     }
     public void addEnemy(Enemy enemy){
         enemies.add(enemy);

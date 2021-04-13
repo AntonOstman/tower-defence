@@ -9,7 +9,7 @@ import java.awt.*;
  *
  */
 
-public class MapComponent extends JComponent
+public class MapComponent extends JComponent implements MapListener
 {
     private Map map;
     private final int mapX;
@@ -27,6 +27,10 @@ public class MapComponent extends JComponent
 
         return new Dimension(mapX*TILE_SIZE + 100,mapY*TILE_SIZE +100);
 
+    }
+
+    @Override public void mapChanged() {
+	repaint();
     }
 
     @Override protected void paintComponent(final Graphics g) {

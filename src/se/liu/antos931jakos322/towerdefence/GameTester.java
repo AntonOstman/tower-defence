@@ -16,6 +16,10 @@ public class GameTester
 
     public static void main(String[] args) {
 
+    final int timerDelay = 50;
+    final int enemySpawnRate = 50;
+    final int waveDensity = timerDelay * enemySpawnRate; // keeps the ratio when timerDelay is changed
+
 
     Map map = new Map(10,10);
     map.hardCodedMap();
@@ -29,22 +33,22 @@ public class GameTester
 
     //map.addEnemy(new GenericEnemy(new Point(3,3)));
     map.addTower(new ArrowTower(new Point(4,6)));
+    map.addTower(new ArrowTower(new Point(5, 5)));
 
     //viewer.viewMapText();
     // hejsan
     viewer.show();
 
-    final Action DoOneStep = new AbstractAction() {
+    final Action doOneStep = new AbstractAction() {
         @Override public void actionPerformed(final ActionEvent e) {
             map.tick();
-            viewer.show();
         }
     };
 
-    final Timer tickTimer = new Timer(50,DoOneStep);
+    final Timer tickTimer = new Timer(timerDelay, doOneStep);
     tickTimer.start();
 
-    final Action CreateEnemy = new AbstractAction() {
+    final Action createEnemy = new AbstractAction() {
         @Override public void actionPerformed(final ActionEvent e) {
             //Enemy enemy =
 
@@ -52,8 +56,8 @@ public class GameTester
         }
     };
 
-    final Timer Enemytimer = new Timer(3000,CreateEnemy);
-    Enemytimer.start();
+    final Timer enemyTimer = new Timer(waveDensity, createEnemy);
+    enemyTimer.start();
     }
 
     public void createWave(int numberOfEnemies){

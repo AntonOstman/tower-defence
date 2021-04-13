@@ -35,6 +35,7 @@ public class MapViewer
 	MapComponent mapComponent = new MapComponent(map);
 	//System.out.println(map);
 	frame.setLayout(new BorderLayout());
+	map.addListener(mapComponent);
 	frame.add(mapComponent, BorderLayout.CENTER);
 	frame.pack();
 	frame.setVisible(true);

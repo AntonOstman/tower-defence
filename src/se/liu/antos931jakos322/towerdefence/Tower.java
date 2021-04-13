@@ -11,11 +11,11 @@ import java.awt.*;
 
 public abstract class Tower implements Entity
 {
-    protected Point pos;
+    protected Point position;
     protected Color color;
     protected int attackPower;
-    public Tower(final Point pos, Color color) {
-        this.pos = pos;
+    protected Tower(final Point position, Color color) {
+        this.position = position;
         this.color = color;
         this.attackPower = 10;
     }
@@ -32,13 +32,15 @@ public abstract class Tower implements Entity
         return false;
     }
 
-    public Point getPosistion(){
-        return pos;
+    public Point getPosition(){
+        return position;
     }
 
 
     @Override public void draw(final Graphics2D g2d, final int tileSize) {
+        double towerScale = 0.9;
+        int towerSize = (int) (tileSize * towerScale);
         g2d.setColor(color);
-        g2d.fillRect(pos.x * tileSize, pos.y * tileSize, tileSize, tileSize);
+        g2d.fillRect(position.x * tileSize, position.y * tileSize, towerSize, towerSize);
     }
 }

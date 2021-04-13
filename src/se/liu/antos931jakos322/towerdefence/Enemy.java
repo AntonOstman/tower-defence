@@ -16,22 +16,20 @@ public abstract class Enemy implements Entity
 {
     protected int level;
     protected List<Point> path;
-    protected Point point;
+    protected Point position;
     protected int health;
     protected int pathIndex;
-    protected int n = 0;
+    protected int moveAmount = 0;
     protected final int maxHealth;
 
     protected double drawX;
     protected double drawY;
 
-
     protected Color color;
 
-
-    protected Enemy(final Point point) {
-	this.point = point;
-	this.health = 10000;
+    protected Enemy(final Point position) {
+	this.position = position;
+	this.health = 1000;
 	this.pathIndex = 0;
 	this.color = Color.red;
 	this.path = new ArrayList<>();
@@ -40,8 +38,14 @@ public abstract class Enemy implements Entity
 
     public void draw(final Graphics2D g2d, final int tileSize) {
 	g2d.setColor(color);
+	final int centrationConstant = 10; // should be changed to fit all sizes
+	final double enemyScale = 0.5;
+	final int size = (int) (tileSize * enemyScale); // less size is bigger enemy
 
-	g2d.fillOval((int) (drawX * tileSize) + 10, (int) (drawY * tileSize) + 10, tileSize / 2, tileSize / 2);
+	int drawPosX = (int) (drawX * tileSize) + centrationConstant;
+	int drawPosY = (int) (drawY * tileSize) + centrationConstant;
+
+	g2d.fillOval(drawPosX, drawPosY, size, size);
 
     }
 
@@ -54,36 +58,47 @@ public abstract class Enemy implements Entity
 	if(pathIndex == path.size()-1){
 	    return 1;
 	}
-        point = path.get(pathIndex);
+	position = path.get(pathIndex);
 
+	// path index moves the actual position while the rest is to keep the enemy walking "smooth"
+	double difX = path.get(pathIndex+1).x - position.x;
+	double difY = path.get(pathIndex+1).y - position.y;
+	drawX =  (position.x + (difX / moveSmoothness) * moveAmount);
+	drawY =  (position.y + (difY / moveSmoothness) * moveAmount);
 
-	double difX =  path.get(pathIndex+1).x - point.x;
-	double difY =  path.get(pathIndex+1).y - point.y;
-	drawX =  (point.x + (difX/moveSmoothness)*n);
-	drawY =  (point.y + (difY/moveSmoothness)*n);
-
-        if(n < moveSmoothness){ n++; }
+        if(moveAmount < moveSmoothness){ moveAmount++; }
         else{
-            n = 1;
+	    moveAmount = 1;
 	    pathIndex += 1;
         }
         return 0;
     }
 
-    public Point getPoint() {
-	return point;
+    public Point getPosition() {
+	return position;
     }
 
     public void takeDamage(int damage){
-	health -= damage;
-
+        if (health - damage < 0) {
+	    health = 0;
+	}
+        else {
+            health -= damage;
+	}
 	double procentageHP = (double) health / maxHealth;
-	System.out.println(procentageHP);
+
 	double inverceProcentageHP = 1 - procentageHP;
 
-	color = new Color(255, (int) (inverceProcentageHP * 255), (int) (inverceProcentageHP * 255));
-
-
+	try {
+	    color = new Color(255, (int) (inverceProcentageHP * 255), (int) (inverceProcentageHP * 255));
+	}
+	catch (IllegalArgumentException e){
+	    System.out.println((inverceProcentageHP * 255));
+	    System.out.println(inverceProcentageHP);
+	    System.out.println(health);
+	    System.out.println(maxHealth);
+	    System.out.println((double) health / maxHealth + " div");
+	}
 
 
     }
