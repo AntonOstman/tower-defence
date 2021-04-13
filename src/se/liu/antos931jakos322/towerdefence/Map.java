@@ -8,6 +8,7 @@ package se.liu.antos931jakos322.towerdefence;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 public class Map
 {
@@ -17,6 +18,7 @@ public class Map
 
     private List<Tower> towers;
     private List<Enemy> enemies;
+    private int health = 100;
 
 
     public Map(final int width, final int height) {
@@ -66,9 +68,24 @@ public class Map
 	}
     }
 
+    public void takeDamage(int damage){
+        health -= damage;
+    }
+
+    public int getHealth() {
+	return health;
+    }
+
     public void enemyMove(){
-        for(Enemy enemy: enemies){
-            enemy.move(path);
+
+	Iterator<Enemy> i = enemies.iterator();
+        while(i.hasNext()){
+            Enemy enemy = i.next();
+            int damage = enemy.moveAndTakeDamage(path);
+            if(damage == 1){
+                i.remove();
+		takeDamage(1);
+            }
 	}
     }
 
@@ -87,6 +104,8 @@ public class Map
     public void addTower(Tower tower){
         towers.add(tower);
     }
+
+
 
     public List<Tower> getTowers() {
 	return towers;
@@ -123,6 +142,9 @@ public class Map
 	tiles[7][7] = new Tile(7, 7, null, TileType.ROADO);
 	tiles[7][8] = new Tile(8, 7, null, TileType.ROADO);
 	tiles[7][9] = new Tile(9, 7, null, TileType.ROADO);
+
+	path.add(new Point(-1,5));
+
 	path.add(new Point(0,5));
 	path.add(new Point(1,5));
 	path.add(new Point(2,5));
@@ -135,6 +157,8 @@ public class Map
 	path.add(new Point(7,7));
 	path.add(new Point(8,7));
 	path.add(new Point(9,7));
+
+	path.add(new Point(10,7));
 
 
     }

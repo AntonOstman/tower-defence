@@ -19,6 +19,11 @@ public abstract class Enemy implements Entity
     protected Point point;
     protected int health;
     protected int pathIndex;
+    protected int n = 0;
+    protected final int maxHealth;
+
+    protected double drawX;
+    protected double drawY;
 
 
     protected Color color;
@@ -26,24 +31,43 @@ public abstract class Enemy implements Entity
 
     protected Enemy(final Point point) {
 	this.point = point;
-	this.health = 100;
+	this.health = 10000;
 	this.pathIndex = 0;
 	this.color = Color.red;
 	this.path = new ArrayList<>();
+	this.maxHealth = health;
     }
 
     public void draw(final Graphics2D g2d, final int tileSize) {
 	g2d.setColor(color);
-	g2d.fillOval(point.x * tileSize, point.y * tileSize, tileSize / 2, tileSize / 2);
+
+	g2d.fillOval((int) (drawX * tileSize) + 10, (int) (drawY * tileSize) + 10, tileSize / 2, tileSize / 2);
+
     }
 
     public int getHealth(){
 	return health;
     }
 
-    public void move(List<Point> path){
+    public int moveAndTakeDamage(List<Point> path){
+	int moveSmoothness = 10;
+	if(pathIndex == path.size()-1){
+	    return 1;
+	}
         point = path.get(pathIndex);
-	pathIndex += 1;
+
+
+	double difX =  path.get(pathIndex+1).x - point.x;
+	double difY =  path.get(pathIndex+1).y - point.y;
+	drawX =  (point.x + (difX/moveSmoothness)*n);
+	drawY =  (point.y + (difY/moveSmoothness)*n);
+
+        if(n < moveSmoothness){ n++; }
+        else{
+            n = 1;
+	    pathIndex += 1;
+        }
+        return 0;
     }
 
     public Point getPoint() {
@@ -52,7 +76,16 @@ public abstract class Enemy implements Entity
 
     public void takeDamage(int damage){
 	health -= damage;
-	System.out.println(health);
+
+	double procentageHP = (double) health / maxHealth;
+	System.out.println(procentageHP);
+	double inverceProcentageHP = 1 - procentageHP;
+
+	color = new Color(255, (int) (inverceProcentageHP * 255), (int) (inverceProcentageHP * 255));
+
+
+
+
     }
 
 }

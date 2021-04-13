@@ -24,7 +24,7 @@ public class GameTester
     map.addEnemy(new GenericEnemy(new Point(9, 9)));
     map.addTower(new CanonTower(new Point(4,3)));
 
-    map.addEnemy(new GenericEnemy(new Point(1,4)));
+    //map.addEnemy(new GenericEnemy(new Point(1,4)));
     map.addTower(new ArrowTower(new Point(2,3)));
 
     //map.addEnemy(new GenericEnemy(new Point(3,3)));
@@ -41,8 +41,23 @@ public class GameTester
         }
     };
 
-    final Timer tickTimer = new Timer(500,DoOneStep);
+    final Timer tickTimer = new Timer(50,DoOneStep);
     tickTimer.start();
+
+    final Action CreateEnemy = new AbstractAction() {
+        @Override public void actionPerformed(final ActionEvent e) {
+            //Enemy enemy =
+
+            map.addEnemy(new GenericEnemy(new Point(-1,-1)));
+        }
+    };
+
+    final Timer Enemytimer = new Timer(3000,CreateEnemy);
+    Enemytimer.start();
+    }
+
+    public void createWave(int numberOfEnemies){
+
     }
 
 }

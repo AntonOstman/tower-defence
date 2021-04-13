@@ -36,6 +36,7 @@ public class MapComponent extends JComponent
 
 
 
+
 	for (int y = 0; y < mapY; y++) {
 	    for (int x = 0; x < mapX; x++) {
 		Tile currentTile = map.getTile(x,y);
@@ -48,6 +49,9 @@ public class MapComponent extends JComponent
 	for(Enemy enemy : map.getEnemies()){
 	    enemy.draw(g2d, TILE_SIZE);
 	}
+	g2d.setColor(Color.BLACK);
+	g2d.setFont(new Font("serif", Font.PLAIN, 40));
+	g2d.drawString(String.valueOf(map.getHealth()), 30, 30);
     }
 
 }

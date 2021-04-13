@@ -14,7 +14,7 @@ public class MapViewer
     private Map map;
     private JFrame frame;
 
-
+    //
     public MapViewer(Map map) {
         this.map = map;
         this.frame = new JFrame();
