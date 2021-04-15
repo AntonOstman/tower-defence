@@ -17,8 +17,8 @@ public class CanonTower extends Tower
 	this.attackPower = 5;
     }
 
-    @Override public boolean isFatalAttack(final Enemy enemy) {
+    @Override public boolean attackAndReturnIsFatal(final Enemy enemy) {
 
-        return super.isFatalAttack(enemy);
+        return super.attackAndReturnIsFatal(enemy);
     }
 }

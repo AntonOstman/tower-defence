@@ -22,7 +22,7 @@ public abstract class Tower implements Entity
         this.range = 5;
     }
 
-    public boolean isFatalAttack(Enemy enemy){
+    public boolean attackAndReturnIsFatal(Enemy enemy){
         if (enemy == null){
             return false;
         }
@@ -43,9 +43,11 @@ public abstract class Tower implements Entity
     }
 
     @Override public void draw(final Graphics2D g2d, final int tileSize) {
-        final double towerScale = 0.5;
-        final int towerOffset = 12;
+        final double towerScale = 0.6;
         int towerSize = (int) (tileSize * towerScale);
+
+        final int towerOffset = tileSize/2 - towerSize/2; // see explanation in notes
+
         g2d.setColor(color);
         g2d.fillRect(position.x * tileSize + towerOffset, position.y * tileSize + towerOffset, towerSize, towerSize);
     }

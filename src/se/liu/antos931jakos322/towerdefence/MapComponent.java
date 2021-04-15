@@ -24,8 +24,9 @@ public class MapComponent extends JComponent implements MapListener
     }
 
     public Dimension getPreferredSize(){
-
-        return new Dimension(mapX*TILE_SIZE,mapY*TILE_SIZE );
+	int width = mapX*( MARGIN + TILE_SIZE);
+	int height = mapY*(MARGIN + TILE_SIZE);
+        return new Dimension(width, height);
 
     }
 
@@ -40,11 +41,10 @@ public class MapComponent extends JComponent implements MapListener
 
 
 
-
 	for (int y = 0; y < mapY; y++) {
 	    for (int x = 0; x < mapX; x++) {
 		Tile currentTile = map.getTile(x,y);
-		currentTile.drawTile(g2d,MARGIN,TILE_SIZE);
+		currentTile.drawTile(g2d, MARGIN, TILE_SIZE);
 	    }
 	}
 	for (Tower tower: map.getTowers()) {
@@ -53,6 +53,7 @@ public class MapComponent extends JComponent implements MapListener
 	for(Enemy enemy : map.getEnemies()){
 	    enemy.draw(g2d, TILE_SIZE);
 	}
+
 	g2d.setColor(Color.BLACK);
 	g2d.setFont(new Font("serif", Font.PLAIN, 40));
 	g2d.drawString(String.valueOf(map.getHealth()), 30, 30);

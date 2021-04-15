@@ -38,12 +38,12 @@ public abstract class Enemy implements Entity
 
     public void draw(final Graphics2D g2d, final int tileSize) {
 	g2d.setColor(color);
-	final int centrationConstant = 10; // should be changed to fit all sizes
-	final double enemyScale = 0.5;
+	final double enemyScale = 0.4;
 	final int size = (int) (tileSize * enemyScale); // less size is bigger enemy
+	final int enemyOffset = tileSize/2 - size/2; // should be changed to fit all sizes
 
-	int drawPosX = (int) (drawX * tileSize) + centrationConstant;
-	int drawPosY = (int) (drawY * tileSize) + centrationConstant;
+	int drawPosX = (int) (drawX * tileSize) + enemyOffset;
+	int drawPosY = (int) (drawY * tileSize) + enemyOffset;
 
 	g2d.fillOval(drawPosX, drawPosY, size, size);
 
@@ -60,7 +60,7 @@ public abstract class Enemy implements Entity
 	}
 	position = path.get(pathIndex);
 
-	// path index moves the actual position while the rest is to keep the enemy walking "smooth"
+	// path index is used moves the actual point position while the rest is to keep the enemy walking "smooth"
 	double difX = path.get(pathIndex+1).x - position.x;
 	double difY = path.get(pathIndex+1).y - position.y;
 	drawX =  (position.x + (difX / moveSmoothness) * moveAmount);
