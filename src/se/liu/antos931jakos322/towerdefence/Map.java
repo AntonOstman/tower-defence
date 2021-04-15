@@ -41,7 +41,7 @@ public class Map
 	}
     }
 
-    public Enemy getClosestEnemy(Point towerPos){
+    public Enemy getClosestEnemy(Point towerPos, int range){
         Enemy closestEnemy = null;
 
         if (!enemies.isEmpty()){
@@ -49,9 +49,9 @@ public class Map
 
 	    for(Enemy enemy: enemies){
                 Point enemyPos = enemy.getPosition();
-                double currentDistance = HelperFunctions.pythagoras(enemyPos.x, enemyPos.y);
-
-		if(currentDistance < closestDistance){
+                Point relativePoint = new Point(towerPos.x - enemyPos.x,towerPos.y - enemyPos.y);
+                double currentDistance = HelperFunctions.pythagoras(relativePoint.x, relativePoint.y);
+		if(currentDistance < closestDistance && currentDistance <= range){
 		    closestEnemy = enemy;
 		    closestDistance = currentDistance;
 
@@ -66,7 +66,7 @@ public class Map
 
     public void activateTowers(){
         for (Tower tower: towers){
-            Enemy closestEnemy = getClosestEnemy(tower.getPosition());
+            Enemy closestEnemy = getClosestEnemy(tower.getPosition(), tower.getRange());
             if (tower.isFatalAttack(closestEnemy)){
                 enemyCleanUp(closestEnemy);
 	    }
@@ -107,10 +107,10 @@ public class Map
     public void addEnemy(Enemy enemy){
         enemies.add(enemy);
     }
+
     public void addTower(Tower tower){
         towers.add(tower);
     }
-
 
 
     public List<Tower> getTowers() {

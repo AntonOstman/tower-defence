@@ -26,17 +26,7 @@ public class GameTester
     map.hardRoad();
     MapViewer viewer = new MapViewer(map);
     map.addEnemy(new GenericEnemy(new Point(9, 9)));
-    map.addTower(new CanonTower(new Point(4,3)));
 
-    //map.addEnemy(new GenericEnemy(new Point(1,4)));
-    map.addTower(new ArrowTower(new Point(2,3)));
-
-    //map.addEnemy(new GenericEnemy(new Point(3,3)));
-    map.addTower(new ArrowTower(new Point(4,6)));
-    map.addTower(new ArrowTower(new Point(5, 5)));
-
-    //viewer.viewMapText();
-    // hejsan
     viewer.show();
 
     final Action doOneStep = new AbstractAction() {

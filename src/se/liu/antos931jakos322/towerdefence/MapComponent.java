@@ -25,7 +25,7 @@ public class MapComponent extends JComponent implements MapListener
 
     public Dimension getPreferredSize(){
 
-        return new Dimension(mapX*TILE_SIZE + 100,mapY*TILE_SIZE +100);
+        return new Dimension(mapX*TILE_SIZE,mapY*TILE_SIZE );
 
     }
 
@@ -58,4 +58,7 @@ public class MapComponent extends JComponent implements MapListener
 	g2d.drawString(String.valueOf(map.getHealth()), 30, 30);
     }
 
+    public static int getTileSize() {
+	return TILE_SIZE;
+    }
 }
