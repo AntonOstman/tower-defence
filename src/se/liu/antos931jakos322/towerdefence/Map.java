@@ -78,6 +78,7 @@ public class Map
 	//returns the path that enemies should take to damage the player
 	// also assumes road starts on the left side of the screen
 	// also assumes road goes one step to the right direct after start
+	// this NEEEEDS to be redone....
 	Tile prevTile = tiles[startPoint.y][startPoint.x];
 	Tile currentTile = tiles[startPoint.y][startPoint.x+1];
 	List<Point> mapPath = new ArrayList<>();
@@ -205,8 +206,14 @@ public class Map
 	tiles[7][5] = new Tile(5, 7, null, TileType.ROADO);
 	tiles[7][6] = new Tile(6, 7, null, TileType.ROADO);
 	tiles[7][7] = new Tile(7, 7, null, TileType.ROADO);
-	tiles[7][8] = new Tile(8, 7, null, TileType.ROADO);
-	tiles[7][9] = new Tile(9, 7, null, TileType.ROADO);
+
+	tiles[6][7] = new Tile(7, 6, null, TileType.ROADO);
+	tiles[5][7] = new Tile(7, 5, null, TileType.ROADO);
+	tiles[5][7] = new Tile(7, 5, null, TileType.ROADO);
+	tiles[5][7] = new Tile(7, 5, null, TileType.ROADO);
+	tiles[5][8] = new Tile(8, 5, null, TileType.ROADO);
+	tiles[5][9] = new Tile(9, 5, null, TileType.ROADO);
+
 
 	//path.add(new Point(-1,5));
 //
