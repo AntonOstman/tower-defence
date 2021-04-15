@@ -38,7 +38,7 @@ public abstract class Tower implements Entity
 
 
     @Override public void draw(final Graphics2D g2d, final int tileSize) {
-        double towerScale = 0.9;
+        final double towerScale = 0.9;
         int towerSize = (int) (tileSize * towerScale);
         g2d.setColor(color);
         g2d.fillRect(position.x * tileSize, position.y * tileSize, towerSize, towerSize);

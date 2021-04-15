@@ -18,7 +18,7 @@ public class Map
 
     private List<Tower> towers;
     private List<Enemy> enemies;
-    private int health = 100;
+    private int health;
     private List<MapListener> mapListeners;
 
     public Map(final int width, final int height) {
@@ -29,6 +29,7 @@ public class Map
 	this.enemies = new ArrayList<>();
 	this.towers = new ArrayList<>();
 	this.mapListeners = new ArrayList<>();
+    	this.health = 100;
     }
     public void addListener(MapListener listener){
         mapListeners.add(listener);
@@ -73,7 +74,7 @@ public class Map
     }
 
     public void takeDamage(int damage){
-        health -= damage;
+	health -= damage;
     }
 
     public int getHealth() {

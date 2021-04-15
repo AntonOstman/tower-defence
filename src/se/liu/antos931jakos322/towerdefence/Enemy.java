@@ -54,7 +54,7 @@ public abstract class Enemy implements Entity
     }
 
     public int moveAndTakeDamage(List<Point> path){
-	int moveSmoothness = 10;
+	final int moveSmoothness = 10;
 	if(pathIndex == path.size()-1){
 	    return 1;
 	}
