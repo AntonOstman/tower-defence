@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
  *
  */
 
-public class GameTester
+public class GameHandler
 {
 
 
