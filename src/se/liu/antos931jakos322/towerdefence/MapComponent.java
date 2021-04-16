@@ -24,6 +24,7 @@ public class MapComponent extends JComponent implements MapListener
     }
 
     public Dimension getPreferredSize(){
+
 	int width = mapX*( MARGIN + TILE_SIZE);
 	int height = mapY*(MARGIN + TILE_SIZE);
         return new Dimension(width, height);
@@ -38,8 +39,6 @@ public class MapComponent extends JComponent implements MapListener
 	super.paintComponent(g);
 
 	final Graphics2D g2d = (Graphics2D) g;
-
-
 
 	for (int y = 0; y < mapY; y++) {
 	    for (int x = 0; x < mapX; x++) {

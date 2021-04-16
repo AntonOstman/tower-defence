@@ -47,7 +47,7 @@ public class GameHandler
     };
 
     final Timer enemyTimer = new Timer(waveDensity, createEnemy);
-    enemyTimer.start();
+         enemyTimer.start();
     }
 
     public void createWave(int numberOfEnemies){

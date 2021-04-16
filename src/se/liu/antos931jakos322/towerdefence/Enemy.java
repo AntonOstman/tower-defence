@@ -21,19 +21,21 @@ public abstract class Enemy implements Entity
     protected int pathIndex;
     protected int moveAmount = 0;
     protected final int maxHealth;
-
+    protected final int rewardMoney;
     protected double drawX;
     protected double drawY;
 
     protected Color color;
 
     protected Enemy(final Point position) {
-	this.position = position;
-	this.health = 1000;
+
+        this.position = position;
+	this.health = 100;
 	this.pathIndex = 0;
 	this.color = Color.red;
 	this.path = new ArrayList<>();
 	this.maxHealth = health;
+    	this.rewardMoney = 5;
     }
 
     public void draw(final Graphics2D g2d, final int tileSize) {

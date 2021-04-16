@@ -2,8 +2,6 @@ package se.liu.antos931jakos322.towerdefence;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 /**
@@ -34,36 +32,47 @@ public class MapViewer
 	}
 }
     public void show(){
+        MenuComponent menuComponent = new MenuComponent(map);
 	MapComponent mapComponent = new MapComponent(map);
+
 	JPanel mainPanel = new JPanel();
-
 	JPanel gamePanel = new JPanel(new GridLayout(0,1));
-	JPanel menuPanel = new JPanel(new GridLayout(4,0));
+	JPanel mainMenuPanel = new JPanel(new GridLayout(2,0));
+	JPanel interactivePanel = new JPanel(new GridLayout(4, 0));
+	JPanel textPanel = new JPanel(new BorderLayout());
 
-	menuPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	interactivePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	gamePanel.setBorder(BorderFactory.createLineBorder(Color.RED));
 	mainPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+	mainMenuPanel.setBorder(BorderFactory.createLineBorder(Color.cyan));
+	textPanel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
 
 	String[] towerStrings = {" ","Arrow tower", "Cannon tower", "Money tower"};
 
 	JComboBox<String> towerDropDown = new JComboBox<>(towerStrings);
 	towerDropDown.setSelectedIndex(0);
 
-	//menupanel
-	menuPanel.add(new Button("tester"));
-	menuPanel.add(new Button("tester2"));
-	menuPanel.add(towerDropDown);
+	//menupanel has the information the player needs and is used for choosing towers
+	interactivePanel.add(new Button("tester"));
+	interactivePanel.add(new Button("tester2"));
 
-	//gamepanel
+	interactivePanel.add(towerDropDown);
+	textPanel.add(menuComponent);
+
+	//gamepanel has the map compopnent and shows the running game
 	gamePanel.add(mapComponent);
 	MouseEvent mouseListener = new MouseEvent(towerDropDown);
 	gamePanel.addMouseListener(mouseListener);
 
+
+	mainMenuPanel.add(interactivePanel);
+	mainMenuPanel.add(menuComponent);
 	mainPanel.add(gamePanel);
-	mainPanel.add(menuPanel);
+	mainPanel.add(mainMenuPanel);
 
 
 	frame.setLayout(new BorderLayout());
+	map.addListener(menuComponent);
 	map.addListener(mapComponent);
 	frame.add(mainPanel);
 
@@ -95,8 +104,12 @@ public class MapViewer
 	    String currentSelectedTower = (String) dropDown.getSelectedItem();
 
 	    if (currentSelectedTower.equals("Arrow tower")){
-	        map.addTower(new ArrowTower(blockPoint));
+	        boolean succesfullyAddedTower = !map.addTowerReturnIfAfford(new ArrowTower(blockPoint));
+	        if (succesfullyAddedTower){
+	            JOptionPane.showMessageDialog(frame,"Can not afford tower");
+		}
 	    }
+
 	}
 
 	@Override public void mousePressed(final java.awt.event.MouseEvent e) {

@@ -19,10 +19,11 @@ public class Map
     private List<Tower> towers;
     private List<Enemy> enemies;
     private int health;
+    private int money;
     private List<MapListener> mapListeners;
 
     public Map(final int width, final int height) {
-
+	this.money = 10;
 	this.width = width;
 	this.height = height;
 	this.tiles = new Tile[height][width];
@@ -56,9 +57,7 @@ public class Map
 		    closestDistance = currentDistance;
 
 		}
-
 	    }
-
 	}
 	return closestEnemy;
     }
@@ -68,7 +67,7 @@ public class Map
         for (Tower tower: towers){
             Enemy closestEnemy = getClosestEnemy(tower.getPosition(), tower.getRange());
             if (tower.attackAndReturnIsFatal(closestEnemy)){
-                enemyCleanUp(closestEnemy);
+                removeEnemy(closestEnemy);
 	    }
 	}
     }
@@ -156,9 +155,9 @@ public class Map
 	}
     }
 
-    public void enemyCleanUp(Enemy enemy){
-	enemies.remove(enemy);
-
+    public void removeEnemy(Enemy enemy){
+	money += enemy.rewardMoney;
+        enemies.remove(enemy);
     }
 
     public void tick(){
@@ -170,8 +169,14 @@ public class Map
         enemies.add(enemy);
     }
 
-    public void addTower(Tower tower){
+    public boolean addTowerReturnIfAfford(Tower tower){
+        money -= tower.cost;
+        if (money < 0){
+            money += tower.cost;
+            return false;
+        }
         towers.add(tower);
+    	return true;
     }
 
 
@@ -240,6 +245,10 @@ public class Map
 
     public Tile getTile(int x, int y){
         return tiles[y][x];
+    }
+
+    public int getMoney() {
+	return money;
     }
 
     public Point getDimension() {

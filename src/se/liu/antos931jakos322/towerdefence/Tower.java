@@ -15,7 +15,12 @@ public abstract class Tower implements Entity
     protected Color color;
     protected int attackPower;
     protected int range;
+    protected int cost;
+    protected final static TowerType TOWER_TYPE = TowerType.ARROW;
+
+
     protected Tower(final Point position, Color color) {
+        this.cost = 10;
         this.position = position;
         this.color = color;
         this.attackPower = 10;
@@ -40,6 +45,10 @@ public abstract class Tower implements Entity
 
     public int getRange() {
         return range;
+    }
+
+    public int getCost() {
+        return cost;
     }
 
     @Override public void draw(final Graphics2D g2d, final int tileSize) {
