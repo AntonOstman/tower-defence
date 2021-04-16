@@ -1,10 +1,14 @@
-package se.liu.antos931jakos322.towerdefence;
+package se.liu.antos931jakos322.towerdefence.maplogic;
 
 /**
  *
  * Map on which the player places towers and enemies walk with the intent to damage
  *
  */
+
+import se.liu.antos931jakos322.towerdefence.entities.Enemy;
+import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
+import se.liu.antos931jakos322.towerdefence.entities.Tower;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -46,8 +50,10 @@ public class Map
         Enemy closestEnemy = null;
 
         if (!enemies.isEmpty()){
-            double closestDistance = Double.POSITIVE_INFINITY; // starting distance
-
+            double closestDistance = Double.POSITIVE_INFINITY;
+		// for every enemy check if another is closer and is in range.
+	    	// If one closer is found save that enemy, do that for all enemies
+	    	// if no enemies in range are found return null
 	    for(Enemy enemy: enemies){
                 Point enemyPos = enemy.getPosition();
                 Point relativePoint = new Point(towerPos.x - enemyPos.x,towerPos.y - enemyPos.y);
@@ -156,7 +162,7 @@ public class Map
     }
 
     public void removeEnemy(Enemy enemy){
-	money += enemy.rewardMoney;
+	money += enemy.getRewardMoney();
         enemies.remove(enemy);
     }
 
@@ -170,9 +176,9 @@ public class Map
     }
 
     public boolean addTowerReturnIfAfford(Tower tower){
-        money -= tower.cost;
+        money -= tower.getCost();
         if (money < 0){
-            money += tower.cost;
+            money += tower.getCost();
             return false;
         }
         towers.add(tower);

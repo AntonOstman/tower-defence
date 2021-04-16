@@ -1,4 +1,4 @@
-package se.liu.antos931jakos322.towerdefence;
+package se.liu.antos931jakos322.towerdefence.maplogic;
 
 /**
  *

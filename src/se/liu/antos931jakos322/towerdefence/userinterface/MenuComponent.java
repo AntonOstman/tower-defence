@@ -1,4 +1,7 @@
-package se.liu.antos931jakos322.towerdefence;
+package se.liu.antos931jakos322.towerdefence.userinterface;
+
+import se.liu.antos931jakos322.towerdefence.maplogic.Map;
+import se.liu.antos931jakos322.towerdefence.maplogic.MapListener;
 
 import javax.swing.*;
 import java.awt.*;

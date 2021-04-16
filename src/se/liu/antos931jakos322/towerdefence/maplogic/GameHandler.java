@@ -1,4 +1,7 @@
-package se.liu.antos931jakos322.towerdefence;
+package se.liu.antos931jakos322.towerdefence.maplogic;
+
+import se.liu.antos931jakos322.towerdefence.userinterface.MapViewer;
+import se.liu.antos931jakos322.towerdefence.entities.GenericEnemy;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +24,7 @@ public class GameHandler
     final int waveDensity = timerDelay * enemySpawnRate; // keeps the ratio when timerDelay is changed
 
 
-    Map map = new Map(10,10);
+    Map map = new Map(10, 10);
     map.hardCodedMap();
     map.hardRoad();
     MapViewer viewer = new MapViewer(map);

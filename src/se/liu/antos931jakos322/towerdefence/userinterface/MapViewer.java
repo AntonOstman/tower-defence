@@ -1,4 +1,9 @@
-package se.liu.antos931jakos322.towerdefence;
+package se.liu.antos931jakos322.towerdefence.userinterface;
+
+import se.liu.antos931jakos322.towerdefence.entities.ArrowTower;
+import se.liu.antos931jakos322.towerdefence.maplogic.Map;
+import se.liu.antos931jakos322.towerdefence.userinterface.MapComponent;
+import se.liu.antos931jakos322.towerdefence.userinterface.MenuComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,7 +37,7 @@ public class MapViewer
 	}
 }
     public void show(){
-        MenuComponent menuComponent = new MenuComponent(map);
+        se.liu.antos931jakos322.towerdefence.userinterface.MenuComponent menuComponent = new MenuComponent(map);
 	MapComponent mapComponent = new MapComponent(map);
 
 	JPanel mainPanel = new JPanel();

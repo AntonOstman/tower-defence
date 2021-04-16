@@ -1,4 +1,4 @@
-package se.liu.antos931jakos322.towerdefence;
+package se.liu.antos931jakos322.towerdefence.entities;
 
 
 /**
@@ -7,6 +7,8 @@ package se.liu.antos931jakos322.towerdefence;
  *
  */
 
+
+import se.liu.antos931jakos322.towerdefence.entities.Entity;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -78,6 +80,10 @@ public abstract class Enemy implements Entity
 
     public Point getPosition() {
 	return position;
+    }
+
+    public int getRewardMoney() {
+	return rewardMoney;
     }
 
     public void takeDamage(int damage){

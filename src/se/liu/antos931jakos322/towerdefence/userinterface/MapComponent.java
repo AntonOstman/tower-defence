@@ -1,4 +1,10 @@
-package se.liu.antos931jakos322.towerdefence;
+package se.liu.antos931jakos322.towerdefence.userinterface;
+
+import se.liu.antos931jakos322.towerdefence.entities.Enemy;
+import se.liu.antos931jakos322.towerdefence.maplogic.Map;
+import se.liu.antos931jakos322.towerdefence.maplogic.MapListener;
+import se.liu.antos931jakos322.towerdefence.maplogic.Tile;
+import se.liu.antos931jakos322.towerdefence.entities.Tower;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,7 +48,7 @@ public class MapComponent extends JComponent implements MapListener
 
 	for (int y = 0; y < mapY; y++) {
 	    for (int x = 0; x < mapX; x++) {
-		Tile currentTile = map.getTile(x,y);
+		Tile currentTile = map.getTile(x, y);
 		currentTile.drawTile(g2d, MARGIN, TILE_SIZE);
 	    }
 	}
