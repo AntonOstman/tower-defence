@@ -79,6 +79,7 @@ public class Map
     public void activateTowers(){
         for (Tower tower: towers){
             Enemy closestEnemy = getClosestEnemy(tower.getPosition(), tower.getRange());
+
             if (tower.attackAndReturnIsFatal(closestEnemy)){
                 removeEnemy(closestEnemy);
 	    }

@@ -50,7 +50,8 @@ public abstract class Enemy implements Entity
 
 	final int size = (int) (tileSize * enemyScale); // less size is bigger enemy
 	final int enemyOffset = tileSize/2 - size/2; // should be changed to fit all sizes
-
+	System.out.println(drawX);
+	System.out.println(drawY);
 	int drawPosX = (int) (drawX * tileSize) + enemyOffset;
 	int drawPosY = (int) (drawY * tileSize) + enemyOffset;
 
@@ -64,7 +65,7 @@ public abstract class Enemy implements Entity
 
     public int moveAndTakeDamage(List<Point> path){
 
-	if(pathIndex == path.size()-1){
+	if(pathIndex == path.size()-1){ // since list size is 1 bigger than the list index
 	    return 1;
 	}
 	position = path.get(pathIndex);
@@ -89,6 +90,14 @@ public abstract class Enemy implements Entity
 
     public int getRewardMoney() {
 	return rewardMoney;
+    }
+
+    public double getDrawX() {
+	return drawX;
+    }
+
+    public double getDrawY() {
+	return drawY;
     }
 
     public void takeDamage(int damage){
