@@ -1,9 +1,9 @@
 package se.liu.antos931jakos322.towerdefence.userinterface;
 
-import se.liu.antos931jakos322.towerdefence.entities.ArrowTower;
+import se.liu.antos931jakos322.towerdefence.entities.Tower;
+import se.liu.antos931jakos322.towerdefence.entities.TowerMaker;
+import se.liu.antos931jakos322.towerdefence.entities.TowerType;
 import se.liu.antos931jakos322.towerdefence.maplogic.Map;
-import se.liu.antos931jakos322.towerdefence.userinterface.MapComponent;
-import se.liu.antos931jakos322.towerdefence.userinterface.MenuComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,9 +52,10 @@ public class MapViewer
 	mainMenuPanel.setBorder(BorderFactory.createLineBorder(Color.cyan));
 	textPanel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
 
-	String[] towerStrings = {" ","Arrow tower", "Cannon tower", "Money tower"};
+	TowerType[] towerTypes = {TowerType.NONE, TowerType.ARROW,TowerType.CANON, TowerType.MONEY};
 
-	JComboBox<String> towerDropDown = new JComboBox<>(towerStrings);
+	JComboBox<TowerType> towerDropDown = new JComboBox<>(towerTypes);
+	towerDropDown.addItem(TowerType.ARROW);
 	towerDropDown.setSelectedIndex(0);
 
 	//menupanel has the information the player needs and is used for choosing towers
@@ -88,9 +89,9 @@ public class MapViewer
 
     }
     public class MouseEvent implements MouseListener{
-	private JComboBox<String> dropDown;
+	private JComboBox<TowerType> dropDown;
 
-	public MouseEvent(JComboBox<String> dropDown) {
+	public MouseEvent(JComboBox<TowerType> dropDown) {
 	    this.dropDown = dropDown;
 	}
 
@@ -103,16 +104,22 @@ public class MapViewer
 	    int mapPosX = clickedPoint.x/tileSize;
 	    int mapPosY = clickedPoint.y/tileSize;
 
-	    Point blockPoint = new Point(mapPosX,mapPosY);
+	    Point mapPoint = new Point(mapPosX, mapPosY);
 
 	    System.out.println(e.getPoint() + " Point");
-	    String currentSelectedTower = (String) dropDown.getSelectedItem();
+	    TowerType currentSelectedTower = (TowerType) dropDown.getSelectedItem();
 
-	    if (currentSelectedTower.equals("Arrow tower")){
-	        boolean succesfullyAddedTower = !map.addTowerReturnIfAfford(new ArrowTower(blockPoint));
-	        if (succesfullyAddedTower){
-	            JOptionPane.showMessageDialog(frame,"Can not afford tower");
-		}
+	    TowerMaker towerMaker = new TowerMaker();
+	    Tower newTower = towerMaker.getTower(currentSelectedTower);
+	    newTower.setPosition(mapPoint);
+
+	    boolean canPlaceTower = map.canAffordAndPlaceTower(newTower);
+
+	    if (!canPlaceTower){
+		JOptionPane.showMessageDialog(frame,"Not enough Money or wrong placement");
+	    }
+	    else{
+	           map.addTower(newTower);
 	    }
 
 	}

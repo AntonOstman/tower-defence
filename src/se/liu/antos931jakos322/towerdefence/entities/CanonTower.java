@@ -12,8 +12,8 @@ public class CanonTower extends Tower
 {
 
 
-    public CanonTower(final Point pos) {
-	super(pos, Color.YELLOW);
+    public CanonTower() {
+	super(Color.YELLOW);
 	this.attackPower = 5;
     }
 

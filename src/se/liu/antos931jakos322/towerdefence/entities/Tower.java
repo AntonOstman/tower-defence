@@ -3,8 +3,9 @@ package se.liu.antos931jakos322.towerdefence.entities;
 import java.awt.*;
 
 /**
- *  An abstract class with the core elements of a tower
- *  A tower is used to attack the enemy wandering the map path
+ *  A tower is an object with attackDamage range and cost
+ *  A tower is used in the game to damage incoming enemy objects
+ *
  *
  */
 
@@ -16,12 +17,11 @@ public abstract class Tower implements Entity
     protected int attackPower;
     protected int range;
     protected int cost;
-    protected final static TowerType TOWER_TYPE = TowerType.ARROW;
 
 
-    protected Tower(final Point position, Color color) {
+    protected Tower(Color color) {
         this.cost = 10;
-        this.position = position;
+        this.position = null;
         this.color = color;
         this.attackPower = 10;
         this.range = 5;
@@ -49,6 +49,10 @@ public abstract class Tower implements Entity
 
     public int getCost() {
         return cost;
+    }
+
+    public void setPosition(final Point position) {
+        this.position = position;
     }
 
     @Override public void draw(final Graphics2D g2d, final int tileSize) {

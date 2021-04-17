@@ -4,13 +4,13 @@ import java.awt.*;
 
 /**
  *
- * A Arrow does single target damage to enemies
+ * A ArrowTower is as type of Tower that has single target damage
  */
 
 public class ArrowTower extends Tower
 {
-    public ArrowTower(final Point pos) {
-	super(pos, Color.blue);
+    public ArrowTower() {
+	super(Color.blue);
     }
 
 
