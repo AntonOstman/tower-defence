@@ -206,14 +206,22 @@ public class Map
 
     }
 
-    public boolean addTowerReturnIfAfford(Tower tower){
-        money -= tower.getCost();
-        if (money < 0){
-            money += tower.getCost();
+    public void addTower(Tower tower){
+	money -= tower.getCost();
+	towers.add(tower);
+    }
+
+    public boolean canAffordAndPlaceTower(Tower tower){
+	Point towerPos = tower.getPosition();
+	TileType desiredPlacementTile  = tiles[towerPos.y][towerPos.x].getTileType();
+	if (desiredPlacementTile != TileType.GRASS) {
+	    return false;
+	}
+        if (money - tower.getCost() < 0){
             return false;
-        }
-        towers.add(tower);
-    	return true;
+	}
+
+	return true;
     }
 
     public List<Tower> getTowers() {
