@@ -10,16 +10,7 @@ import java.awt.*;
 
 public class GenericEnemy extends Enemy
 {
-
-
-
-    public GenericEnemy(final Point point) {
-        super(point);
+    public GenericEnemy() {
+        super(100, 10, Color.RED, 0.5);
     }
-
-
-    public void remove(){
-
-    }
-
 }

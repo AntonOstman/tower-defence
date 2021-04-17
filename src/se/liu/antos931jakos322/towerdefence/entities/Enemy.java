@@ -26,19 +26,22 @@ public abstract class Enemy implements Entity
     protected final int rewardMoney;
     protected double drawX;
     protected double drawY;
-    protected int speed = 10;
-    protected double enemyScale = 0.4;
+    protected int speed;
+    protected double enemyScale;
 
     protected Color color;
 
-    protected Enemy(final Point position) {
+    protected Enemy(final int maxHealth, final int speed, final Color color, final double size) {
 
-        this.position = position;
-	this.health = 100;
+        this.position = new Point(-1, -1);
+	this.health = maxHealth;
+	this.maxHealth = maxHealth;
+	this.color = color;
+	this.enemyScale = size;
+	this.speed = speed;
+
 	this.pathIndex = 0;
-	this.color = Color.red;
 	this.path = new ArrayList<>();
-	this.maxHealth = health;
     	this.rewardMoney = 5;
     }
 
@@ -101,7 +104,11 @@ public abstract class Enemy implements Entity
 
 	try {
 
-	    color = new Color(255, (int) (inverceProcentageHP * 255), (int) (inverceProcentageHP * 255));
+	    //color = new Color(255, (int) (inverceProcentageHP * 255), (int) (inverceProcentageHP * 255));
+	    color = new Color( 	(int) (color.getRed()	+ (255- color.getRed())   *inverceProcentageHP),
+		    		(int) (color.getGreen()	+ (255- color.getGreen()) *inverceProcentageHP),
+	    			(int) (color.getBlue()	+ (255- color.getBlue())  *inverceProcentageHP));
+
 	}
 	catch (IllegalArgumentException e){
 	    System.out.println((inverceProcentageHP * 255));

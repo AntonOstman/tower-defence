@@ -183,22 +183,22 @@ public class Map
     public void addEnemy(){
 
         // The first number is the starting speed, the secound is the changing speed
-	int spawningspeedGeneric = (int)(50- (tickCounter / 10.0));
+	int spawningspeedGeneric = (int)(50- (tickCounter / 100.0));
 	if (spawningspeedGeneric <= 2){ spawningspeedGeneric = 2;}
         if( tickCounter % spawningspeedGeneric == 0){
-	    enemies.add(new GenericEnemy(new Point(-1,-1)));
+	    enemies.add(new GenericEnemy());
 	}
 
-	int spawningspeedBoss = (int)(100- (tickCounter / 10.0));
+	int spawningspeedBoss = (int)(1000- (tickCounter / 100.0));
 	if (spawningspeedBoss <= 2){ spawningspeedBoss = 2;}
 	if( tickCounter % spawningspeedBoss == 0){
-	    enemies.add(new SpeedEnemy(new Point(-1, -1)));
+	    enemies.add(new BossEnemy());
 	}
 
-	int spawningspeedSpeedy = (int)(70- (tickCounter / 10.0));
+	int spawningspeedSpeedy = (int)(70- (tickCounter / 100.0));
 	if (spawningspeedSpeedy <= 2){ spawningspeedSpeedy = 2;}
 	if( tickCounter % spawningspeedSpeedy == 0){
-	    enemies.add(new BossEnemy(new Point(-1, -1)));
+	    enemies.add(new SpeedEnemy());
 	}
 
         tickCounter ++;

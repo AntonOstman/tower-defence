@@ -4,10 +4,9 @@ import java.awt.*;
 
 public class SpeedEnemy extends Enemy
 {
-    public SpeedEnemy(final Point position) {
-	super(position);
-	enemyScale = 0.3;
-	speed = 3;
+    public SpeedEnemy() {
+	super(70, 6, Color.PINK, 0.3);
+
     }
 
 }
