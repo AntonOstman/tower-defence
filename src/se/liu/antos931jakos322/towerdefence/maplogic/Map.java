@@ -1,10 +1,6 @@
 package se.liu.antos931jakos322.towerdefence.maplogic;
 
-/**
- *
- * Map on which the player places towers and enemies walk with the intent to damage
- *
- */
+
 
 import se.liu.antos931jakos322.towerdefence.entities.BossEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.Enemy;
@@ -17,6 +13,15 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+/**
+ *
+ * Map contain the core background information of the game.
+ * It structures the tiles which the game is played on.
+ * It contains information related to the game such as how much money the player has
+ *
+ */
+
 public class Map
 {
     private Tile[][] tiles;
@@ -29,7 +34,7 @@ public class Map
     private int money;
     private List<MapListener> mapListeners;
 
-    private static int waveTimer = 50;
+    private final static int WAVE_TIMER = 50;
     private int tickCounter = 1;
     private int waveLevel = 0;
 

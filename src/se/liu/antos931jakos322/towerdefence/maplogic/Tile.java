@@ -1,18 +1,21 @@
 package se.liu.antos931jakos322.towerdefence.maplogic;
 
 
-/**
- *
- * A tile which
- *
- */
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.List;
+/**
+ *
+ * Uses a tileType to decide which type of tile itself is.
+ * Depending on what type of tile a tile is it is drawn in different ways
+ *
+ */
 
 public class Tile
 {
@@ -21,6 +24,8 @@ public class Tile
     private int posX;
     private int posY;
     private Map<TileType, Color> tileColorEnum;
+    private final static Random RND = new Random();
+
 
     public Tile(int posX, int posY, final Entity[] entities, final TileType tileType) {
 	this.tileType = tileType;
@@ -54,25 +59,34 @@ public class Tile
 	EnumMap<TileType, Color> tileColorEnum = createColorMap();
 	Color color = tileColorEnum.get(tileType);
 
-	Random rnd = new Random();
-	int randomInt = rnd.nextInt(50);
+	int randomInt = RND.nextInt(50);
+
 	int newRed = 0;
-	int newGreen = 0;
 	int newBlue = 0;
+	int newGreen = 0;
+
+
+
 	if (color.getRed() - randomInt < 0) {
-	    newRed = color.getRed() + randomInt;
+	     newRed = color.getRed() + randomInt;
 	}
-	else{newRed = color.getRed() - randomInt;}
+	else{
+	     newRed = color.getRed() - randomInt;
+	}
 
 	if (color.getGreen() - randomInt < 0) {
-	    newGreen = color.getGreen() + randomInt;
+	     newGreen = color.getGreen() + randomInt;
 	}
-	else{newGreen = color.getGreen() - randomInt;}
+	else{
+	     newGreen = color.getGreen() - randomInt;
+	}
 
 	if (color.getBlue() - randomInt < 0) {
-	    newBlue = color.getBlue() + randomInt;
+	     newBlue = color.getBlue() + randomInt;
 	}
-	else{ newBlue = color.getBlue() - randomInt;}
+	else{
+	     newBlue = color.getBlue() - randomInt;
+	}
 
 	Color newColor = new Color(newRed, newGreen, newBlue);
 

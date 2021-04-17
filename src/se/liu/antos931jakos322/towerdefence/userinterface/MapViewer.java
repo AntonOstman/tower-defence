@@ -12,7 +12,7 @@ import java.awt.event.MouseListener;
 /**
  *
  * Starts the GUI on which the player interacts with and can view the game
- *
+ * Controls the frame and panels contained in the frame
  *
  */
 public class MapViewer

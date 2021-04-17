@@ -3,6 +3,9 @@ package se.liu.antos931jakos322.towerdefence.other;
 /**
  *
  * Class with various helper functions
+ * The helper functions do directly have anyhting with the game to do
+ * example:
+ * 	Pythagoras therom is a general mathematical formula
  *
  */
 

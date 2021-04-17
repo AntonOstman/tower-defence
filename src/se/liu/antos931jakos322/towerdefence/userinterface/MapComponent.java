@@ -10,7 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * A graphics component used for drawing the map and objects on it.
+ * MapComponent draws everything in the game contained in map but does not itself have knowledge how
+ * Example
+ * 	Does not know how to draw a tower. But uses the towers own draw method to draw it.
  *
  *
  */
@@ -59,9 +61,7 @@ public class MapComponent extends JComponent implements MapListener
 	    enemy.draw(g2d, TILE_SIZE);
 	}
 
-	g2d.setColor(Color.BLACK);
-	g2d.setFont(new Font("serif", Font.PLAIN, 40));
-	g2d.drawString(String.valueOf(map.getHealth()), 30, 30);
+
     }
 
     public static int getTileSize() {

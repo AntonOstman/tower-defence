@@ -1,11 +1,6 @@
 package se.liu.antos931jakos322.towerdefence.entities;
 
 
-/**
- * An abstract class with the core elements of an enemy
- * An enemy object wanders the map path with the intent of damaging the player
- *
- */
 
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
@@ -13,6 +8,11 @@ import se.liu.antos931jakos322.towerdefence.entities.Entity;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * An abstract class with the core elements of an enemy
+ * An enemy object wanders the map path with the intent of damaging the player
+ *
+ */
 
 public abstract class Enemy implements Entity
 {
@@ -120,11 +120,7 @@ public abstract class Enemy implements Entity
 
 	}
 	catch (IllegalArgumentException e){
-	    System.out.println((inverceProcentageHP * 255));
-	    System.out.println(inverceProcentageHP);
-	    System.out.println(health);
-	    System.out.println(maxHealth);
-	    System.out.println((double) health / maxHealth + " div");
+		e.printStackTrace();
 	}
 
 

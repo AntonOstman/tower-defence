@@ -1,11 +1,20 @@
 package se.liu.antos931jakos322.towerdefence.userinterface;
 
+
+
 import se.liu.antos931jakos322.towerdefence.maplogic.Map;
 import se.liu.antos931jakos322.towerdefence.maplogic.MapListener;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ *
+ * MenuComponent controls the main text based information in the game
+ * Example:
+ * 	Draws the current player health and current money
+ *
+ *
+ */
 public class MenuComponent extends JComponent implements MapListener
 {
     private Map map;

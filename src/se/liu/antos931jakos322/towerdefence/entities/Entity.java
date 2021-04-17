@@ -4,7 +4,9 @@ import java.awt.*;
 
 /**
  *
- * An Entity is an object that in some way exists in the map
+ * An Entity is an object that acts as something on the map
+ *  example:
+ *      a tower or enemy object
  *
  */
 public interface Entity
