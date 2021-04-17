@@ -28,7 +28,7 @@ public class GameHandler
     map.hardCodedMap();
     map.hardRoad();
     MapViewer viewer = new MapViewer(map);
-    map.addEnemy(new GenericEnemy(new Point(9, 9)));
+    //map.addEnemy(new GenericEnemy(new Point(9, 9)));
 
     viewer.show();
 
@@ -45,7 +45,7 @@ public class GameHandler
         @Override public void actionPerformed(final ActionEvent e) {
             //Enemy enemy =
 
-            map.addEnemy(new GenericEnemy(new Point(-1,-1)));
+            //map.addEnemy(new GenericEnemy(new Point(-1,-1)));
         }
     };
 

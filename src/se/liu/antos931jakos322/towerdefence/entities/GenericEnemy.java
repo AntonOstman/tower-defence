@@ -18,7 +18,6 @@ public class GenericEnemy extends Enemy
     }
 
 
-
     public void remove(){
 
     }

@@ -6,7 +6,10 @@ package se.liu.antos931jakos322.towerdefence.maplogic;
  *
  */
 
+import se.liu.antos931jakos322.towerdefence.entities.BossEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.Enemy;
+import se.liu.antos931jakos322.towerdefence.entities.GenericEnemy;
+import se.liu.antos931jakos322.towerdefence.entities.SpeedEnemy;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 import se.liu.antos931jakos322.towerdefence.entities.Tower;
 
@@ -25,6 +28,11 @@ public class Map
     private int health;
     private int money;
     private List<MapListener> mapListeners;
+
+    private static int waveTimer = 50;
+    private int tickCounter = 1;
+    private int waveLevel = 0;
+
 
     public Map(final int width, final int height) {
 	this.money = 10;
@@ -67,7 +75,6 @@ public class Map
 	}
 	return closestEnemy;
     }
-
 
     public void activateTowers(){
         for (Tower tower: towers){
@@ -168,11 +175,35 @@ public class Map
 
     public void tick(){
         activateTowers();
+        addEnemy();
 	enemyMove();
 	notifyListeners();
     }
-    public void addEnemy(Enemy enemy){
-        enemies.add(enemy);
+
+    public void addEnemy(){
+
+        // The first number is the starting speed, the secound is the changing speed
+	int spawningspeedGeneric = (int)(50- (tickCounter / 10.0));
+	if (spawningspeedGeneric <= 2){ spawningspeedGeneric = 2;}
+        if( tickCounter % spawningspeedGeneric == 0){
+	    enemies.add(new GenericEnemy(new Point(-1,-1)));
+	}
+
+	int spawningspeedBoss = (int)(100- (tickCounter / 10.0));
+	if (spawningspeedBoss <= 2){ spawningspeedBoss = 2;}
+	if( tickCounter % spawningspeedBoss == 0){
+	    enemies.add(new SpeedEnemy(new Point(-1, -1)));
+	}
+
+	int spawningspeedSpeedy = (int)(70- (tickCounter / 10.0));
+	if (spawningspeedSpeedy <= 2){ spawningspeedSpeedy = 2;}
+	if( tickCounter % spawningspeedSpeedy == 0){
+	    enemies.add(new BossEnemy(new Point(-1, -1)));
+	}
+
+        tickCounter ++;
+
+
     }
 
     public boolean addTowerReturnIfAfford(Tower tower){
@@ -185,11 +216,9 @@ public class Map
     	return true;
     }
 
-
     public List<Tower> getTowers() {
 	return towers;
     }
-
 
     public List<Enemy> getEnemies() {
 	return enemies;
@@ -202,7 +231,6 @@ public class Map
 	    }
 	}
     }
-
 
     public void hardRoad(){
     //hard coded path
@@ -246,8 +274,6 @@ public class Map
 	System.out.println(createMapPath(new Point(0,5)));
 	System.out.println(path);
     }
-
-
 
     public Tile getTile(int x, int y){
         return tiles[y][x];

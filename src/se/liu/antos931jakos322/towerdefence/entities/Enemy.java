@@ -26,6 +26,8 @@ public abstract class Enemy implements Entity
     protected final int rewardMoney;
     protected double drawX;
     protected double drawY;
+    protected int speed = 10;
+    protected double enemyScale = 0.4;
 
     protected Color color;
 
@@ -42,7 +44,7 @@ public abstract class Enemy implements Entity
 
     public void draw(final Graphics2D g2d, final int tileSize) {
 	g2d.setColor(color);
-	final double enemyScale = 0.4;
+
 	final int size = (int) (tileSize * enemyScale); // less size is bigger enemy
 	final int enemyOffset = tileSize/2 - size/2; // should be changed to fit all sizes
 
@@ -58,7 +60,7 @@ public abstract class Enemy implements Entity
     }
 
     public int moveAndTakeDamage(List<Point> path){
-	final int moveSmoothness = 10;
+
 	if(pathIndex == path.size()-1){
 	    return 1;
 	}
@@ -67,10 +69,10 @@ public abstract class Enemy implements Entity
 	// path index is used moves the actual point position while the rest is to keep the enemy walking "smooth"
 	double difX = path.get(pathIndex+1).x - position.x;
 	double difY = path.get(pathIndex+1).y - position.y;
-	drawX =  (position.x + (difX / moveSmoothness) * moveAmount);
-	drawY =  (position.y + (difY / moveSmoothness) * moveAmount);
+	drawX =  (position.x + (difX / speed) * moveAmount);
+	drawY =  (position.y + (difY / speed) * moveAmount);
 
-        if(moveAmount < moveSmoothness){ moveAmount++; }
+        if(moveAmount < speed){ moveAmount++; }
         else{
 	    moveAmount = 1;
 	    pathIndex += 1;
@@ -98,6 +100,7 @@ public abstract class Enemy implements Entity
 	double inverceProcentageHP = 1 - procentageHP;
 
 	try {
+
 	    color = new Color(255, (int) (inverceProcentageHP * 255), (int) (inverceProcentageHP * 255));
 	}
 	catch (IllegalArgumentException e){
