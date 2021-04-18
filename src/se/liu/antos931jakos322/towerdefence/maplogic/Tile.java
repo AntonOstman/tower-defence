@@ -65,7 +65,27 @@ public class Tile
 	int newBlue = 0;
 	int newGreen = 0;
 
+	/*
 
+		int newRed = color.getRed();
+	int newBlue = color.getBlue();
+	int newGreen = color.getGreen();
+
+	List<Integer> colors = new ArrayList<>();
+
+	colors.add(newRed);
+	colors.add(newBlue);
+	colors.add(newGreen);
+
+	for (int newColor: colors) {
+	    int randomInt = RND.nextInt(50);
+	    if(newColor - randomInt >= 0){
+	        newColor -= randomInt;
+	    }
+	}
+
+
+	 */
 
 	if (color.getRed() - randomInt < 0) {
 	     newRed = color.getRed() + randomInt;
