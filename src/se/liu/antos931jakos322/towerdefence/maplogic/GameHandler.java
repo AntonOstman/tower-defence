@@ -6,6 +6,7 @@ import se.liu.antos931jakos322.towerdefence.entities.GenericEnemy;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 /**
  *
@@ -17,7 +18,7 @@ public class GameHandler
 {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
     final int timerDelay = 50;
     final int enemySpawnRate = 50;
@@ -25,8 +26,8 @@ public class GameHandler
 
 
     Map map = new Map(10, 10);
-    map.hardCodedMap();
-    map.hardRoad();
+    //map.hardCodedMap();
+    //map.hardRoad();
     MapViewer viewer = new MapViewer(map);
     //map.addEnemy(new GenericEnemy(new Point(9, 9)));
 
