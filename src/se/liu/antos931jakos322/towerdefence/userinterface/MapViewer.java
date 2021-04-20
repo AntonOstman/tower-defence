@@ -3,6 +3,7 @@ package se.liu.antos931jakos322.towerdefence.userinterface;
 import se.liu.antos931jakos322.towerdefence.entities.Tower;
 import se.liu.antos931jakos322.towerdefence.entities.TowerMaker;
 import se.liu.antos931jakos322.towerdefence.entities.TowerType;
+import se.liu.antos931jakos322.towerdefence.maplogic.GameHandler;
 import se.liu.antos931jakos322.towerdefence.maplogic.Map;
 
 import javax.swing.*;
@@ -17,18 +18,18 @@ import java.awt.event.MouseListener;
  */
 public class MapViewer
 {
-    private Map map;
+    private GameHandler gameHandler;
     private JFrame frame;
 
     //
-    public MapViewer(Map map) {
-        this.map = map;
+    public MapViewer(GameHandler gameHandler) {
+        this.gameHandler = gameHandler;
         this.frame = new JFrame();
     }
 
     public void viewMapText(){
-        int mapX = map.getDimension().x;
-	int mapY = map.getDimension().y;
+        int mapX = gameHandler.getMap().getDimension().x;
+	int mapY = gameHandler.getMap().getDimension().y;
         for (int y = 0; y < mapY; y++) {
 	    for (int x = 0; x < mapX; x++) {
 		//System.out.print(map.getTile(x, y));
@@ -37,8 +38,8 @@ public class MapViewer
 	}
 }
     public void show(){
-        se.liu.antos931jakos322.towerdefence.userinterface.MenuComponent menuComponent = new MenuComponent(map);
-	MapComponent mapComponent = new MapComponent(map);
+        se.liu.antos931jakos322.towerdefence.userinterface.MenuComponent menuComponent = new MenuComponent(gameHandler);
+	MapComponent mapComponent = new MapComponent(gameHandler);
 
 	JPanel mainPanel = new JPanel();
 	JPanel gamePanel = new JPanel(new GridLayout(0,1));
@@ -78,8 +79,8 @@ public class MapViewer
 
 
 	frame.setLayout(new BorderLayout());
-	map.addListener(menuComponent);
-	map.addListener(mapComponent);
+	gameHandler.addListener(menuComponent);
+	gameHandler.addListener(mapComponent);
 	frame.add(mainPanel);
 
 	frame.pack();
@@ -111,15 +112,16 @@ public class MapViewer
 
 	    TowerMaker towerMaker = new TowerMaker();
 	    Tower newTower = towerMaker.getTower(currentSelectedTower);
+
 	    newTower.setPosition(mapPoint);
 
-	    boolean canPlaceTower = map.canAffordAndPlaceTower(newTower);
+	    boolean canPlaceTower = gameHandler.canAffordAndPlaceTower(newTower);
 
 	    if (!canPlaceTower){
 		JOptionPane.showMessageDialog(frame,"Not enough Money or wrong placement");
 	    }
 	    else{
-	           map.addTower(newTower);
+	           gameHandler.addTower(newTower);
 	    }
 
 	}

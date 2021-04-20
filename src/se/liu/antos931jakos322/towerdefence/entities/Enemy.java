@@ -3,8 +3,6 @@ package se.liu.antos931jakos322.towerdefence.entities;
 
 
 
-import se.liu.antos931jakos322.towerdefence.entities.Entity;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +18,7 @@ public abstract class Enemy implements Entity
     protected List<Point> path;
     protected Point position;
     protected int health;
-    protected int pathIndex;
+    protected int pathPosition;
     protected int moveAmount = 0;
     protected final int maxHealth;
     protected final int rewardMoney;
@@ -40,7 +38,7 @@ public abstract class Enemy implements Entity
 	this.enemyScale = size;
 	this.speed = speed;
 
-	this.pathIndex = 0;
+	this.pathPosition = 0;
 	this.path = new ArrayList<>();
     	this.rewardMoney = 5;
     }
@@ -63,24 +61,26 @@ public abstract class Enemy implements Entity
 	return health;
     }
 
-    public int moveAndTakeDamage(List<Point> path){
+    public int moveAndTakeDamage(Point nextTile, Point lastTile){
 
-	if(pathIndex == path.size()-1){ // since list size is 1 bigger than the list index
+	if(nextTile.equals(lastTile)){ // since list size is 1 bigger than the list index
 	    return 1;
 	}
-	position = path.get(pathIndex);
 
 	// path index is used moves the actual point position while the rest is to keep the enemy walking "smooth"
-	double difX = path.get(pathIndex+1).x - position.x;
-	double difY = path.get(pathIndex+1).y - position.y;
+	double difX = nextTile.x - position.x;
+	double difY = nextTile.y - position.y;
+
 	drawX =  (position.x + (difX / speed) * moveAmount);
 	drawY =  (position.y + (difY / speed) * moveAmount);
 
         if(moveAmount < speed){ moveAmount++; }
         else{
 	    moveAmount = 1;
-	    pathIndex += 1;
-        }
+	    pathPosition += 1;
+	    position = nextTile;
+
+	}
         return 0;
     }
 
@@ -123,7 +123,9 @@ public abstract class Enemy implements Entity
 		e.printStackTrace();
 	}
 
-
     }
 
+    public int getPath() {
+	return pathPosition;
+    }
 }

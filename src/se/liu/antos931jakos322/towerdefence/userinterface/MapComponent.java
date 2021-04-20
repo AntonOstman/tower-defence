@@ -1,6 +1,7 @@
 package se.liu.antos931jakos322.towerdefence.userinterface;
 
 import se.liu.antos931jakos322.towerdefence.entities.Enemy;
+import se.liu.antos931jakos322.towerdefence.maplogic.GameHandler;
 import se.liu.antos931jakos322.towerdefence.maplogic.Map;
 import se.liu.antos931jakos322.towerdefence.maplogic.MapListener;
 import se.liu.antos931jakos322.towerdefence.maplogic.Tile;
@@ -19,16 +20,16 @@ import java.awt.*;
 
 public class MapComponent extends JComponent implements MapListener
 {
-    private Map map;
+    private GameHandler gameHandler;
     private final int mapX;
     private final int mapY;
     private final static int TILE_SIZE = 50;
     private final static int MARGIN = 0;
 
-    public MapComponent(final Map map) {
-	this.map = map;
-	this.mapY = map.getHeight();
-	this.mapX = map.getWidth();
+    public MapComponent(GameHandler gameHandler) {
+	this.gameHandler = gameHandler;
+	this.mapY = gameHandler.getMap().getDimension().y;
+	this.mapX = gameHandler.getMap().getDimension().x;
     }
 
     public Dimension getPreferredSize(){
@@ -50,14 +51,14 @@ public class MapComponent extends JComponent implements MapListener
 
 	for (int y = 0; y < mapY; y++) {
 	    for (int x = 0; x < mapX; x++) {
-		Tile currentTile = map.getTile(x, y);
+		Tile currentTile = gameHandler.getMap().getTile(new Point(x, y));
 		currentTile.drawTile(g2d, MARGIN, TILE_SIZE);
 	    }
 	}
-	for (Tower tower: map.getTowers()) {
+	for (Tower tower: gameHandler.getTowers()) {
 	    tower.draw(g2d, TILE_SIZE);
 	}
-	for(Enemy enemy : map.getEnemies()){
+	for(Enemy enemy : gameHandler.getEnemies()){
 	    enemy.draw(g2d, TILE_SIZE);
 	}
 

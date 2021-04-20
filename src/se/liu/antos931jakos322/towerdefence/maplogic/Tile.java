@@ -5,11 +5,10 @@ package se.liu.antos931jakos322.towerdefence.maplogic;
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.List;
+
 /**
  *
  * Uses a tileType to decide which type of tile itself is.
@@ -118,7 +117,7 @@ public class Tile
         EnumMap<TileType, Color> tileColors = new EnumMap<>(TileType.class);
 
         tileColors.put(TileType.GRASS, Color.GREEN);
-	tileColors.put(TileType.ROADO, Color.BLACK);
+	tileColors.put(TileType.ROAD, Color.BLACK);
 
         return tileColors;
     }

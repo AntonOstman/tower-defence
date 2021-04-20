@@ -10,5 +10,5 @@ package se.liu.antos931jakos322.towerdefence.maplogic;
 
 public enum TileType
 {
-    GRASS, ROADO
+    GRASS, ROAD
 }
