@@ -28,7 +28,7 @@ import java.util.List;
 public class Map
 {
     private Tile[][] tiles;
-    private List<Point> path = new ArrayList<>();
+    private List<Point> path;
     private int width, height;
 
 
@@ -36,9 +36,11 @@ public class Map
 	this.width = width;
 	this.height = height;
 	this.tiles = new Tile[height][width];
-
+	this.path = null;
 	//createMap();
     	//loadMap(); loadmap throws IO excpetion and the correct usage is probably to try loading in tester class?
+	// cool usage would be to load map with the "selected map index" you want to load
+	// that way the player could choose map
     }
 
 
@@ -120,15 +122,19 @@ public class Map
     }
 
     public void loadMap() throws IOException {
-        final int selectedMapIndex = 0;
+	final int selectedMapIndex = 0;
 
-	List<MapInfo> mapInfoList = new ArrayList<>();
+	List<MapInfo> mapInfoList; // does not need to be initialieed to new arraylist
 	// create Gson instance
 	Gson gson = new Gson();
 	// create a reader
+	// an exception descriping the problem should probaly be thrown here
+	// likely try to read from file an if FileNotFoundException then create file or something
 	Reader reader = Files.newBufferedReader(Paths.get("src/se/liu/antos931jakos322/towerdefence/maplogic/maps.json"));
 	// convert JSON array to object
-	mapInfoList = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>() {}.getType());
+	mapInfoList = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>()
+	{
+	}.getType());
 	reader.close();
 
 	MapInfo selectedMap = mapInfoList.get(selectedMapIndex);
@@ -136,12 +142,12 @@ public class Map
 	// Creates the base map with all grass tiles
 	for (int h = 0; h < dimensions.y; h++) {
 	    for (int w = 0; w < dimensions.x; w++) {
-		tiles[h][w] = new Tile(new Point(w, h),  TileType.GRASS);
+		tiles[h][w] = new Tile(new Point(w, h), TileType.GRASS);
 	    }
 	}
 	// Creates the road tiles
-	for (Point pathTile : selectedMap.getPath()){
-	    tiles[pathTile.y][pathTile.x] = new Tile(new Point (pathTile.x, pathTile.y), TileType.ROAD);
+	for (Point pathTile : selectedMap.getPath()) {
+	    tiles[pathTile.y][pathTile.x] = new Tile(new Point(pathTile.x, pathTile.y), TileType.ROAD);
 	}
 	// Updates the path in this class
 	path = selectedMap.getPath();

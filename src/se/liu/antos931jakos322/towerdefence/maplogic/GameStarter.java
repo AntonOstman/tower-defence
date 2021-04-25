@@ -8,18 +8,20 @@ import java.io.IOException;
 
 public class GameStarter
 {
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
 
 	final int timerDelay = 50;
 	final int enemySpawnRate = 50;
 	final int waveDensity = timerDelay * enemySpawnRate; // keeps the ratio when timerDelay is changed
 
 	Map map = new Map(10, 10);
-
 	try {
 	    map.loadMap();
 	}
-	catch (IOException e){e.printStackTrace();}
+	catch (IOException e){
+	    e.printStackTrace();
+	}
+
 
 	GameHandler gameHandler = new GameHandler(map);
 	MapViewer viewer = new MapViewer(gameHandler);

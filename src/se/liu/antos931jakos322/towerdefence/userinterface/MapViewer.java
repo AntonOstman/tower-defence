@@ -18,7 +18,7 @@ import java.awt.event.MouseAdapter;
 public class MapViewer
 {
     private GameHandler gameHandler;
-    private JFrame frame;
+    private JFrame frame = new JFrame();
 
     //
     public MapViewer(GameHandler gameHandler) {
@@ -36,7 +36,6 @@ public class MapViewer
 	}
 }
     public void show(){
-	frame = new JFrame(); // inspections wants to create the frame here instead of constructor, why?
 
 	se.liu.antos931jakos322.towerdefence.userinterface.MenuComponent menuComponent = new MenuComponent(gameHandler);
 	GameComponent mapComponent = new GameComponent(gameHandler);
