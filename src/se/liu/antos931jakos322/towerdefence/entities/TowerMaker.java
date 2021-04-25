@@ -29,13 +29,18 @@ public class TowerMaker
 	return towerMap.get(type);
     }
     private Tower createArrowTower(){
-
-        Tower arrowTower = new ArrowTower();
+	int arrowAttackpower = 10;
+        int arrowCost = 10;
+        int arrowRange = 5;
+        Tower arrowTower = new ArrowTower(arrowCost,arrowAttackpower,arrowRange);
         return arrowTower;
     }
 
     private Tower createCanonTower(){
-        Tower canonTower = new CanonTower();
+	int canonAttackpower = 5;
+	int canonCost = 5;
+	int canonRange = 10;
+        Tower canonTower = new CanonTower(canonCost,canonAttackpower,canonRange);
         return canonTower;
     }
 

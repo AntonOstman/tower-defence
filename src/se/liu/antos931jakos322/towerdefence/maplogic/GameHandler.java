@@ -6,6 +6,7 @@ import se.liu.antos931jakos322.towerdefence.entities.SpeedEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.Tower;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 import se.liu.antos931jakos322.towerdefence.entities.GenericEnemy;
+import se.liu.antos931jakos322.towerdefence.userinterface.MapListener;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -88,7 +89,7 @@ public class GameHandler
             Point lastTile = map.getLastTile();
             int damage = enemy.moveAndTakeDamage(map.getPath(nextTile), lastTile);
             if(damage == 1){
-                i.remove();
+                i.remove(); // this should definately be more generic
                 takeDamage(1);
             }
         }

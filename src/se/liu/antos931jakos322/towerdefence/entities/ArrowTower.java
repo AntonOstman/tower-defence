@@ -9,9 +9,10 @@ import java.awt.*;
 
 public class ArrowTower extends Tower
 {
-    public ArrowTower() {
-	super(Color.blue);
-    }
 
+    public ArrowTower(int cost, int attackPower, int range) {
+	super(Color.blue, cost, attackPower, range);
+
+    }
 
 }

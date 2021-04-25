@@ -24,7 +24,6 @@ public class MapViewer
     //
     public MapViewer(GameHandler gameHandler) {
         this.gameHandler = gameHandler;
-        this.frame = new JFrame();
     }
 
     public void viewMapText(){
@@ -38,7 +37,9 @@ public class MapViewer
 	}
 }
     public void show(){
-        se.liu.antos931jakos322.towerdefence.userinterface.MenuComponent menuComponent = new MenuComponent(gameHandler);
+	frame = new JFrame(); // inspections wants to create the frame here instead of constructor, why?
+
+	se.liu.antos931jakos322.towerdefence.userinterface.MenuComponent menuComponent = new MenuComponent(gameHandler);
 	MapComponent mapComponent = new MapComponent(gameHandler);
 
 	JPanel mainPanel = new JPanel();

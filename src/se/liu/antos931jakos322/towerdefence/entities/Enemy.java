@@ -15,7 +15,6 @@ import java.util.List;
 public abstract class Enemy implements Entity
 {
     protected int level;
-    protected List<Point> path;
     protected Point position;
     protected int health;
     protected int pathPosition;
@@ -25,7 +24,7 @@ public abstract class Enemy implements Entity
     protected double drawX;
     protected double drawY;
     protected int speed;
-    protected double enemyScale;
+    protected double enemyScale; // many fields, can any be removed/moved?
 
     protected Color color;
 
@@ -39,7 +38,6 @@ public abstract class Enemy implements Entity
 	this.speed = speed;
 
 	this.pathPosition = 0;
-	this.path = new ArrayList<>();
     	this.rewardMoney = 5;
     }
 
@@ -100,7 +98,7 @@ public abstract class Enemy implements Entity
 	return drawY;
     }
 
-    public void takeDamage(int damage){
+    public void takeDamage(int damage) throws IllegalArgumentException{
         if (health - damage < 0) {
 	    health = 0;
 	}

@@ -2,8 +2,6 @@ package se.liu.antos931jakos322.towerdefence.userinterface;
 
 import se.liu.antos931jakos322.towerdefence.entities.Enemy;
 import se.liu.antos931jakos322.towerdefence.maplogic.GameHandler;
-import se.liu.antos931jakos322.towerdefence.maplogic.Map;
-import se.liu.antos931jakos322.towerdefence.maplogic.MapListener;
 import se.liu.antos931jakos322.towerdefence.maplogic.Tile;
 import se.liu.antos931jakos322.towerdefence.entities.Tower;
 

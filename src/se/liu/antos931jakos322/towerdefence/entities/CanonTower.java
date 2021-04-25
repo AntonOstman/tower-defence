@@ -12,13 +12,10 @@ public class CanonTower extends Tower
 {
 
 
-    public CanonTower() {
-	super(Color.YELLOW);
-	this.attackPower = 5;
+
+    public CanonTower(int cost, int attackPower, int range) {
+	super(Color.YELLOW,cost,attackPower,range);
+
     }
 
-    @Override public boolean attackAndReturnIsFatal(final Enemy enemy) {
-
-        return super.attackAndReturnIsFatal(enemy);
-    }
 }

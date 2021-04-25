@@ -22,12 +22,12 @@ public abstract class Tower implements Entity
     protected double bulletDrawY;
 
 
-    protected Tower(Color color) {
-        this.cost = 10;
+    protected Tower(Color color, int cost, int attackPower, int range) {
+        this.cost = cost;
         this.position = null;
         this.color = color;
-        this.attackPower = 10;
-        this.range = 5;
+        this.attackPower = attackPower;
+        this.range = range;
     }
 
     public boolean attackAndReturnIsFatal(Enemy enemy){
