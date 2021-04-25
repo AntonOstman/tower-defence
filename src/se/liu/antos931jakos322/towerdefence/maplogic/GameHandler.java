@@ -6,7 +6,7 @@ import se.liu.antos931jakos322.towerdefence.entities.SpeedEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.Tower;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 import se.liu.antos931jakos322.towerdefence.entities.GenericEnemy;
-import se.liu.antos931jakos322.towerdefence.userinterface.MapListener;
+import se.liu.antos931jakos322.towerdefence.userinterface.GameListener;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class GameHandler
     private final static int WAVE_TIMER = 50;
     private int tickCounter = 1;
     private int waveLevel = 0;
-    private List<MapListener> gameListeners;
+    private List<GameListener> gameListeners;
 
 
     public GameHandler(Map map) {
@@ -140,13 +140,21 @@ public class GameHandler
     public boolean canAffordAndPlaceTower(Tower tower){
         Point towerPos = tower.getPosition();
         TileType desiredPlacementTile  = map.getTile(towerPos).getTileType();
+
+        // if the player attempts to place the tower on something thats not grass return false
         if (desiredPlacementTile != TileType.GRASS) {
             return false;
         }
+        // if there is another tower on the tile return fakse
+        for (Tower otherTowers: towers){
+            if(otherTowers.getPosition().equals(towerPos)){
+                return false;
+            }
+        }
+        // if the player cannot afford the tower return false
         if (money - tower.getCost() < 0){
             return false;
         }
-
         return true;
     }
 
@@ -162,11 +170,11 @@ public class GameHandler
     }
 
     public void notifyListeners(){
-        for(MapListener listener: gameListeners){
+        for(GameListener listener: gameListeners){
             listener.mapChanged();
         }
     }
-    public void addListener(MapListener listener){
+    public void addListener(GameListener listener){
         gameListeners.add(listener);
     }
 

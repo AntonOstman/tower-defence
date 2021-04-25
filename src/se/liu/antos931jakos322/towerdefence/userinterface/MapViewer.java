@@ -4,11 +4,10 @@ import se.liu.antos931jakos322.towerdefence.entities.Tower;
 import se.liu.antos931jakos322.towerdefence.entities.TowerMaker;
 import se.liu.antos931jakos322.towerdefence.entities.TowerType;
 import se.liu.antos931jakos322.towerdefence.maplogic.GameHandler;
-import se.liu.antos931jakos322.towerdefence.maplogic.Map;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseListener;
+import java.awt.event.MouseAdapter;
 
 /**
  *
@@ -40,24 +39,27 @@ public class MapViewer
 	frame = new JFrame(); // inspections wants to create the frame here instead of constructor, why?
 
 	se.liu.antos931jakos322.towerdefence.userinterface.MenuComponent menuComponent = new MenuComponent(gameHandler);
-	MapComponent mapComponent = new MapComponent(gameHandler);
+	GameComponent mapComponent = new GameComponent(gameHandler);
 
+	// create the panels of the UI
 	JPanel mainPanel = new JPanel();
 	JPanel gamePanel = new JPanel(new GridLayout(0,1));
 	JPanel mainMenuPanel = new JPanel(new GridLayout(2,0));
 	JPanel interactivePanel = new JPanel(new GridLayout(4, 0));
 	JPanel textPanel = new JPanel(new BorderLayout());
 
+	// set borders on all panels for easier debugging
 	interactivePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	gamePanel.setBorder(BorderFactory.createLineBorder(Color.RED));
 	mainPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
 	mainMenuPanel.setBorder(BorderFactory.createLineBorder(Color.cyan));
 	textPanel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
 
+	// should be changed to be more generic, take all types from towermaker?
 	TowerType[] towerTypes = {TowerType.NONE, TowerType.ARROW,TowerType.CANON, TowerType.MONEY};
 
+
 	JComboBox<TowerType> towerDropDown = new JComboBox<>(towerTypes);
-	towerDropDown.addItem(TowerType.ARROW);
 	towerDropDown.setSelectedIndex(0);
 
 	//menupanel has the information the player needs and is used for choosing towers
@@ -72,7 +74,7 @@ public class MapViewer
 	MouseEvent mouseListener = new MouseEvent(towerDropDown);
 	gamePanel.addMouseListener(mouseListener);
 
-
+	// now add all panels we have created to the main
 	mainMenuPanel.add(interactivePanel);
 	mainMenuPanel.add(menuComponent);
 	mainPanel.add(gamePanel);
@@ -90,7 +92,8 @@ public class MapViewer
 
 
     }
-    public class MouseEvent implements MouseListener{
+    public class MouseEvent extends MouseAdapter
+    {
 	private JComboBox<TowerType> dropDown;
 
 	public MouseEvent(JComboBox<TowerType> dropDown) {
@@ -102,7 +105,7 @@ public class MapViewer
 	    //System.out.println(e.getLocationOnScreen());
 	    Point clickedPoint = e.getPoint();
 	    // we get the tilesize and translate from pixel coordinates to map coordinates
-	    int tileSize = MapComponent.getTileSize();
+	    int tileSize = GameComponent.getTileSize();
 	    int mapPosX = clickedPoint.x/tileSize;
 	    int mapPosY = clickedPoint.y/tileSize;
 
@@ -124,24 +127,9 @@ public class MapViewer
 	    else{
 	           gameHandler.addTower(newTower);
 	    }
-
 	}
 
-	@Override public void mousePressed(final java.awt.event.MouseEvent e) {
 
-	}
-
-	@Override public void mouseReleased(final java.awt.event.MouseEvent e) {
-
-	}
-
-	@Override public void mouseEntered(final java.awt.event.MouseEvent e) {
-
-	}
-
-	@Override public void mouseExited(final java.awt.event.MouseEvent e) {
-
-	}
     }
 
 }

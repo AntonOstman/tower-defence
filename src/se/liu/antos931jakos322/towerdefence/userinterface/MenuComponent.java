@@ -14,7 +14,7 @@ import java.awt.*;
  *
  *
  */
-public class MenuComponent extends JComponent implements MapListener
+public class MenuComponent extends JComponent implements GameListener
 {
     private GameHandler gameHandler;
     private int textSize;

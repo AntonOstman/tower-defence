@@ -120,7 +120,7 @@ public class Map
     }
 
     public void loadMap() throws IOException {
-        int selectedMapIndex = 0;
+        final int selectedMapIndex = 0;
 
 	List<MapInfo> mapInfoList = new ArrayList<>();
 	// create Gson instance
@@ -132,16 +132,16 @@ public class Map
 	reader.close();
 
 	MapInfo selectedMap = mapInfoList.get(selectedMapIndex);
-	Point dimentions = selectedMap.getDimentions();
+	Point dimensions = selectedMap.getDimensions();
 	// Creates the base map with all grass tiles
-	for (int h = 0; h < dimentions.y; h++) {
-	    for (int w = 0; w < dimentions.x; w++) {
-		tiles[h][w] = new Tile(w, h,  TileType.GRASS);
+	for (int h = 0; h < dimensions.y; h++) {
+	    for (int w = 0; w < dimensions.x; w++) {
+		tiles[h][w] = new Tile(new Point(w, h),  TileType.GRASS);
 	    }
 	}
 	// Creates the road tiles
 	for (Point pathTile : selectedMap.getPath()){
-	    tiles[pathTile.y][pathTile.x] = new Tile(pathTile.x, pathTile.y, TileType.ROAD);
+	    tiles[pathTile.y][pathTile.x] = new Tile(new Point (pathTile.x, pathTile.y), TileType.ROAD);
 	}
 	// Updates the path in this class
 	path = selectedMap.getPath();

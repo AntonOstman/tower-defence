@@ -6,16 +6,16 @@ import java.util.List;
 
 public class MapInfo
 {
-    private Point dimentions;
+    private Point dimensions;
     private List<Point> path = new ArrayList<>();
 
-    public MapInfo(final Point dimentions, final List<Point> path) {
-	this.dimentions = dimentions;
+    public MapInfo(final Point dimensions, final List<Point> path) {
+	this.dimensions = dimensions;
 	this.path = path;
     }
 
-    public Point getDimentions() {
-	return dimentions;
+    public Point getDimensions() {
+	return dimensions;
     }
 
     public List<Point> getPath() {

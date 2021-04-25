@@ -20,7 +20,8 @@ public abstract class Tower implements Entity
     protected double moveAmount;
     protected double bulletDrawX;
     protected double bulletDrawY;
-
+    protected int drawPosX;
+    protected int drawPosY;
 
     protected Tower(Color color, int cost, int attackPower, int range) {
         this.cost = cost;
@@ -47,13 +48,13 @@ public abstract class Tower implements Entity
 
     public void changeBulletPlacement(Enemy enemy){
         int distanceToEnemyScale = 1;
-        double difX = enemy.getPosition().x - position.x;
-        double difY = enemy.getPosition().y - position.y;
-        bulletDrawX =  (position.x + ((difX ) * moveAmount));
-        bulletDrawY =  (position.y + ((difY ) * moveAmount));
+        double difX = enemy.getDrawPosX() - drawPosX;
+        double difY = enemy.getDrawPosY() - drawPosY;
+        bulletDrawX =  (drawPosX + ((difX ) * moveAmount));
+        bulletDrawY =  (drawPosY + ((difY ) * moveAmount));
 
         if(moveAmount < distanceToEnemyScale){
-            double bulletSpeed = 0.2;
+            final double bulletSpeed = 0.2;
 
             moveAmount += bulletSpeed;
         }
@@ -81,17 +82,19 @@ public abstract class Tower implements Entity
 
     @Override public void draw(final Graphics2D g2d, final int tileSize) {
         final double towerScale = 0.6;
-        final double bulletScale = 0.2;
+        final double bulletScale = 0.02 * attackPower; // the bullet scales with tower power
         int towerSize = (int) (tileSize * towerScale);
         int bulletSize = (int) (tileSize * bulletScale);
 
 
         final int towerOffset = tileSize/2 - towerSize/2; // the ratio to keep a tower centered on a tile
         final int bulletOffset = tileSize/2 - bulletSize/2;
-        int posX = (int) (tileSize * bulletDrawX) + bulletOffset;
-        int posY = (int) (tileSize * bulletDrawY) + bulletOffset;
+        int bulletPosX = (int) (bulletDrawX) + bulletOffset ;
+        int bulletPosY = (int) (bulletDrawY) + bulletOffset ;
+        drawPosX = position.x * tileSize + towerOffset;
+        drawPosY = position.y * tileSize + towerOffset;
         g2d.setColor(color);
-        g2d.fillRect(position.x * tileSize + towerOffset, position.y * tileSize + towerOffset, towerSize, towerSize);
-        g2d.fillOval(posX, posY, bulletSize, bulletSize);
+        g2d.fillRect(drawPosX, drawPosY, towerSize, towerSize);
+        g2d.fillOval(bulletPosX, bulletPosY, bulletSize, bulletSize);
     }
 }

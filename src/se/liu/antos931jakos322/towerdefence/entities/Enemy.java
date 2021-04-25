@@ -25,7 +25,8 @@ public abstract class Enemy implements Entity
     protected double drawY;
     protected int speed;
     protected double enemyScale; // many fields, can any be removed/moved?
-
+    protected int drawPosX;
+    protected int drawPosY;
     protected Color color;
 
     protected Enemy(final int maxHealth, final int speed, final Color color, final double size) {
@@ -46,10 +47,8 @@ public abstract class Enemy implements Entity
 
 	final int size = (int) (tileSize * enemyScale); // less size is bigger enemy
 	final int enemyOffset = tileSize/2 - size/2; // should be changed to fit all sizes
-	System.out.println(drawX);
-	System.out.println(drawY);
-	int drawPosX = (int) (drawX * tileSize) + enemyOffset;
-	int drawPosY = (int) (drawY * tileSize) + enemyOffset;
+	drawPosX = (int) (drawX * tileSize) + enemyOffset;
+	drawPosY = (int) (drawY * tileSize) + enemyOffset;
 
 	g2d.fillOval(drawPosX, drawPosY, size, size);
 
@@ -105,17 +104,19 @@ public abstract class Enemy implements Entity
         else {
             health -= damage;
 	}
-	double procentageHP = (double) health / maxHealth;
 
-	double inverceProcentageHP = 1 - procentageHP;
 
 	try {
+	    double procentageHP = (double) health / maxHealth;
+	    double inverceProcentageHP = 1 - procentageHP;
 
 	    //color = new Color(255, (int) (inverceProcentageHP * 255), (int) (inverceProcentageHP * 255));
-	    color = new Color( 	(int) (color.getRed()	+ (255- color.getRed())   *inverceProcentageHP),
-		    		(int) (color.getGreen()	+ (255- color.getGreen()) *inverceProcentageHP),
-	    			(int) (color.getBlue()	+ (255- color.getBlue())  *inverceProcentageHP));
-
+	    color = new Color( 	(int) (color.getRed()	+ (255- color.getRed())   * inverceProcentageHP),
+		    		(int) (color.getGreen()	+ (255- color.getGreen()) * inverceProcentageHP),
+	    			(int) (color.getBlue()	+ (255- color.getBlue())  * inverceProcentageHP));
+				// the reason that a red enemy becomes fully white on half hp
+	    			// is because if the colors value start on 128 128 128
+	    			// and when precentageHP is 0.5 it will become 128 + 128 ( i think)
 	}
 	catch (IllegalArgumentException e){
 		e.printStackTrace();
@@ -125,5 +126,13 @@ public abstract class Enemy implements Entity
 
     public int getPath() {
 	return pathPosition;
+    }
+
+    public int getDrawPosX() {
+	return drawPosX;
+    }
+
+    public int getDrawPosY() {
+	return drawPosY;
     }
 }

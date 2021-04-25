@@ -16,7 +16,7 @@ import java.awt.*;
  *
  */
 
-public class MapComponent extends JComponent implements MapListener
+public class GameComponent extends JComponent implements GameListener
 {
     private GameHandler gameHandler;
     private final int mapX;
@@ -24,7 +24,7 @@ public class MapComponent extends JComponent implements MapListener
     private final static int TILE_SIZE = 50;
     private final static int MARGIN = 0;
 
-    public MapComponent(GameHandler gameHandler) {
+    public GameComponent(GameHandler gameHandler) {
 	this.gameHandler = gameHandler;
 	this.mapY = gameHandler.getMap().getDimension().y;
 	this.mapX = gameHandler.getMap().getDimension().x;

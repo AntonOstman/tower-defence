@@ -20,16 +20,13 @@ public class Tile
     private TileType tileType;
     private Color tileColor;
     private Point position;
-    private int posX;// should be changed into a point
-    private int posY; // should be changed into a point
     private final static Random RND = new Random();
 
 
-    public Tile(int posX, int posY, final TileType tileType) {
+    public Tile(Point position, final TileType tileType) {
 	this.tileType = tileType;
 	this.tileColor = randomNuance();
-	this.posX = posX;
-	this.posY = posY;
+	this.position = position;
     }
 
     public TileType getTileType() {
@@ -39,7 +36,7 @@ public class Tile
     public void drawTile(final Graphics2D g2d, final int margin, final int tileSize){
 
 	g2d.setColor(tileColor);
-	g2d.fillRect(posX * (margin + tileSize), posY * (margin + tileSize), tileSize, tileSize);
+	g2d.fillRect(position.x * (margin + tileSize), position.y * (margin + tileSize), tileSize, tileSize);
 
     }
 
@@ -66,8 +63,8 @@ public class Tile
 	colors.add(oldRed);
 	colors.add(oldGreen);
 	colors.add(oldBlue);
-	int colorSpan = 50; // the span in which the colors can differs for a tile
-	int randomInt = RND.nextInt(colorSpan);
+	final int colorSpan = 50; // the span in which the colors can differs for a tile
+	final int randomInt = RND.nextInt(colorSpan);
 
 	for (int i = 0; i < 3; i++) {
 	    int oldColor = colors.get(i);
@@ -100,11 +97,9 @@ public class Tile
         return tileColors;
     }
 
-    public int getPosX() {
-	return posX;
+    public Point getPosition() {
+	return position;
     }
 
-    public int getPosY() {
-	return posY;
-    }
+
 }

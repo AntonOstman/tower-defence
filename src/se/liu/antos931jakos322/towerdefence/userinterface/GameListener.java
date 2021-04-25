@@ -6,7 +6,7 @@ package se.liu.antos931jakos322.towerdefence.userinterface;
  *
  */
 
-public interface MapListener
+public interface GameListener
 {
 
     public void mapChanged();
