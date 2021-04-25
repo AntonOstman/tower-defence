@@ -14,9 +14,9 @@ public class GameStarter
 	final int enemySpawnRate = 50;
 	final int waveDensity = timerDelay * enemySpawnRate; // keeps the ratio when timerDelay is changed
 
-	Map map = new Map(10, 10);
+	Map map = new Map();
 	try {
-	    map.loadMap();
+	    map.loadMap(0);
 	}
 	catch (IOException e){
 	    e.printStackTrace();

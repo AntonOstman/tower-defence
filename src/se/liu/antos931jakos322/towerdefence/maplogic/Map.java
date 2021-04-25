@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,14 +28,14 @@ public class Map
 {
     private Tile[][] tiles;
     private List<Point> path;
-    private int width, height;
+    private Point dimensions;
 
 
-    public Map(final int width, final int height)  {
-	this.width = width;
-	this.height = height;
-	this.tiles = new Tile[height][width];
+    public Map()  {
+	this.dimensions = null;
+	this.tiles = null;
 	this.path = null;
+
 	//createMap();
     	//loadMap(); loadmap throws IO excpetion and the correct usage is probably to try loading in tester class?
 	// cool usage would be to load map with the "selected map index" you want to load
@@ -121,8 +120,7 @@ public class Map
 	writer.close();
     }
 
-    public void loadMap() throws IOException {
-	final int selectedMapIndex = 0;
+    public void loadMap(int selectedMapIndex) throws IOException {
 
 	List<MapInfo> mapInfoList; // does not need to be initialieed to new arraylist
 	// create Gson instance
@@ -138,7 +136,10 @@ public class Map
 	reader.close();
 
 	MapInfo selectedMap = mapInfoList.get(selectedMapIndex);
-	Point dimensions = selectedMap.getDimensions();
+	this.dimensions = selectedMap.getDimensions();
+
+	this.tiles = new Tile[dimensions.y][dimensions.x];
+
 	// Creates the base map with all grass tiles
 	for (int h = 0; h < dimensions.y; h++) {
 	    for (int w = 0; w < dimensions.x; w++) {
@@ -155,19 +156,17 @@ public class Map
 
     }
 
-
     public Tile getTile(Point pos){
         return tiles[pos.y][pos.x];
     }
 
-    public Point getDimension() {
-	return new Point(width, height);
+    public Point getDimensions() {
+	return dimensions;
     }
 
-
     @Override public String toString() {
-	for (int h = 0; h < height; h++) {
-	    for (int w = 0; w < width; w++) {
+	for (int h = 0; h < dimensions.y; h++) {
+	    for (int w = 0; w < dimensions.x; w++) {
 		System.out.print(tiles[h][w]);
 	    }
 	    System.out.println();

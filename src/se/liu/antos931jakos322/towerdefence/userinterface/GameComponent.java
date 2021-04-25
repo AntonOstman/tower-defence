@@ -26,8 +26,8 @@ public class GameComponent extends JComponent implements GameListener
 
     public GameComponent(GameHandler gameHandler) {
 	this.gameHandler = gameHandler;
-	this.mapY = gameHandler.getMap().getDimension().y;
-	this.mapX = gameHandler.getMap().getDimension().x;
+	this.mapY = gameHandler.getMap().getDimensions().y;
+	this.mapX = gameHandler.getMap().getDimensions().x;
     }
 
     public Dimension getPreferredSize(){

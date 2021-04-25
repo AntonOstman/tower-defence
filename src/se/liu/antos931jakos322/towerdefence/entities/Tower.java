@@ -23,6 +23,7 @@ public abstract class Tower implements Entity
     protected int drawPosX;
     protected int drawPosY;
 
+
     protected Tower(Color color, int cost, int attackPower, int range) {
         this.cost = cost;
         this.position = null;
@@ -96,5 +97,14 @@ public abstract class Tower implements Entity
         g2d.setColor(color);
         g2d.fillRect(drawPosX, drawPosY, towerSize, towerSize);
         g2d.fillOval(bulletPosX, bulletPosY, bulletSize, bulletSize);
+    }
+
+    public String getDescription(){
+        String description = "This is a tower";
+        return description;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }

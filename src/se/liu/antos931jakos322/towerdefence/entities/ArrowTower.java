@@ -15,4 +15,7 @@ public class ArrowTower extends Tower
 
     }
 
+    @Override public String getDescription() {
+	return "this is a arrow tower";
+    }
 }

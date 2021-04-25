@@ -24,6 +24,8 @@ public class MenuComponent extends JComponent implements GameListener
 	this.textSize = 20;
     }
 
+
+
     @Override public void mapChanged() {
 	repaint();
     }
