@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
-import java.util.List;
+
 /**
  *
  * Starts the GUI on which the player interacts with and can view the game
@@ -43,19 +43,24 @@ public class MapViewer
 
         frame = new JFrame();
 	se.liu.antos931jakos322.towerdefence.userinterface.MenuComponent menuComponent = new MenuComponent(gameHandler);
-	GameComponent mapComponent = new GameComponent(gameHandler);
+	GameComponent gameComponent = new GameComponent(gameHandler);
 
 	// create the panels of the UI
 	JPanel mainPanel = new JPanel();
-	JPanel gamePanel = new JPanel(new GridLayout(0,1));
-	JPanel mainMenuPanel = new JPanel(new GridLayout(3,0));
-
-	GridLayout interPanelLayout = new GridLayout(2, 4);
-	interPanelLayout.setHgap(10);
-	interPanelLayout.setVgap(10);
-	JPanel interactivePanel = new JPanel(interPanelLayout);
-	JPanel towerDescriptionPanel = new JPanel(new BorderLayout());
+	JPanel gamePanel = new JPanel(new GridLayout(1,1));
+	JPanel mainMenuPanel = new JPanel(new GridLayout(4,1));
+	JPanel towerUpgradesPanel = new JPanel(new BorderLayout());
+	JPanel towerDescriptionPanel = new JPanel(new GridLayout(1,1));
 	JPanel textPanel = new JPanel(new BorderLayout());
+	JScrollPane scrollableInteractivePanel = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	// create the interactive panel
+	final int unlimitedRows = 0;
+	GridLayout interactivePanelLayout = new GridLayout(unlimitedRows, 2);
+	JPanel interactivePanel = new JPanel(interactivePanelLayout);
+	final int margin = 10;
+	interactivePanelLayout.setHgap(margin);
+	interactivePanelLayout.setVgap(margin);
+
 
 	/*
 	// set borders on all panels for easier debugging
@@ -70,20 +75,19 @@ public class MapViewer
 
 	//menupanel has the information the player needs and is used for choosing towers
 
-
-	ButtonGroup buttonGroup = new ButtonGroup();
-
+	// create and set the buttons for placing towers
+	ButtonGroup buttonGroup = new ButtonGroup(); // create button group to deselect buttons when antoher is clicked
 	TowerMaker towerMaker = new TowerMaker();
-	List<TowerType> towerList = towerMaker.getAllTowers();
-	JLabel towerDesripction = new JLabel("non selected");
+	TowerType[] towerList = towerMaker.getAllTowers();
+	JTextArea towerDesripction = new JTextArea("non selected");
 
+	// iterate over all towerstypes that exist and get the information about certain towers from towermaker
+	// and create buttons with that information
 	for (TowerType towerType: towerList) {
-
 	    ButtonEvent buttonLiserner = new ButtonEvent(towerType, towerDesripction);
 
 	    Color buttonColor = towerMaker.getTower(towerType).getColor();
 	    JToggleButton b = new JToggleButton();
-	    b.setPreferredSize(new Dimension(50,50));
 	    b.setBackground(buttonColor);
 	    b.addActionListener(buttonLiserner);
 	    buttonGroup.add(b);
@@ -96,8 +100,9 @@ public class MapViewer
 	final Color backGroundColor = new Color(92, 184, 92);
 
 	//gamepanel has the map compopnent and shows the running game
-	gamePanel.add(mapComponent);
+	gamePanel.add(gameComponent);
 	gamePanel.setBorder(BorderFactory.createLineBorder(Color.black));
+	gamePanel.addMouseListener(new MouseEvent(towerDesripction));
 
 	//tower description panel config
 	towerDescriptionPanel.add(towerDesripction);
@@ -106,11 +111,17 @@ public class MapViewer
 
 	// interactive panel configuareuon
 	interactivePanel.setBackground(backGroundColor);
+	scrollableInteractivePanel.getViewport().add(interactivePanel);
+	// upgrade panel configuratoin
+	towerUpgradesPanel.setBackground(Color.blue);
+//	JLabel towerUpgradeLabel
+//	towerUpgradesPanel.add
 
 	// now add all panels we have created to the main
 	mainMenuPanel.add(menuComponent);
 	mainMenuPanel.add(towerDescriptionPanel);
-	mainMenuPanel.add(interactivePanel);
+	mainMenuPanel.add(scrollableInteractivePanel);
+	mainMenuPanel.add(towerDescriptionPanel);
 	mainMenuPanel.setPreferredSize(new Dimension(200,500));
 	mainMenuPanel.setBackground(backGroundColor);
 
@@ -121,7 +132,7 @@ public class MapViewer
 
 	frame.setLayout(new BorderLayout());
 	gameHandler.addListener(menuComponent);
-	gameHandler.addListener(mapComponent);
+	gameHandler.addListener(gameComponent);
 	frame.add(mainPanel);
 
 	frame.pack();
@@ -134,8 +145,8 @@ public class MapViewer
     public class ButtonEvent extends AbstractAction{
 
         private TowerType towerType;
-	private JLabel towerDescriptionLabel;
-	public ButtonEvent(TowerType towerType, JLabel towerDescriptionLabel) {
+	private JTextArea towerDescriptionLabel;
+	public ButtonEvent(TowerType towerType, JTextArea towerDescriptionLabel) {
 	    this.towerType = towerType;
 	    this.towerDescriptionLabel = towerDescriptionLabel;
 	}
@@ -152,10 +163,9 @@ public class MapViewer
 
     public class MouseEvent extends MouseAdapter
     {
-	private JComboBox<TowerType> dropDown;
-
-	public MouseEvent(JComboBox<TowerType> dropDown) {
-	    this.dropDown = dropDown;
+	private JTextArea textArea;
+	public MouseEvent(JTextArea textArea) {
+	    this.textArea = textArea;
 	}
 
 	@Override public void mouseClicked(final java.awt.event.MouseEvent e) {
@@ -169,13 +179,31 @@ public class MapViewer
 
 	    Point mapPoint = new Point(mapPosX, mapPosY);
 
+	    displayTowerInfo(mapPoint);
+	    placeTower(mapPoint);
+
 	    System.out.println(e.getPoint() + " Point");
 
+
+
+	}
+	private void displayTowerInfo(Point clickedPoint){
+
+	    Tower clickedTower = gameHandler.getTowerOnPoint(clickedPoint);
+	    if (clickedTower != null){
+	        textArea.setText(clickedTower.getDescription());
+	    }
+
+
+	}
+
+	private void placeTower(Point clickedPoint){
+
 	    TowerMaker towerMaker = new TowerMaker();
+	    System.out.println(selectedTower);
 	    Tower newTower = towerMaker.getTower(selectedTower);
 
-
-	    newTower.setPosition(mapPoint);
+	    newTower.setPosition(clickedPoint);
 
 	    boolean canPlaceTower = gameHandler.canAffordAndPlaceTower(newTower);
 
@@ -183,8 +211,12 @@ public class MapViewer
 		JOptionPane.showMessageDialog(frame,"Not enough Money or wrong placement");
 	    }
 	    else{
-	           gameHandler.addTower(newTower);
+		gameHandler.addTower(newTower);
 	    }
+	}
+    	private void upgradeTower(Point clickedPoint){
+	    Tower tower = gameHandler.getTowerOnPoint(clickedPoint);
+	    gameHandler.upgradeTower(tower);
 	}
 
     }

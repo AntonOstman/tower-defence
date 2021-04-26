@@ -22,14 +22,15 @@ public abstract class Tower implements Entity
     protected double bulletDrawY;
     protected int drawPosX;
     protected int drawPosY;
+    protected TowerType towerType;
 
-
-    protected Tower(Color color, int cost, int attackPower, int range) {
+    protected Tower(TowerType towerType, Color color, int cost, int attackPower, int range) {
         this.cost = cost;
         this.position = null;
         this.color = color;
         this.attackPower = attackPower;
         this.range = range;
+        this.towerType = towerType;
     }
 
     public boolean attackAndReturnIsFatal(Enemy enemy){
@@ -99,9 +100,16 @@ public abstract class Tower implements Entity
         g2d.fillOval(bulletPosX, bulletPosY, bulletSize, bulletSize);
     }
 
-    public String getDescription(){
-        String description = "This is a tower";
+    public String getDescription() {
+        String description = towerType +" TOWER\nattack power: " + attackPower + "\ncost: " + cost + "\nrange: " + range;
+
         return description;
+    }
+    public void upgrade(int attackPower, int range, int cost){
+        this.attackPower += attackPower;
+        this.range += range;
+        this.cost += cost;
+
     }
 
     public Color getColor() {

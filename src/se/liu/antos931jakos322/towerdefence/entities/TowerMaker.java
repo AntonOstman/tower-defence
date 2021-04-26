@@ -22,14 +22,11 @@ public class TowerMaker
     // tower to create when for eg. getting a string "arrow"
     // instead of if arrow do this, if cannon do this....
 
-    public List<TowerType> getAllTowers(){
+    public TowerType[] getAllTowers(){
 
-        List<TowerType> towerList = new ArrayList<>();
-        towerList.add(TowerType.ARROW);
-        towerList.add(TowerType.CANON);
-        towerList.add(TowerType.MONEY);
-
-        return towerList;
+	// return TowerType.values(); // this should be used in the final implementaion
+        // hard coded only to test
+	return new TowerType[] { TowerType.ARROW, TowerType.CANON, TowerType.MONEY,TowerType.ARROW,TowerType.ARROW,TowerType.ARROW };
     }
 
     public Tower getTower(TowerType type){

@@ -14,8 +14,7 @@ public class CanonTower extends Tower
 
 
     public CanonTower(int cost, int attackPower, int range) {
-	super(Color.YELLOW,cost,attackPower,range);
-
+	super(TowerType.CANON, Color.YELLOW,cost,attackPower,range);
     }
 
 }

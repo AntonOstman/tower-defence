@@ -11,11 +11,9 @@ public class ArrowTower extends Tower
 {
 
     public ArrowTower(int cost, int attackPower, int range) {
-	super(Color.blue, cost, attackPower, range);
+	super(TowerType.ARROW, Color.blue, cost, attackPower, range);
 
     }
 
-    @Override public String getDescription() {
-	return "this is a arrow tower";
-    }
+
 }

@@ -178,7 +178,20 @@ public class GameHandler
         gameListeners.add(listener);
     }
 
-    public Map getMap() {
+    public Tower getTowerOnPoint(Point coord){
+        for(Tower tower : towers){
+            if (coord.equals(tower.getPosition())){
+                return tower;
+            }
+        }
+        return null;
+    }
+
+    public void upgradeTower(Tower tower){
+        tower.upgrade(2,2,2);
+    }
+
+    public Map getMap() { // this should probably be changed so map cannot be directly accessed. Game handler controls map not others
         return map;
     }
 }
