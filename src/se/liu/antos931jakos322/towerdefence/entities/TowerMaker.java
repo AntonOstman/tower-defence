@@ -22,11 +22,19 @@ public class TowerMaker
     // tower to create when for eg. getting a string "arrow"
     // instead of if arrow do this, if cannon do this....
 
-    public TowerType[] getAllTowers(){
+    public List<TowerType> getAllTowers(){
 
 	// return TowerType.values(); // this should be used in the final implementaion
-        // hard coded only to test
-	return new TowerType[] { TowerType.ARROW, TowerType.CANON, TowerType.MONEY,TowerType.ARROW,TowerType.ARROW,TowerType.ARROW };
+	List<TowerType> towerList = new ArrayList<>();
+	for(TowerType towerType: TowerType.values()){
+	    if (towerType != TowerType.NONE){
+	        towerList.add(towerType);
+	    }
+	}
+
+
+	return towerList;
+	// hard coded only to test
     }
 
     public Tower getTower(TowerType type){
@@ -34,22 +42,24 @@ public class TowerMaker
 	towerMap.put(TowerType.ARROW,createArrowTower());
 	towerMap.put(TowerType.CANON,createCanonTower());
 	towerMap.put(TowerType.MONEY,createCanonTower());
-
+	towerMap.put(TowerType.NONE,null);
 	return towerMap.get(type);
     }
     private Tower createArrowTower(){
 	int arrowAttackpower = 10;
-        int arrowCost = 10;
+        int arrowCost = 13;
         int arrowRange = 5;
-        Tower arrowTower = new ArrowTower(arrowCost,arrowAttackpower,arrowRange);
+	int upgradeCost = 1;
+        Tower arrowTower = new ArrowTower(arrowCost, arrowAttackpower, arrowRange, upgradeCost);
         return arrowTower;
     }
 
     private Tower createCanonTower(){
 	int canonAttackpower = 5;
-	int canonCost = 5;
+	int canonCost = 7;
 	int canonRange = 10;
-        Tower canonTower = new CanonTower(canonCost,canonAttackpower,canonRange);
+	int upgradeCost = 1;
+	Tower canonTower = new CanonTower(canonCost,canonAttackpower,canonRange, upgradeCost);
         return canonTower;
     }
 
@@ -57,7 +67,8 @@ public class TowerMaker
 	int canonAttackpower = 5;
 	int canonCost = 5;
 	int canonRange = 10;
-	Tower canonTower = new CanonTower(canonCost,canonAttackpower,canonRange);
+	int upgradeCost = 1;
+	Tower canonTower = new CanonTower(canonCost,canonAttackpower,canonRange, upgradeCost);
 	return canonTower;
 
 

@@ -187,8 +187,17 @@ public class GameHandler
         return null;
     }
 
+    public boolean isTowerUpgradable(Tower tower){
+        if (money - tower.getUpgradeCost() < 0){
+            return false;
+        }
+        return true;
+    }
+
     public void upgradeTower(Tower tower){
-        tower.upgrade(2,2,2);
+        money -= tower.getUpgradeCost();
+        tower.upgrade();
+
     }
 
     public Map getMap() { // this should probably be changed so map cannot be directly accessed. Game handler controls map not others

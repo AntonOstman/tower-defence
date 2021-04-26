@@ -11,10 +11,8 @@ import java.awt.*;
 public class CanonTower extends Tower
 {
 
-
-
-    public CanonTower(int cost, int attackPower, int range) {
-	super(TowerType.CANON, Color.YELLOW,cost,attackPower,range);
+    public CanonTower(int cost, int attackPower, int range,int upgradeCost) {
+	super(TowerType.CANON, Color.YELLOW, cost, attackPower, range, upgradeCost);
     }
 
 }

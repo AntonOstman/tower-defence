@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
-
+import java.util.List;
 /**
  *
  * Starts the GUI on which the player interacts with and can view the game
@@ -21,12 +21,17 @@ public class MapViewer
     private GameHandler gameHandler;
     private JFrame frame;
     private TowerType selectedTower;
+    private ButtonGroup buttonGroup;
+    private JTextArea towerDescription;
+    private Tower clickedTower;
 
     public MapViewer(GameHandler gameHandler) {
         this.gameHandler = gameHandler;
         this.selectedTower = null;
 	this.frame = null;
-
+	this.towerDescription = null;
+	this.buttonGroup = null;
+	this.clickedTower = null;
     }
 
     public void viewMapText(){
@@ -42,7 +47,7 @@ public class MapViewer
     public void show(){
 
         frame = new JFrame();
-	se.liu.antos931jakos322.towerdefence.userinterface.MenuComponent menuComponent = new MenuComponent(gameHandler);
+	MenuComponent menuComponent = new MenuComponent(gameHandler);
 	GameComponent gameComponent = new GameComponent(gameHandler);
 
 	// create the panels of the UI
@@ -76,16 +81,15 @@ public class MapViewer
 	//menupanel has the information the player needs and is used for choosing towers
 
 	// create and set the buttons for placing towers
-	ButtonGroup buttonGroup = new ButtonGroup(); // create button group to deselect buttons when antoher is clicked
+	buttonGroup = new ButtonGroup(); // create button group to deselect buttons when antoher is clicked
 	TowerMaker towerMaker = new TowerMaker();
-	TowerType[] towerList = towerMaker.getAllTowers();
-	JTextArea towerDesripction = new JTextArea("non selected");
+	List<TowerType> towerList = towerMaker.getAllTowers();
+	towerDescription = new JTextArea("non selected");
 
 	// iterate over all towerstypes that exist and get the information about certain towers from towermaker
 	// and create buttons with that information
 	for (TowerType towerType: towerList) {
-	    ButtonEvent buttonLiserner = new ButtonEvent(towerType, towerDesripction);
-
+	    ButtonEvent buttonLiserner = new ButtonEvent(towerType,"button clicked");
 	    Color buttonColor = towerMaker.getTower(towerType).getColor();
 	    JToggleButton b = new JToggleButton();
 	    b.setBackground(buttonColor);
@@ -102,10 +106,10 @@ public class MapViewer
 	//gamepanel has the map compopnent and shows the running game
 	gamePanel.add(gameComponent);
 	gamePanel.setBorder(BorderFactory.createLineBorder(Color.black));
-	gamePanel.addMouseListener(new MouseEvent(towerDesripction));
+	gamePanel.addMouseListener(new MouseEvent(towerDescription));
 
 	//tower description panel config
-	towerDescriptionPanel.add(towerDesripction);
+	towerDescriptionPanel.add(towerDescription);
 	towerDescriptionPanel.setBackground(backGroundColor);
 	//towerDesripction.setBorder(BorderFactory.createLineBorder(Color.black));
 
@@ -114,14 +118,15 @@ public class MapViewer
 	scrollableInteractivePanel.getViewport().add(interactivePanel);
 	// upgrade panel configuratoin
 	towerUpgradesPanel.setBackground(Color.blue);
-//	JLabel towerUpgradeLabel
-//	towerUpgradesPanel.add
+	JButton upgradeButton = new JButton(new ButtonEvent(TowerType.NONE, "upgrade"));
+	towerUpgradesPanel.add(upgradeButton);
 
 	// now add all panels we have created to the main
 	mainMenuPanel.add(menuComponent);
 	mainMenuPanel.add(towerDescriptionPanel);
 	mainMenuPanel.add(scrollableInteractivePanel);
 	mainMenuPanel.add(towerDescriptionPanel);
+	mainMenuPanel.add(towerUpgradesPanel);
 	mainMenuPanel.setPreferredSize(new Dimension(200,500));
 	mainMenuPanel.setBackground(backGroundColor);
 
@@ -138,26 +143,37 @@ public class MapViewer
 	frame.pack();
 	frame.setVisible(true);
 
-
-
     }
 
     public class ButtonEvent extends AbstractAction{
 
         private TowerType towerType;
-	private JTextArea towerDescriptionLabel;
-	public ButtonEvent(TowerType towerType, JTextArea towerDescriptionLabel) {
+	private String action;
+	public ButtonEvent(TowerType towerType, String action) {
 	    this.towerType = towerType;
-	    this.towerDescriptionLabel = towerDescriptionLabel;
+	    this.action = action;
 	}
 
 
 	@Override public void actionPerformed(final ActionEvent e) {
-	    selectedTower = towerType;
-	    TowerMaker towerMaker = new TowerMaker();
-	    String towerDesc = towerMaker.getTower(towerType).getDescription();
+	    if (action.equals("upgrade")){
+	        // player is trying to upgrade a tower
+	        if(clickedTower != null) {
+		    if (gameHandler.isTowerUpgradable(clickedTower)) {
+			gameHandler.upgradeTower(clickedTower);
+			towerDescription.setText(clickedTower.getDescription());
+		    }
 
-	    towerDescriptionLabel.setText(towerDesc);
+		}
+	    }
+	    if (action.equals("button clicked")) {
+	        // player is trying to press a tower on the menu
+		selectedTower = towerType;
+		TowerMaker towerMaker = new TowerMaker();
+
+		String towerDesc = towerMaker.getTower(towerType).getDescription();
+		towerDescription.setText(towerDesc);
+	    }
 	}
     }
 
@@ -178,40 +194,48 @@ public class MapViewer
 	    int mapPosY = clickedPoint.y/tileSize;
 
 	    Point mapPoint = new Point(mapPosX, mapPosY);
-
-	    displayTowerInfo(mapPoint);
+	    // if no tower is selected the player is trying to get info from a tower placed on the map
+	    if (selectedTower == TowerType.NONE) {
+		displayTowerInfo(mapPoint);
+		return;
+	    }
+	    // if a tower is selected then the player is trying to place a tower on the map
 	    placeTower(mapPoint);
-
-	    System.out.println(e.getPoint() + " Point");
-
-
 
 	}
 	private void displayTowerInfo(Point clickedPoint){
 
-	    Tower clickedTower = gameHandler.getTowerOnPoint(clickedPoint);
-	    if (clickedTower != null){
-	        textArea.setText(clickedTower.getDescription());
-	    }
+	    Tower clickedTow = gameHandler.getTowerOnPoint(clickedPoint);
 
+	    textArea.setText(clickedTow.getDescription());
+	    clickedTower = clickedTow;
 
 	}
 
 	private void placeTower(Point clickedPoint){
 
 	    TowerMaker towerMaker = new TowerMaker();
-	    System.out.println(selectedTower);
+	    // if no tower is selcted then we cannot place tower
+	    // then check if the game allows placing the tower on the requested spot
 	    Tower newTower = towerMaker.getTower(selectedTower);
-
 	    newTower.setPosition(clickedPoint);
-
 	    boolean canPlaceTower = gameHandler.canAffordAndPlaceTower(newTower);
 
+	    // if selcted tower is none we cannot place tower
+	    // after check if we can place tower
 	    if (!canPlaceTower){
-		JOptionPane.showMessageDialog(frame,"Not enough Money or wrong placement");
+		// if not say tell the player he has done something incorrect
+		JOptionPane.showMessageDialog(frame,"Not enough money, incorrect placement or no tower selected");
 	    }
+
 	    else{
+		// otherwise place the tower for where the player has requested
 		gameHandler.addTower(newTower);
+		// lastely deselct the tower button and set the selcted tower to nothing,
+		buttonGroup.clearSelection();
+		selectedTower = TowerType.NONE;
+		//if the player wants to place another
+		// he needs to press the tower button again to select tower
 	    }
 	}
     	private void upgradeTower(Point clickedPoint){

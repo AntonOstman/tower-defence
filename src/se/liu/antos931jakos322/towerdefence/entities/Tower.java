@@ -17,6 +17,7 @@ public abstract class Tower implements Entity
     protected int attackPower;
     protected int range;
     protected int cost;
+    protected int upgradeCost;
     protected double moveAmount;
     protected double bulletDrawX;
     protected double bulletDrawY;
@@ -24,13 +25,14 @@ public abstract class Tower implements Entity
     protected int drawPosY;
     protected TowerType towerType;
 
-    protected Tower(TowerType towerType, Color color, int cost, int attackPower, int range) {
+    protected Tower(TowerType towerType, Color color, int cost, int attackPower, int range, int upgradeCost) {
         this.cost = cost;
         this.position = null;
         this.color = color;
         this.attackPower = attackPower;
         this.range = range;
         this.towerType = towerType;
+        this.upgradeCost = upgradeCost;
     }
 
     public boolean attackAndReturnIsFatal(Enemy enemy){
@@ -101,15 +103,18 @@ public abstract class Tower implements Entity
     }
 
     public String getDescription() {
-        String description = towerType +" TOWER\nattack power: " + attackPower + "\ncost: " + cost + "\nrange: " + range;
+        String description = towerType +" TOWER\nattack power: " + attackPower + "\ncost: " + cost + "\nupgrade cost: " + upgradeCost + "\nrange: " + range ;
 
         return description;
     }
-    public void upgrade(int attackPower, int range, int cost){
-        this.attackPower += attackPower;
-        this.range += range;
-        this.cost += cost;
+    public void upgrade(){
+        attackPower += 1;
+        upgradeCost += 1;
+        range += 1;
+    }
 
+    public int getUpgradeCost() {
+        return upgradeCost;
     }
 
     public Color getColor() {
