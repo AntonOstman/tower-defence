@@ -119,6 +119,7 @@ public class MapViewer
 	// upgrade panel configuratoin
 	towerUpgradesPanel.setBackground(Color.blue);
 	JButton upgradeButton = new JButton(new ButtonEvent(TowerType.NONE, "upgrade"));
+	upgradeButton.setText("Upgrade selected tower");
 	towerUpgradesPanel.add(upgradeButton);
 
 	// now add all panels we have created to the main
