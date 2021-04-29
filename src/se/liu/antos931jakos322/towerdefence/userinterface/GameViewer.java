@@ -16,7 +16,7 @@ import java.util.List;
  * Controls the frame and panels contained in the frame
  *
  */
-public class MapViewer
+public class GameViewer
 {
     private GameHandler gameHandler;
     private JFrame frame;
@@ -25,7 +25,7 @@ public class MapViewer
     private JTextArea towerDescription;
     private Tower clickedTower;
 
-    public MapViewer(GameHandler gameHandler) {
+    public GameViewer(GameHandler gameHandler) {
         this.gameHandler = gameHandler;
         this.selectedTower = null;
 	this.frame = null;
