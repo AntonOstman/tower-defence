@@ -37,7 +37,8 @@ public class Map
 	this.path = null;
 
 	//createMap();
-    	//loadMap(); loadmap throws IO excpetion and the correct usage is probably to try loading in tester class?
+
+	//loadMap(); loadmap throws IO excpetion and the correct usage is probably to try loading in tester class?
 	// cool usage would be to load map with the "selected map index" you want to load
 	// that way the player could choose map
     }
@@ -46,8 +47,10 @@ public class Map
     private void createMap() throws IOException{
 	Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
+	// OBS when creating the path, the path is using a margin on one tile over the edge to make for a smooth enering and exit
 	// Creates the path for map 1
-	List<Point> path1 = Arrays.asList(new Point(0,4),
+	List<Point> path1 = Arrays.asList(new Point(-1,4),
+					  new Point(0,4),
 					  new Point(1,4),
 					  new Point(2,4),
 					  new Point(3,4),
@@ -70,10 +73,17 @@ public class Map
 					  new Point(6,2),
 					  new Point(7,2),
 					  new Point(8,2),
-					  new Point(9,2));
+					  new Point(9,2),
+					  new Point(10,2),
+					  new Point(11,2),
+					  new Point(12,2),
+					  new Point(13,2),
+					  new Point(14,2),
+					  new Point(15,2));
 
 	// Creates the path for map 2
-	List<Point> path2 = Arrays.asList(new Point(0,5),
+	List<Point> path2 = Arrays.asList(new Point(-1,5),
+					  new Point(0,5),
 					  new Point(1,5),
 					  new Point(2,5),
 					  new Point(3,5),
@@ -86,31 +96,31 @@ public class Map
 					  new Point(7,6),
 					  new Point(7,5),
 					  new Point(8,5),
-					  new Point(9,5));
+					  new Point(9,5),
+					  new Point(10,5));
 
-	List<Point> path3 = Arrays.asList(new Point(0,5),
+	List<Point> path3 = Arrays.asList(new Point(-1,5),
+					  new Point(0,5),
 					  new Point(1,5),
 					  new Point(2,5),
 					  new Point(3,5),
-
 					  new Point(4,5),
 					  new Point(4,5),
 					  new Point(4,5),
-
 					  new Point(5,5),
 					  new Point(6,5),
-
 					  new Point(4,7),
 					  new Point(5,7),
 					  new Point(6,7),
 					  new Point(7,7),
 					  new Point(8,7),
-					  new Point(9,7));
+					  new Point(9,7),
+					  new Point(10,5));
 
 
 
 	// Creates a list for mapInfo objects, MapInfo have height width and the path as input parameters.
-	List<MapInfo> mapInfoList = Arrays.asList(new MapInfo(new Point(10, 10), path1),
+	List<MapInfo> mapInfoList = Arrays.asList(new MapInfo(new Point(15, 15), path1),
 						  new MapInfo(new Point(10, 10), path2),
 						  new MapInfo(new Point(10, 10), path3));
 	String mapInfoAsJson = gson.toJson(mapInfoList);
@@ -122,23 +132,19 @@ public class Map
 
     public void loadMap(int selectedMapIndex) throws IOException {
 
-	List<MapInfo> mapInfoList; // does not need to be initialieed to new arraylist
-	// create Gson instance
 	Gson gson = new Gson();
-	// create a reader
-	// an exception descriping the problem should probaly be thrown here
-	// likely try to read from file an if FileNotFoundException then create file or something
 	Reader reader = Files.newBufferedReader(Paths.get("src/se/liu/antos931jakos322/towerdefence/maplogic/maps.json"));
+
 	// convert JSON array to object
-	mapInfoList = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>()
-	{
-	}.getType());
+	List<MapInfo> mapInfoList;
+	mapInfoList = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>() {}.getType());
 	reader.close();
 
+	// Updates varibles
 	MapInfo selectedMap = mapInfoList.get(selectedMapIndex);
 	this.dimensions = selectedMap.getDimensions();
-
 	this.tiles = new Tile[dimensions.y][dimensions.x];
+	this.path = selectedMap.getPath();
 
 	// Creates the base map with all grass tiles
 	for (int h = 0; h < dimensions.y; h++) {
@@ -146,14 +152,13 @@ public class Map
 		tiles[h][w] = new Tile(new Point(w, h), TileType.GRASS);
 	    }
 	}
-	// Creates the road tiles
-	for (Point pathTile : selectedMap.getPath()) {
+
+	// Overrides some of the grass tiles with road blocks
+	// The path uses one tile margin that should not be shown
+	for (int i = 1; i < path.size()-1; i++) {
+	    Point pathTile = path.get(i);
 	    tiles[pathTile.y][pathTile.x] = new Tile(new Point(pathTile.x, pathTile.y), TileType.ROAD);
 	}
-	// Updates the path in this class
-	path = selectedMap.getPath();
-
-
     }
 
     public Tile getTile(Point pos){
@@ -179,7 +184,7 @@ public class Map
     }
 
     public Point getLastTile(){
-        return path.get(path.size() - 1);
+        return path.get(path.size()-1);
 
     }
 }

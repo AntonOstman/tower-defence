@@ -60,10 +60,6 @@ public abstract class Enemy implements Entity
 
     public int moveAndTakeDamage(Point nextTile, Point lastTile){
 
-	if(nextTile.equals(lastTile)){ // since list size is 1 bigger than the list index
-	    return 1;
-	}
-
 	// path index is used moves the actual point position while the rest is to keep the enemy walking "smooth"
 	double difX = nextTile.x - position.x;
 	double difY = nextTile.y - position.y;
@@ -73,10 +69,10 @@ public abstract class Enemy implements Entity
 
         if(moveAmount < speed){ moveAmount++; }
         else{
+	    if(nextTile.equals(lastTile)){ return 1; }
 	    moveAmount = 1;
 	    pathPosition += 1;
 	    position = nextTile;
-
 	}
         return 0;
     }
