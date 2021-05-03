@@ -18,7 +18,7 @@ public class WaveMaker
         this.activeWave = false;
         this.activeWaveCounter = 0;
         this.waveTimer = 400;               // After how many ticks a new wave is made
-        this.tickCounter = waveTimer-10;    // The first wave start after 10 tick
+        this.tickCounter = waveTimer-1;    // The first wave start after 10 tick
         this.waveActiveTime = 100;          // the wave duration
 
     }
@@ -52,6 +52,7 @@ public class WaveMaker
         // The enemy type is determened by the type you send as parameter.
         // Tip! To change spawning rate, change the amount.
         //      To change the spawning change speed, multiply / devide the wavelevel varible.
+
 
         if(waveLevel < 5){
             enemies = spawnEnemy(enemies, 3 + waveLevel, new GenericEnemy());

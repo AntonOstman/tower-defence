@@ -47,6 +47,7 @@ public class GameHandler
         activateTowers();
         enemies = waveMaker.update(enemies);
         enemyMove();
+
         notifyListeners();
 
     }
@@ -98,6 +99,7 @@ public class GameHandler
             Enemy enemy = i.next();
             int nextTile = enemy.getPath();
             Point lastTile = map.getLastTile();
+
             int damage = enemy.moveAndTakeDamage(map.getPath(nextTile), lastTile);
             if(damage == 1){
                 i.remove(); // this should definately be more generic

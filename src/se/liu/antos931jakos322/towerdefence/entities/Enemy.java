@@ -4,53 +4,40 @@ package se.liu.antos931jakos322.towerdefence.entities;
 
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+
 /**
  * An abstract class with the core elements of an enemy
  * An enemy object wanders the map path with the intent of damaging the player
  *
  */
 
-public abstract class Enemy implements Entity
+public abstract class Enemy extends EntityAbstract implements Entity
 {
     protected int level;
-    protected Point position;
     protected int health;
     protected int pathPosition;
-    protected int moveAmount = 0;
     protected final int maxHealth;
     protected final int rewardMoney;
-    protected double drawX;
-    protected double drawY;
-    protected int speed;
-    protected double enemyScale; // many fields, can any be removed/moved?
-    protected int drawPosX;
-    protected int drawPosY;
-    protected Color color;
 
     protected Enemy(final int maxHealth, final int speed, final Color color, final double size) {
-
-        this.position = new Point(-1, -1);
+	super(color, size, speed);
+	this.position = new Point(-1000,-1000);
 	this.health = maxHealth;
 	this.maxHealth = maxHealth;
-	this.color = color;
-	this.enemyScale = size;
-	this.speed = speed;
-
 	this.pathPosition = 0;
     	this.rewardMoney = 5;
     }
 
     public void draw(final Graphics2D g2d, final int tileSize) {
+
 	g2d.setColor(color);
 
-	final int size = (int) (tileSize * enemyScale); // less size is bigger enemy
+	final int size = (int) (tileSize * drawScale); // less size is bigger enemy
 	final int enemyOffset = tileSize/2 - size/2; // should be changed to fit all sizes
 	drawPosX = (int) (drawX * tileSize) + enemyOffset;
 	drawPosY = (int) (drawY * tileSize) + enemyOffset;
 
-	g2d.fillOval(drawPosX, drawPosY, size, size);
+	g2d.fillOval(getDrawPosX(), getDrawPosY(), size, size);
 
     }
 
@@ -61,6 +48,7 @@ public abstract class Enemy implements Entity
     public int moveAndTakeDamage(Point nextTile, Point lastTile){
 
 	// path index is used moves the actual point position while the rest is to keep the enemy walking "smooth"
+
 	double difX = nextTile.x - position.x;
 	double difY = nextTile.y - position.y;
 
@@ -77,9 +65,6 @@ public abstract class Enemy implements Entity
         return 0;
     }
 
-    public Point getPosition() {
-	return position;
-    }
 
     public int getRewardMoney() {
 	return rewardMoney;
@@ -124,11 +109,4 @@ public abstract class Enemy implements Entity
 	return pathPosition;
     }
 
-    public int getDrawPosX() {
-	return drawPosX;
-    }
-
-    public int getDrawPosY() {
-	return drawPosY;
-    }
 }

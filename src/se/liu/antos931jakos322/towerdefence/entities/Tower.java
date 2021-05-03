@@ -1,5 +1,6 @@
 package se.liu.antos931jakos322.towerdefence.entities;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -10,39 +11,38 @@ import java.awt.*;
  */
 
 
-public abstract class Tower implements Entity
+public abstract class Tower extends EntityAbstract implements Entity
 {
-    protected Point position;
-    protected Color color;
     protected int attackPower;
     protected int range;
     protected int cost;
     protected int upgradeCost;
-    protected double moveAmount;
     protected double bulletDrawX;
     protected double bulletDrawY;
-    protected int drawPosX;
-    protected int drawPosY;
     protected TowerType towerType;
+    protected TowerProjectile projectile;
 
     protected Tower(TowerType towerType, Color color, int cost, int attackPower, int range, int upgradeCost) {
+        super(color, 0.7);
         this.cost = cost;
-        this.position = null;
-        this.color = color;
         this.attackPower = attackPower;
         this.range = range;
         this.towerType = towerType;
         this.upgradeCost = upgradeCost;
+        this.projectile = null;
     }
 
     public boolean attackAndReturnIsFatal(Enemy enemy){
+
         if (enemy == null){
             bulletDrawX = -1;
             bulletDrawY = -1;
             return false;
         }
-        changeBulletPlacement(enemy);
-        enemy.takeDamage(attackPower);
+        projectile = new BulletProjectile(Color.black,0.1,20);
+        projectile.attack(enemy, position);
+        //changeBulletPlacement(enemy);
+        //enemy.takeDamage(attackPower);
         int enemyHealth = enemy.getHealth();
         if (enemyHealth <= 0){
             return true;
@@ -52,10 +52,12 @@ public abstract class Tower implements Entity
 
     public void changeBulletPlacement(Enemy enemy){
         int distanceToEnemyScale = 1;
-        double difX = enemy.getDrawPosX() - drawPosX;
-        double difY = enemy.getDrawPosY() - drawPosY;
-        bulletDrawX =  (drawPosX + ((difX ) * moveAmount));
-        bulletDrawY =  (drawPosY + ((difY ) * moveAmount));
+
+        double difX = enemy.getDrawPosX() - getDrawPosX();
+        double difY = enemy.getDrawPosY() - getDrawPosY();
+
+        bulletDrawX =  (getDrawPosX() + ((difX ) * moveAmount));
+        bulletDrawY =  (getDrawPosY() + ((difY ) * moveAmount));
 
         if(moveAmount < distanceToEnemyScale){
             final double bulletSpeed = 0.2;
@@ -68,9 +70,6 @@ public abstract class Tower implements Entity
     }
 
 
-    public Point getPosition(){
-        return position;
-    }
 
     public int getRange() {
         return range;
@@ -78,10 +77,6 @@ public abstract class Tower implements Entity
 
     public int getCost() {
         return cost;
-    }
-
-    public void setPosition(final Point position) {
-        this.position = position;
     }
 
     @Override public void draw(final Graphics2D g2d, final int tileSize) {
@@ -93,12 +88,14 @@ public abstract class Tower implements Entity
 
         final int towerOffset = tileSize/2 - towerSize/2; // the ratio to keep a tower centered on a tile
         final int bulletOffset = tileSize/2 - bulletSize/2;
+
         int bulletPosX = (int) (bulletDrawX) + bulletOffset ;
         int bulletPosY = (int) (bulletDrawY) + bulletOffset ;
-        drawPosX = position.x * tileSize + towerOffset;
-        drawPosY = position.y * tileSize + towerOffset;
-        g2d.setColor(color);
-        g2d.fillRect(drawPosX, drawPosY, towerSize, towerSize);
+
+        drawPosX = getPosition().x * tileSize + towerOffset;
+        drawPosY = getPosition().y * tileSize + towerOffset;
+        g2d.setColor(getColor());
+        g2d.fillRect(getDrawPosX(), getDrawPosY(), towerSize, towerSize);
         g2d.fillOval(bulletPosX, bulletPosY, bulletSize, bulletSize);
     }
 
@@ -117,7 +114,4 @@ public abstract class Tower implements Entity
         return upgradeCost;
     }
 
-    public Color getColor() {
-        return color;
-    }
 }
