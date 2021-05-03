@@ -4,6 +4,7 @@ import se.liu.antos931jakos322.towerdefence.entities.BossEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.Enemy;
 import se.liu.antos931jakos322.towerdefence.entities.SpeedEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.Tower;
+import se.liu.antos931jakos322.towerdefence.entities.WaveMaker;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 import se.liu.antos931jakos322.towerdefence.entities.GenericEnemy;
 import se.liu.antos931jakos322.towerdefence.userinterface.GameListener;
@@ -27,9 +28,10 @@ public class GameHandler
     private int health;
     private int money;
     private final static int WAVE_TIMER = 50;
-    private int tickCounter = 1;
+
     private int waveLevel = 0;
     private List<GameListener> gameListeners;
+    private WaveMaker waveMaker;
 
 
     public GameHandler(Map map) {
@@ -39,7 +41,16 @@ public class GameHandler
         this.health = 100;
         this.money = 10;
         this.gameListeners = new ArrayList<>();
+        this.waveMaker = new WaveMaker();
     }
+    public void tick(){
+        activateTowers();
+        enemies = waveMaker.update(enemies);
+        enemyMove();
+        notifyListeners();
+
+    }
+
     public Enemy getClosestEnemy(Point towerPos, int range){
         Enemy closestEnemy = null;
 
@@ -100,35 +111,9 @@ public class GameHandler
         enemies.remove(enemy);
     }
 
-    public void tick(){
-        activateTowers();
-        addEnemy();
-        enemyMove();
-        notifyListeners();
-    }
-
     public void addEnemy(){
 
-        // The first number is the starting speed, the secound is the changing speed
-        int spawningspeedGeneric = (int)(50- (tickCounter / 100.0));
-        if (spawningspeedGeneric <= 2){ spawningspeedGeneric = 2;}
-        if( tickCounter % spawningspeedGeneric == 0){
-            enemies.add(new GenericEnemy());
-        }
 
-        int spawningspeedBoss = (int)(1000- (tickCounter / 100.0));
-        if (spawningspeedBoss <= 2){ spawningspeedBoss = 2;}
-        if( tickCounter % spawningspeedBoss == 0){
-            enemies.add(new BossEnemy());
-        }
-
-        int spawningspeedSpeedy = (int)(70- (tickCounter / 100.0));
-        if (spawningspeedSpeedy <= 2){ spawningspeedSpeedy = 2;}
-        if( tickCounter % spawningspeedSpeedy == 0){
-            enemies.add(new SpeedEnemy());
-        }
-
-        tickCounter ++;
 
     }
 
@@ -165,6 +150,7 @@ public class GameHandler
     public List<Enemy> getEnemies() {
         return enemies;
     }
+
     public int getMoney() {
         return money;
     }
@@ -174,6 +160,7 @@ public class GameHandler
             listener.mapChanged();
         }
     }
+
     public void addListener(GameListener listener){
         gameListeners.add(listener);
     }
