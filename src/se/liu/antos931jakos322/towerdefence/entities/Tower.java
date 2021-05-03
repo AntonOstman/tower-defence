@@ -1,6 +1,5 @@
 package se.liu.antos931jakos322.towerdefence.entities;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -20,7 +19,9 @@ public abstract class Tower extends EntityAbstract implements Entity
     protected double bulletDrawX;
     protected double bulletDrawY;
     protected TowerType towerType;
-    protected TowerProjectile projectile;
+    protected ProjectileType projectileType;
+    protected final static ProjectileMaker PROJECTILE_MAKER = new ProjectileMaker();
+
 
     protected Tower(TowerType towerType, Color color, int cost, int attackPower, int range, int upgradeCost) {
         super(color, 0.7);
@@ -29,25 +30,32 @@ public abstract class Tower extends EntityAbstract implements Entity
         this.range = range;
         this.towerType = towerType;
         this.upgradeCost = upgradeCost;
-        this.projectile = null;
+        this.projectileType = ProjectileType.BULLET;
     }
 
-    public boolean attackAndReturnIsFatal(Enemy enemy){
+    public void attack(Enemy enemy){
 
-        if (enemy == null){
-            bulletDrawX = -1;
-            bulletDrawY = -1;
-            return false;
-        }
-        projectile = new BulletProjectile(Color.black,0.1,20);
-        projectile.attack(enemy, position);
+//        if (enemy == null){
+//            bulletDrawX = -1;
+//            bulletDrawY = -1;
+//            return;
+//        }
+
+        //projectile.attack();
         //changeBulletPlacement(enemy);
         //enemy.takeDamage(attackPower);
-        int enemyHealth = enemy.getHealth();
-        if (enemyHealth <= 0){
-            return true;
-        }
-        return false;
+
+    }
+
+
+
+    public Projectile getProjectile(Enemy enemy) {
+
+
+        Projectile projectile = PROJECTILE_MAKER.getProjectile(ProjectileType.BULLET, position);
+        projectile.setTarget(enemy);
+
+        return projectile;
     }
 
     public void changeBulletPlacement(Enemy enemy){

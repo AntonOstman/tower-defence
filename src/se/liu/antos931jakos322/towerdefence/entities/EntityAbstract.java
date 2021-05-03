@@ -51,7 +51,6 @@ public class EntityAbstract
     }
 
 
-
     public void setPosition(final Point position) {
         this.position = position;
     }

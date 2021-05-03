@@ -1,6 +1,7 @@
 package se.liu.antos931jakos322.towerdefence.userinterface;
 
 import se.liu.antos931jakos322.towerdefence.entities.Enemy;
+import se.liu.antos931jakos322.towerdefence.entities.Projectile;
 import se.liu.antos931jakos322.towerdefence.maplogic.GameHandler;
 import se.liu.antos931jakos322.towerdefence.maplogic.Tile;
 import se.liu.antos931jakos322.towerdefence.entities.Tower;
@@ -53,13 +54,15 @@ public class GameComponent extends JComponent implements GameListener
 		currentTile.drawTile(g2d, MARGIN, TILE_SIZE);
 	    }
 	}
-	for (Tower tower: gameHandler.getTowers()) {
+	for (Tower tower : gameHandler.getTowers()) {
 	    tower.draw(g2d, TILE_SIZE);
 	}
 	for(Enemy enemy : gameHandler.getEnemies()){
 	    enemy.draw(g2d, TILE_SIZE);
 	}
-
+	for(Projectile projectile : gameHandler.getProjectiles()){
+	    projectile.draw(g2d, TILE_SIZE);
+	}
 
     }
 

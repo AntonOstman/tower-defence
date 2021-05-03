@@ -1,12 +1,10 @@
 package se.liu.antos931jakos322.towerdefence.maplogic;
 
-import se.liu.antos931jakos322.towerdefence.entities.BossEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.Enemy;
-import se.liu.antos931jakos322.towerdefence.entities.SpeedEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.Tower;
+import se.liu.antos931jakos322.towerdefence.entities.Projectile;
 import se.liu.antos931jakos322.towerdefence.entities.WaveMaker;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
-import se.liu.antos931jakos322.towerdefence.entities.GenericEnemy;
 import se.liu.antos931jakos322.towerdefence.userinterface.GameListener;
 
 import java.awt.*;
@@ -23,8 +21,9 @@ import java.util.List;
 public class GameHandler
 {
     private Map map;
-    private java.util.List<Tower> towers;
+    private List<Tower> towers;
     private List<Enemy> enemies;
+    private List<Projectile> projectiles;
     private int health;
     private int money;
     private final static int WAVE_TIMER = 50;
@@ -38,6 +37,7 @@ public class GameHandler
         this.map = map;
         this.enemies = new ArrayList<>();
         this.towers = new ArrayList<>();
+        this.projectiles = new ArrayList<>();
         this.health = 100;
         this.money = 10;
         this.gameListeners = new ArrayList<>();
@@ -45,6 +45,7 @@ public class GameHandler
     }
     public void tick(){
         activateTowers();
+        moveProjectiles();
         enemies = waveMaker.update(enemies);
         enemyMove();
 
@@ -74,13 +75,28 @@ public class GameHandler
         return closestEnemy;
     }
 
+    public void moveProjectiles(){
+        for (Projectile projectile : projectiles){
+            projectile.attack();
+        }
+    }
+
+
     public void activateTowers(){
         for (Tower tower: towers){
             Enemy closestEnemy = getClosestEnemy(tower.getPosition(), tower.getRange());
-
-            if (tower.attackAndReturnIsFatal(closestEnemy)){
-                removeEnemy(closestEnemy);
+            if (closestEnemy == null){
+                return;
             }
+            Projectile projectile =  tower.getProjectile(closestEnemy);
+
+            // tower.attack(closestEnemy); towers only add projectiles
+            projectiles.add(projectile);
+
+            if (closestEnemy.getHealth() <= 0){
+                enemies.remove(closestEnemy);
+            }
+
         }
     }
 
@@ -122,6 +138,10 @@ public class GameHandler
     public void addTower(Tower tower){
         money -= tower.getCost();
         towers.add(tower);
+    }
+
+    public void addProjectile(Projectile projectile){
+        projectiles.add(projectile);
     }
 
     public boolean canAffordAndPlaceTower(Tower tower){
@@ -167,6 +187,17 @@ public class GameHandler
         gameListeners.add(listener);
     }
 
+    public List<Enemy> getEnemiesOnPoint(Point coord){
+        List<Enemy> enemyList = new ArrayList<>();
+        for(Enemy enemy : enemies){
+            if (coord.equals(enemy.getPosition())){
+                enemyList.add(enemy);
+            }
+        }
+        return enemyList;
+    }
+
+
     public Tower getTowerOnPoint(Point coord){
         for(Tower tower : towers){
             if (coord.equals(tower.getPosition())){
@@ -187,6 +218,10 @@ public class GameHandler
         money -= tower.getUpgradeCost();
         tower.upgrade();
 
+    }
+
+    public List<Projectile> getProjectiles() {
+        return projectiles;
     }
 
     public Map getMap() { // this should probably be changed so map cannot be directly accessed. Game handler controls map not others
