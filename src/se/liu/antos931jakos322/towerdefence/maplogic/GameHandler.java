@@ -46,7 +46,8 @@ public class GameHandler
     public void tick(){
         activateTowers();
         moveProjectiles();
-        enemies = waveMaker.update(enemies);
+        // OBS måste fixa så det inte är lika med varandra eftersom nu är 2 list objekt länkade
+        enemies = waveMaker.update();
         enemyMove();
 
         notifyListeners();
@@ -115,11 +116,9 @@ public class GameHandler
             Enemy enemy = i.next();
             int nextTile = enemy.getPath();
             Point lastTile = map.getLastTile();
-
-            int damage = enemy.moveAndTakeDamage(map.getPath(nextTile), lastTile);
-            if(damage == 1){
-                i.remove(); // this should definately be more generic
-                takeDamage(1);
+            if( enemy.isPathMovementDone(map.getPath(nextTile), lastTile) ){
+                takeDamage(enemy.getDamage());
+                i.remove();
             }
         }
     }
@@ -127,12 +126,6 @@ public class GameHandler
     public void removeEnemy(Enemy enemy){
         money += enemy.getRewardMoney();
         enemies.remove(enemy);
-    }
-
-    public void addEnemy(){
-
-
-
     }
 
     public void addTower(Tower tower){

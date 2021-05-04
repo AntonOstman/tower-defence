@@ -18,14 +18,16 @@ public abstract class Enemy extends EntityAbstract implements Entity
     protected int pathPosition;
     protected final int maxHealth;
     protected final int rewardMoney;
+    protected int damage;
 
-    protected Enemy(final int maxHealth, final int speed, final Color color, final double size) {
+    protected Enemy(final int maxHealth, final int speed, final Color color, final double size, int damage) {
 	super(color, size, speed);
 	this.position = new Point(-1000,-1000);
 	this.health = maxHealth;
 	this.maxHealth = maxHealth;
 	this.pathPosition = 0;
     	this.rewardMoney = 5;
+    	this.damage = damage;
     }
 
     public void draw(final Graphics2D g2d, final int tileSize) {
@@ -45,24 +47,16 @@ public abstract class Enemy extends EntityAbstract implements Entity
 	return health;
     }
 
-    public int moveAndTakeDamage(Point nextTile, Point lastTile){
+    public boolean isPathMovementDone(Point nextTile, Point lastTile){
 
 	// path index is used moves the actual point position while the rest is to keep the enemy walking "smooth"
-
-	double difX = nextTile.x - position.x;
-	double difY = nextTile.y - position.y;
-
-	drawX =  (position.x + (difX / speed) * moveAmount);
-	drawY =  (position.y + (difY / speed) * moveAmount);
-
-        if(moveAmount < speed){ moveAmount++; }
-        else{
-	    if(nextTile.equals(lastTile)){ return 1; }
-	    moveAmount = 1;
+	if (isMovementDone(nextTile)){
 	    pathPosition += 1;
-	    position = nextTile;
 	}
-        return 0;
+	if( position.equals(lastTile)){
+	    return true;
+	}
+        return false;
     }
 
 
@@ -78,6 +72,9 @@ public abstract class Enemy extends EntityAbstract implements Entity
 	return drawY;
     }
 
+    public int getDamage(){
+        return damage;
+    }
     public void takeDamage(int damage) throws IllegalArgumentException{
         if (health - damage < 0) {
 	    health = 0;

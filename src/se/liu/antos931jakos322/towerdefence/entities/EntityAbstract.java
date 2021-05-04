@@ -22,6 +22,7 @@ public class EntityAbstract
 
 
 
+
     public EntityAbstract(final Color color, final double drawScale, final int speed) {
         this.position = null;
         this.color = color;
@@ -55,9 +56,9 @@ public class EntityAbstract
         this.position = position;
     }
 
-    public void drawMove(Point start, Point end){
-        double difX = start.x - position.x;
-        double difY = start.y - position.y;
+    public boolean isMovementDone(Point end){
+        double difX = end.x - position.x;
+        double difY = end.y - position.y;
 
         drawX =  (position.x + (difX / speed) * moveAmount);
         drawY =  (position.y + (difY / speed) * moveAmount);
@@ -66,7 +67,9 @@ public class EntityAbstract
         else{
             moveAmount = 1;
             position = end;
+            return true;
         }
+        return false;
 
 
 

@@ -1,5 +1,6 @@
 package se.liu.antos931jakos322.towerdefence.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WaveMaker
@@ -10,6 +11,7 @@ public class WaveMaker
     private int activeWaveCounter;
     private int waveTimer;
     int waveActiveTime;
+    List<Enemy> enemies;
 
     public WaveMaker() {
 
@@ -20,10 +22,11 @@ public class WaveMaker
         this.waveTimer = 400;               // After how many ticks a new wave is made
         this.tickCounter = waveTimer-1;    // The first wave start after 10 tick
         this.waveActiveTime = 100;          // the wave duration
+        this.enemies = new ArrayList<>();
 
     }
 
-    public List<Enemy> update(List<Enemy> enemies){
+    public List<Enemy> update(){
 
         if(tickCounter % waveTimer == 0){
             activeWave = true;

@@ -11,6 +11,6 @@ import java.awt.*;
 public class GenericEnemy extends Enemy
 {
     public GenericEnemy() {
-        super(100, 10, Color.RED, 0.5);
+        super(100, 10, Color.RED, 0.5, 1);
     }
 }
