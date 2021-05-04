@@ -27,13 +27,6 @@ public abstract class Projectile extends EntityAbstract
     }
 
 
-
-    public void createProjectilePath(){
-
-        //k = (double) (y2 - position.y) / (x2 - position.x);
-        //m = position.y - k * (position.x);
-    }
-
     public void move(){
 
 	Point myDraw = new Point(startPoint.x*50,startPoint.y*50);
@@ -46,9 +39,12 @@ public abstract class Projectile extends EntityAbstract
 
 
 
-	setDrawPosY((int) drawPosy);
-	setDrawPosX((int) drawPosx);
-        //drawMove2(direction.x, direction.y);
+//	setDrawPosY((int) drawPosy);
+//	setDrawPosX((int) drawPosx);
+	drawPosX =(int) drawPosx;
+	drawPosY = (int )drawPosy;
+
+	//drawMove2(direction.x, direction.y);
 	Point position = new Point(getDrawPosX()/50,getDrawPosY()/50);
 	setPosition(position);
 
@@ -74,7 +70,6 @@ public abstract class Projectile extends EntityAbstract
 	direction = new Point(directionX, directionY);
 	targetStartDrawPoint = new Point(target.getDrawPosX(), target.getDrawPosY());
 	//targetStartPoint = target.getPosition();
-	createProjectilePath();
     }
 
     public int getAttackPower() {
