@@ -1,12 +1,9 @@
 package se.liu.antos931jakos322.towerdefence.entities;
 
-import se.liu.antos931jakos322.towerdefence.maplogic.TileType;
-
 import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.Map;
 
 /**
  *
@@ -41,16 +38,20 @@ public class TowerMaker
 	EnumMap<TowerType,Tower> towerMap = new EnumMap<>(TowerType.class);
 	towerMap.put(TowerType.ARROW,createArrowTower());
 	towerMap.put(TowerType.CANON,createCanonTower());
+	towerMap.put(TowerType.MACHINEGUN, createMachineGunTower());
 	towerMap.put(TowerType.MONEY,createCanonTower());
+
 	towerMap.put(TowerType.NONE,null);
 	return towerMap.get(type);
     }
     private Tower createArrowTower(){
 	int arrowAttackpower = 10;
-        int arrowCost = 13;
+        int arrowCost = 7;
         int arrowRange = 5;
 	int upgradeCost = 1;
-        Tower arrowTower = new ArrowTower(arrowCost, arrowAttackpower, arrowRange, upgradeCost);
+	int arrowAttackSpeed = 8;
+	Color arrowColor = Color.BLUE;
+        Tower arrowTower = new CanonTower(TowerType.ARROW, arrowColor,arrowCost,arrowAttackpower,arrowRange,upgradeCost,ProjectileType.BULLET, arrowAttackSpeed);
         return arrowTower;
     }
 
@@ -59,16 +60,20 @@ public class TowerMaker
 	int canonCost = 7;
 	int canonRange = 10;
 	int upgradeCost = 1;
-	Tower canonTower = new CanonTower(canonCost,canonAttackpower,canonRange, upgradeCost);
+	int canonAttackSpeed = 20;
+	Color canonColor = Color.ORANGE;
+	Tower canonTower = new CanonTower(TowerType.CANON,canonColor,canonCost,canonAttackpower,canonRange,upgradeCost,ProjectileType.CANON, canonAttackSpeed);
         return canonTower;
     }
 
-    private Tower createMoneyTower(){
-	int canonAttackpower = 5;
-	int canonCost = 5;
-	int canonRange = 10;
+    private Tower createMachineGunTower(){
+	int attackPower = 3;
+	int cost = 7;
+	int range = 15;
 	int upgradeCost = 1;
-	Tower canonTower = new CanonTower(canonCost,canonAttackpower,canonRange, upgradeCost);
+	int canonAttackSpeed = 1;
+	Color machinegunColor = Color.PINK;
+	Tower canonTower = new CanonTower(TowerType.MACHINEGUN, machinegunColor, cost, attackPower, range, upgradeCost, ProjectileType.MACHINE, canonAttackSpeed);
 	return canonTower;
 
 

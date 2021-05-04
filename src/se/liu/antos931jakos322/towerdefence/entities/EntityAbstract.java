@@ -107,11 +107,7 @@ public class EntityAbstract
         return color;
     }
 
-    public Point getDrawPoint(){
-        int drawPossX = drawPosX;
-        int drawPossY = drawPossX;
-        return new Point(drawPossX,drawPossY);
-    }
+
 
     public int getDrawPosX() {
         int drawPos = drawPosX;

@@ -54,6 +54,30 @@ public abstract class Enemy extends EntityAbstract implements Entity
 
     }
 
+    @Override public void draw(final Graphics2D g2d, final int tileSize) {
+	super.draw(g2d, tileSize);
+
+	g2d.setColor(color);
+
+	// less size is bigger
+	final int size = (int) (tileSize * drawScale);
+	final int offset = TILE_SIZE / 2 - size / 2;
+	double procentageHP = (double) health / maxHealth;
+	g2d.fillOval(drawPosX + offset, drawPosY + offset, size, size);
+
+	// below is for the healthbar
+	// first we add a red bar to background...
+	int healthBarHeight = 7;
+	g2d.setColor(Color.red);
+	g2d.fillRect(drawPosX + offset,drawPosY, size , healthBarHeight);
+
+	// then on top of the red bar we add the green representing the current health
+	// which gets lower with the remaning procentageHP
+	g2d.setColor(Color.green);
+	g2d.fillRect(drawPosX + offset,drawPosY, (int) (size * procentageHP), healthBarHeight);
+
+    }
+
     public boolean isPathMovementDone(Point nextTile, Point lastTile){
 
 	// Moves the enemy to "nextTile" over multiple ticks

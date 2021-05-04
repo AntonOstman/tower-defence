@@ -5,7 +5,9 @@ import java.awt.*;
 public class BulletProjectile extends Projectile
 {
 
-    public BulletProjectile(final Color color, final double drawScale, final int speed, final Point position) {
-	super(color, drawScale, speed, position);
+    public BulletProjectile(final Color color, final double drawScale, final double projectileSpeed, final Point position,
+			    final int penetrationAmount, final int attackPower)
+    {
+	super(color, drawScale, projectileSpeed, position, penetrationAmount, attackPower);
     }
 }

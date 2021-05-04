@@ -7,69 +7,54 @@ public abstract class Projectile extends EntityAbstract
 {
 
     private int attackPower;
-    private Enemy target;
-    private double k; // k as in the value in the formula y = kx + m
-    private double m;
     private Point startPoint;
-    private Point targetStartDrawPoint;
-    private Point direction;
+    private Point deltaDirection;
+    private double projectileSpeed;
+    private int penetrationAmount;
 
-
-    protected Projectile(final Color color, final double drawScale, final int speed, Point position) {
-	super(color, drawScale, speed);
-	this.attackPower = 1;
-	this.target = null;
-	this.k = 0;
-	this.m = 0;
+    protected Projectile(final Color color, final double drawScale, double projectileSpeed, Point position, int penetrationAmount, int attackPower) {
+	super(color, drawScale);
+	this.attackPower = attackPower;
+	this.deltaDirection = null;
 	this.startPoint = position;
-	this.targetStartDrawPoint = null;
-
+	this.projectileSpeed = projectileSpeed;
+	this.penetrationAmount = penetrationAmount;
     }
 
 
     public void move(){
+	// moves the projectile using the directional x and y coordinates we want to travel
+	double drawPosy = getDrawPosY() + deltaDirection.y * projectileSpeed;
+	double drawPosx = getDrawPosX() + deltaDirection.x * projectileSpeed;
 
-	Point myDraw = new Point(startPoint.x*50,startPoint.y*50);
+	drawPosX = (int) drawPosx;
+	drawPosY = (int) drawPosy;
 
-	double deltaX = targetStartDrawPoint.x - myDraw.x;
-	double deltaY = targetStartDrawPoint.y - myDraw.y;
-
-	double drawPosy = getDrawPosY() + direction.y * 0.1;
-	double drawPosx = getDrawPosX() + direction.x * 0.1;
-
-
-
-//	setDrawPosY((int) drawPosy);
-//	setDrawPosX((int) drawPosx);
-	drawPosX =(int) drawPosx;
-	drawPosY = (int )drawPosy;
-
-	//drawMove2(direction.x, direction.y);
-	Point position = new Point(getDrawPosX()/50,getDrawPosY()/50);
+	Point position = new Point(getDrawPosX()/TILE_SIZE,getDrawPosY()/TILE_SIZE);
 	setPosition(position);
-
-	//target.takeDamage(attackPower); // temporary fix to keep the game playable
-
     }
+
 
     public void attack(List<Enemy> enemies){
 
         Enemy firstEnemy = enemies.get(0);
         firstEnemy.takeDamage(attackPower);
-
+	penetrationAmount -= 1;
     }
 
-
+    //sets the direction for the projectile by calculating the change in x and y
     public void setTarget(final Enemy target) {
-	this.target = target;
-	int directionX = target.getDrawPosX() - startPoint.x * 50;
-	int directionY = target.getDrawPosY() - startPoint.y * 50;
-	setDrawPosY(startPoint.y*50);
-	setDrawPosX(startPoint.x*50);
+	int directionX = target.getDrawPosX() - startPoint.x * TILE_SIZE;
+	int directionY = target.getDrawPosY() - startPoint.y * TILE_SIZE;
 
-	direction = new Point(directionX, directionY);
-	targetStartDrawPoint = new Point(target.getDrawPosX(), target.getDrawPosY());
-	//targetStartPoint = target.getPosition();
+	// sets the start position for the projectile
+	drawPosY = startPoint.y * TILE_SIZE;
+	drawPosX = startPoint.x * TILE_SIZE;
+	deltaDirection = new Point(directionX, directionY);
+    }
+
+    public int getPenetrationAmount() {
+	return penetrationAmount;
     }
 
     public int getAttackPower() {

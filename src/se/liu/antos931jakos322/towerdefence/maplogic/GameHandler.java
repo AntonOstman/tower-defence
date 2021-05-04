@@ -77,30 +77,35 @@ public class GameHandler
 
     public void moveProjectiles(){
         List<Projectile> removeList = new ArrayList<>();
-        ;
+
         for (Projectile projectile : projectiles){
 
+
            projectile.move();
+
+           //check on the tile the projectile is on if there are any enemies on it
            List<Enemy> potentalTargets = getEnemiesOnPoint(projectile.getPosition());
            if (!potentalTargets.isEmpty()) {
+               // if there are enemies let the projectile attack them
                projectile.attack(potentalTargets);
            }
-            // if a projectile is out outside the map save it and remove it later
-            boolean outsideTopLeft = projectile.getPosition().y < 0 || projectile.getPosition().y < 0;
-            boolean outsideBottomRight = projectile.getPosition().x > map.getWidth() || projectile.getPosition().y > map.getHeigth();
-            if(outsideTopLeft || outsideBottomRight){
+           // if the projectile cannot penetrate through any more enemies, remove it
+           if (projectile.getPenetrationAmount() == 0){
+               removeList.add(projectile);
+           }
+            // if there are any projectiles outside the game add them to the remove list
+            boolean lessThanBounds = projectile.getPosition().y < 0 || projectile.getPosition().y < 0;
+            boolean greaterThanBounds = projectile.getPosition().x > map.getWidth() || projectile.getPosition().y > map.getHeigth();
+            if(lessThanBounds || greaterThanBounds){
                 removeList.add(projectile);
             }
         }
-        // removes the projectiles outside the map
+        // remove the projectiles designated to be removed
         for (Projectile projectile : removeList){
             projectiles.remove(projectile);
         }
     }
 
-    public void projectileAttack(Projectile projectile, Enemy enemy){
-        return;
-    }
 
 
     public void activateTowers(){
@@ -109,14 +114,13 @@ public class GameHandler
             if (closestEnemy == null){
                 return;
             }
-            Projectile projectile =  tower.getProjectile(closestEnemy);
 
-            // tower.attack(closestEnemy); towers only add projectiles
-            projectiles.add(projectile);
+            if (tower.canAttack()) {
+                Projectile projectile = tower.createProjectile(closestEnemy);
+                projectiles.add(projectile);
 
-            if (closestEnemy.getHealth() <= 0){
-                removeEnemy(closestEnemy);
             }
+            // tower.attack(closestEnemy); towers only add projectiles
 
         }
     }
@@ -140,6 +144,11 @@ public class GameHandler
                 takeDamage(enemy.getDamage());
                 i.remove();
             }
+            if (enemy.getHealth() <= 0){
+                i.remove();
+                money += enemy.getRewardMoney();
+            }
+
         }
     }
 
