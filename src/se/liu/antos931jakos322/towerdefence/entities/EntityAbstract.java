@@ -54,7 +54,7 @@ public class EntityAbstract
     }
 
     public boolean isMovementDone(Point end){
-        System.out.println("this is smoooth");
+
         if(position == null){
             position = end;
         }
