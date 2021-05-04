@@ -44,6 +44,8 @@ public abstract class Projectile extends EntityAbstract
 	double drawPosy = getDrawPosY() + direction.y * 0.1;
 	double drawPosx = getDrawPosX() + direction.x * 0.1;
 
+
+
 	setDrawPosY((int) drawPosy);
 	setDrawPosX((int) drawPosx);
         //drawMove2(direction.x, direction.y);

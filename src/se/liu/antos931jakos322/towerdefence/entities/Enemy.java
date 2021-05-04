@@ -73,9 +73,6 @@ public abstract class Enemy extends EntityAbstract implements Entity
 
     public int getRewardMoney() { return rewardMoney; }
 
-    public double getDrawX() { return drawX; }
-
-    public double getDrawY() { return drawY; }
 
     public int getDamage(){ return damage; }
 

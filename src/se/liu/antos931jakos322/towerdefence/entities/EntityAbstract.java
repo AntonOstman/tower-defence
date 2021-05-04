@@ -18,6 +18,7 @@ public class EntityAbstract
     protected int speed;
     protected double drawX;
     protected double drawY;
+    protected final static int TILE_SIZE = 50; // this should definately be changed later to not be hard coded
 
 
     public EntityAbstract(final Color color, final double drawScale, final int speed) {
@@ -42,8 +43,9 @@ public class EntityAbstract
 
          // less size is bigger
         final int size = (int) (tileSize * drawScale);
+        final int offset = TILE_SIZE / 2 - size / 2;
 
-        g2d.fillOval(drawPosX, drawPosY, size, size);
+        g2d.fillOval(drawPosX + offset, drawPosY + offset, size, size);
     }
 
 
@@ -62,12 +64,10 @@ public class EntityAbstract
         drawX =  (position.x + (difX / speed) * moveAmount);
         drawY =  (position.y + (difY / speed) * moveAmount);
 
-        int tileSize = 50; // this should be fixed...
-        final int size = (int) (50 * drawScale);
-        final int offset = tileSize / 2 - size / 2;
+      // this should be fixed...
         // the reason for this is because projectiles need to decide drawposx from other kriteria
-        drawPosX = (int) (drawX * tileSize) + offset;
-        drawPosY = (int) (drawY * tileSize) + offset;
+        drawPosX = (int) (drawX * TILE_SIZE);
+        drawPosY = (int) (drawY * TILE_SIZE);
 
 
         if(moveAmount < speed){ moveAmount++; }
