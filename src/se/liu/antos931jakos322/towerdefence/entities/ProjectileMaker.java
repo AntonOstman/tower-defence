@@ -25,7 +25,7 @@ public class ProjectileMaker
     }
     private Projectile createBulletProjectile(Point start){
 
-	Projectile projectile = new BulletProjectile(Color.black, 0.2, 10, start);
+	Projectile projectile = new BulletProjectile(Color.cyan, 0.2, 6, start);
 	return projectile;
     }
 

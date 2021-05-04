@@ -76,9 +76,30 @@ public class GameHandler
     }
 
     public void moveProjectiles(){
+        List<Projectile> removeList = new ArrayList<>();
+        ;
         for (Projectile projectile : projectiles){
-            projectile.attack();
+
+           projectile.move();
+           List<Enemy> potentalTargets = getEnemiesOnPoint(projectile.getPosition());
+           if (!potentalTargets.isEmpty()) {
+               projectile.attack(potentalTargets);
+           }
+            // if a projectile is out outside the map save it and remove it later
+            boolean outsideTopLeft = projectile.getPosition().y < 0 || projectile.getPosition().y < 0;
+            boolean outsideBottomRight = projectile.getPosition().x > map.getWidth() || projectile.getPosition().y > map.getHeigth();
+            if(outsideTopLeft || outsideBottomRight){
+                removeList.add(projectile);
+            }
         }
+        // removes the projectiles outside the map
+        for (Projectile projectile : removeList){
+            projectiles.remove(projectile);
+        }
+    }
+
+    public void projectileAttack(Projectile projectile, Enemy enemy){
+        return;
     }
 
 
@@ -94,7 +115,7 @@ public class GameHandler
             projectiles.add(projectile);
 
             if (closestEnemy.getHealth() <= 0){
-                enemies.remove(closestEnemy);
+                removeEnemy(closestEnemy);
             }
 
         }

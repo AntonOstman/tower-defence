@@ -40,12 +40,10 @@ public class EntityAbstract
 
         g2d.setColor(color);
 
-        final int size = (int) (tileSize * drawScale); // less size is bigger enemy
-        final int enemyOffset = tileSize/2 - size/2; // should be changed to fit all sizes
-        drawPosX = (int) (drawX * tileSize) + enemyOffset;
-        drawPosY = (int) (drawY * tileSize) + enemyOffset;
+         // less size is bigger
+        final int size = (int) (tileSize * drawScale);
 
-        g2d.fillOval(getDrawPosX(), getDrawPosY(), size, size);
+        g2d.fillOval(drawPosX, drawPosY, size, size);
     }
 
 
@@ -64,6 +62,14 @@ public class EntityAbstract
         drawX =  (position.x + (difX / speed) * moveAmount);
         drawY =  (position.y + (difY / speed) * moveAmount);
 
+        int tileSize = 50; // this should be fixed...
+        final int size = (int) (50 * drawScale);
+        final int offset = tileSize / 2 - size / 2;
+        // the reason for this is because projectiles need to decide drawposx from other kriteria
+        drawPosX = (int) (drawX * tileSize) + offset;
+        drawPosY = (int) (drawY * tileSize) + offset;
+
+
         if(moveAmount < speed){ moveAmount++; }
         else{
             moveAmount = 1;
@@ -72,24 +78,64 @@ public class EntityAbstract
         }
         return false;
 
-
-
     }
 
+    public void drawMove2(double deltaX, double deltaY) {
+
+
+        drawX = (position.x + ((double) drawPosX / speed) * moveAmount);
+        drawY = (position.y + ((double) drawPosY / speed) * moveAmount);
+
+        if (moveAmount < speed) {
+            moveAmount++;
+        } else {
+            moveAmount = 1;
+            position.x += (int) deltaX/50;
+            position.y += (int) deltaY/50;
+
+        }
+    }
+
+
     public Point getPosition() {
-        return position;
+        int posx = position.x;
+        int posy = position.y;
+        return new Point(posx, posy);
     }
 
     public Color getColor() {
         return color;
     }
 
+    public Point getDrawPoint(){
+        int drawPossX = drawPosX;
+        int drawPossY = drawPossX;
+        return new Point(drawPossX,drawPossY);
+    }
 
     public int getDrawPosX() {
-	return drawPosX;
+        int drawPos = drawPosX;
+        return drawPos;
     }
 
     public int getDrawPosY() {
-	return drawPosY;
+        int drawPos = drawPosY;
+        return drawPos;
+    }
+
+    public void setDrawX(final double drawX) {
+        this.drawX = drawX;
+    }
+
+    public void setDrawY(final double drawY) {
+        this.drawY = drawY;
+    }
+
+    public void setDrawPosX(final int drawPosX) {
+        this.drawPosX = drawPosX;
+    }
+
+    public void setDrawPosY(final int drawPosY) {
+        this.drawPosY = drawPosY;
     }
 }

@@ -185,6 +185,17 @@ public class Map
 
     public Point getLastTile(){
         return path.get(path.size()-1);
-
     }
+
+    public int getWidth(){
+        int width = dimensions.x;
+        return width;
+    }
+
+    public int getHeigth(){
+	int height = dimensions.y;
+	return height;
+    }
+
+
 }

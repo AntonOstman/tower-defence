@@ -51,31 +51,30 @@ public abstract class Tower extends EntityAbstract implements Entity
 
     public Projectile getProjectile(Enemy enemy) {
 
-
-        Projectile projectile = PROJECTILE_MAKER.getProjectile(ProjectileType.BULLET, position);
+        Projectile projectile = PROJECTILE_MAKER.getProjectile(ProjectileType.BULLET, getPosition());
         projectile.setTarget(enemy);
 
         return projectile;
     }
 
-    public void changeBulletPlacement(Enemy enemy){
-        int distanceToEnemyScale = 1;
-
-        double difX = enemy.getDrawPosX() - getDrawPosX();
-        double difY = enemy.getDrawPosY() - getDrawPosY();
-
-        bulletDrawX =  (getDrawPosX() + ((difX ) * moveAmount));
-        bulletDrawY =  (getDrawPosY() + ((difY ) * moveAmount));
-
-        if(moveAmount < distanceToEnemyScale){
-            final double bulletSpeed = 0.2;
-
-            moveAmount += bulletSpeed;
-        }
-        else{
-            moveAmount = 0;
-        }
-    }
+//    public void changeBulletPlacement(Enemy enemy){
+//        int distanceToEnemyScale = 1;
+//
+//        double difX = enemy.getDrawPosX() - getDrawPosX();
+//        double difY = enemy.getDrawPosY() - getDrawPosY();
+//
+//        bulletDrawX =  (getDrawPosX() + ((difX ) * moveAmount));
+//        bulletDrawY =  (getDrawPosY() + ((difY ) * moveAmount));
+//
+//        if(moveAmount < distanceToEnemyScale){
+//            final double bulletSpeed = 0.2;
+//
+//            moveAmount += bulletSpeed;
+//        }
+//        else{
+//            moveAmount = 0;
+//        }
+//    }
 
 
 
@@ -117,6 +116,8 @@ public abstract class Tower extends EntityAbstract implements Entity
         upgradeCost += 1;
         range += 1;
     }
+
+
 
     public int getUpgradeCost() {
         return upgradeCost;
