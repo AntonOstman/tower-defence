@@ -27,7 +27,7 @@ public class WaveMaker
     }
 
     public List<Enemy> update(){
-
+        enemies.clear();
         if(tickCounter % waveTimer == 0){
             activeWave = true;
         }
@@ -47,8 +47,8 @@ public class WaveMaker
 
     private List<Enemy> createWave(List<Enemy> enemies, int waveLevel){
         // phases:
-        //      1. Only red
-        //      2. Red + pink
+        //      1. Only generic
+        //      2. Generic + speedy
         //      3. Endless (all types)
 
         // The amount is how many enemies of that type sparn in a wave.

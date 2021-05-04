@@ -20,9 +20,6 @@ public class EntityAbstract
     protected double drawY;
 
 
-
-
-
     public EntityAbstract(final Color color, final double drawScale, final int speed) {
         this.position = null;
         this.color = color;
@@ -57,6 +54,10 @@ public class EntityAbstract
     }
 
     public boolean isMovementDone(Point end){
+        System.out.println("this is smoooth");
+        if(position == null){
+            position = end;
+        }
         double difX = end.x - position.x;
         double difY = end.y - position.y;
 

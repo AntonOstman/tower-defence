@@ -46,8 +46,7 @@ public class GameHandler
     public void tick(){
         activateTowers();
         moveProjectiles();
-        // OBS måste fixa så det inte är lika med varandra eftersom nu är 2 list objekt länkade
-        enemies = waveMaker.update();
+        enemies.addAll(waveMaker.update());
         enemyMove();
 
         notifyListeners();

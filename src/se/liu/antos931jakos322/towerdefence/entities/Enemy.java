@@ -22,7 +22,6 @@ public abstract class Enemy extends EntityAbstract implements Entity
 
     protected Enemy(final int maxHealth, final int speed, final Color color, final double size, int damage) {
 	super(color, size, speed);
-	this.position = new Point(-1000,-1000);
 	this.health = maxHealth;
 	this.maxHealth = maxHealth;
 	this.pathPosition = 0;
@@ -49,8 +48,9 @@ public abstract class Enemy extends EntityAbstract implements Entity
 
     public boolean isPathMovementDone(Point nextTile, Point lastTile){
 
-	// path index is used moves the actual point position while the rest is to keep the enemy walking "smooth"
+	// Moves the enemy to "nextTile" over multiple ticks
 	if (isMovementDone(nextTile)){
+	    // When done with the movement -> change the next tile
 	    pathPosition += 1;
 	}
 	if( position.equals(lastTile)){
