@@ -113,7 +113,7 @@ public class GameHandler
         Iterator<Enemy> i = enemies.iterator();
         while(i.hasNext()){
             Enemy enemy = i.next();
-            int nextTile = enemy.getPath();
+            int nextTile = enemy.getPathPosition();
             Point lastTile = map.getLastTile();
             if( enemy.isPathMovementDone(map.getPath(nextTile), lastTile) ){
                 takeDamage(enemy.getDamage());
