@@ -27,7 +27,7 @@ public class GameViewer
 
     public GameViewer(GameHandler gameHandler) {
         this.gameHandler = gameHandler;
-        this.selectedTower = null;
+        this.selectedTower = TowerType.NONE;
 	this.frame = null;
 	this.towerDescription = null;
 	this.buttonGroup = null;
@@ -162,6 +162,7 @@ public class GameViewer
         private TowerType towerType;
 	private String action;
 
+
 	public ButtonEvent(TowerType towerType, String action) {
 	    this.towerType = towerType;
 	    this.action = action;
@@ -184,6 +185,7 @@ public class GameViewer
 	    }
 	    else if (action.equals("button clicked")) {
 	        // player is trying to press a tower on the menu
+
 		selectedTower = towerType;
 		TowerMaker towerMaker = new TowerMaker();
 
@@ -236,8 +238,10 @@ public class GameViewer
 	}
 	private void displayTowerInfo(Point clickedPoint){
 
-	    Tower clickedTow = gameHandler.getTowerOnPoint(clickedPoint);
 
+	    Tower clickedTow = gameHandler.getTowerOnPoint(clickedPoint);
+	    // if there is no tower on the point exit
+	    if (clickedTow == null){ return;}
 	    textArea.setText(clickedTow.getDescription());
 	    clickedTower = clickedTow;
 
@@ -246,14 +250,11 @@ public class GameViewer
 	private void placeTower(Point clickedPoint){
 
 	    TowerMaker towerMaker = new TowerMaker();
-	    // if no tower is selcted then we cannot place tower
-	    // then check if the game allows placing the tower on the requested spot
 	    Tower newTower = towerMaker.getTower(selectedTower);
 	    newTower.setPosition(clickedPoint);
 	    boolean canPlaceTower = gameHandler.canAffordAndPlaceTower(newTower);
 
-	    // if selcted tower is none we cannot place tower
-	    // after check if we can place tower
+	    // check if the game allows placing the selected tower
 	    if (!canPlaceTower){
 		// if not say tell the player he has done something incorrect
 		JOptionPane.showMessageDialog(frame,"Not enough money, incorrect placement or no tower selected");

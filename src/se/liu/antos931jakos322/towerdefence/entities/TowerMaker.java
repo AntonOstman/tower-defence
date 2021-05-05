@@ -41,7 +41,6 @@ public class TowerMaker
 	towerMap.put(TowerType.MACHINEGUN, createMachineGunTower());
 	towerMap.put(TowerType.MONEY,createCanonTower());
 
-	towerMap.put(TowerType.NONE,null);
 	return towerMap.get(type);
     }
     private Tower createArrowTower(){

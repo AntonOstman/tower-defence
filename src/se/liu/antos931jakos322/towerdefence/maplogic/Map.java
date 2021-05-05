@@ -170,7 +170,10 @@ public class Map
     }
 
     public Point getDimensions() {
-	return dimensions;
+        int width = dimensions.x;
+        int height = dimensions.y;
+
+	return new Point(width, height);
     }
 
     @Override public String toString() {
