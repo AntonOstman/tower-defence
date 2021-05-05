@@ -28,7 +28,7 @@ public class EntityAbstract
         this.speed = speed;
         this.moveAmount = 0;
     }
-
+    // towers dont need a speed
     public EntityAbstract(final Color color, final double drawScale) {
         this.position = null;
         this.color = color;
@@ -38,10 +38,11 @@ public class EntityAbstract
     }
 
     public void draw(final Graphics2D g2d, final int tileSize){
+        // drawPosX could be changed to a double and then in this draw method we cast to int
+        // problem with a direct int is for example we cannot go "between" tiles only straight to it
 
         g2d.setColor(color);
 
-         // less size is bigger
         final int size = (int) (tileSize * drawScale);
         final int offset = TILE_SIZE / 2 - size / 2;
 
@@ -54,7 +55,8 @@ public class EntityAbstract
     }
 
     public boolean isMovementDone(Point end){
-
+        // this move method can be done more generic to work for several entities
+        // for example as done with projectiles we dont set a specifik end "tile" only a direction
         if(position == null){
             position = end;
         }
@@ -80,22 +82,6 @@ public class EntityAbstract
 
     }
 
-    public void drawMove2(double deltaX, double deltaY) {
-
-
-        drawX = (position.x + ((double) drawPosX / speed) * moveAmount);
-        drawY = (position.y + ((double) drawPosY / speed) * moveAmount);
-
-        if (moveAmount < speed) {
-            moveAmount++;
-        } else {
-            moveAmount = 1;
-            position.x += (int) deltaX/50;
-            position.y += (int) deltaY/50;
-
-        }
-    }
-
 
     public Point getPosition() {
         int posx = position.x;
@@ -119,13 +105,6 @@ public class EntityAbstract
         return drawPos;
     }
 
-    public void setDrawX(final double drawX) {
-        this.drawX = drawX;
-    }
-
-    public void setDrawY(final double drawY) {
-        this.drawY = drawY;
-    }
 
     public void setDrawPosX(final int drawPosX) {
         this.drawPosX = drawPosX;
