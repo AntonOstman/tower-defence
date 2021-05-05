@@ -31,6 +31,7 @@ public class GameComponent extends JComponent implements GameListener
 	this.mapX = gameHandler.getMap().getDimensions().x;
     }
 
+
     public Dimension getPreferredSize(){
 
 	int width = mapX*( MARGIN + TILE_SIZE);

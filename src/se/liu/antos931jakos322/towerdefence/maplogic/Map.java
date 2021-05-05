@@ -36,7 +36,11 @@ public class Map
 	this.tiles = null;
 	this.path = null;
 
-	//createMap();
+	try {
+	    createMap();
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
 
 	//loadMap(); loadmap throws IO excpetion and the correct usage is probably to try loading in tester class?
 	// cool usage would be to load map with the "selected map index" you want to load
@@ -121,8 +125,8 @@ public class Map
 
 	// Creates a list for mapInfo objects, MapInfo have height width and the path as input parameters.
 	List<MapInfo> mapInfoList = Arrays.asList(new MapInfo(new Point(15, 15), path1),
-						  new MapInfo(new Point(10, 10), path2),
-						  new MapInfo(new Point(10, 10), path3));
+						  new MapInfo(new Point(15, 15), path2),
+						  new MapInfo(new Point(15, 15), path3));
 	String mapInfoAsJson = gson.toJson(mapInfoList);
 
 	FileWriter writer = new FileWriter("src/se/liu/antos931jakos322/towerdefence/maplogic/maps.json");
