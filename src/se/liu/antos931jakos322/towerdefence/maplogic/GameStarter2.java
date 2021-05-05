@@ -10,9 +10,7 @@ public class GameStarter2
 {
     public void startGame(int mapIndex) {
 
-	final int timerDelay = 30;
-	final int enemySpawnRate = 50;
-	final int waveDensity = timerDelay * enemySpawnRate; // keeps the ratio when timerDelay is changed
+
 
 	Map map = new Map(); // move to gamehandelr?
 	try {
@@ -26,19 +24,11 @@ public class GameStarter2
 
 	GameHandler gameHandler = new GameHandler(map);
 	GameViewer viewer = new GameViewer(gameHandler);
-
+	gameHandler.start();
 	viewer.show();
 
 
 
-	final Action doOneStep = new AbstractAction() {
-	    @Override public void actionPerformed(final ActionEvent e) {
-		gameHandler.tick();
-	    }
-	};
-
-	final Timer tickTimer = new Timer(timerDelay, doOneStep);
-	tickTimer.start();
 
 	final Action createEnemy = new AbstractAction() {
 	    @Override public void actionPerformed(final ActionEvent e) {
@@ -48,8 +38,6 @@ public class GameStarter2
 	    }
 	};
 
-	final Timer enemyTimer = new Timer(waveDensity, createEnemy);
-	enemyTimer.start();
     }
 
 

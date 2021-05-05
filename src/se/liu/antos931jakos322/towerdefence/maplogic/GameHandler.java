@@ -7,7 +7,9 @@ import se.liu.antos931jakos322.towerdefence.entities.WaveMaker;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 import se.liu.antos931jakos322.towerdefence.userinterface.GameListener;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -27,11 +29,12 @@ public class GameHandler
     private int health;
     private int money;
     private final static int WAVE_TIMER = 50;
-
     private int waveLevel = 0;
     private List<GameListener> gameListeners;
     private WaveMaker waveMaker;
-
+    private Timer tickTimer;
+    final int timerDelay = 30;
+    private int tickDelay;
 
     public GameHandler(Map map) {
         this.map = map;
@@ -42,6 +45,9 @@ public class GameHandler
         this.money = 10;
         this.gameListeners = new ArrayList<>();
         this.waveMaker = new WaveMaker();
+        this.tickDelay = 50;
+        this.tickTimer = new Timer(tickDelay,new doOneStep()); // timer is set when the game starts in method startgame
+
     }
     public void tick(){
         activateTowers();
@@ -75,6 +81,16 @@ public class GameHandler
             }
         }
         return closestEnemy;
+    }
+
+    public void start() {
+
+    tickTimer.start();
+
+    }
+
+    public void pause(){
+        tickTimer.stop();
     }
 
     public void moveProjectiles(){
@@ -252,4 +268,14 @@ public class GameHandler
     public Map getMap() { // this should probably be changed so map cannot be directly accessed. Game handler controls map not others
         return map;
     }
+
+    public class doOneStep extends AbstractAction{
+
+        @Override public void actionPerformed(final ActionEvent e){
+            tick();
+
+        }
+    }
+
+
 }

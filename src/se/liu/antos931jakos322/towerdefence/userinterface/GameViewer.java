@@ -150,6 +150,7 @@ public class GameViewer
 
         private TowerType towerType;
 	private String action;
+
 	public ButtonEvent(TowerType towerType, String action) {
 	    this.towerType = towerType;
 	    this.action = action;
@@ -167,7 +168,7 @@ public class GameViewer
 
 		}
 	    }
-	    if (action.equals("button clicked")) {
+	    else if (action.equals("button clicked")) {
 	        // player is trying to press a tower on the menu
 		selectedTower = towerType;
 		TowerMaker towerMaker = new TowerMaker();
@@ -175,6 +176,10 @@ public class GameViewer
 		String towerDesc = towerMaker.getTower(towerType).getDescription();
 		towerDescription.setText(towerDesc);
 	    }
+	    else if (action.equals("pause game")){
+	        gameHandler.pause();
+	    }
+
 	}
     }
 
