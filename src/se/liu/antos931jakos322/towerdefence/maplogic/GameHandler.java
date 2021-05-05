@@ -65,6 +65,8 @@ public class GameHandler
                 Point enemyPos = enemy.getPosition();
                 Point relativePoint = new Point(towerPos.x - enemyPos.x,towerPos.y - enemyPos.y);
                 double currentDistance = HelperFunctions.pythagoras(relativePoint.x, relativePoint.y);
+                // get the "real" distance
+                currentDistance = Math.sqrt(currentDistance);
                 if(currentDistance < closestDistance && currentDistance <= range){
                     closestEnemy = enemy;
                     closestDistance = currentDistance;
@@ -94,7 +96,7 @@ public class GameHandler
                removeList.add(projectile);
            }
             // if there are any projectiles outside the game add them to the remove list
-            boolean lessThanBounds = projectile.getPosition().y < 0 || projectile.getPosition().y < 0;
+            boolean lessThanBounds = projectile.getPosition().y < 0 || projectile.getPosition().x < 0;
             boolean greaterThanBounds = projectile.getPosition().x > map.getWidth() || projectile.getPosition().y > map.getHeigth();
             if(lessThanBounds || greaterThanBounds){
                 removeList.add(projectile);

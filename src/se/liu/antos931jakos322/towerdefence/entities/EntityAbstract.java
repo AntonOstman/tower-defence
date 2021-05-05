@@ -60,6 +60,7 @@ public class EntityAbstract
         if(position == null){
             position = end;
         }
+
         double difX = end.x - position.x;
         double difY = end.y - position.y;
 

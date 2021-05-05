@@ -58,7 +58,7 @@ public class TowerMaker
     private Tower createCanonTower(){
 	int canonAttackpower = 5;
 	int canonCost = 7;
-	int canonRange = 10;
+	int canonRange = 3;
 	int upgradeCost = 1;
 	int canonAttackSpeed = 20;
 	Color canonColor = Color.ORANGE;
@@ -69,7 +69,7 @@ public class TowerMaker
     private Tower createMachineGunTower(){
 	int attackPower = 3;
 	int cost = 7;
-	int range = 15;
+	int range = 6;
 	int upgradeCost = 1;
 	int canonAttackSpeed = 1;
 	Color machinegunColor = Color.PINK;

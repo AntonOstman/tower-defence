@@ -41,6 +41,8 @@ public abstract class Tower extends EntityAbstract implements Entity
         this.level = 1;
     }
 
+
+
     public boolean canAttack(){
         if (attackSpeedCharge == attackSpeed){
             attackSpeedCharge = 0;
