@@ -92,9 +92,9 @@ public abstract class Tower extends EntityAbstract implements Entity
             }
 
             int pixelRange = range*tileSize;
-            g2d.drawOval(getPosition().x * tileSize -pixelRange/2 + tileSize/2,
-                         getPosition().y * tileSize -pixelRange/2 + tileSize/2,
-                         range*tileSize, range*tileSize);
+            g2d.drawOval(getPosition().x * tileSize - pixelRange + tileSize/2,
+                         getPosition().y * tileSize - pixelRange + tileSize/2,
+                         range*tileSize*2, range*tileSize*2);
             rangeTickCounter++;
         }
         g2d.setColor(Color.white);
