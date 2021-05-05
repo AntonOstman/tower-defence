@@ -101,7 +101,7 @@ public class StartMenu
 	@Override public void actionPerformed(final ActionEvent e) {
 	    System.out.println(index);
 	    gameStarter2.startGame(index);
-
+	    frame.dispose();
 	}
     }
 }

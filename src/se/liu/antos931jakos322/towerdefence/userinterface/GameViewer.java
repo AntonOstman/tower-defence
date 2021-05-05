@@ -50,10 +50,12 @@ public class GameViewer
 	MenuComponent menuComponent = new MenuComponent(gameHandler);
 	GameComponent gameComponent = new GameComponent(gameHandler);
 
-	// create the panels of the UI
+	// create the panels of the UI In the gridLayout the first agrument represent amout of rows and seconds amout of coloumns
+	// in the gridlayout
 	JPanel mainPanel = new JPanel();
 	JPanel gamePanel = new JPanel(new GridLayout(1,1));
-	JPanel mainMenuPanel = new JPanel(new GridLayout(4,1));
+	JPanel mainMenuPanel = new JPanel(new GridLayout(5,1));
+	JPanel pauseAndQuitPanel = new JPanel(new GridLayout(4, 0));
 	JPanel towerUpgradesPanel = new JPanel(new BorderLayout());
 	JPanel towerDescriptionPanel = new JPanel(new GridLayout(1,1));
 	JPanel textPanel = new JPanel(new BorderLayout());
@@ -118,9 +120,17 @@ public class GameViewer
 	scrollableInteractivePanel.getViewport().add(interactivePanel);
 	// upgrade panel configuratoin
 	towerUpgradesPanel.setBackground(Color.blue);
-	JButton upgradeButton = new JButton(new ButtonEvent(TowerType.NONE, "upgrade"));
+	JButton upgradeButton = new JButton(new ButtonEvent("upgrade"));
 	upgradeButton.setText("Upgrade selected tower");
 	towerUpgradesPanel.add(upgradeButton);
+
+	// pause and quit buttons
+	JButton quitButton = new JButton(new ButtonEvent("quit game"));
+	JButton pauseButton = new JButton(new ButtonEvent("pause game"));
+	quitButton.setText("Quit game");
+	pauseButton.setText("Pause game");
+	pauseAndQuitPanel.add(quitButton);
+	pauseAndQuitPanel.add(pauseButton);
 
 	// now add all panels we have created to the main
 	mainMenuPanel.add(menuComponent);
@@ -128,6 +138,7 @@ public class GameViewer
 	mainMenuPanel.add(scrollableInteractivePanel);
 	mainMenuPanel.add(towerDescriptionPanel);
 	mainMenuPanel.add(towerUpgradesPanel);
+	mainMenuPanel.add(pauseAndQuitPanel);
 	mainMenuPanel.setPreferredSize(new Dimension(200,500));
 	mainMenuPanel.setBackground(backGroundColor);
 
@@ -155,7 +166,10 @@ public class GameViewer
 	    this.towerType = towerType;
 	    this.action = action;
 	}
-
+	public ButtonEvent(String action) {
+	    this.towerType = TowerType.NONE;
+	    this.action = action;
+	}
 
 	@Override public void actionPerformed(final ActionEvent e) {
 	    if (action.equals("upgrade")){
@@ -177,11 +191,22 @@ public class GameViewer
 		towerDescription.setText(towerDesc);
 	    }
 	    else if (action.equals("pause game")){
-	        gameHandler.pause();
-	    }
 
+	     	if (gameHandler.isGamePaused()){
+	     	    gameHandler.startGame();
+		}
+	     	else{
+	        gameHandler.pauseGame();
+	     	}
+	    }
+	    else if (action.equals("quit game")){
+	        StartMenu startMenu = new StartMenu();
+	        startMenu.createStartMenu();
+	        frame.dispose();
+	    }
 	}
     }
+
 
     public class MouseEvent extends MouseAdapter
     {

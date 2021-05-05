@@ -33,29 +33,50 @@ public class GameHandler
     private List<GameListener> gameListeners;
     private WaveMaker waveMaker;
     private Timer tickTimer;
-    final int timerDelay = 30;
     private int tickDelay;
+    private boolean gamePaused;
 
     public GameHandler(Map map) {
         this.map = map;
         this.enemies = new ArrayList<>();
         this.towers = new ArrayList<>();
         this.projectiles = new ArrayList<>();
-        this.health = 100;
+        this.health = 1;
         this.money = 10;
         this.gameListeners = new ArrayList<>();
         this.waveMaker = new WaveMaker();
-        this.tickDelay = 50;
+        this.tickDelay = 30;
         this.tickTimer = new Timer(tickDelay,new doOneStep()); // timer is set when the game starts in method startgame
-
+        this.gamePaused = true;
     }
     public void tick(){
+        setGameOver();
         activateTowers();
         moveProjectiles();
         enemies.addAll(waveMaker.update());
         enemyMove();
-
         notifyListeners();
+
+    }
+
+    public void setGameOver(){
+
+        if (health <= 0){
+            pauseGame();
+            int option = JOptionPane.showOptionDialog(null,"Do you want to play again?","Choose",
+                                                      JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                                                      null,null,null);
+        if (option == JOptionPane.YES_OPTION){
+            // do something
+            // the best is probably to have the logic for game over in gameviewer
+            // though we need a tick function in gameViwer which chechs if the game is over
+            // or something
+            health = 1000;
+            startGame();
+        }
+        else { System.exit(0);}
+        }
+
 
     }
 
@@ -83,14 +104,15 @@ public class GameHandler
         return closestEnemy;
     }
 
-    public void start() {
+    public void startGame() {
 
     tickTimer.start();
-
+    gamePaused = false;
     }
 
-    public void pause(){
+    public void pauseGame(){
         tickTimer.stop();
+        gamePaused = true;
     }
 
     public void moveProjectiles(){
@@ -269,6 +291,10 @@ public class GameHandler
         return map;
     }
 
+    public boolean isGamePaused() {
+        return gamePaused;
+    }
+
     public class doOneStep extends AbstractAction{
 
         @Override public void actionPerformed(final ActionEvent e){
@@ -276,6 +302,7 @@ public class GameHandler
 
         }
     }
+
 
 
 }
