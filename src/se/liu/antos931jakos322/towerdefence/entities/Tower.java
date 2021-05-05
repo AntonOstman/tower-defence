@@ -21,6 +21,9 @@ public abstract class Tower extends EntityAbstract implements Entity
     protected TowerType towerType;
     protected ProjectileType projectileType;
     protected final static ProjectileMaker PROJECTILE_MAKER = new ProjectileMaker();
+    protected boolean selected;
+    protected int rangeTickCounter;
+    protected int level;
 
 
     protected Tower(TowerType towerType, Color color, int cost, int attackPower, int range, int upgradeCost, ProjectileType projectileType, int attackSpeed) {
@@ -33,6 +36,9 @@ public abstract class Tower extends EntityAbstract implements Entity
         this.projectileType = projectileType;
         this.attackSpeed = attackSpeed;
         this.attackSpeedCharge = 0;
+        this.selected = false;
+        this.rangeTickCounter = 0;
+        this.level = 1;
     }
 
     public boolean canAttack(){
@@ -54,6 +60,10 @@ public abstract class Tower extends EntityAbstract implements Entity
         return projectile;
     }
 
+    public void setSelected(final boolean selected) {
+        this.selected = selected;
+    }
+
     public int getRange() {
         return range;
     }
@@ -71,6 +81,25 @@ public abstract class Tower extends EntityAbstract implements Entity
         drawPosY = getPosition().y * tileSize + towerOffset;
         g2d.setColor(getColor());
         g2d.fillRect(drawPosX, drawPosY, towerSize, towerSize);
+
+        if(selected){
+            // Shows the range for a set number of ticks
+            if(rangeTickCounter>30){
+                selected = false;
+                rangeTickCounter = 0;
+            }
+
+            int pixelRange = range*tileSize;
+            g2d.drawOval(getPosition().x * tileSize -pixelRange/2 + tileSize/2,
+                         getPosition().y * tileSize -pixelRange/2 + tileSize/2,
+                         range*tileSize, range*tileSize);
+            rangeTickCounter++;
+        }
+        g2d.setColor(Color.white);
+        //g2d.drawString("5",drawPosX+tileSize/2, drawPosY+tileSize/2);
+        g2d.setFont(new Font("TimesRoman", Font.PLAIN, tileSize/3));
+        g2d.drawString(String.valueOf(level), getPosition().x * tileSize + tileSize / 3,
+                       getPosition().y* tileSize + 2*tileSize/3);
     }
 
     public String getDescription() {
@@ -83,6 +112,7 @@ public abstract class Tower extends EntityAbstract implements Entity
         attackPower += 1;
         upgradeCost += 1;
         range += 1;
+        level++;
     }
 
 

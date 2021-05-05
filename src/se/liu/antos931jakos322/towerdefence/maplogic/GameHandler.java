@@ -223,6 +223,7 @@ public class GameHandler
     public Tower getTowerOnPoint(Point coord){
         for(Tower tower : towers){
             if (coord.equals(tower.getPosition())){
+                tower.setSelected(true);
                 return tower;
             }
         }
