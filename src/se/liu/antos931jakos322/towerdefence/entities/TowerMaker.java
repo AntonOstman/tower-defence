@@ -39,18 +39,18 @@ public class TowerMaker
 	towerMap.put(TowerType.ARROW,createArrowTower());
 	towerMap.put(TowerType.CANON,createCanonTower());
 	towerMap.put(TowerType.MACHINEGUN, createMachineGunTower());
-	towerMap.put(TowerType.MONEY,createCanonTower());
 
 	return towerMap.get(type);
     }
     private Tower createArrowTower(){
-	int arrowAttackpower = 10;
-        int arrowCost = 7;
-        int arrowRange = 5;
+	int attackpower = 10;
+        int cost = 7;
+        int range = 5;
 	int upgradeCost = 1;
-	int arrowAttackSpeed = 8;
+	int attackSpeed = 8;
 	Color arrowColor = Color.BLUE;
-        Tower arrowTower = new CanonTower(TowerType.ARROW, arrowColor,arrowCost,arrowAttackpower,arrowRange,upgradeCost,ProjectileType.BULLET, arrowAttackSpeed);
+        Tower arrowTower = new ArrowTower(TowerType.ARROW, arrowColor, cost, attackpower, range, upgradeCost,
+					  ProjectileType.BULLET, attackSpeed);
         return arrowTower;
     }
 
@@ -59,9 +59,10 @@ public class TowerMaker
 	int canonCost = 7;
 	int canonRange = 3;
 	int upgradeCost = 1;
-	int canonAttackSpeed = 20;
-	Color canonColor = Color.ORANGE;
-	Tower canonTower = new CanonTower(TowerType.CANON,canonColor,canonCost,canonAttackpower,canonRange,upgradeCost,ProjectileType.CANON, canonAttackSpeed);
+	int attackSpeed = 20;
+	Color color = Color.ORANGE;
+	Tower canonTower = new ArrowTower(TowerType.CANON, color, canonCost, canonAttackpower, canonRange, upgradeCost,
+					  ProjectileType.CANON, attackSpeed);
         return canonTower;
     }
 
@@ -70,10 +71,11 @@ public class TowerMaker
 	int cost = 7;
 	int range = 6;
 	int upgradeCost = 1;
-	int canonAttackSpeed = 1;
+	int attackSpeed = 1;
 	Color machinegunColor = Color.PINK;
-	Tower canonTower = new CanonTower(TowerType.MACHINEGUN, machinegunColor, cost, attackPower, range, upgradeCost, ProjectileType.MACHINE, canonAttackSpeed);
-	return canonTower;
+	Tower machineGunTower = new ArrowTower(TowerType.MACHINEGUN, machinegunColor, cost, attackPower, range, upgradeCost,
+					       ProjectileType.MACHINE, attackSpeed);
+	return machineGunTower;
 
 
     }

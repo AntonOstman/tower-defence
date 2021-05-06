@@ -42,7 +42,7 @@ public class GameHandler
         this.enemies = new ArrayList<>();
         this.towers = new ArrayList<>();
         this.projectiles = new ArrayList<>();
-        this.health = 1;
+        this.health = 100;
         this.money = 10;
         this.gameListeners = new ArrayList<>();
         this.waveMaker = new WaveMaker();

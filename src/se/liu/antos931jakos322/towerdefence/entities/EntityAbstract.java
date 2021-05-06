@@ -54,22 +54,22 @@ public class EntityAbstract
 
     public void move2(Point2D deltaDirection, double moveSpeed){
 
-        //double hypotonus = Math.sqrt(HelperFunctions.pythagoras(deltaDirection.y,deltaDirection.x));
 
-        //double xSpeed = Math.sin(deltaDirection.x / hypotonus);
-        //double y
-
+        // normalise the delta x and y direction to an angle
         double direction = Math.atan2(deltaDirection.getY() , deltaDirection.getX());
-
+        // use the angle to calcutate the x and y move relations
         double directionY = Math.sin(direction);
         double directionX = Math.cos(direction);
 
+        // set the draw position with the direction, later we will only use the Point2d
         double drawPosy = getDrawPosY() + directionY * moveSpeed * 10;
         double drawPosx = getDrawPosX() + directionX * moveSpeed * 10;
 
         drawPosX = (int) drawPosx;
         drawPosY = (int) drawPosy;
 
+
+        // change the actual position with the calculated coordinates
         Point position = new Point(getDrawPosX()/TILE_SIZE,getDrawPosY()/TILE_SIZE);
         setPosition(position);
 
@@ -93,7 +93,7 @@ public class EntityAbstract
         drawX =  (position.x + (difX / speed) * moveAmount);
         drawY =  (position.y + (difY / speed) * moveAmount);
 
-      // this should be fixed...
+        // this should be fixed...
         // the reason for this is because projectiles need to decide drawposx from other kriteria
         drawPosX = (int) (drawX * TILE_SIZE);
         drawPosY = (int) (drawY * TILE_SIZE);
