@@ -3,6 +3,7 @@ package se.liu.antos931jakos322.towerdefence.entities;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 
 public class EntityAbstract
 {
@@ -51,14 +52,14 @@ public class EntityAbstract
         g2d.fillOval(drawPosX + offset, drawPosY + offset, size, size);
     }
 
-    public void move2(Point deltaDirection, double moveSpeed){
+    public void move2(Point2D deltaDirection, double moveSpeed){
 
         //double hypotonus = Math.sqrt(HelperFunctions.pythagoras(deltaDirection.y,deltaDirection.x));
 
         //double xSpeed = Math.sin(deltaDirection.x / hypotonus);
         //double y
 
-        double direction = Math.atan2(deltaDirection.y , deltaDirection.x);
+        double direction = Math.atan2(deltaDirection.getY() , deltaDirection.getX());
 
         double directionY = Math.sin(direction);
         double directionX = Math.cos(direction);

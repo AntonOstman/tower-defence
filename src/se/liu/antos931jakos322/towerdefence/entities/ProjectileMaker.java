@@ -26,20 +26,20 @@ public class ProjectileMaker
     }
     private Projectile createBulletProjectile(Point start, int attackPower){
 
-	Projectile projectile = new BulletProjectile(Color.red, 0.23, 100, start,2, attackPower);
+	Projectile projectile = new BulletProjectile(Color.red, 0.23, 2, start,2, attackPower);
 	return projectile;
     }
 
     private Projectile createCanonProjectile(Point start, int attackPower){
 
-	Projectile projectile = new BulletProjectile(Color.lightGray, 0.35, 0.05, start,10, attackPower);
+	Projectile projectile = new BulletProjectile(Color.lightGray, 0.35, 0.5, start,10, attackPower);
 	return projectile;
     }
 
 
     private Projectile createMachineProjectile(Point start, int attackPower){
 
-	Projectile projectile = new BulletProjectile(Color.MAGENTA, 0.15, 0.25, start,1, attackPower);
+	Projectile projectile = new BulletProjectile(Color.MAGENTA, 0.15, 3, start,1, attackPower);
 	return projectile;
     }
 }

@@ -25,15 +25,7 @@ public abstract class Projectile extends EntityAbstract
 
 
     public void move(){
-	// moves the projectile using the directional x and y coordinates we want to travel
-	double drawPosy = getDrawPosY() + deltaDirection.getY() * projectileSpeed;
-	double drawPosx = getDrawPosX() + deltaDirection.getX() * projectileSpeed;
-
-	drawPosX = (int) drawPosx;
-	drawPosY = (int) drawPosy;
-
-	Point position = new Point(getDrawPosX()/TILE_SIZE,getDrawPosY()/TILE_SIZE);
-	setPosition(position);
+	move2(deltaDirection, projectileSpeed);
     }
 
 
