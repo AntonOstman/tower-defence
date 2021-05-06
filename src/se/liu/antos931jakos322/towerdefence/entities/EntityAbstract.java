@@ -1,5 +1,7 @@
 package se.liu.antos931jakos322.towerdefence.entities;
 
+import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
+
 import java.awt.*;
 
 public class EntityAbstract
@@ -47,6 +49,29 @@ public class EntityAbstract
         final int offset = TILE_SIZE / 2 - size / 2;
 
         g2d.fillOval(drawPosX + offset, drawPosY + offset, size, size);
+    }
+
+    public void move2(Point deltaDirection, double moveSpeed){
+
+        //double hypotonus = Math.sqrt(HelperFunctions.pythagoras(deltaDirection.y,deltaDirection.x));
+
+        //double xSpeed = Math.sin(deltaDirection.x / hypotonus);
+        //double y
+
+        double direction = Math.atan2(deltaDirection.y , deltaDirection.x);
+
+        double directionY = Math.sin(direction);
+        double directionX = Math.cos(direction);
+
+        double drawPosy = getDrawPosY() + directionY * moveSpeed * 10;
+        double drawPosx = getDrawPosX() + directionX * moveSpeed * 10;
+
+        drawPosX = (int) drawPosx;
+        drawPosY = (int) drawPosy;
+
+        Point position = new Point(getDrawPosX()/TILE_SIZE,getDrawPosY()/TILE_SIZE);
+        setPosition(position);
+
     }
 
 

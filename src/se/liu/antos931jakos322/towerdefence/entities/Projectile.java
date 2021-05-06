@@ -1,6 +1,8 @@
 package se.liu.antos931jakos322.towerdefence.entities;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.List;
 
 public abstract class Projectile extends EntityAbstract
@@ -8,7 +10,7 @@ public abstract class Projectile extends EntityAbstract
 
     private int attackPower;
     private Point startPoint;
-    private Point deltaDirection;
+    private Point2D deltaDirection;
     private double projectileSpeed;
     private int penetrationAmount;
 
@@ -24,8 +26,8 @@ public abstract class Projectile extends EntityAbstract
 
     public void move(){
 	// moves the projectile using the directional x and y coordinates we want to travel
-	double drawPosy = getDrawPosY() + deltaDirection.y * projectileSpeed;
-	double drawPosx = getDrawPosX() + deltaDirection.x * projectileSpeed;
+	double drawPosy = getDrawPosY() + deltaDirection.getY() * projectileSpeed;
+	double drawPosx = getDrawPosX() + deltaDirection.getX() * projectileSpeed;
 
 	drawPosX = (int) drawPosx;
 	drawPosY = (int) drawPosy;
@@ -44,14 +46,19 @@ public abstract class Projectile extends EntityAbstract
 
     //sets the direction for the projectile by calculating the change in x and y
     public void setTarget(final Enemy target) {
-	int directionX = target.getDrawPosX() - startPoint.x * TILE_SIZE;
-	int directionY = target.getDrawPosY() - startPoint.y * TILE_SIZE;
+	double directionX = target.getDrawPosX() - startPoint.x * TILE_SIZE;
+	double directionY = target.getDrawPosY() - startPoint.y * TILE_SIZE;
 
 	// sets the start position for the projectile
 	drawPosY = startPoint.y * TILE_SIZE;
 	drawPosX = startPoint.x * TILE_SIZE;
-	deltaDirection = new Point(directionX, directionY);
+	//deltaDirection = new Point2D(directionX, directionY);
+
+	deltaDirection = new Point2D.Double(directionX,directionY);
+
     }
+
+
 
     public int getPenetrationAmount() {
 	return penetrationAmount;

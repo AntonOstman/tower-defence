@@ -1,8 +1,6 @@
 package se.liu.antos931jakos322.towerdefence.userinterface;
 
-import se.liu.antos931jakos322.towerdefence.entities.TowerMaker;
-import se.liu.antos931jakos322.towerdefence.entities.TowerType;
-import se.liu.antos931jakos322.towerdefence.maplogic.GameStarter2;
+import se.liu.antos931jakos322.towerdefence.maplogic.GameHandler;
 import se.liu.antos931jakos322.towerdefence.maplogic.Map;
 import se.liu.antos931jakos322.towerdefence.maplogic.Tile;
 
@@ -12,13 +10,17 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class StartMenu
+public class StartMenu implements GameListener
 {
     private JFrame frame;
-    private GameStarter2 gameStarter2;
-    public StartMenu(){
-	gameStarter2 = new GameStarter2();
+    private GameHandler gameHandler;
+    private GameViewer viewer;
+    public StartMenu() {
+	this.frame = null;
+	this.gameHandler = null;
+	this.viewer = null;
     }
+
     public void createStartMenu(){
         Color background = new Color(100,100,100);
 
@@ -100,8 +102,57 @@ public class StartMenu
 
 	@Override public void actionPerformed(final ActionEvent e) {
 	    System.out.println(index);
-	    gameStarter2.startGame(index);
-	    frame.dispose();
+
+	    startGame(index);
+
+	    frame.setVisible(false);
 	}
+    }
+
+    public void startGame(int mapIndex) {
+
+	Map map = new Map(); // move to gamehandelr?
+	try {
+	    map.loadMap(mapIndex);
+	}
+	catch (IOException e){
+	    // not handeled correctly
+	    e.printStackTrace();
+	}
+
+
+	gameHandler = new GameHandler(map);
+	viewer = new GameViewer(gameHandler);
+	gameHandler.addListener(this);
+	gameHandler.startGame();
+	viewer.show();
+
+    }
+
+    @Override public void mapChanged() {
+	boolean gameOver = gameHandler.isGameOver();
+	if (gameOver) {
+	    int option = JOptionPane.showOptionDialog(null, "Do you want to play again?", "Choose",
+						      JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+						      null, null, null);
+	    if (option == JOptionPane.YES_OPTION) {
+	        gameHandler = null;
+	        viewer.dispose();
+	        viewer = null;
+	        frame.setVisible(true);
+
+
+		// do something
+		// the best is probably to have the logic for game over in gameviewer
+		// though we need a tick function in gameViwer which chechs if the game is over
+		// or something
+	    }
+	else {
+	    System.exit(0);
+	    }
+
+	}
+
+
     }
 }

@@ -34,6 +34,8 @@ public class GameViewer
 	this.clickedTower = null;
     }
 
+
+
     public void viewMapText(){
         int mapX = gameHandler.getMap().getDimensions().x;
 	int mapY = gameHandler.getMap().getDimensions().y;
@@ -157,6 +159,10 @@ public class GameViewer
 
     }
 
+    public void dispose() {
+        frame.dispose();
+    }
+
     public class ButtonEvent extends AbstractAction{
 
         private TowerType towerType;
@@ -202,9 +208,8 @@ public class GameViewer
 	     	}
 	    }
 	    else if (action.equals("quit game")){
-	        StartMenu startMenu = new StartMenu();
-	        startMenu.createStartMenu();
-	        frame.dispose();
+		System.exit(0);
+
 	    }
 	}
     }
@@ -246,6 +251,7 @@ public class GameViewer
 	    clickedTower = clickedTow;
 
 	}
+
 
 	private void placeTower(Point clickedPoint){
 

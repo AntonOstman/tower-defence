@@ -35,19 +35,21 @@ public class GameHandler
     private Timer tickTimer;
     private int tickDelay;
     private boolean gamePaused;
+    private boolean gameOver;
 
     public GameHandler(Map map) {
         this.map = map;
         this.enemies = new ArrayList<>();
         this.towers = new ArrayList<>();
         this.projectiles = new ArrayList<>();
-        this.health = 100;
+        this.health = 1;
         this.money = 10;
         this.gameListeners = new ArrayList<>();
         this.waveMaker = new WaveMaker();
         this.tickDelay = 30;
         this.tickTimer = new Timer(tickDelay, new doOneStep()); // timer is set when the game starts in method startgame
         this.gamePaused = true;
+        this.gameOver = false;
     }
     public void tick(){
         setGameOver();
@@ -61,24 +63,13 @@ public class GameHandler
 
     public void setGameOver(){
 
-        if (health <= 0){
+        if (health <= 0) {
             pauseGame();
-            int option = JOptionPane.showOptionDialog(null,"Do you want to play again?","Choose",
-                                                      JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
-                                                      null,null,null);
-        if (option == JOptionPane.YES_OPTION){
-            // do something
-            // the best is probably to have the logic for game over in gameviewer
-            // though we need a tick function in gameViwer which chechs if the game is over
-            // or something
-            health = 1000;
-            startGame();
+            gameOver = true;
         }
-        else { System.exit(0);}
-        }
-
-
     }
+
+
 
     public Enemy getClosestEnemy(Point towerPos, int range){
         Enemy closestEnemy = null;
@@ -102,6 +93,10 @@ public class GameHandler
             }
         }
         return closestEnemy;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 
     public void startGame() {
@@ -228,6 +223,7 @@ public class GameHandler
     }
 
     public List<Tower> getTowers() {
+
         return towers;
     }
 
