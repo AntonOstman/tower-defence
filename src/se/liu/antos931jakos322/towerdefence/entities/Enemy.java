@@ -4,6 +4,7 @@ package se.liu.antos931jakos322.towerdefence.entities;
 
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 
 /**
  * An abstract class with the core elements of an enemy
@@ -11,7 +12,7 @@ import java.awt.*;
  *
  */
 
-public abstract class Enemy extends EntityAbstract implements Entity
+public abstract class Enemy extends EntityAbstract
 {
     protected int health;
     protected int pathPosition;
@@ -58,27 +59,29 @@ public abstract class Enemy extends EntityAbstract implements Entity
 	super.draw(g2d, tileSize);
 
 	g2d.setColor(color);
+	int drawPositionX = (int) (drawPosX * tileSize);
+	int drawPositionY = (int) (drawPosY * tileSize);
 
 	// less size is bigger
 	final int size = (int) (tileSize * drawScale);
-	final int offset = TILE_SIZE / 2 - size / 2;
+	final int offset = tileSize / 2 - size / 2;
 	double procentageHP = (double) health / maxHealth;
-	g2d.fillOval(drawPosX + offset, drawPosY + offset, size, size);
+	g2d.fillOval(drawPositionX + offset, drawPositionY + offset, size, size);
 
 	// below is for the healthbar
 	// first we add a red bar to background...
 	int healthBarHeight = 7;
 	g2d.setColor(Color.red);
-	g2d.fillRect(drawPosX + offset,drawPosY, size , healthBarHeight);
+	g2d.fillRect(drawPositionX + offset,drawPositionY, size , healthBarHeight);
 
 	// then on top of the red bar we add the green representing the current health
 	// which gets lower with the remaning procentageHP
 	g2d.setColor(Color.green);
-	g2d.fillRect(drawPosX + offset,drawPosY, (int) (size * procentageHP), healthBarHeight);
+	g2d.fillRect(drawPositionX + offset,drawPositionY, (int) (procentageHP * size), healthBarHeight);
 
     }
 
-    public boolean isPathMovementDone(Point nextTile, Point lastTile){
+    public boolean isPathMovementDone(Point2D nextTile, Point2D lastTile){
 
 	// Moves the enemy to "nextTile" over multiple ticks
 	if (isMovementDone(nextTile)){

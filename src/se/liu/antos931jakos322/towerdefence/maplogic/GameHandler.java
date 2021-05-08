@@ -10,6 +10,7 @@ import se.liu.antos931jakos322.towerdefence.userinterface.GameListener;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -71,7 +72,7 @@ public class GameHandler
 
 
 
-    public Enemy getClosestEnemy(Point towerPos, int range){
+    public Enemy getClosestEnemy(Point2D towerPos, int range){
         Enemy closestEnemy = null;
 
         if (!enemies.isEmpty()){
@@ -80,9 +81,9 @@ public class GameHandler
             // If one closer is found save that enemy, do that for all enemies
             // if no enemies in range are found return null
             for(Enemy enemy: enemies){
-                Point enemyPos = enemy.getPosition();
-                Point relativePoint = new Point(towerPos.x - enemyPos.x,towerPos.y - enemyPos.y);
-                double currentDistance = HelperFunctions.pythagoras(relativePoint.x, relativePoint.y);
+                Point2D enemyPos = enemy.getPosition();
+                Point2D relativePoint = new Point2D.Double(towerPos.getX() - enemyPos.getX(),towerPos.getY() - enemyPos.getY());
+                double currentDistance = HelperFunctions.pythagoras(relativePoint.getX(), relativePoint.getY());
                 // get the "real" distance
                 currentDistance = Math.sqrt(currentDistance);
                 if(currentDistance < closestDistance && currentDistance <= range){
@@ -119,7 +120,7 @@ public class GameHandler
            projectile.move();
 
            //check on the tile the projectile is on if there are any enemies on it
-           List<Enemy> potentalTargets = getEnemiesOnPoint(projectile.getPosition());
+           List<Enemy> potentalTargets = getEnemiesWithin(projectile.getPosition(), projectile.getProjectileSize());
            if (!potentalTargets.isEmpty()) {
                // if there are enemies let the projectile attack them
                projectile.attack(potentalTargets);
@@ -129,8 +130,8 @@ public class GameHandler
                removeList.add(projectile);
            }
             // if there are any projectiles outside the game add them to the remove list
-            boolean lessThanBounds = projectile.getPosition().y < 0 || projectile.getPosition().x < 0;
-            boolean greaterThanBounds = projectile.getPosition().x > map.getWidth() || projectile.getPosition().y > map.getHeigth();
+            boolean lessThanBounds = projectile.getPosition().getY() < 0 || projectile.getPosition().getX() < 0;
+            boolean greaterThanBounds = projectile.getPosition().getX() > map.getWidth() || projectile.getPosition().getY() > map.getHeigth();
             if(lessThanBounds || greaterThanBounds){
                 removeList.add(projectile);
             }
@@ -202,8 +203,10 @@ public class GameHandler
     }
 
     public boolean canAffordAndPlaceTower(Tower tower){
-        Point towerPos = tower.getPosition();
-        TileType desiredPlacementTile  = map.getTile(towerPos).getTileType();
+        Point2D towerPos = tower.getPosition();
+        Point towerPosPoint = new Point((int)towerPos.getX(),(int)towerPos.getY());
+
+        TileType desiredPlacementTile  = map.getTile(towerPosPoint).getTileType();
 
         // if the player attempts to place the tower on something thats not grass return false
         if (desiredPlacementTile != TileType.GRASS) {
@@ -245,7 +248,27 @@ public class GameHandler
         gameListeners.add(listener);
     }
 
-    public List<Enemy> getEnemiesOnPoint(Point coord){
+
+    // returnes the enemies within a ceratin range.
+    // example: if range = 1 all enemies whithin 1 tiles range will be returned
+
+    public List<Enemy> getEnemiesWithin(Point2D coord, double range) {
+        List<Enemy> enemyList = new ArrayList<>();
+        for (Enemy enemy : enemies) {
+            double difX = enemy.getDrawPosX() - coord.getX();
+            double difY = enemy.getDrawPosY() - coord.getY();
+
+           double distance = Math.sqrt(HelperFunctions.pythagoras(difX,difY));
+           if (distance <= range){
+               enemyList.add(enemy);
+
+            }
+        }
+        return enemyList;
+    }
+
+
+    public List<Enemy> getEnemiesOnPoint(Point2D coord){
         List<Enemy> enemyList = new ArrayList<>();
         for(Enemy enemy : enemies){
             if (coord.equals(enemy.getPosition())){
@@ -256,7 +279,7 @@ public class GameHandler
     }
 
 
-    public Tower getTowerOnPoint(Point coord){
+    public Tower getTowerOnPoint(Point2D coord){
         for(Tower tower : towers){
             if (coord.equals(tower.getPosition())){
                 tower.setSelected(true);

@@ -1,6 +1,7 @@
 package se.liu.antos931jakos322.towerdefence.entities;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -14,7 +15,7 @@ public class ProjectileMaker
 
     }
 
-    public Projectile getProjectile(ProjectileType type, Point start, int attackPower){
+    public Projectile getProjectile(ProjectileType type, Point2D start, int attackPower){
 	EnumMap<ProjectileType, Projectile> projectileMap = new EnumMap<>(ProjectileType.class);
 
 	projectileMap.put(ProjectileType.BULLET, createBulletProjectile(start, attackPower));
@@ -24,19 +25,19 @@ public class ProjectileMaker
 	projectile.setPosition(start);
 	return projectile;
     }
-    private Projectile createBulletProjectile(Point start, int attackPower){
+    private Projectile createBulletProjectile(Point2D start, int attackPower){
 	double drawScale = 0.23;
-	double projectileSpeed = 2;
+	double projectileSpeed = 0.5;
 	int penetrationAmount = 2;
 
 	Projectile projectile = new BulletProjectile(Color.red, drawScale, projectileSpeed, start,penetrationAmount, attackPower);
 	return projectile;
     }
 
-    private Projectile createCanonProjectile(Point start, int attackPower){
+    private Projectile createCanonProjectile(Point2D start, int attackPower){
 
         double drawScale = 0.35;
-        double projectileSpeed = 0.5;
+        double projectileSpeed = 0.2;
         int penetrationAmount = 10;
 
 	Projectile projectile = new BulletProjectile(Color.lightGray, drawScale, projectileSpeed, start,penetrationAmount, attackPower);
@@ -44,9 +45,9 @@ public class ProjectileMaker
     }
 
 
-    private Projectile createMachineProjectile(Point start, int attackPower){
+    private Projectile createMachineProjectile(Point2D start, int attackPower){
 	double drawScale = 0.15;
-	double projectileSpeed = 3;
+	double projectileSpeed = 1;
 	int penetrationAmount = 1;
 
 	Projectile projectile = new BulletProjectile(Color.MAGENTA, drawScale, projectileSpeed, start,penetrationAmount, attackPower);
