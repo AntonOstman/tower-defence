@@ -55,14 +55,15 @@ public class GameComponent extends JComponent implements GameListener
 		currentTile.drawTile(g2d, MARGIN, TILE_SIZE);
 	    }
 	}
-	for (Tower tower : gameHandler.getTowers()) {
-	    tower.draw(g2d, TILE_SIZE);
+
+	for (int i = 0; i < gameHandler.getTowerAmount(); i++) {
+	    gameHandler.getTower(i).draw(g2d, TILE_SIZE);
 	}
-	for(Enemy enemy : gameHandler.getEnemies()){
-	    enemy.draw(g2d, TILE_SIZE);
+	for(int i = 0; i < gameHandler.getEnemyAmount(); i++){
+	    gameHandler.getEnemy(i).draw(g2d, TILE_SIZE);
 	}
-	for(Projectile projectile : gameHandler.getProjectiles()){
-	    projectile.draw(g2d, TILE_SIZE);
+	for(int i = 0; i < gameHandler.getProjectileAmount(); i++ ){
+	    gameHandler.getProjectile(i).draw(g2d, TILE_SIZE);
 	}
 
     }

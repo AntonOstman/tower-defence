@@ -314,6 +314,33 @@ public class GameHandler
         return gamePaused;
     }
 
+
+    public int getEnemyAmount(){
+        return enemies.size();
+    }
+
+    public int getProjectileAmount(){
+        return projectiles.size();
+    }
+
+    public int getTowerAmount(){
+
+        return towers.size();
+    }
+
+    public Projectile getProjectile(int number){
+
+        return projectiles.get(number);
+    }
+    public Tower getTower(int number){
+        return towers.get(number);
+    }
+
+    public Enemy getEnemy(int number){
+
+        return enemies.get(number);
+    }
+
     public class doOneStep extends AbstractAction{
 
         @Override public void actionPerformed(final ActionEvent e){
