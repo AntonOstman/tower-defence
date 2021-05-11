@@ -1,8 +1,8 @@
 package se.liu.antos931jakos322.towerdefence.userinterface;
 
-import se.liu.antos931jakos322.towerdefence.entities.Tower;
-import se.liu.antos931jakos322.towerdefence.entities.TowerMaker;
-import se.liu.antos931jakos322.towerdefence.entities.TowerType;
+import se.liu.antos931jakos322.towerdefence.entities.towers.Tower;
+import se.liu.antos931jakos322.towerdefence.entities.towers.TowerMaker;
+import se.liu.antos931jakos322.towerdefence.entities.towers.TowerType;
 import se.liu.antos931jakos322.towerdefence.maplogic.GameHandler;
 
 import javax.swing.*;

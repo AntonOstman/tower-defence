@@ -1,4 +1,6 @@
-package se.liu.antos931jakos322.towerdefence.entities;
+package se.liu.antos931jakos322.towerdefence.entities.enemies;
+
+import se.liu.antos931jakos322.towerdefence.entities.towers.SpeedEnemy;
 
 import java.util.ArrayList;
 import java.util.List;

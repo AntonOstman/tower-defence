@@ -1,4 +1,4 @@
-package se.liu.antos931jakos322.towerdefence.entities;
+package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
 import java.awt.*;
 

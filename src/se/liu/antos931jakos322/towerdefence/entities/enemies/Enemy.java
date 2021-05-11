@@ -1,7 +1,9 @@
-package se.liu.antos931jakos322.towerdefence.entities;
+package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
 
 
+
+import se.liu.antos931jakos322.towerdefence.entities.Entity;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -12,7 +14,7 @@ import java.awt.geom.Point2D;
  *
  */
 
-public abstract class Enemy extends EntityAbstract
+public abstract class Enemy extends Entity
 {
     protected int health;
     protected int pathPosition;

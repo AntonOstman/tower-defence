@@ -1,4 +1,7 @@
-package se.liu.antos931jakos322.towerdefence.entities;
+package se.liu.antos931jakos322.towerdefence.entities.towers;
+
+import se.liu.antos931jakos322.towerdefence.entities.Entity;
+import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 
 import java.awt.*;
 
@@ -10,7 +13,7 @@ import java.awt.*;
  */
 
 
-public abstract class Tower extends EntityAbstract
+public abstract class Tower extends Entity
 {
     protected int attackPower;
     protected int range;

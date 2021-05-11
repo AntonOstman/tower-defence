@@ -1,10 +1,13 @@
-package se.liu.antos931jakos322.towerdefence.entities;
+package se.liu.antos931jakos322.towerdefence.entities.towers;
+
+import se.liu.antos931jakos322.towerdefence.entities.Entity;
+import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.List;
 
-public abstract class Projectile extends EntityAbstract
+public abstract class Projectile extends Entity
 {
 
     private int attackPower;
