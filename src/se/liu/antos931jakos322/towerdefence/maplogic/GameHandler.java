@@ -57,7 +57,7 @@ public class GameHandler
         activateTowers();
         moveProjectiles();
         enemies.addAll(waveMaker.update());
-        enemyMove();
+        moveEnemy();
         notifyListeners();
 
     }
@@ -169,7 +169,7 @@ public class GameHandler
         return health;
     }
 
-    public void enemyMove(){
+    public void moveEnemy(){
 
         Iterator<Enemy> i = enemies.iterator();
         while(i.hasNext()){
