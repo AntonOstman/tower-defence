@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
+import java.util.InputMismatchException;
 import java.util.List;
 /**
  *
@@ -87,12 +88,12 @@ public class GameViewer
 	// create and set the buttons for placing towers
 	buttonGroup = new ButtonGroup(); // create button group to deselect buttons when antoher is clicked
 	TowerMaker towerMaker = new TowerMaker();
-	List<TowerType> towerList = towerMaker.getAllTowers();
+	List<TowerType> towerTypes = towerMaker.getAllTowers();
 	towerDescription = new JTextArea("non selected");
 
 	// iterate over all towerstypes that exist and get the information about certain towers from towermaker
 	// and create buttons with that information
-	for (TowerType towerType: towerList) {
+	for (TowerType towerType: towerTypes) {
 	    ButtonEvent buttonLiserner = new ButtonEvent(towerType,"button clicked");
 	    Color buttonColor = towerMaker.getTower(towerType).getColor();
 	    JToggleButton b = new JToggleButton();
@@ -179,7 +180,8 @@ public class GameViewer
 	}
 
 	@Override public void actionPerformed(final ActionEvent e) {
-	    if (action.equals("upgrade")){
+	    switch (action){
+		case("upgrade"):
 	        // player is trying to upgrade a tower
 	        if(clickedTower != null) {
 		    if (gameHandler.isTowerUpgradable(clickedTower)) {
@@ -188,8 +190,8 @@ public class GameViewer
 		    }
 
 		}
-	    }
-	    else if (action.equals("button clicked")) {
+		    break;
+		case("button clicked"):
 	        // player is trying to press a tower on the menu
 
 		selectedTower = towerType;
@@ -197,8 +199,9 @@ public class GameViewer
 
 		String towerDesc = towerMaker.getTower(towerType).getDescription();
 		towerDescription.setText(towerDesc);
-	    }
-	    else if (action.equals("pause game")){
+
+		break;
+		case("pause game"):
 
 	     	if (gameHandler.isGamePaused()){
 	     	    gameHandler.startGame();
@@ -206,11 +209,19 @@ public class GameViewer
 	     	else{
 	        gameHandler.pauseGame();
 	     	}
-	    }
-	    else if (action.equals("quit game")){
-		System.exit(0);
 
+		    break;
+		case("quit game"):
+		System.exit(0);
+		default:
+		    try {
+			throw new InputMismatchException("Button did not have valid action");
+		    } catch (InputMismatchException inputMismatchException) {
+			inputMismatchException.printStackTrace();
+			System.exit(0);
+		    }
 	    }
+
 	}
     }
 

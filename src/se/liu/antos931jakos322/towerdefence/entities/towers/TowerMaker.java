@@ -38,7 +38,7 @@ public class TowerMaker
 	EnumMap<TowerType,Tower> towerMap = new EnumMap<>(TowerType.class);
 	towerMap.put(TowerType.ARROW,createArrowTower());
 	towerMap.put(TowerType.CANON,createCanonTower());
-	towerMap.put(TowerType.MACHINEGUN, createMachineGunTower());
+	towerMap.put(TowerType.MACHINE_GUN, createMachineGunTower());
 
 	return towerMap.get(type);
     }
@@ -72,8 +72,8 @@ public class TowerMaker
 	final int range = 6;
 	final int upgradeCost = 1;
 	final int attackSpeed = 1;
-	final Color machinegunColor = Color.PINK;
-	Tower machineGunTower = new ArrowTower(TowerType.MACHINEGUN, machinegunColor, cost, attackPower, range, upgradeCost,
+	final Color machineGunColor = Color.PINK;
+	Tower machineGunTower = new ArrowTower(TowerType.MACHINE_GUN, machineGunColor, cost, attackPower, range, upgradeCost,
 					       ProjectileType.MACHINE, attackSpeed);
 	return machineGunTower;
 

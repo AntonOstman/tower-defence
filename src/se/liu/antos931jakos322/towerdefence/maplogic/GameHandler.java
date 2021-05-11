@@ -112,7 +112,7 @@ public class GameHandler
     }
 
     public void moveProjectiles(){
-        List<Projectile> removeList = new ArrayList<>();
+        List<Projectile> projectilesToRemove = new ArrayList<>();
 
         for (Projectile projectile : projectiles){
 
@@ -127,17 +127,17 @@ public class GameHandler
            }
            // if the projectile cannot penetrate through any more enemies, remove it
            if (projectile.getPenetrationAmount() <= 0){
-               removeList.add(projectile);
+               projectilesToRemove.add(projectile);
            }
             // if there are any projectiles outside the game add them to the remove list
             boolean lessThanBounds = projectilePosition.getY() < 0 || projectilePosition.getX() < 0;
             boolean greaterThanBounds = projectilePosition.getX() > map.getWidth() || projectilePosition.getY() > map.getHeigth();
             if(lessThanBounds || greaterThanBounds){
-                removeList.add(projectile);
+                projectilesToRemove.add(projectile);
             }
         }
         // remove the projectiles designated to be removed
-        for (Projectile projectile : removeList){
+        for (Projectile projectile : projectilesToRemove){
             projectiles.remove(projectile);
         }
     }
@@ -254,18 +254,18 @@ public class GameHandler
     // example: if range = 1 all enemies whithin 1 tiles range will be returned
 
     public List<Enemy> getEnemiesWithin(Point2D coord, double range) {
-        List<Enemy> enemyList = new ArrayList<>();
+        List<Enemy> enemiesInRange = new ArrayList<>();
         for (Enemy enemy : enemies) {
             double difX = enemy.getDrawPosX() - coord.getX();
             double difY = enemy.getDrawPosY() - coord.getY();
 
            double distance = Math.sqrt(HelperFunctions.pythagoras(difX,difY));
            if (distance <= range){
-               enemyList.add(enemy);
+               enemiesInRange.add(enemy);
 
             }
         }
-        return enemyList;
+        return enemiesInRange;
     }
 
 
