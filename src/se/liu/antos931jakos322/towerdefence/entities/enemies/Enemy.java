@@ -21,14 +21,18 @@ public abstract class Enemy extends Entity
     protected final int maxHealth;
     protected final int rewardMoney;
     protected int damage;
+    private int movementCounter;
+    private boolean finished;
 
-    protected Enemy(final int maxHealth, final int speed, final Color color, final double size, int damage) {
+    protected Enemy(final int maxHealth, final double speed, final Color color, final double size, int damage) {
 	super(color, size, speed);
 	this.health = maxHealth;
 	this.maxHealth = maxHealth;
 	this.pathPosition = 0;
     	this.rewardMoney = 5;
     	this.damage = damage;
+    	this.movementCounter = 0;
+    	this.finished = false;
     }
 
     public void takeDamage(int damage){
@@ -57,14 +61,13 @@ public abstract class Enemy extends Entity
 
     }
 
-    @Override public void draw(final Graphics2D g2d, final int tileSize) {
-	super.draw(g2d, tileSize);
+    public void draw(final Graphics2D g2d, final int tileSize) {
+	//super.draw(g2d, tileSize);
 
 	g2d.setColor(color);
-	int drawPositionX = (int) (drawPosX * tileSize);
-	int drawPositionY = (int) (drawPosY * tileSize);
+	int drawPositionX = (int) (position.getX() * tileSize);
+	int drawPositionY = (int) (position.getY() * tileSize);
 
-	// less size is bigger
 	final int size = (int) (tileSize * drawScale);
 	final int offset = tileSize / 2 - size / 2;
 	double procentageHP = (double) health / maxHealth;
@@ -83,17 +86,33 @@ public abstract class Enemy extends Entity
 
     }
 
-    public boolean isPathMovementDone(Point2D nextTile, Point2D lastTile){
-
-	// Moves the enemy to "nextTile" over multiple ticks
-	if (isMovementDone(nextTile)){
-	    // When done with the movement -> change the next tile
+    public void moveEnemy(Point2D nextTile, Point2D lastTile){
+	// Gives Enemy a starting position
+        if(position == null){
+            position = nextTile;
 	    pathPosition += 1;
+        }
+        // If all movements have been done for a block
+	else if(movementCounter == (1/speed)){
+	    // If this is the last block --> Enemy is done with the path
+	    if(nextTile.equals(lastTile)){ finished = true; }
+	    else {
+		pathPosition += 1;
+		movementCounter = 0;
+	    }
 	}
-	if( position.equals(lastTile)){
-	    return true;
+	else {
+	    // Move enemy forward
+	    Point2D delta = new Point2D.Double();
+	    delta.setLocation( nextTile.getX()-position.getX(),
+			       nextTile.getY()-position.getY());
+	    move(delta);
+	    movementCounter++;
 	}
-        return false;
+    }
+
+    public boolean isFinished(){
+	return finished;
     }
 
     public int getHealth(){

@@ -18,18 +18,17 @@ public abstract class Projectile extends Entity
     private double projectileSize;
 
     protected Projectile(final Color color, final double drawScale, double projectileSpeed, Point2D position, int penetrationAmount, int attackPower) {
-	super(color, drawScale);
+	super(color, drawScale, projectileSpeed);
 	this.projectileSize = drawScale*2 ;
 	this.attackPower = attackPower;
 	this.deltaDirection = null;
 	this.startPoint = position; // the start position is always a normal point
-	this.projectileSpeed = projectileSpeed;
 	this.penetrationAmount = penetrationAmount;
     }
 
 
     public void move(){
-	move2(deltaDirection, projectileSpeed);
+	move(deltaDirection);
     }
 
 
@@ -42,18 +41,27 @@ public abstract class Projectile extends Entity
 
     //sets the direction for the projectile by calculating the change in x and y
     public void setTarget(final Enemy target) {
-	double directionX = target.getDrawPosX() - startPoint.getX();
-	double directionY = target.getDrawPosY() - startPoint.getY();
-
-	// sets the start position for the projectile
-	drawPosY = startPoint.getY();
-	drawPosX = startPoint.getX();
-	//deltaDirection = new Point2D(directionX, directionY);
+	double directionX = target.getX() - startPoint.getX();
+	double directionY = target.getY() - startPoint.getY();
 
 	deltaDirection = new Point2D.Double(directionX,directionY);
 
     }
 
+    public void draw(final Graphics2D g2d, final int tileSize){
+	// drawPosX could be changed to a double and then in this draw method we cast to int
+	// problem with a direct int is for example we cannot go "between" tiles only straight to it
+
+	g2d.setColor(color);
+
+	final int size = (int) (tileSize * drawScale);
+	final int offset = tileSize / 2 - size / 2;
+
+	int drawPositionX = (int) (position.getX() * tileSize) + offset;
+	int drawPositionY = (int) (position.getY() * tileSize) + offset;
+
+	g2d.fillOval(drawPositionX, drawPositionY, size, size);
+    }
 
     public double getProjectileSize() {
 	return projectileSize;

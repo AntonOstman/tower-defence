@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class EnemyCreator extends Enemy
 {
-    public EnemyCreator(int health, int speed, Color color, double size, int damage) {
+    public EnemyCreator(int health, double speed, Color color, double size, int damage) {
 
         super(health, speed, color, size, damage);
     }

@@ -176,8 +176,8 @@ public class GameHandler
             Enemy enemy = i.next();
             int nextTile = enemy.getPathPosition();
             Point lastTile = map.getLastTile();
-
-            if( enemy.isPathMovementDone(map.getPath(nextTile), lastTile) ){
+            enemy.moveEnemy(map.getPath(nextTile), lastTile);
+            if(enemy.isFinished()){
                 takeDamage(enemy.getDamage());
                 i.remove();
             }
@@ -256,8 +256,8 @@ public class GameHandler
     public List<Enemy> getEnemiesWithin(Point2D coord, double range) {
         List<Enemy> enemiesInRange = new ArrayList<>();
         for (Enemy enemy : enemies) {
-            double difX = enemy.getDrawPosX() - coord.getX();
-            double difY = enemy.getDrawPosY() - coord.getY();
+            double difX = enemy.getX() - coord.getX();
+            double difY = enemy.getY() - coord.getY();
 
            double distance = Math.sqrt(HelperFunctions.pythagoras(difX,difY));
            if (distance <= range){

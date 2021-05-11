@@ -77,15 +77,15 @@ public abstract class Tower extends Entity
         return cost;
     }
 
-    @Override public void draw(final Graphics2D g2d, final int tileSize) {
+    public void draw(final Graphics2D g2d, final int tileSize) {
 
         int towerSize = (int) (tileSize * drawScale);
 
         final int towerOffset = tileSize/2 - towerSize/2; // the ratio to keep a tower centered on a tile
-        drawPosX = getPosition().getX() * tileSize + towerOffset;
-        drawPosY = getPosition().getY() * tileSize + towerOffset;
+        int drawX = (int) getPosition().getX() * tileSize + towerOffset;
+        int drawY = (int) getPosition().getY() * tileSize + towerOffset;
         g2d.setColor(getColor());
-        g2d.fillRect((int)drawPosX,(int) drawPosY, towerSize, towerSize);
+        g2d.fillRect(drawX, drawY, towerSize, towerSize);
 
         if(selected){
             // Shows the range for a set number of ticks

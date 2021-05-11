@@ -59,9 +59,9 @@ public class WaveMaker
         // The enemy type is determened by the type you send as parameter.
         // Tip! To change spawning rate, change the amount.
         //      To change the spawning change speed, multiply / devide the wavelevel varible.
-        Enemy genericEnemy = new EnemyCreator(100, 10, Color.RED,0.5,1);
-        Enemy speedEnemy = new EnemyCreator(70, 6, Color.PINK,0.3,3);
-        Enemy bossEnemy = new EnemyCreator(100, 20, Color.GRAY,0.9,10);
+        Enemy genericEnemy = new EnemyCreator(100, 0.1, Color.RED,0.5,1);
+        Enemy speedEnemy = new EnemyCreator(70, 0.2, Color.PINK,0.3,3);
+        Enemy bossEnemy = new EnemyCreator(100, 0.05, Color.GRAY,0.9,10);
 
 
         if(waveLevel < 5){
