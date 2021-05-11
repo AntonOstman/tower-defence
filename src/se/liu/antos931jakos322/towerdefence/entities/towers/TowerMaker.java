@@ -43,36 +43,36 @@ public class TowerMaker
 	return towerMap.get(type);
     }
     private Tower createArrowTower(){
-	int attackpower = 10;
-        int cost = 7;
-        int range = 5;
-	int upgradeCost = 1;
-	int attackSpeed = 8;
-	Color arrowColor = Color.BLUE;
+	final int attackpower = 10;
+        final int cost = 7;
+        final int range = 5;
+	final int upgradeCost = 1;
+	final int attackSpeed = 8;
+	final Color arrowColor = Color.BLUE;
         Tower arrowTower = new ArrowTower(TowerType.ARROW, arrowColor, cost, attackpower, range, upgradeCost,
 					  ProjectileType.BULLET, attackSpeed);
         return arrowTower;
     }
 
     private Tower createCanonTower(){
-	int canonAttackpower = 5;
-	int canonCost = 7;
-	int canonRange = 3;
-	int upgradeCost = 1;
-	int attackSpeed = 20;
-	Color color = Color.ORANGE;
+	final int canonAttackpower = 5;
+	final int canonCost = 7;
+	final int canonRange = 3;
+	final int upgradeCost = 1;
+	final int attackSpeed = 20;
+	final Color color = Color.ORANGE;
 	Tower canonTower = new ArrowTower(TowerType.CANON, color, canonCost, canonAttackpower, canonRange, upgradeCost,
 					  ProjectileType.CANON, attackSpeed);
         return canonTower;
     }
 
     private Tower createMachineGunTower(){
-	int attackPower = 3;
-	int cost = 7;
-	int range = 6;
-	int upgradeCost = 1;
-	int attackSpeed = 1;
-	Color machinegunColor = Color.PINK;
+	final int attackPower = 3;
+	final int cost = 7;
+	final int range = 6;
+	final int upgradeCost = 1;
+	final int attackSpeed = 1;
+	final Color machinegunColor = Color.PINK;
 	Tower machineGunTower = new ArrowTower(TowerType.MACHINEGUN, machinegunColor, cost, attackPower, range, upgradeCost,
 					       ProjectileType.MACHINE, attackSpeed);
 	return machineGunTower;

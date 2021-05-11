@@ -1,4 +1,4 @@
-package se.liu.antos931jakos322.towerdefence.entities.towers;
+package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
 import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 

@@ -54,19 +54,18 @@ public class Tile
 	Color color = tileColorEnum.get(tileType);
 
 
-	int oldRed = color.getRed();
-	int oldBlue = color.getBlue();
-	int oldGreen = color.getGreen();
-
 	List<Integer> colors = new ArrayList<>();
 
-	colors.add(oldRed);
-	colors.add(oldGreen);
-	colors.add(oldBlue);
+	// add the colors in order red green blue
+	colors.add(color.getRed());
+	colors.add(color.getGreen());
+	colors.add(color.getBlue());
+
 	final int colorSpan = 50; // the span in which the colors can differs for a tile
 	final int randomInt = RND.nextInt(colorSpan);
+	final int colorAmount = 3;
 
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < colorAmount; i++) {
 	    int oldColor = colors.get(i);
 	    int newColor;
 	    if(oldColor - randomInt >= 0){
@@ -77,7 +76,7 @@ public class Tile
 	    }
 	    colors.set(i, newColor);
 	}
-
+	// we added red first, then green then blue to the colors list.
 	int newRed = colors.get(0);
 	int newGreen = colors.get(1);
 	int newBlue = colors.get(2);

@@ -24,9 +24,9 @@ public class ProjectileMaker
 	return projectile;
     }
     private Projectile createBulletProjectile(Point2D start, int attackPower){
-	double drawScale = 0.23;
-	double projectileSpeed = 0.5;
-	int penetrationAmount = 2;
+	final double drawScale = 0.23;
+	final double projectileSpeed = 0.5;
+	final int penetrationAmount = 2;
 
 	Projectile projectile = new BulletProjectile(Color.red, drawScale, projectileSpeed, start,penetrationAmount, attackPower);
 	return projectile;
@@ -34,9 +34,9 @@ public class ProjectileMaker
 
     private Projectile createCanonProjectile(Point2D start, int attackPower){
 
-        double drawScale = 0.35;
-        double projectileSpeed = 0.2;
-        int penetrationAmount = 10;
+        final double drawScale = 0.35;
+        final double projectileSpeed = 0.2;
+        final int penetrationAmount = 10;
 
 	Projectile projectile = new BulletProjectile(Color.lightGray, drawScale, projectileSpeed, start,penetrationAmount, attackPower);
 	return projectile;
@@ -44,9 +44,9 @@ public class ProjectileMaker
 
 
     private Projectile createMachineProjectile(Point2D start, int attackPower){
-	double drawScale = 0.15;
-	double projectileSpeed = 1;
-	int penetrationAmount = 1;
+	final double drawScale = 0.15;
+	final double projectileSpeed = 1;
+	final int penetrationAmount = 1;
 
 	Projectile projectile = new BulletProjectile(Color.MAGENTA, drawScale, projectileSpeed, start,penetrationAmount, attackPower);
 	return projectile;

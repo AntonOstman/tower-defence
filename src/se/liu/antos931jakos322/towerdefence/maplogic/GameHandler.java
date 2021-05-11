@@ -118,20 +118,20 @@ public class GameHandler
 
 
            projectile.move();
-
+           Point2D projectilePosition = projectile.getPosition();
            //check on the tile the projectile is on if there are any enemies on it
-           List<Enemy> potentalTargets = getEnemiesWithin(projectile.getPosition(), projectile.getProjectileSize());
+           List<Enemy> potentalTargets = getEnemiesWithin(projectilePosition, projectile.getProjectileSize());
            if (!potentalTargets.isEmpty()) {
                // if there are enemies let the projectile attack them
                projectile.attack(potentalTargets);
            }
            // if the projectile cannot penetrate through any more enemies, remove it
-           if (projectile.getPenetrationAmount() == 0){
+           if (projectile.getPenetrationAmount() <= 0){
                removeList.add(projectile);
            }
             // if there are any projectiles outside the game add them to the remove list
-            boolean lessThanBounds = projectile.getPosition().getY() < 0 || projectile.getPosition().getX() < 0;
-            boolean greaterThanBounds = projectile.getPosition().getX() > map.getWidth() || projectile.getPosition().getY() > map.getHeigth();
+            boolean lessThanBounds = projectilePosition.getY() < 0 || projectilePosition.getX() < 0;
+            boolean greaterThanBounds = projectilePosition.getX() > map.getWidth() || projectilePosition.getY() > map.getHeigth();
             if(lessThanBounds || greaterThanBounds){
                 removeList.add(projectile);
             }
@@ -176,6 +176,7 @@ public class GameHandler
             Enemy enemy = i.next();
             int nextTile = enemy.getPathPosition();
             Point lastTile = map.getLastTile();
+
             if( enemy.isPathMovementDone(map.getPath(nextTile), lastTile) ){
                 takeDamage(enemy.getDamage());
                 i.remove();

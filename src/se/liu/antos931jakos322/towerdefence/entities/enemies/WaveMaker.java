@@ -1,7 +1,5 @@
 package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
-import se.liu.antos931jakos322.towerdefence.entities.towers.SpeedEnemy;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +7,7 @@ public class WaveMaker
 {
     private int waveLevel;
     private int tickCounter;
-    private Boolean activeWave;
+    private boolean activeWave;
     private int activeWaveCounter;
     private int waveTimer;
     private int waveActiveTime;
@@ -29,6 +27,7 @@ public class WaveMaker
     }
 
     public List<Enemy> update(){
+
         enemies.clear();
         if(tickCounter % waveTimer == 0){
             activeWave = true;
@@ -40,14 +39,16 @@ public class WaveMaker
                 activeWave = false;
             } else {
                 activeWaveCounter++;
-                return createWave(enemies, waveLevel);
+                // does the createWave method really need to have enemies as an argument?
+                return createWave(waveLevel);
             }
         }
         tickCounter ++;
         return enemies;
     }
 
-    private List<Enemy> createWave(List<Enemy> enemies, int waveLevel){
+    // does the createWave method really need to have enemies as an argument?
+    private List<Enemy> createWave(int waveLevel){
         // phases:
         //      1. Only generic
         //      2. Generic + speedy
@@ -60,25 +61,24 @@ public class WaveMaker
 
 
         if(waveLevel < 5){
-            enemies = spawnEnemy(enemies, 3 + waveLevel, new GenericEnemy());
+            spawnEnemy( 3 + waveLevel, new GenericEnemy());
         } else if(waveLevel < 10){
-            enemies = spawnEnemy(enemies, -1 + waveLevel, new GenericEnemy());
-            enemies = spawnEnemy(enemies, -1 + waveLevel, new SpeedEnemy());
+            spawnEnemy( -1 + waveLevel, new GenericEnemy());
+            spawnEnemy( -1 + waveLevel, new SpeedEnemy());
         } else{
-            enemies = spawnEnemy(enemies, -6 + waveLevel, new GenericEnemy());
-            enemies = spawnEnemy(enemies, -6 + waveLevel, new SpeedEnemy());
-            enemies = spawnEnemy(enemies, -9 + waveLevel, new BossEnemy());
+            spawnEnemy( -6 + waveLevel, new GenericEnemy());
+            spawnEnemy( -6 + waveLevel, new SpeedEnemy());
+            spawnEnemy( -9 + waveLevel, new BossEnemy());
         }
         return enemies;
     }
 
-    private List<Enemy> spawnEnemy(List<Enemy> enemies, int amount, Enemy enemyType){
+    private void spawnEnemy(int amount, Enemy enemyType){
         int spawnSpeed = waveActiveTime/amount;
         if(spawnSpeed == 0){spawnSpeed = 1;}
         if( activeWaveCounter % spawnSpeed == 0){
             enemies.add(enemyType);
         }
-        return enemies;
 
     }
 
