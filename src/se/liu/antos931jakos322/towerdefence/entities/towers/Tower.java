@@ -23,7 +23,6 @@ public abstract class Tower extends Entity
     protected int attackSpeedCharge;
     protected TowerType towerType;
     protected ProjectileType projectileType;
-    protected final static ProjectileMaker PROJECTILE_MAKER = new ProjectileMaker();
     protected boolean selected;
     protected int rangeTickCounter;
     protected int level;
@@ -59,7 +58,7 @@ public abstract class Tower extends Entity
 
     public Projectile createProjectile(Enemy enemy) {
 
-        Projectile projectile = PROJECTILE_MAKER.getProjectile(projectileType, position, attackPower);
+        Projectile projectile = ProjectileMaker.getProjectile(projectileType, position, attackPower);
         projectile.setTarget(enemy);
 
         return projectile;

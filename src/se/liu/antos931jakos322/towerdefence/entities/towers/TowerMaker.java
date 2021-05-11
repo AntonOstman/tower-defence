@@ -19,7 +19,7 @@ public class TowerMaker
     // tower to create when for eg. getting a string "arrow"
     // instead of if arrow do this, if cannon do this....
 
-    public List<TowerType> getAllTowers(){
+    public static List<TowerType> getAllTowers(){
 
 	// return TowerType.values(); // this should be used in the final implementaion
 	List<TowerType> towerList = new ArrayList<>();
@@ -34,7 +34,7 @@ public class TowerMaker
 	// hard coded only to test
     }
 
-    public Tower getTower(TowerType type){
+    public static Tower getTower(TowerType type){
 	EnumMap<TowerType,Tower> towerMap = new EnumMap<>(TowerType.class);
 	towerMap.put(TowerType.ARROW,createArrowTower());
 	towerMap.put(TowerType.CANON,createCanonTower());
@@ -42,7 +42,7 @@ public class TowerMaker
 
 	return towerMap.get(type);
     }
-    private Tower createArrowTower(){
+    private static Tower createArrowTower(){
 	final int attackpower = 10;
         final int cost = 7;
         final int range = 5;
@@ -54,7 +54,7 @@ public class TowerMaker
         return arrowTower;
     }
 
-    private Tower createCanonTower(){
+    private static Tower createCanonTower(){
 	final int canonAttackpower = 5;
 	final int canonCost = 7;
 	final int canonRange = 3;
@@ -66,7 +66,7 @@ public class TowerMaker
         return canonTower;
     }
 
-    private Tower createMachineGunTower(){
+    private static Tower createMachineGunTower(){
 	final int attackPower = 3;
 	final int cost = 7;
 	final int range = 6;

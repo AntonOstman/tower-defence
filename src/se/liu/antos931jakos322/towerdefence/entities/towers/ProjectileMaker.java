@@ -13,7 +13,7 @@ public class ProjectileMaker
 
     }
 
-    public Projectile getProjectile(ProjectileType type, Point2D start, int attackPower){
+    public static Projectile getProjectile(ProjectileType type, Point2D start, int attackPower){
 	EnumMap<ProjectileType, Projectile> projectileMap = new EnumMap<>(ProjectileType.class);
 
 	projectileMap.put(ProjectileType.BULLET, createBulletProjectile(start, attackPower));
@@ -23,7 +23,7 @@ public class ProjectileMaker
 	projectile.setPosition(start);
 	return projectile;
     }
-    private Projectile createBulletProjectile(Point2D start, int attackPower){
+    private static Projectile createBulletProjectile(Point2D start, int attackPower){
 	final double drawScale = 0.23;
 	final double projectileSpeed = 0.5;
 	final int penetrationAmount = 2;
@@ -32,7 +32,7 @@ public class ProjectileMaker
 	return projectile;
     }
 
-    private Projectile createCanonProjectile(Point2D start, int attackPower){
+    private static Projectile createCanonProjectile(Point2D start, int attackPower){
 
         final double drawScale = 0.35;
         final double projectileSpeed = 0.2;
@@ -43,7 +43,7 @@ public class ProjectileMaker
     }
 
 
-    private Projectile createMachineProjectile(Point2D start, int attackPower){
+    private static Projectile createMachineProjectile(Point2D start, int attackPower){
 	final double drawScale = 0.15;
 	final double projectileSpeed = 1;
 	final int penetrationAmount = 1;

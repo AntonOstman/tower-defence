@@ -87,15 +87,14 @@ public class GameViewer
 
 	// create and set the buttons for placing towers
 	buttonGroup = new ButtonGroup(); // create button group to deselect buttons when antoher is clicked
-	TowerMaker towerMaker = new TowerMaker();
-	List<TowerType> towerTypes = towerMaker.getAllTowers();
+	List<TowerType> towerTypes = TowerMaker.getAllTowers();
 	towerDescription = new JTextArea("non selected");
 
 	// iterate over all towerstypes that exist and get the information about certain towers from towermaker
 	// and create buttons with that information
 	for (TowerType towerType: towerTypes) {
 	    ButtonEvent buttonLiserner = new ButtonEvent(towerType,"button clicked");
-	    Color buttonColor = towerMaker.getTower(towerType).getColor();
+	    Color buttonColor = TowerMaker.getTower(towerType).getColor();
 	    JToggleButton b = new JToggleButton();
 	    b.setBackground(buttonColor);
 	    b.addActionListener(buttonLiserner);
@@ -195,9 +194,8 @@ public class GameViewer
 	        // player is trying to press a tower on the menu
 
 		selectedTower = towerType;
-		TowerMaker towerMaker = new TowerMaker();
 
-		String towerDesc = towerMaker.getTower(towerType).getDescription();
+		String towerDesc = TowerMaker.getTower(towerType).getDescription();
 		towerDescription.setText(towerDesc);
 
 		break;
@@ -266,8 +264,7 @@ public class GameViewer
 
 	private void placeTower(Point clickedPoint){
 
-	    TowerMaker towerMaker = new TowerMaker();
-	    Tower newTower = towerMaker.getTower(selectedTower);
+	    Tower newTower = TowerMaker.getTower(selectedTower);
 	    newTower.setPosition(clickedPoint);
 	    boolean canPlaceTower = gameHandler.canAffordAndPlaceTower(newTower);
 

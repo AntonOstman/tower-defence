@@ -55,9 +55,9 @@ public class StartMenu implements GameListener
 		    e.printStackTrace();
 		}
 		JButton b = new JButton();
-		final int BI_WIDTH = 105;
-		final int BI_HEIGHT = 105;
-		BufferedImage lineImage = new BufferedImage(BI_WIDTH, BI_HEIGHT,
+		final int bufferedImageWidth = 105;
+		final int bufferedImageHeight = 105;
+		BufferedImage lineImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight,
 							    BufferedImage.TYPE_INT_RGB);
 
 		Graphics2D bg2d = lineImage.createGraphics();
