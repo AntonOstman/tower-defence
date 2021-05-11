@@ -1,5 +1,6 @@
 package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,17 +59,20 @@ public class WaveMaker
         // The enemy type is determened by the type you send as parameter.
         // Tip! To change spawning rate, change the amount.
         //      To change the spawning change speed, multiply / devide the wavelevel varible.
+        Enemy genericEnemy = new EnemyCreator(100, 10, Color.RED,0.5,1);
+        Enemy speedEnemy = new EnemyCreator(70, 6, Color.PINK,0.3,3);
+        Enemy bossEnemy = new EnemyCreator(100, 20, Color.GRAY,0.9,10);
 
 
         if(waveLevel < 5){
-            spawnEnemy( 3 + waveLevel, new GenericEnemy());
+            spawnEnemy( 3 + waveLevel, genericEnemy);
         } else if(waveLevel < 10){
-            spawnEnemy( -1 + waveLevel, new GenericEnemy());
-            spawnEnemy( -1 + waveLevel, new SpeedEnemy());
+            spawnEnemy( -1 + waveLevel, genericEnemy);
+            spawnEnemy( -1 + waveLevel, speedEnemy);
         } else{
-            spawnEnemy( -6 + waveLevel, new GenericEnemy());
-            spawnEnemy( -6 + waveLevel, new SpeedEnemy());
-            spawnEnemy( -9 + waveLevel, new BossEnemy());
+            spawnEnemy( -6 + waveLevel, genericEnemy);
+            spawnEnemy( -6 + waveLevel, speedEnemy);
+            spawnEnemy( -9 + waveLevel, bossEnemy);
         }
         return enemies;
     }
