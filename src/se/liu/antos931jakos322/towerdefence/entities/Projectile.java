@@ -1,6 +1,5 @@
 package se.liu.antos931jakos322.towerdefence.entities;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.List;

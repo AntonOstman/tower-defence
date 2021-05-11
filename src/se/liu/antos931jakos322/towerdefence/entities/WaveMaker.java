@@ -10,8 +10,8 @@ public class WaveMaker
     private Boolean activeWave;
     private int activeWaveCounter;
     private int waveTimer;
-    int waveActiveTime;
-    List<Enemy> enemies;
+    private int waveActiveTime;
+    private List<Enemy> enemies;
 
     public WaveMaker() {
 
