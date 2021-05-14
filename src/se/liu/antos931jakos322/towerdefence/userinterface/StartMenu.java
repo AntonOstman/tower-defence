@@ -62,7 +62,7 @@ public class StartMenu implements GameListener
 
 		Graphics2D bg2d = lineImage.createGraphics();
 
-		int mapY = gameMap.getHeigth();
+		int mapY = gameMap.getHeight();
 		int mapX = gameMap.getWidth();
 		for (int y = 0; y < mapY; y++) {
 		    for (int x = 0; x < mapX; x++) {
