@@ -23,7 +23,7 @@ import java.util.List;
 
 public class GameHandler
 {
-    private Map map;
+    private GameMap gameMap;
     private List<Tower> towers;
     private List<Enemy> enemies;
     private List<Projectile> projectiles;
@@ -38,8 +38,8 @@ public class GameHandler
     private boolean gamePaused;
     private boolean gameOver;
 
-    public GameHandler(Map map) {
-        this.map = map;
+    public GameHandler(GameMap gameMap) {
+        this.gameMap = gameMap;
         this.enemies = new ArrayList<>();
         this.towers = new ArrayList<>();
         this.projectiles = new ArrayList<>();
@@ -48,7 +48,7 @@ public class GameHandler
         this.gameListeners = new ArrayList<>();
         this.waveMaker = new WaveMaker();
         this.tickDelay = 30;
-        this.tickTimer = new Timer(tickDelay, new doOneStep()); // timer is set when the game starts in method startgame
+        this.tickTimer = new Timer(tickDelay, new DoOneStep()); // timer is set when the game starts in method startgame
         this.gamePaused = true;
         this.gameOver = false;
     }
@@ -120,10 +120,10 @@ public class GameHandler
            projectile.move();
            Point2D projectilePosition = projectile.getPosition();
            //check on the tile the projectile is on if there are any enemies on it
-           List<Enemy> potentalTargets = getEnemiesWithin(projectilePosition, projectile.getProjectileSize());
-           if (!potentalTargets.isEmpty()) {
+           List<Enemy> potentialTargets = getEnemiesWithin(projectilePosition, projectile.getProjectileSize());
+           if (!potentialTargets.isEmpty()) {
                // if there are enemies let the projectile attack them
-               projectile.attack(potentalTargets);
+               projectile.attack(potentialTargets);
            }
            // if the projectile cannot penetrate through any more enemies, remove it
            if (projectile.getPenetrationAmount() <= 0){
@@ -131,7 +131,7 @@ public class GameHandler
            }
             // if there are any projectiles outside the game add them to the remove list
             boolean lessThanBounds = projectilePosition.getY() < 0 || projectilePosition.getX() < 0;
-            boolean greaterThanBounds = projectilePosition.getX() > map.getWidth() || projectilePosition.getY() > map.getHeigth();
+            boolean greaterThanBounds = projectilePosition.getX() > gameMap.getWidth() || projectilePosition.getY() > gameMap.getHeight();
             if(lessThanBounds || greaterThanBounds){
                 projectilesToRemove.add(projectile);
             }
@@ -175,8 +175,8 @@ public class GameHandler
         while(i.hasNext()){
             Enemy enemy = i.next();
             int nextTile = enemy.getPathPosition();
-            Point lastTile = map.getLastTile();
-            enemy.moveEnemy(map.getPath(nextTile), lastTile);
+            Point lastTile = gameMap.getLastTile();
+            enemy.moveEnemy(gameMap.getPath(nextTile), lastTile);
             if(enemy.isFinished()){
                 takeDamage(enemy.getDamage());
                 i.remove();
@@ -207,7 +207,7 @@ public class GameHandler
         Point2D towerPos = tower.getPosition();
         Point towerPosPoint = new Point((int)towerPos.getX(),(int)towerPos.getY());
 
-        TileType desiredPlacementTile  = map.getTile(towerPosPoint).getTileType();
+        TileType desiredPlacementTile  = gameMap.getTile(towerPosPoint).getTileType();
 
         // if the player attempts to place the tower on something thats not grass return false
         if (desiredPlacementTile != TileType.GRASS) {
@@ -270,13 +270,13 @@ public class GameHandler
 
 
     public List<Enemy> getEnemiesOnPoint(Point2D coord){
-        List<Enemy> enemyList = new ArrayList<>();
+        List<Enemy> enemiesOnPoint = new ArrayList<>();
         for(Enemy enemy : enemies){
             if (coord.equals(enemy.getPosition())){
-                enemyList.add(enemy);
+                enemiesOnPoint.add(enemy);
             }
         }
-        return enemyList;
+        return enemiesOnPoint;
     }
 
 
@@ -307,8 +307,8 @@ public class GameHandler
         return projectiles;
     }
 
-    public Map getMap() { // this should probably be changed so map cannot be directly accessed. Game handler controls map not others
-        return map;
+    public GameMap getMap() { // this should probably be changed so map cannot be directly accessed. Game handler controls map not others
+        return gameMap;
     }
 
     public boolean isGamePaused() {
@@ -342,7 +342,7 @@ public class GameHandler
         return enemies.get(number);
     }
 
-    public class doOneStep extends AbstractAction{
+    public class DoOneStep extends AbstractAction{
 
         @Override public void actionPerformed(final ActionEvent e){
             tick();

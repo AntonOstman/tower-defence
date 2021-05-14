@@ -44,8 +44,8 @@ public abstract class Enemy extends Entity
 	}
 
 	try {
-	    double procentageHP = (double) health / maxHealth;
-	    double inverceProcentageHP = 1 - procentageHP;
+	    double percentageHealth = (double) health / maxHealth;
+	    double inverceProcentageHP = 1 - percentageHealth;
 
 	    //color = new Color(255, (int) (inverceProcentageHP * 255), (int) (inverceProcentageHP * 255));
 	    color = new Color( 	(int) (color.getRed()	+ (255- color.getRed())   * inverceProcentageHP),
@@ -70,19 +70,19 @@ public abstract class Enemy extends Entity
 
 	final int size = (int) (tileSize * drawScale);
 	final int offset = tileSize / 2 - size / 2;
-	double procentageHP = (double) health / maxHealth;
+	double percentageHealth = (double) health / maxHealth;
 	g2d.fillOval(drawPositionX + offset, drawPositionY + offset, size, size);
 
 	// below is for the healthbar
 	// first we add a red bar to background...
-	int healthBarHeight = 7;
+	final int healthBarHeight = 7;
 	g2d.setColor(Color.red);
 	g2d.fillRect(drawPositionX + offset,drawPositionY, size , healthBarHeight);
 
 	// then on top of the red bar we add the green representing the current health
-	// which gets lower with the remaning procentageHP
+	// which gets lower with the remaning percentageHealth
 	g2d.setColor(Color.green);
-	g2d.fillRect(drawPositionX + offset,drawPositionY, (int) (procentageHP * size), healthBarHeight);
+	g2d.fillRect(drawPositionX + offset, drawPositionY, (int) (percentageHealth * size), healthBarHeight);
 
     }
 

@@ -6,9 +6,16 @@ import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 import java.awt.*;
 
 /**
- *  A tower is an object with attackDamage range and cost
- *  A tower is used in the game to damage incoming enemy objects
- *
+ * Tower is the Abstract class for defensive structures in the game
+ * Tower facilitates the use of projectiles and has properties
+ * which can be increased to improve the effectiveness
+ * These properties are:
+ * attackpower - represents how much damage the tower's projectiles do
+ * cost - represents how much a tower costs to create
+ * attackspeed - how often at tower can send a projectile
+ * range - how close the tower needs to be a target to send a projectile
+ * Level - represents how much Tower has upgraded where each level increases
+ * the strength of Tower
  *
  */
 
@@ -79,10 +86,12 @@ public abstract class Tower extends Entity
     public void draw(final Graphics2D g2d, final int tileSize) {
 
         int towerSize = (int) (tileSize * drawScale);
+        double towerPosX = position.getX();
+        double towerPosY = position.getY();
 
         final int towerOffset = tileSize/2 - towerSize/2; // the ratio to keep a tower centered on a tile
-        int drawX = (int) getPosition().getX() * tileSize + towerOffset;
-        int drawY = (int) getPosition().getY() * tileSize + towerOffset;
+        int drawX = (int) towerPosX * tileSize + towerOffset;
+        int drawY = (int) towerPosY * tileSize + towerOffset;
         g2d.setColor(getColor());
         g2d.fillRect(drawX, drawY, towerSize, towerSize);
 
@@ -94,8 +103,8 @@ public abstract class Tower extends Entity
             }
             int pixelRange = range*tileSize;
 
-            int circleX = (int)getPosition().getX() * tileSize - pixelRange + tileSize/2;
-            int circleY = (int)getPosition().getY() * tileSize - pixelRange + tileSize/2;
+            int circleX = (int)towerPosX * tileSize - pixelRange + tileSize/2;
+            int circleY = (int)towerPosY * tileSize - pixelRange + tileSize/2;
 
             g2d.drawOval(circleX, circleY, range*tileSize*2, range*tileSize*2);
             rangeTickCounter++;
@@ -103,8 +112,8 @@ public abstract class Tower extends Entity
         g2d.setColor(Color.white);
         //g2d.drawString("5",drawPosX+tileSize/2, drawPosY+tileSize/2);
         g2d.setFont(new Font("TimesRoman", Font.PLAIN, tileSize/3));
-        int textPosX = (int) getPosition().getX() * tileSize + tileSize / 3;
-        int textPosY = (int) getPosition().getY() * tileSize + tileSize / 3;
+        int textPosX = (int) towerPosX * tileSize + tileSize / 3;
+        int textPosY = (int) towerPosY * tileSize + tileSize / 3;
         g2d.drawString(String.valueOf(level), textPosX, textPosY);
     }
 

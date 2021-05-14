@@ -1,7 +1,7 @@
 package se.liu.antos931jakos322.towerdefence.userinterface;
 
 import se.liu.antos931jakos322.towerdefence.maplogic.GameHandler;
-import se.liu.antos931jakos322.towerdefence.maplogic.Map;
+import se.liu.antos931jakos322.towerdefence.maplogic.GameMap;
 import se.liu.antos931jakos322.towerdefence.maplogic.Tile;
 
 import javax.swing.*;
@@ -45,12 +45,12 @@ public class StartMenu implements GameListener
 	header.setBackground(background);
 	header.add(label);
 
-	Map map = new Map();
+	GameMap gameMap = new GameMap();
 	for (int j = 0; j < 2; j++) {
 	    for (int i = 0; i < 3; i++) {
 	        ButtonEvent buttonListener = new ButtonEvent(i);
 		try {
-		    map.loadMap(i);
+		    gameMap.loadMap(i);
 		} catch (IOException e) {
 		    e.printStackTrace();
 		}
@@ -62,11 +62,11 @@ public class StartMenu implements GameListener
 
 		Graphics2D bg2d = lineImage.createGraphics();
 
-		int mapY = map.getHeigth();
-		int mapX = map.getWidth();
+		int mapY = gameMap.getHeigth();
+		int mapX = gameMap.getWidth();
 		for (int y = 0; y < mapY; y++) {
 		    for (int x = 0; x < mapX; x++) {
-			Tile currentTile = map.getTile(new Point(x, y));
+			Tile currentTile = gameMap.getTile(new Point(x, y));
 			currentTile.drawTile(bg2d, 0, 7);
 		    }
 		}
@@ -111,9 +111,9 @@ public class StartMenu implements GameListener
 
     public void startGame(int mapIndex) {
 
-	Map map = new Map(); // move to gamehandelr?
+	GameMap gameMap = new GameMap(); // move to gamehandelr?
 	try {
-	    map.loadMap(mapIndex);
+	    gameMap.loadMap(mapIndex);
 	}
 	catch (IOException e){
 	    // not handeled correctly
@@ -121,7 +121,7 @@ public class StartMenu implements GameListener
 	}
 
 
-	gameHandler = new GameHandler(map);
+	gameHandler = new GameHandler(gameMap);
 	viewer = new GameViewer(gameHandler);
 	gameHandler.addListener(this);
 	gameHandler.startGame();

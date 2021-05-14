@@ -38,12 +38,12 @@ public class MenuComponent extends JComponent implements GameListener
 	String currentMoney = "Money: " + gameHandler.getMoney();
 	g2d.setColor(Color.BLACK);
 	g2d.setFont(new Font("serif", Font.PLAIN, textSize));
-	int positionX = 0;
-	int positionY = 30;
-	int margin = 30;
-	g2d.drawString(health, positionX, positionY);
+	final int positionX = 0;
+	final int healthPositionY = 30;
+	final int moneyPositionY = 60;
+	g2d.drawString(health, positionX, healthPositionY);
 	// increase the position so the texts do not collide
-	positionY += margin;
-    	g2d.drawString(currentMoney, positionX, positionY);
+
+    	g2d.drawString(currentMoney, positionX, moneyPositionY);
     }
 }

@@ -24,14 +24,14 @@ import java.util.List;
  *
  */
 
-public class Map
+public class GameMap
 {
     private Tile[][] tiles;
     private List<Point> path;
     private Point dimensions;
 
 
-    public Map()  {
+    public GameMap()  {
 	this.dimensions = null;
 	this.tiles = null;
 	this.path = null;
@@ -124,10 +124,10 @@ public class Map
 
 
 	// Creates a list for mapInfo objects, MapInfo have height width and the path as input parameters.
-	List<MapInfo> mapInfoList = Arrays.asList(new MapInfo(new Point(15, 15), path1),
-						  new MapInfo(new Point(15, 15), path2),
-						  new MapInfo(new Point(15, 15), path3));
-	String mapInfoAsJson = gson.toJson(mapInfoList);
+	List<MapInfo> mapInfo = Arrays.asList(new MapInfo(new Point(15, 15), path1),
+					      new MapInfo(new Point(15, 15), path2),
+					      new MapInfo(new Point(15, 15), path3));
+	String mapInfoAsJson = gson.toJson(mapInfo);
 
 	FileWriter writer = new FileWriter("src/se/liu/antos931jakos322/towerdefence/maplogic/maps.json");
 	writer.write(mapInfoAsJson);
@@ -140,12 +140,11 @@ public class Map
 	Reader reader = Files.newBufferedReader(Paths.get("src/se/liu/antos931jakos322/towerdefence/maplogic/maps.json"));
 
 	// convert JSON array to object
-	List<MapInfo> mapInfoList;
-	mapInfoList = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>() {}.getType());
+	List<MapInfo> mapInfo = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>() {}.getType());
 	reader.close();
 
 	// Updates varibles
-	MapInfo selectedMap = mapInfoList.get(selectedMapIndex);
+	MapInfo selectedMap = mapInfo.get(selectedMapIndex);
 	this.dimensions = selectedMap.getDimensions();
 	this.tiles = new Tile[dimensions.y][dimensions.x];
 	this.path = selectedMap.getPath();
@@ -199,7 +198,7 @@ public class Map
         return width;
     }
 
-    public int getHeigth(){
+    public int getHeight(){
 	int height = dimensions.y;
 	return height;
     }

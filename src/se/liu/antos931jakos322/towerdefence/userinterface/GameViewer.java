@@ -93,11 +93,11 @@ public class GameViewer
 	// iterate over all towerstypes that exist and get the information about certain towers from towermaker
 	// and create buttons with that information
 	for (TowerType towerType: towerTypes) {
-	    ButtonEvent buttonLiserner = new ButtonEvent(towerType,"button clicked");
+	    ButtonEvent buttonEvent = new ButtonEvent(towerType, "button clicked");
 	    Color buttonColor = TowerMaker.getTower(towerType).getColor();
 	    JToggleButton b = new JToggleButton();
 	    b.setBackground(buttonColor);
-	    b.addActionListener(buttonLiserner);
+	    b.addActionListener(buttonEvent);
 	    buttonGroup.add(b);
 	    interactivePanel.add(b);
 	    UIManager.put(b.isSelected(),Color.BLACK);
