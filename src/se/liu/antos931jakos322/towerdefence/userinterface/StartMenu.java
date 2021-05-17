@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class StartMenu implements GameListener
@@ -24,8 +25,6 @@ public class StartMenu implements GameListener
     public void createStartMenu(){
         Color background = new Color(100,100,100);
 
-	frame = new JFrame();
-	frame.setPreferredSize(new Dimension(700, 500));
 
 	JPanel mainPanel = new JPanel(new GridLayout(2, 1));
 	//mainPanel.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -52,7 +51,30 @@ public class StartMenu implements GameListener
 		try {
 		    gameMap.loadMap(i);
 		} catch (IOException e) {
-		    e.printStackTrace();
+		    System.out.println("error load");
+		    String loadErrorMessage = "error reading maps file, do you want to create the default maps file?";
+		    int answer = JOptionPane.showConfirmDialog(null, loadErrorMessage);
+		    if (answer == JOptionPane.YES_OPTION) {
+			try {
+			    gameMap.createMap();
+			    createStartMenu();
+			    return;
+			} catch (IOException ioException) {
+			    System.out.println("error create");
+			    //ioException.printStackTrace();
+			    String createErrorMesage = "error creating maps file in mapLogic folder, do you want to try again?";
+			    int createAnswer = JOptionPane.showConfirmDialog(null, createErrorMesage);
+			    if (createAnswer == JOptionPane.YES_OPTION){
+			        createStartMenu();
+			        return;
+			    }
+			    else {System.exit(0);}
+			}
+		    }
+		    else{System.exit(0);}
+
+
+
 		}
 		JButton b = new JButton();
 		final int bufferedImageWidth = 105;
@@ -82,11 +104,12 @@ public class StartMenu implements GameListener
 	}
 
 
-
-
 	mainPanel.add(header);
 	mainPanel.add(mapSelect);
 
+
+	frame = new JFrame();
+	frame.setPreferredSize(new Dimension(700, 500));
 
 	frame.setLayout(new BorderLayout());
 	frame.add(mainPanel);

@@ -212,12 +212,7 @@ public class GameViewer
 		case("quit game"):
 		System.exit(0);
 		default:
-		    try {
-			throw new InputMismatchException("Button did not have valid action");
-		    } catch (InputMismatchException inputMismatchException) {
-			inputMismatchException.printStackTrace();
-			System.exit(0);
-		    }
+		     throw new IllegalArgumentException("button did not have valid action string");
 	    }
 
 	}

@@ -4,6 +4,7 @@ package se.liu.antos931jakos322.towerdefence.maplogic;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import java.awt.*;
@@ -36,11 +37,6 @@ public class GameMap
 	this.tiles = null;
 	this.path = null;
 
-	try {
-	    createMap();
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
 
 	//loadMap(); loadmap throws IO excpetion and the correct usage is probably to try loading in tester class?
 	// cool usage would be to load map with the "selected map index" you want to load
@@ -48,7 +44,7 @@ public class GameMap
     }
 
 
-    private void createMap() throws IOException{
+    public void createMap() throws IOException{
 	Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 	// OBS when creating the path, the path is using a margin on one tile over the edge to make for a smooth enering and exit
@@ -140,7 +136,17 @@ public class GameMap
 	Reader reader = Files.newBufferedReader(Paths.get("src/se/liu/antos931jakos322/towerdefence/maplogic/maps.json"));
 
 	// convert JSON array to object
-	List<MapInfo> mapInfo = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>() {}.getType());
+	// if loading fails we should handle it by creating the map
+	List<MapInfo> mapInfo;
+	try {
+	    mapInfo = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>()
+	    {
+	    }.getType());
+	}
+	catch (JsonSyntaxException ignored){
+
+	    throw new IOException("maps file has been corrupted and can not be read");
+	}
 	reader.close();
 
 	// Updates varibles

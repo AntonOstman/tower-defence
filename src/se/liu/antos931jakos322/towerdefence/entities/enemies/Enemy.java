@@ -42,8 +42,6 @@ public abstract class Enemy extends Entity
 	else {
 	    health -= damage;
 	}
-
-	try {
 	    double percentageHealth = (double) health / maxHealth;
 	    double inverceProcentageHP = 1 - percentageHealth;
 
@@ -54,10 +52,7 @@ public abstract class Enemy extends Entity
 	    // the reason that a red enemy becomes fully white on half hp
 	    // is because if the colors value start on 128 128 128
 	    // and when precentageHP is 0.5 it will become 128 + 128 ( i think)
-	}
-	catch (IllegalArgumentException e){
-	    e.printStackTrace();
-	}
+
 
     }
 
