@@ -3,13 +3,12 @@ package se.liu.antos931jakos322.towerdefence.userinterface;
 import se.liu.antos931jakos322.towerdefence.entities.towers.Tower;
 import se.liu.antos931jakos322.towerdefence.entities.towers.TowerMaker;
 import se.liu.antos931jakos322.towerdefence.entities.towers.TowerType;
-import se.liu.antos931jakos322.towerdefence.maplogic.GameHandler;
+import se.liu.antos931jakos322.towerdefence.gamelogic.GameHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
-import java.util.InputMismatchException;
 import java.util.List;
 /**
  *
@@ -35,18 +34,6 @@ public class GameViewer
 	this.clickedTower = null;
     }
 
-
-
-    public void viewMapText(){
-        int mapX = gameHandler.getMap().getDimensions().x;
-	int mapY = gameHandler.getMap().getDimensions().y;
-        for (int y = 0; y < mapY; y++) {
-	    for (int x = 0; x < mapX; x++) {
-		//System.out.print(map.getTile(x, y));
-	    }
-	    //System.out.println();
-	}
-}
     public void show(){
 
         frame = new JFrame();
@@ -279,10 +266,7 @@ public class GameViewer
 		// he needs to press the tower button again to select tower
 	    }
 	}
-    	private void upgradeTower(Point clickedPoint){
-	    Tower tower = gameHandler.getTowerOnPoint(clickedPoint);
-	    gameHandler.upgradeTower(tower);
-	}
+
 
     }
 

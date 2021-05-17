@@ -1,4 +1,4 @@
-package se.liu.antos931jakos322.towerdefence.maplogic;
+package se.liu.antos931jakos322.towerdefence.gamelogic;
 
 
 
@@ -125,15 +125,14 @@ public class GameMap
 					      new MapInfo(new Point(15, 15), path3));
 	String mapInfoAsJson = gson.toJson(mapInfo);
 
-	FileWriter writer = new FileWriter("src/se/liu/antos931jakos322/towerdefence/maplogic/maps.json");
+	FileWriter writer = new FileWriter("maps.json");
 	writer.write(mapInfoAsJson);
 	writer.close();
     }
 
     public void loadMap(int selectedMapIndex) throws IOException {
 
-	Gson gson = new Gson();
-	Reader reader = Files.newBufferedReader(Paths.get("src/se/liu/antos931jakos322/towerdefence/maplogic/maps.json"));
+	Reader reader = Files.newBufferedReader(Paths.get("maps.json"));
 
 	// convert JSON array to object
 	// if loading fails we should handle it by creating the map

@@ -1,14 +1,13 @@
 package se.liu.antos931jakos322.towerdefence.userinterface;
 
-import se.liu.antos931jakos322.towerdefence.maplogic.GameHandler;
-import se.liu.antos931jakos322.towerdefence.maplogic.GameMap;
-import se.liu.antos931jakos322.towerdefence.maplogic.Tile;
+import se.liu.antos931jakos322.towerdefence.gamelogic.GameHandler;
+import se.liu.antos931jakos322.towerdefence.gamelogic.GameMap;
+import se.liu.antos931jakos322.towerdefence.gamelogic.Tile;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class StartMenu implements GameListener

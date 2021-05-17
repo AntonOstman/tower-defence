@@ -7,11 +7,6 @@ import java.util.EnumMap;
 public class ProjectileMaker
 {
 
-    public ProjectileType[] getAllProjectiles(){
-
-    return ProjectileType.values(); // this should be used in the final implementaion
-
-    }
 
     public static Projectile getProjectile(ProjectileType type, Point2D start, int attackPower){
 	EnumMap<ProjectileType, Projectile> projectileMap = new EnumMap<>(ProjectileType.class);
@@ -25,7 +20,7 @@ public class ProjectileMaker
     }
     private static Projectile createBulletProjectile(Point2D start, int attackPower){
 	final double drawScale = 0.23;
-	final double projectileSpeed = 0.5;
+	final double projectileSpeed = 0.4;
 	final int penetrationAmount = 2;
 
 	Projectile projectile = new BulletProjectile(Color.red, drawScale, projectileSpeed, start,penetrationAmount, attackPower);
@@ -35,7 +30,7 @@ public class ProjectileMaker
     private static Projectile createCanonProjectile(Point2D start, int attackPower){
 
         final double drawScale = 0.35;
-        final double projectileSpeed = 0.2;
+        final double projectileSpeed = 0.15;
         final int penetrationAmount = 10;
 
 	Projectile projectile = new BulletProjectile(Color.lightGray, drawScale, projectileSpeed, start,penetrationAmount, attackPower);
@@ -45,7 +40,7 @@ public class ProjectileMaker
 
     private static Projectile createMachineProjectile(Point2D start, int attackPower){
 	final double drawScale = 0.15;
-	final double projectileSpeed = 1;
+	final double projectileSpeed = 0.5;
 	final int penetrationAmount = 1;
 
 	Projectile projectile = new BulletProjectile(Color.MAGENTA, drawScale, projectileSpeed, start,penetrationAmount, attackPower);

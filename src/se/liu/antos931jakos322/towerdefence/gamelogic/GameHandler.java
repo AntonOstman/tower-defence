@@ -1,4 +1,4 @@
-package se.liu.antos931jakos322.towerdefence.maplogic;
+package se.liu.antos931jakos322.towerdefence.gamelogic;
 
 import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 import se.liu.antos931jakos322.towerdefence.entities.towers.Tower;
@@ -29,8 +29,6 @@ public class GameHandler
     private List<Projectile> projectiles;
     private int health;
     private int money;
-    private final static int WAVE_TIMER = 50;
-    private int waveLevel = 0;
     private List<GameListener> gameListeners;
     private WaveMaker waveMaker;
     private Timer tickTimer;
@@ -190,10 +188,7 @@ public class GameHandler
         }
     }
 
-    public void removeEnemy(Enemy enemy){
-        money += enemy.getRewardMoney();
-        enemies.remove(enemy);
-    }
+
 
     public void addTower(Tower tower){
         money -= tower.getCost();
@@ -227,14 +222,6 @@ public class GameHandler
         return true;
     }
 
-    public List<Tower> getTowers() {
-
-        return towers;
-    }
-
-    public List<Enemy> getEnemies() {
-        return enemies;
-    }
 
     public int getMoney() {
         return money;
@@ -267,17 +254,6 @@ public class GameHandler
             }
         }
         return enemiesInRange;
-    }
-
-
-    public List<Enemy> getEnemiesOnPoint(Point2D coord){
-        List<Enemy> enemiesOnPoint = new ArrayList<>();
-        for(Enemy enemy : enemies){
-            if (coord.equals(enemy.getPosition())){
-                enemiesOnPoint.add(enemy);
-            }
-        }
-        return enemiesOnPoint;
     }
 
 

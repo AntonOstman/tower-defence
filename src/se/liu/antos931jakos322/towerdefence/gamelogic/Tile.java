@@ -1,4 +1,4 @@
-package se.liu.antos931jakos322.towerdefence.maplogic;
+package se.liu.antos931jakos322.towerdefence.gamelogic;
 
 
 
@@ -42,10 +42,6 @@ public class Tile
 
     @Override public String toString() {
 	return tileType + " ";
-    }
-
-    public Color getTileColor() {
-	return tileColor;
     }
 
     public Color randomNuance(){
@@ -95,10 +91,5 @@ public class Tile
 
         return tileColors;
     }
-
-    public Point getPosition() {
-	return position;
-    }
-
 
 }

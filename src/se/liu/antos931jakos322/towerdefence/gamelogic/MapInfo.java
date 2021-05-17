@@ -1,4 +1,4 @@
-package se.liu.antos931jakos322.towerdefence.maplogic;
+package se.liu.antos931jakos322.towerdefence.gamelogic;
 
 import java.awt.*;
 import java.util.ArrayList;

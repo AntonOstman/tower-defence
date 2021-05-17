@@ -1,7 +1,7 @@
 package se.liu.antos931jakos322.towerdefence.userinterface;
 
-import se.liu.antos931jakos322.towerdefence.maplogic.GameHandler;
-import se.liu.antos931jakos322.towerdefence.maplogic.Tile;
+import se.liu.antos931jakos322.towerdefence.gamelogic.GameHandler;
+import se.liu.antos931jakos322.towerdefence.gamelogic.Tile;
 
 import javax.swing.*;
 import java.awt.*;

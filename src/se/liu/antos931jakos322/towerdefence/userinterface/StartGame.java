@@ -1,7 +1,7 @@
 package se.liu.antos931jakos322.towerdefence.userinterface;
 
 
-public class Start implements GameListener
+public class StartGame
 {
 
     public static void main(String[] args) {
@@ -9,7 +9,4 @@ public class Start implements GameListener
 	startMenu.createStartMenu();
     }
 
-    @Override public void mapChanged() {
-
-    }
 }

@@ -15,9 +15,8 @@ public class Entity
 
     protected Point2D position;
     protected Color color;
-    protected double drawScale; // many fields, can any be removed/moved?
+    protected double drawScale;
     protected double speed;
-    protected final static int TILE_SIZE = 50; // this should definately be changed later to not be hard coded
 
 
     public Entity(final Color color, final double drawScale, final double speed) {
@@ -39,16 +38,13 @@ public class Entity
         double deltaX = deltaDirection.getX() - position.getX();
         double deltaY = deltaDirection.getY() - position.getY();
 
-        double distance = Math.sqrt(HelperFunctions.pythagoras(deltaX,deltaY));
-
         // normalise the delta x and y direction to an angle
         double direction = Math.atan2(deltaY , deltaX);
         // use the angle to calcutate the x and y  relations
         double directionY = Math.sin(direction);
         double directionX = Math.cos(direction);
-//        double directionY = Math.sin(deltaY/distance);
-//        double directionX = Math.cos(deltaX/distance);
 
+        // an entity's speed alters how much its position increases with every move method call
         double newY = position.getY() + directionY * speed ;
         double newX = position.getX() + directionX * speed ;
 

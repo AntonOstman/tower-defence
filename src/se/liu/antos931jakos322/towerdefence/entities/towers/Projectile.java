@@ -12,19 +12,16 @@ public abstract class Projectile extends Entity
 
     private int attackPower;
     private Point2D startPoint;
-    private Point2D deltaDirection;
-    private double projectileSpeed;
     private int penetrationAmount;
     private double projectileSize;
     private Point2D targetPosition;
 
 
-    protected Projectile(final Color color, final double drawScale, double projectileSpeed, Point2D position, int penetrationAmount, int attackPower) {
-	super(color, drawScale, projectileSpeed);
+    protected Projectile(final Color color, final double drawScale, double speed, Point2D position, int penetrationAmount, int attackPower) {
+	super(color, drawScale, speed);
 	this.targetPosition = null;
 	this.projectileSize = drawScale*2 ;
 	this.attackPower = attackPower;
-	this.deltaDirection = null;
 	this.startPoint = position; // the start position is always a normal point
 	this.penetrationAmount = penetrationAmount;
     }
@@ -75,7 +72,4 @@ public abstract class Projectile extends Entity
 	return penetrationAmount;
     }
 
-    public int getAttackPower() {
-	return attackPower;
-    }
 }
