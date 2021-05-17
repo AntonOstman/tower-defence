@@ -1,6 +1,8 @@
 package se.liu.antos931jakos322.towerdefence.entities;
 
 
+import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
+
 import java.awt.*;
 import java.awt.geom.Point2D;
 
@@ -33,13 +35,20 @@ public class Entity
     }
 
     public void move(Point2D deltaDirection){
+
+        double deltaX = deltaDirection.getX() - position.getX();
+        double deltaY = deltaDirection.getY() - position.getY();
+
+        double distance = Math.sqrt(HelperFunctions.pythagoras(deltaX,deltaY));
+
         // normalise the delta x and y direction to an angle
-        double direction = Math.atan2(deltaDirection.getY() , deltaDirection.getX());
-        // use the angle to calcutate the x and y move relations
+        double direction = Math.atan2(deltaY , deltaX);
+        // use the angle to calcutate the x and y  relations
         double directionY = Math.sin(direction);
         double directionX = Math.cos(direction);
+//        double directionY = Math.sin(deltaY/distance);
+//        double directionX = Math.cos(deltaX/distance);
 
-        // set the draw position with the direction, later we will only use the Point2d
         double newY = position.getY() + directionY * speed ;
         double newX = position.getX() + directionX * speed ;
 

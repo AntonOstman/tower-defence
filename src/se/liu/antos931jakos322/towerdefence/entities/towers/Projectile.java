@@ -16,9 +16,12 @@ public abstract class Projectile extends Entity
     private double projectileSpeed;
     private int penetrationAmount;
     private double projectileSize;
+    private Point2D targetPosition;
+
 
     protected Projectile(final Color color, final double drawScale, double projectileSpeed, Point2D position, int penetrationAmount, int attackPower) {
 	super(color, drawScale, projectileSpeed);
+	this.targetPosition = null;
 	this.projectileSize = drawScale*2 ;
 	this.attackPower = attackPower;
 	this.deltaDirection = null;
@@ -28,7 +31,11 @@ public abstract class Projectile extends Entity
 
 
     public void move(){
-	move(deltaDirection);
+	move(targetPosition);
+	// we increase the target position with the deltax and deltay to keep the projectile from stopping once it reaches the position
+	Point2D deltaPos = new Point2D.Double(targetPosition.getX() - position.getX(), targetPosition.getY() - position.getY());
+	Point2D newPos = new Point2D.Double(targetPosition.getX() + deltaPos.getX(),targetPosition.getY() + deltaPos.getY());
+	targetPosition = newPos;
     }
 
 
@@ -41,11 +48,8 @@ public abstract class Projectile extends Entity
 
     //sets the direction for the projectile by calculating the change in x and y
     public void setTarget(final Enemy target) {
-	double directionX = target.getX() - startPoint.getX();
-	double directionY = target.getY() - startPoint.getY();
-
-	deltaDirection = new Point2D.Double(directionX,directionY);
-
+	this.targetPosition = target.getPosition();
+	this.position = startPoint;
     }
 
     public void draw(final Graphics2D g2d, final int tileSize){

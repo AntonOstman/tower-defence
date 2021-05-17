@@ -177,6 +177,7 @@ public class GameHandler
             int nextTile = enemy.getPathPosition();
             Point lastTile = gameMap.getLastTile();
             enemy.moveEnemy(gameMap.getPath(nextTile), lastTile);
+
             if(enemy.isFinished()){
                 takeDamage(enemy.getDamage());
                 i.remove();

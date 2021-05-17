@@ -4,6 +4,7 @@ package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
+import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -21,7 +22,6 @@ public abstract class Enemy extends Entity
     protected final int maxHealth;
     protected final int rewardMoney;
     protected int damage;
-    private int movementCounter;
     private boolean finished;
 
     protected Enemy(final int maxHealth, final double speed, final Color color, final double size, int damage) {
@@ -31,7 +31,6 @@ public abstract class Enemy extends Entity
 	this.pathPosition = 0;
     	this.rewardMoney = 5;
     	this.damage = damage;
-    	this.movementCounter = 0;
     	this.finished = false;
     }
 
@@ -81,29 +80,40 @@ public abstract class Enemy extends Entity
 
     }
 
+    public boolean isNear(Point2D position, double distance){
+
+        double deltaPositionX = this.position.getX() - position.getX();
+        double deltaPositionY = this.position.getY() - position.getY();
+	double distanceFrom = Math.sqrt(HelperFunctions.pythagoras(deltaPositionX, deltaPositionY));
+	if (distanceFrom < distance){
+	    return true;
+	}
+	return false;
+    }
+
+
     public void moveEnemy(Point2D nextTile, Point2D lastTile){
 	// Gives Enemy a starting position
-        if(position == null){
-            position = nextTile;
+	if(position == null){
+	    position = nextTile;
 	    pathPosition += 1;
-        }
-        // If all movements have been done for a block
-	else if(movementCounter == (1/speed)){
+	}
+//	Point2D delta = new Point2D.Double();
+//	delta.setLocation( nextTile.getX()-position.getX(),
+//			   nextTile.getY()-position.getY());
+	move(nextTile);
+
+	if(isNear(nextTile,0.5)){
 	    // If this is the last block --> Enemy is done with the path
-	    if(nextTile.equals(lastTile)){ finished = true; }
-	    else {
-		pathPosition += 1;
-		movementCounter = 0;
+	    if (nextTile.equals(lastTile)){
+	        finished = true;
+	        return;
 	    }
+	    pathPosition += 1;
+
 	}
-	else {
-	    // Move enemy forward
-	    Point2D delta = new Point2D.Double();
-	    delta.setLocation( nextTile.getX()-position.getX(),
-			       nextTile.getY()-position.getY());
-	    move(delta);
-	    movementCounter++;
-	}
+	// If all movements have been done for a block
+
     }
 
     public boolean isFinished(){
