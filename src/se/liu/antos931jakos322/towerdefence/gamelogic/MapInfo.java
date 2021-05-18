@@ -1,13 +1,12 @@
 package se.liu.antos931jakos322.towerdefence.gamelogic;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MapInfo
 {
     private Point dimensions;
-    private List<Point> path = new ArrayList<>();
+    private List<Point> path;
 
     public MapInfo(final Point dimensions, final List<Point> path) {
 	this.dimensions = dimensions;

@@ -111,7 +111,7 @@ public class StartMenu implements GameListener
 	}
 
 	@Override public void actionPerformed(final ActionEvent e) {
-	    System.out.println(index);
+	    //System.out.println(index);
 
 	    startGame(index);
 
@@ -125,15 +125,17 @@ public class StartMenu implements GameListener
         try {
 	    fileTxt = new FileHandler("Logging.txt");
 	}
+        // the reason we dont log this exception is because there is no logger yet. The log file is what we are trying to create
 	catch (IOException e){
-	    String loadErrorMessage = "error starting logger";
+            e.printStackTrace();
+	    String loadErrorMessage = e + " error starting logger do you want to try again?";
 	    int answer = JOptionPane.showConfirmDialog(null, loadErrorMessage);
 	    if (answer == JOptionPane.YES_OPTION){
 	        startLogger();
 	        return;
 	    }
 	    else {
-	        System.exit(0);
+	        System.exit(1);
 	    }
         }
         SimpleFormatter formatterTxt = new SimpleFormatter();

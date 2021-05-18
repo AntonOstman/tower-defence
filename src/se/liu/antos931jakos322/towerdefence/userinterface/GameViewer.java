@@ -47,7 +47,7 @@ public class GameViewer
 	JPanel mainPanel = new JPanel();
 	JPanel gamePanel = new JPanel(new GridLayout(1,1));
 	JPanel mainMenuPanel = new JPanel(new GridLayout(5,1));
-	JPanel pauseAndQuitPanel = new JPanel(new GridLayout(4, 0));
+	JPanel pauseAndQuitPanel = new JPanel(new GridLayout(2, 0));
 	JPanel towerUpgradesPanel = new JPanel(new BorderLayout());
 	JPanel towerDescriptionPanel = new JPanel(new GridLayout(1,1));
 	JPanel textPanel = new JPanel(new BorderLayout());
@@ -77,7 +77,7 @@ public class GameViewer
 	// create and set the buttons for placing towers
 	buttonGroup = new ButtonGroup(); // create button group to deselect buttons when antoher is clicked
 	List<TowerType> towerTypes = TowerMaker.getAllTowers();
-	towerDescription = new JTextArea("non selected");
+	towerDescription = new JTextArea("No tower selected");
 
 	// iterate over all towerstypes that exist and get the information about certain towers from towermaker
 	// and create buttons with that information
