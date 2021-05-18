@@ -92,7 +92,7 @@ public abstract class Enemy extends Entity
     }
 
 
-    public void moveEnemy(Point2D nextTile, Point2D lastTile){
+     public void moveEnemy(Point2D nextTile, Point2D lastTile){
 	// Gives Enemy a starting position
 	if(position == null){
 	    position = nextTile;

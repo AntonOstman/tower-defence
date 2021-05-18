@@ -15,7 +15,7 @@ public class StartMenu implements GameListener
     private JFrame frame;
     private GameHandler gameHandler;
     private GameViewer viewer;
-    private final static int TILE_SIZE = 70;
+    private final static int TILE_SIZE = 20;
 
     public StartMenu() {
 	this.frame = null;
@@ -49,34 +49,7 @@ public class StartMenu implements GameListener
 	for (int j = 0; j < 2; j++) {
 	    for (int i = 0; i < 3; i++) {
 	        ButtonEvent buttonListener = new ButtonEvent(i);
-		try {
-		    gameMap.loadMap(i);
-		} catch (IOException e) {
-		    System.out.println("error load");
-		    String loadErrorMessage = "error reading maps file, do you want to create the default maps file?";
-		    int answer = JOptionPane.showConfirmDialog(null, loadErrorMessage);
-		    if (answer == JOptionPane.YES_OPTION) {
-			try {
-			    gameMap.createMap();
-			    createStartMenu();
-			    return;
-			} catch (IOException ioException) {
-			    System.out.println("error create");
-			    //ioException.printStackTrace();
-			    String createErrorMesage = "error creating maps file in mapLogic folder, do you want to try again?";
-			    int createAnswer = JOptionPane.showConfirmDialog(null, createErrorMesage);
-			    if (createAnswer == JOptionPane.YES_OPTION){
-			        createStartMenu();
-			        return;
-			    }
-			    else {System.exit(0);}
-			}
-		    }
-		    else{System.exit(0);}
-
-
-
-		}
+	        loadNewMap(i,gameMap);
 		JButton b = new JButton();
 		final int bufferedImageWidth = 105;
 		final int bufferedImageHeight = 105;
@@ -133,16 +106,43 @@ public class StartMenu implements GameListener
 	}
     }
 
+    public void loadNewMap(int mapIndex, GameMap gameMap){
+
+	try {
+	    gameMap.loadMap(mapIndex);
+	} catch (IOException e) {
+	    System.out.println("error load");
+	    String loadErrorMessage = "error reading maps file, do you want to create the default maps file?";
+	    int answer = JOptionPane.showConfirmDialog(null, loadErrorMessage);
+	    if (answer == JOptionPane.YES_OPTION) {
+		try {
+		    gameMap.createMap();
+		    loadNewMap(mapIndex, gameMap);
+		} catch (IOException ioException) {
+		    System.out.println("error create");
+		    //ioException.printStackTrace();
+		    String createErrorMesage = "error creating maps file in mapLogic folder, do you want to try again?";
+		    int createAnswer = JOptionPane.showConfirmDialog(null, createErrorMesage);
+		    if (createAnswer == JOptionPane.YES_OPTION){
+			loadNewMap(mapIndex,gameMap);
+		    }
+		    else {System.exit(0);}
+		}
+	    }
+	    else{System.exit(0);}
+
+
+
+	}
+
+
+    }
+
+
     public void startGame(int mapIndex) {
 
 	GameMap gameMap = new GameMap(); // move to gamehandelr?
-	try {
-	    gameMap.loadMap(mapIndex);
-	}
-	catch (IOException e){
-	    // not handeled correctly
-	    e.printStackTrace();
-	}
+	loadNewMap(mapIndex,gameMap);
 
 
 	gameHandler = new GameHandler(gameMap, TILE_SIZE);
