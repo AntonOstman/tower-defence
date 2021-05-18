@@ -82,7 +82,7 @@ public class GameViewer
 	// iterate over all towerstypes that exist and get the information about certain towers from towermaker
 	// and create buttons with that information
 	for (TowerType towerType: towerTypes) {
-	    ButtonEvent buttonEvent = new ButtonEvent(towerType, "button clicked");
+	    ButtonEvent buttonEvent = new ButtonEvent(towerType, ButtonType.MENU);
 	    Color buttonColor = TowerMaker.getTower(towerType).getColor();
 	    JToggleButton b = new JToggleButton();
 	    b.setBackground(buttonColor);
@@ -111,13 +111,13 @@ public class GameViewer
 	scrollableInteractivePanel.getViewport().add(interactivePanel);
 	// upgrade panel configuratoin
 	towerUpgradesPanel.setBackground(Color.blue);
-	JButton upgradeButton = new JButton(new ButtonEvent("upgrade"));
+	JButton upgradeButton = new JButton(new ButtonEvent(ButtonType.UPGRADE));
 	upgradeButton.setText("Upgrade selected tower");
 	towerUpgradesPanel.add(upgradeButton);
 
 	// pause and quit buttons
-	JButton quitButton = new JButton(new ButtonEvent("quit game"));
-	JButton pauseButton = new JButton(new ButtonEvent("pause game"));
+	JButton quitButton = new JButton(new ButtonEvent(ButtonType.QUIT));
+	JButton pauseButton = new JButton(new ButtonEvent(ButtonType.PAUSE));
 	quitButton.setText("Quit game");
 	pauseButton.setText("Pause game");
 	pauseAndQuitPanel.add(quitButton);
@@ -155,21 +155,21 @@ public class GameViewer
     public class ButtonEvent extends AbstractAction{
 
         private TowerType towerType;
-	private String action;
+	private ButtonType buttonType;
 
 
-	public ButtonEvent(TowerType towerType, String action) {
+	public ButtonEvent(TowerType towerType, ButtonType buttonType) {
 	    this.towerType = towerType;
-	    this.action = action;
+	    this.buttonType = buttonType;
 	}
-	public ButtonEvent(String action) {
+	public ButtonEvent(ButtonType buttonType) {
 	    this.towerType = TowerType.NONE;
-	    this.action = action;
+	    this.buttonType = buttonType;
 	}
 
 	@Override public void actionPerformed(final ActionEvent e) {
-	    switch (action){
-		case("upgrade"):
+	    switch (buttonType){
+		case UPGRADE:
 	        // player is trying to upgrade a tower
 	        if(clickedTower != null) {
 		    if (gameHandler.isTowerUpgradable(clickedTower)) {
@@ -179,7 +179,7 @@ public class GameViewer
 
 		}
 		    break;
-		case("button clicked"):
+		case MENU:
 	        // player is trying to press a tower on the menu
 
 		selectedTower = towerType;
@@ -188,7 +188,7 @@ public class GameViewer
 		towerDescription.setText(towerDesc);
 
 		break;
-		case("pause game"):
+		case PAUSE:
 
 	     	if (gameHandler.isGamePaused()){
 	     	    gameHandler.startGame();
@@ -198,7 +198,7 @@ public class GameViewer
 	     	}
 
 		    break;
-		case("quit game"):
+		case QUIT:
 		System.exit(0);
 		default:
 		     throw new IllegalArgumentException("button did not have valid action string");
