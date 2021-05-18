@@ -4,7 +4,13 @@ import java.awt.*;
 
 /**
  *
- * A ArrowTower is as type of Tower that has single target damage
+ * This tower represents a normal tower without any special methods or attribues
+ * This tower can be set to have different colors, damage values etc..
+ * StandardTower is a skeleton tower which can be used to create other different towers in the game
+ * Example:
+ * 	StandardTower is used in the game to create a MachineGunTower which sends projectiles faster than other towers
+ * 	but each projectile does less damage.
+ *
  */
 
 public class StandardTower extends Tower

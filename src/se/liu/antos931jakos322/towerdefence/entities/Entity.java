@@ -8,13 +8,9 @@ import java.awt.geom.Point2D;
 public class Entity
 {
 
-
-    // temporary class to be used while tranfering methods from tower and enemy to the abstract
-    // so we still can use Entity Interface as to keep the game from breaking in the meanwhile
-
     protected Point2D position;
     protected Color color;
-    protected double drawScale; // many fields, can any be removed/moved?
+    protected double drawScale;
     protected double speed;
 
 
@@ -25,7 +21,7 @@ public class Entity
         this.speed = speed;
 
     }
-    // towers dont need a speed
+    // towers dont always need a speed so create another constructor for those
     public Entity(final Color color, final double drawScale) {
         this.position = null;
         this.color = color;
@@ -33,22 +29,21 @@ public class Entity
         this.speed = 0;
     }
 
+/*
+* This is the inner method which entities use to calculate and move towards a location
+* @params movePosition - the position which the entity moves towards
+* */
+    public void move(Point2D movePosition){
 
-    public void move(Point2D deltaDirection){
+        double deltaX = movePosition.getX() - position.getX();
+        double deltaY = movePosition.getY() - position.getY();
 
-        double deltaX = deltaDirection.getX() - position.getX();
-        double deltaY = deltaDirection.getY() - position.getY();
-
-
-        //should use Math.hypot() instead
 
         // normalise the delta x and y direction to an angle
         double direction = Math.atan2(deltaY , deltaX);
         // use the angle to calcutate the x and y  relations
         double directionY = Math.sin(direction);
         double directionX = Math.cos(direction);
-//        double directionY = Math.sin(deltaY/distance);
-//        double directionX = Math.cos(deltaX/distance);
 
         double newY = position.getY() + directionY * speed ;
         double newX = position.getX() + directionX * speed ;
@@ -56,6 +51,18 @@ public class Entity
         // change the actual position with the calculated coordinates
         this.position = new Point2D.Double(newX, newY);
     }
+
+    /*
+    *
+    * This is the method which is overridden by entities so they can create their own moving patterns
+    * using the move(Point2d movePosition) method
+    * this is later called by other classes to move the entity using its own logic for moving
+    * */
+    public void move(){
+
+    }
+
+
 
     public void setPosition(final Point2D position) { this.position = position; }
 

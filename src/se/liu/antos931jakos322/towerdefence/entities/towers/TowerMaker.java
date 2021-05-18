@@ -7,7 +7,9 @@ import java.util.EnumMap;
 
 /**
  *
- * A TowerMaker is a factory class used for the creation of towers
+ * TowerMaker is a factory class used for the creation of towers
+ * TowerMaker contains the specific properties of all towers
+ * such as attackdamage range and so on..
  *
  *  Example:
  *  	getTower(TowerType) returns the a new Tower object of the desired type
@@ -43,6 +45,7 @@ public class TowerMaker
 
 	return towerMap.get(type);
     }
+
     private static Tower createArrowTower(){
 	final int attackpower = 10;
         final int cost = 7;

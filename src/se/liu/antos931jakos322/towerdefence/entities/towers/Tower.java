@@ -6,8 +6,8 @@ import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 import java.awt.*;
 
 /**
- * Tower is the Abstract class for defensive structures in the game
- * Tower facilitates the use of projectiles and has properties
+ * Tower is the Abstract class for defensive structures in the game which also extends Entity
+ * Tower facilitates the use of projectiles and also has properties...
  * which can be increased to improve the effectiveness
  * These properties are:
  * attackpower - represents how much damage the tower's projectiles do
@@ -16,6 +16,7 @@ import java.awt.*;
  * range - how close the tower needs to be a target to send a projectile
  * Level - represents how much Tower has upgraded where each level increases
  * the strength of Tower
+ *
  *
  */
 
@@ -84,7 +85,7 @@ public abstract class Tower extends Entity
     }
 
     public void activate(){
-        // does something
+        // can be used by towers to do something special on a tick example: airplanetower moves
         return;
     }
 
@@ -102,10 +103,10 @@ public abstract class Tower extends Entity
 
         if(selected){
             // Shows the range for a set number of ticks
-            if(rangeTickCounter>30){
-                selected = false;
-                rangeTickCounter = 0;
-            }
+//            if(rangeTickCounter>30){
+//                selected = false;
+//                rangeTickCounter = 0;
+//            }
             int pixelRange = range*tileSize;
 
             int circleX = (int) (towerPosX * tileSize) - pixelRange + tileSize/2;

@@ -19,7 +19,7 @@ public class AirplaneTower extends Tower
 
 
     @Override public void activate() {
-	move(null);
+	move();
         super.activate();
     }
 
@@ -28,14 +28,17 @@ public class AirplaneTower extends Tower
         super.setPosition(position);
     }
 
-    @Override public void move(final Point2D deltaDirection) {
+    @Override public void draw(final Graphics2D g2d, final int tileSize) {
+        super.draw(g2d, tileSize);
+
+    }
+
+    @Override public void move() {
 	speed = 0.03;
-        double angleSpeed = speed;
-	int radius = 4;
-	angle += angleSpeed;
+	final int radius = 4;
+	angle += speed; // in this context speed is a angle speed
         double newX = startPoint.getX() + radius * Math.sin(angle);
         double newY = startPoint.getY() + radius * Math.cos(angle);
-
 
         Point2D newPos = new Point2D.Double(newX,newY);
 	position = newPos;

@@ -37,7 +37,6 @@ public abstract class Projectile extends Entity
 
 
     public void attack(List<Enemy> enemies){
-
         Enemy firstEnemy = enemies.get(0);
         firstEnemy.takeDamage(attackPower);
 	penetrationAmount -= 1;

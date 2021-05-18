@@ -235,13 +235,15 @@ public class GameViewer
 	}
 	private void displayTowerInfo(Point clickedPoint){
 
-
+	    if (clickedTower != null){
+	        clickedTower.setSelected(false);
+	    }
 	    Tower clickedTow = gameHandler.getTowerOnPoint(clickedPoint);
 	    // if there is no tower on the point exit
 	    if (clickedTow == null){ return;}
 	    textArea.setText(clickedTow.getDescription());
 	    clickedTower = clickedTow;
-
+	    clickedTower.setSelected(true);
 	}
 
 

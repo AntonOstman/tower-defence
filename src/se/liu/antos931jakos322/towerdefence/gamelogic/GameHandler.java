@@ -175,14 +175,16 @@ public class GameHandler
         return health;
     }
 
-    public void moveEnemy(){
+     public void moveEnemy(){
 
         Iterator<Enemy> i = enemies.iterator();
         while(i.hasNext()){
             Enemy enemy = i.next();
             int nextTile = enemy.getPathPosition();
             Point lastTile = gameMap.getLastTile();
-            enemy.moveEnemy(gameMap.getPath(nextTile), lastTile);
+            enemy.setLastPosition(gameMap.getLastTile());
+            //enemy.setNextPosition();
+            enemy.move(gameMap.getPath(nextTile));
             // if the enemy has come to the end of the map damage the player
             if(enemy.isFinished()){
                 takeDamage(enemy.getDamage());

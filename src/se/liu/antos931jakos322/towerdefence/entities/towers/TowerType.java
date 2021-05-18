@@ -2,7 +2,8 @@ package se.liu.antos931jakos322.towerdefence.entities.towers;
 
 /**
  *
- * Enum containing the different types of towers avaible in the game
+ * TowerType has the values representing different towers
+ *
  */
 public enum TowerType
 {
