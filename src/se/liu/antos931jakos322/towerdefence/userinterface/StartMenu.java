@@ -151,30 +151,25 @@ public class StartMenu implements GameListener
 	    LOGGER.fine("succesfully loaded maps file");
 
 	} catch (IOException e) {
-	    LOGGER.warning("ERROR LOADING MAPS FILE, asking user to create new maps file");
-	    System.out.println("error load");
-	    String loadErrorMessage = "error reading maps file, do you want to create the default maps file?";
-	    int answer = JOptionPane.showConfirmDialog(null, loadErrorMessage);
-	    if (answer == JOptionPane.YES_OPTION) {
+
+	    LOGGER.log(Level.WARNING, " could not find or read maps.json file, attempting to create a new one" , e);
 		try {
 		    gameMap.createMap();
 		    LOGGER.fine("succesfully created new maps file");
 		    readNewMap(gameMap);
 
 		} catch (IOException ioException) {
-		    LOGGER.warning("ERROR CREATING MAPS FILE, asking user to try again");
+		    LOGGER.log(Level.WARNING,  " could not create maps.json file, asking user to try again", e);
 
-		    System.out.println("error create");
 		    //ioException.printStackTrace();
-		    String createErrorMesage = "error creating maps file in mapLogic folder, do you want to try again?";
+		    String createErrorMesage = ioException + "\n Error creating game map. \n Do you want to try again?";
 		    int createAnswer = JOptionPane.showConfirmDialog(null, createErrorMesage);
 		    if (createAnswer == JOptionPane.YES_OPTION){
 			readNewMap(gameMap);
 		    }
-		    else {System.exit(0);}
-		}
+		    else {System.exit(1);}
+
 	    }
-	    else{System.exit(0);}
 
 
 

@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -125,12 +126,15 @@ public class GameMap
 	List<MapInfo> mapInfo = Arrays.asList(new MapInfo(new Point(15, 15), path1),
 					      new MapInfo(new Point(15, 15), path2),
 					      new MapInfo(new Point(15, 15), path3));
+
 	String mapInfoAsJson = gson.toJson(mapInfo);
 
 	FileWriter writer = new FileWriter("maps.json");
 	writer.write(mapInfoAsJson);
 	writer.close();
-    }
+
+
+	}
 
     public void loadMap(int selectedMapIndex){
 	// Updates varibles
@@ -156,7 +160,9 @@ public class GameMap
 
     public void readMap() throws IOException {
 
+
 	Reader reader = Files.newBufferedReader(Paths.get("maps.json"));
+
 
 	// convert JSON array to object
 	// if loading fails we should handle it by creating the map
@@ -166,9 +172,9 @@ public class GameMap
 	    {
 	    }.getType());
 	}
-	catch (JsonSyntaxException ignored){
-	    LOGGER.severe("maps file has been corrupted and can not be read");
-	    throw new IOException("maps file has been corrupted and can not be read");
+	catch (JsonSyntaxException jsonSyntaxException){
+	    LOGGER.log(Level.SEVERE, "maps file has been corrupted and can not be read", jsonSyntaxException);
+	    throw new IOException("maps file has been corrupted and can not be read \n" + jsonSyntaxException);
 	}
 	reader.close();
 
