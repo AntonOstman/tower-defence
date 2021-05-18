@@ -23,7 +23,7 @@ public class ProjectileMaker
 	final double projectileSpeed = 0.4;
 	final int penetrationAmount = 2;
 
-	Projectile projectile = new BulletProjectile(Color.red, drawScale, projectileSpeed, start,penetrationAmount, attackPower);
+	Projectile projectile = new StandardProjectile(Color.red, drawScale, projectileSpeed, start, penetrationAmount, attackPower);
 	return projectile;
     }
 
@@ -33,7 +33,7 @@ public class ProjectileMaker
         final double projectileSpeed = 0.15;
         final int penetrationAmount = 10;
 
-	Projectile projectile = new BulletProjectile(Color.lightGray, drawScale, projectileSpeed, start,penetrationAmount, attackPower);
+	Projectile projectile = new StandardProjectile(Color.lightGray, drawScale, projectileSpeed, start, penetrationAmount, attackPower);
 	return projectile;
     }
 
@@ -43,7 +43,7 @@ public class ProjectileMaker
 	final double projectileSpeed = 0.5;
 	final int penetrationAmount = 1;
 
-	Projectile projectile = new BulletProjectile(Color.MAGENTA, drawScale, projectileSpeed, start,penetrationAmount, attackPower);
+	Projectile projectile = new StandardProjectile(Color.MAGENTA, drawScale, projectileSpeed, start, penetrationAmount, attackPower);
 	return projectile;
     }
 }

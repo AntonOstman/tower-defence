@@ -49,8 +49,8 @@ public class TowerMaker
 	final int upgradeCost = 1;
 	final int attackSpeed = 8;
 	final Color arrowColor = Color.BLUE;
-        Tower arrowTower = new ArrowTower(TowerType.ARROW, arrowColor, cost, attackpower, range, upgradeCost,
-					  ProjectileType.BULLET, attackSpeed);
+        Tower arrowTower = new StandardTower(TowerType.ARROW, arrowColor, cost, attackpower, range, upgradeCost,
+					     ProjectileType.BULLET, attackSpeed);
         return arrowTower;
     }
 
@@ -61,8 +61,8 @@ public class TowerMaker
 	final int upgradeCost = 1;
 	final int attackSpeed = 20;
 	final Color color = Color.ORANGE;
-	Tower canonTower = new ArrowTower(TowerType.CANON, color, canonCost, canonAttackpower, canonRange, upgradeCost,
-					  ProjectileType.CANON, attackSpeed);
+	Tower canonTower = new StandardTower(TowerType.CANON, color, canonCost, canonAttackpower, canonRange, upgradeCost,
+					     ProjectileType.CANON, attackSpeed);
         return canonTower;
     }
 
@@ -73,8 +73,8 @@ public class TowerMaker
 	final int upgradeCost = 1;
 	final int attackSpeed = 1;
 	final Color machineGunColor = Color.PINK;
-	Tower machineGunTower = new ArrowTower(TowerType.MACHINE_GUN, machineGunColor, cost, attackPower, range, upgradeCost,
-					       ProjectileType.MACHINE, attackSpeed);
+	Tower machineGunTower = new StandardTower(TowerType.MACHINE_GUN, machineGunColor, cost, attackPower, range, upgradeCost,
+						  ProjectileType.MACHINE, attackSpeed);
 	return machineGunTower;
 
 

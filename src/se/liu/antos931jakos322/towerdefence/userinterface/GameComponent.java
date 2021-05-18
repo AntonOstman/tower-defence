@@ -19,7 +19,7 @@ public class GameComponent extends JComponent implements GameListener
     private GameHandler gameHandler;
     private final int mapX;
     private final int mapY;
-    private static int gameScale;
+    private int gameScale;
     private final static int MARGIN = 0;
 
     public GameComponent(GameHandler gameHandler, int gameScale) {

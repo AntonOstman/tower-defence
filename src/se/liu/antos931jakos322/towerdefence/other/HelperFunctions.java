@@ -13,11 +13,11 @@ package se.liu.antos931jakos322.towerdefence.other;
 public class HelperFunctions
 {
 
-    public static double pythagoras(double a, double b){
-	// returns the integer value of pythagoras therom for 2 integers
-	double c = Math.pow((a), 2) + Math.pow((b), 2);
-
-	return c;
-    }
+//    public static double pythagoras(double a, double b){
+//	// returns the integer value of pythagoras therom for 2 integers
+//	double c = Math.pow((a), 2) + Math.pow((b), 2);
+//
+//	return c;
+//    }
 
 }
