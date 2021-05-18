@@ -1,11 +1,9 @@
 package se.liu.antos931jakos322.towerdefence.gamelogic;
 
-import se.liu.antos931jakos322.towerdefence.entities.Entity;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 import se.liu.antos931jakos322.towerdefence.entities.towers.Tower;
 import se.liu.antos931jakos322.towerdefence.entities.towers.Projectile;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.WaveMaker;
-import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 import se.liu.antos931jakos322.towerdefence.userinterface.GameListener;
 
 import javax.swing.*;
@@ -125,6 +123,7 @@ public class GameHandler
            Point2D projectilePosition = projectile.getPosition();
            //check on the tile the projectile is on if there are any enemies on it
            List<Enemy> potentialTargets = getEnemiesWithin(projectilePosition, projectile.getProjectileSize());
+
            if (!potentialTargets.isEmpty()) {
                // if there are enemies let the projectile attack them
                projectile.attack(potentialTargets);
@@ -146,7 +145,9 @@ public class GameHandler
         }
     }
 
+    public void attackAllEnemies(){
 
+    }
 
     public void activateTowers(){
         for (Tower tower: towers){
@@ -160,7 +161,6 @@ public class GameHandler
                 projectiles.add(projectile);
 
             }
-            // tower.attack(closestEnemy); towers only add projectiles
 
         }
     }
@@ -181,12 +181,13 @@ public class GameHandler
             int nextTile = enemy.getPathPosition();
             Point lastTile = gameMap.getLastTile();
             enemy.moveEnemy(gameMap.getPath(nextTile), lastTile);
-
+            // if the enemy has come to the end of the map damage the player
             if(enemy.isFinished()){
                 takeDamage(enemy.getDamage());
                 i.remove();
             }
-            if (enemy.getHealth() <= 0){
+            // if an enemy is defeated remove it and give the player money
+            else if (enemy.getHealth() <= 0){
                 i.remove();
                 money += enemy.getRewardMoney();
             }

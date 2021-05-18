@@ -110,7 +110,7 @@ public abstract class Tower extends Entity
             rangeTickCounter++;
         }
         g2d.setColor(Color.white);
-        //g2d.drawString("5",drawPosX+tileSize/2, drawPosY+tileSize/2);
+
         g2d.setFont(new Font("TimesRoman", Font.PLAIN, tileSize/3));
         int textPosX = (int) towerPosX * tileSize + tileSize / 3;
         int textPosY = (int) towerPosY * tileSize + tileSize /2;
@@ -126,7 +126,6 @@ public abstract class Tower extends Entity
     public void upgrade(){
         attackPower += 1;
         upgradeCost += 1;
-        range += 1;
         level++;
     }
 

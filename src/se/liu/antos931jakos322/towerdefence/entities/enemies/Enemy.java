@@ -4,7 +4,6 @@ package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
-import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -84,7 +83,6 @@ public abstract class Enemy extends Entity
 
         double deltaPositionX = this.position.getX() - position.getX();
         double deltaPositionY = this.position.getY() - position.getY();
-	//double distanceFrom = Math.sqrt(HelperFunctions.pythagoras(deltaPositionX, deltaPositionY));
 	double distanceFrom = Math.hypot(deltaPositionX, deltaPositionY);
 	if (distanceFrom < distance){
 	    return true;

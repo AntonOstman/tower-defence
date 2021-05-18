@@ -35,7 +35,9 @@ public class StartMenu implements GameListener
     public void createStartMenu(){
 
         startLogger();
-        Color background = new Color(100,100,100);
+	readNewMap(gameMap);
+
+	Color background = new Color(100,100,100);
 
 
 	JPanel mainPanel = new JPanel(new GridLayout(2, 1));
@@ -48,7 +50,8 @@ public class StartMenu implements GameListener
 	JPanel mapSelect = new JPanel(new GridLayout(2, 4));
 	//mapSelect.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 
-	JLabel label = new JLabel("Click a map to play");
+	JLabel label = new JLabel("Select a map to play");
+
 	label.setSize(new Dimension(200, 200));
 
 	label.setFont(new Font("TimesRoman", Font.PLAIN, 50));
@@ -56,13 +59,13 @@ public class StartMenu implements GameListener
 	header.setBackground(background);
 	header.add(label);
 
-	//GameMap gameMap = new GameMap();
-	readNewMap(gameMap);
+	// these magic constans should not be magic.. get the information from gamemap and loop through the maps
 	for (int j = 0; j < 2; j++) {
 	    for (int i = 0; i < 3; i++) {
 	        ButtonEvent buttonListener = new ButtonEvent(i);
 	        gameMap.loadMap(i);
 		JButton b = new JButton();
+		// these should probably be decided from the amount of images to draw
 		final int bufferedImageWidth = 105;
 		final int bufferedImageHeight = 105;
 		BufferedImage lineImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight,
