@@ -37,7 +37,7 @@ public class GameHandler
     private boolean gamePaused;
     private boolean gameOver;
 
-    public GameHandler(GameMap gameMap, int tileSize) {
+    public GameHandler(GameMap gameMap) {
         this.gameMap = gameMap;
         this.enemies = new ArrayList<>();
         this.towers = new ArrayList<>();
@@ -50,7 +50,6 @@ public class GameHandler
         this.tickTimer = new Timer(tickDelay, new DoOneStep()); // timer is set when the game starts in method startgame
         this.gamePaused = true;
         this.gameOver = false;
-        Entity a = new Entity(tileSize);
     }
     public void tick(){
 
@@ -88,9 +87,9 @@ public class GameHandler
             for(Enemy enemy: enemies){
                 Point2D enemyPos = enemy.getPosition();
                 Point2D relativePoint = new Point2D.Double(towerPos.getX() - enemyPos.getX(),towerPos.getY() - enemyPos.getY());
-                double currentDistance = HelperFunctions.pythagoras(relativePoint.getX(), relativePoint.getY());
+                double currentDistance = Math.hypot(relativePoint.getX(), relativePoint.getY());
                 // get the "real" distance
-                currentDistance = Math.sqrt(currentDistance);
+
                 if(currentDistance < closestDistance && currentDistance <= range){
                     closestEnemy = enemy;
                     closestDistance = currentDistance;
@@ -254,7 +253,7 @@ public class GameHandler
             double difX = enemy.getX() - coord.getX();
             double difY = enemy.getY() - coord.getY();
 
-           double distance = Math.sqrt(HelperFunctions.pythagoras(difX,difY));
+           double distance = Math.hypot(difX,difY);
            if (distance <= range){
                enemiesInRange.add(enemy);
 

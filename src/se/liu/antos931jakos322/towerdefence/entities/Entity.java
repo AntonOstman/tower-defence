@@ -17,7 +17,6 @@ public class Entity
     protected Color color;
     protected double drawScale; // many fields, can any be removed/moved?
     protected double speed;
-    protected static int tileSize; // this should definately be changed later to not be hard coded
 
 
     public Entity(final Color color, final double drawScale, final double speed) {
@@ -35,9 +34,6 @@ public class Entity
         this.speed = 0;
     }
 
-    public Entity(int tileSize) {
-        this.tileSize = tileSize;
-    }
 
     public void move(Point2D deltaDirection){
 

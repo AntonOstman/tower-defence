@@ -13,20 +13,20 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-import java.util.logging.XMLFormatter;
 
 public class StartMenu implements GameListener
 {
     private JFrame frame;
     private GameHandler gameHandler;
     private GameViewer viewer;
-    private final static int TILE_SIZE = 20;
+    private final static int GAME_SCALE = 50;
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-    GameMap gameMap = new GameMap();
+    private GameMap gameMap;
 
 
 
     public StartMenu() {
+        this.gameMap =  new GameMap();
 	this.frame = null;
 	this.gameHandler = null;
 	this.viewer = null;
@@ -184,8 +184,8 @@ public class StartMenu implements GameListener
 	gameMap.loadMap(mapIndex);
 
 
-	gameHandler = new GameHandler(gameMap, TILE_SIZE);
-	viewer = new GameViewer(gameHandler, TILE_SIZE);
+	gameHandler = new GameHandler(gameMap);
+	viewer = new GameViewer(gameHandler, GAME_SCALE);
 	gameHandler.addListener(this);
 	gameHandler.startGame();
 	viewer.show();

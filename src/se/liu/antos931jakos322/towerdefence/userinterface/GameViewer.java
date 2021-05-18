@@ -24,23 +24,23 @@ public class GameViewer
     private ButtonGroup buttonGroup;
     private JTextArea towerDescription;
     private Tower clickedTower;
-    private int tileSize;
+    private int gameScale;
 
-    public GameViewer(GameHandler gameHandler, int tileSize) {
+    public GameViewer(GameHandler gameHandler, int gameScale) {
         this.gameHandler = gameHandler;
         this.selectedTower = TowerType.NONE;
 	this.frame = null;
 	this.towerDescription = null;
 	this.buttonGroup = null;
 	this.clickedTower = null;
-	this.tileSize = tileSize;
+	this.gameScale = gameScale;
     }
 
     public void show(){
 
         frame = new JFrame();
 	MenuComponent menuComponent = new MenuComponent(gameHandler);
-	GameComponent gameComponent = new GameComponent(gameHandler, tileSize);
+	GameComponent gameComponent = new GameComponent(gameHandler, gameScale);
 
 	// create the panels of the UI In the gridLayout the first agrument represent amout of rows and seconds amout of coloumns
 	// in the gridlayout
@@ -219,10 +219,9 @@ public class GameViewer
 	    System.out.println(e);
 	    //System.out.println(e.getLocationOnScreen());
 	    Point clickedPoint = e.getPoint();
-	    // we get the tilesize and translate from pixel coordinates to map coordinates
-	    int tileSize = GameComponent.getTileSize();
-	    int mapPosX = clickedPoint.x/tileSize;
-	    int mapPosY = clickedPoint.y/tileSize;
+	    // we get the gameScale and translate from pixel coordinates to map coordinates
+	    int mapPosX = clickedPoint.x/gameScale;
+	    int mapPosY = clickedPoint.y/gameScale;
 
 	    Point mapPoint = new Point(mapPosX, mapPosY);
 	    // if no tower is selected the player is trying to get info from a tower placed on the map
