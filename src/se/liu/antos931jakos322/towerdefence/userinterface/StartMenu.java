@@ -8,13 +8,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import java.util.logging.XMLFormatter;
 
 public class StartMenu implements GameListener
 {
@@ -23,6 +22,7 @@ public class StartMenu implements GameListener
     private GameViewer viewer;
     private final static int TILE_SIZE = 20;
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    GameMap gameMap = new GameMap();
 
 
 
@@ -56,11 +56,12 @@ public class StartMenu implements GameListener
 	header.setBackground(background);
 	header.add(label);
 
-	GameMap gameMap = new GameMap();
+	//GameMap gameMap = new GameMap();
+	readNewMap(gameMap);
 	for (int j = 0; j < 2; j++) {
 	    for (int i = 0; i < 3; i++) {
 	        ButtonEvent buttonListener = new ButtonEvent(i);
-	        loadNewMap(i,gameMap);
+	        gameMap.loadMap(i);
 		JButton b = new JButton();
 		final int bufferedImageWidth = 105;
 		final int bufferedImageHeight = 105;
@@ -101,6 +102,7 @@ public class StartMenu implements GameListener
 	frame.pack();
 	frame.setVisible(true);
     }
+
     public class ButtonEvent extends AbstractAction{
 
 	private int index;
@@ -124,7 +126,7 @@ public class StartMenu implements GameListener
 	    fileTxt = new FileHandler("Logging.txt");
 	}
 	catch (IOException e){
-	    String loadErrorMessage = "error reading maps file, do you want to create the default maps file?";
+	    String loadErrorMessage = "error starting logger";
 	    int answer = JOptionPane.showConfirmDialog(null, loadErrorMessage);
 	    if (answer == JOptionPane.YES_OPTION){
 	        startLogger();
@@ -135,16 +137,17 @@ public class StartMenu implements GameListener
 	    }
         }
         SimpleFormatter formatterTxt = new SimpleFormatter();
+	//XMLFormatter formatterTxt = new XMLFormatter();
 	fileTxt.setFormatter(formatterTxt);
 	LOGGER.setLevel(Level.FINE);
 	LOGGER.addHandler(fileTxt);
     }
 
-    public void loadNewMap(int mapIndex, GameMap gameMap){
+    public void readNewMap(GameMap gameMap){
 
 
 	try {
-	    gameMap.loadMap(mapIndex);
+	    gameMap.readMap();
 	    LOGGER.fine("succesfully loaded maps file");
 
 	} catch (IOException e) {
@@ -155,8 +158,9 @@ public class StartMenu implements GameListener
 	    if (answer == JOptionPane.YES_OPTION) {
 		try {
 		    gameMap.createMap();
-		    loadNewMap(mapIndex, gameMap);
 		    LOGGER.fine("succesfully created new maps file");
+		    readNewMap(gameMap);
+
 		} catch (IOException ioException) {
 		    LOGGER.warning("ERROR CREATING MAPS FILE, asking user to try again");
 
@@ -165,7 +169,7 @@ public class StartMenu implements GameListener
 		    String createErrorMesage = "error creating maps file in mapLogic folder, do you want to try again?";
 		    int createAnswer = JOptionPane.showConfirmDialog(null, createErrorMesage);
 		    if (createAnswer == JOptionPane.YES_OPTION){
-			loadNewMap(mapIndex,gameMap);
+			readNewMap(gameMap);
 		    }
 		    else {System.exit(0);}
 		}
@@ -173,16 +177,16 @@ public class StartMenu implements GameListener
 	    else{System.exit(0);}
 
 
+
 	}
 
 
     }
 
-
     public void startGame(int mapIndex) {
 
-	GameMap gameMap = new GameMap(); // move to gamehandelr?
-	loadNewMap(mapIndex,gameMap);
+	//GameMap gameMap = new GameMap(); // move to gamehandelr?
+	gameMap.loadMap(mapIndex);
 
 
 	gameHandler = new GameHandler(gameMap, TILE_SIZE);

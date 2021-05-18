@@ -84,7 +84,8 @@ public abstract class Enemy extends Entity
 
         double deltaPositionX = this.position.getX() - position.getX();
         double deltaPositionY = this.position.getY() - position.getY();
-	double distanceFrom = Math.sqrt(HelperFunctions.pythagoras(deltaPositionX, deltaPositionY));
+	//double distanceFrom = Math.sqrt(HelperFunctions.pythagoras(deltaPositionX, deltaPositionY));
+	double distanceFrom = Math.hypot(deltaPositionX, deltaPositionY);
 	if (distanceFrom < distance){
 	    return true;
 	}
@@ -103,7 +104,7 @@ public abstract class Enemy extends Entity
 //			   nextTile.getY()-position.getY());
 	move(nextTile);
 
-	if(isNear(nextTile,0.5)){
+	if(isNear(nextTile,0.2)){
 	    // If this is the last block --> Enemy is done with the path
 	    if (nextTile.equals(lastTile)){
 	        finished = true;

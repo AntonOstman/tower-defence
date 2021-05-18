@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 /**
@@ -30,7 +31,8 @@ public class GameMap
     private Tile[][] tiles;
     private List<Point> path;
     private Point dimensions;
-
+    private List<MapInfo> mapInfo;
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public GameMap()  {
 	this.dimensions = null;
@@ -130,24 +132,7 @@ public class GameMap
 	writer.close();
     }
 
-    public void loadMap(int selectedMapIndex) throws IOException {
-
-	Reader reader = Files.newBufferedReader(Paths.get("maps.json"));
-
-	// convert JSON array to object
-	// if loading fails we should handle it by creating the map
-	List<MapInfo> mapInfo;
-	try {
-	    mapInfo = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>()
-	    {
-	    }.getType());
-	}
-	catch (JsonSyntaxException ignored){
-
-	    throw new IOException("maps file has been corrupted and can not be read");
-	}
-	reader.close();
-
+    public void loadMap(int selectedMapIndex){
 	// Updates varibles
 	MapInfo selectedMap = mapInfo.get(selectedMapIndex);
 	this.dimensions = selectedMap.getDimensions();
@@ -167,6 +152,27 @@ public class GameMap
 	    Point pathTile = path.get(i);
 	    tiles[pathTile.y][pathTile.x] = new Tile(new Point(pathTile.x, pathTile.y), TileType.ROAD);
 	}
+    }
+
+    public void readMap() throws IOException {
+
+	Reader reader = Files.newBufferedReader(Paths.get("maps.json"));
+
+	// convert JSON array to object
+	// if loading fails we should handle it by creating the map
+	//List<MapInfo> mapInfo;
+	try {
+	    mapInfo = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>()
+	    {
+	    }.getType());
+	}
+	catch (JsonSyntaxException ignored){
+	    LOGGER.severe("maps file has been corrupted and can not be read");
+	    throw new IOException("maps file has been corrupted and can not be read");
+	}
+	reader.close();
+
+
     }
 
     public Tile getTile(Point pos){

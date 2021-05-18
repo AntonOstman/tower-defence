@@ -44,7 +44,7 @@ public class Entity
         double deltaX = deltaDirection.getX() - position.getX();
         double deltaY = deltaDirection.getY() - position.getY();
 
-        double distance = Math.sqrt(HelperFunctions.pythagoras(deltaX,deltaY));
+
         //should use Math.hypot() instead
 
         // normalise the delta x and y direction to an angle
