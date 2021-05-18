@@ -8,7 +8,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class StartMenu implements GameListener
 {
@@ -16,6 +22,9 @@ public class StartMenu implements GameListener
     private GameHandler gameHandler;
     private GameViewer viewer;
     private final static int TILE_SIZE = 20;
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
+
 
     public StartMenu() {
 	this.frame = null;
@@ -24,6 +33,8 @@ public class StartMenu implements GameListener
     }
 
     public void createStartMenu(){
+
+        startLogger();
         Color background = new Color(100,100,100);
 
 
@@ -106,11 +117,38 @@ public class StartMenu implements GameListener
 	}
     }
 
+    public void startLogger() {
+
+	FileHandler fileTxt = null;
+        try {
+	    fileTxt = new FileHandler("Logging.txt");
+	}
+	catch (IOException e){
+	    String loadErrorMessage = "error reading maps file, do you want to create the default maps file?";
+	    int answer = JOptionPane.showConfirmDialog(null, loadErrorMessage);
+	    if (answer == JOptionPane.YES_OPTION){
+	        startLogger();
+	        return;
+	    }
+	    else {
+	        System.exit(0);
+	    }
+        }
+        SimpleFormatter formatterTxt = new SimpleFormatter();
+	fileTxt.setFormatter(formatterTxt);
+	LOGGER.setLevel(Level.FINE);
+	LOGGER.addHandler(fileTxt);
+    }
+
     public void loadNewMap(int mapIndex, GameMap gameMap){
+
 
 	try {
 	    gameMap.loadMap(mapIndex);
+	    LOGGER.fine("succesfully loaded maps file");
+
 	} catch (IOException e) {
+	    LOGGER.warning("ERROR LOADING MAPS FILE, asking user to create new maps file");
 	    System.out.println("error load");
 	    String loadErrorMessage = "error reading maps file, do you want to create the default maps file?";
 	    int answer = JOptionPane.showConfirmDialog(null, loadErrorMessage);
@@ -118,7 +156,10 @@ public class StartMenu implements GameListener
 		try {
 		    gameMap.createMap();
 		    loadNewMap(mapIndex, gameMap);
+		    LOGGER.fine("succesfully created new maps file");
 		} catch (IOException ioException) {
+		    LOGGER.warning("ERROR CREATING MAPS FILE, asking user to try again");
+
 		    System.out.println("error create");
 		    //ioException.printStackTrace();
 		    String createErrorMesage = "error creating maps file in mapLogic folder, do you want to try again?";
@@ -130,7 +171,6 @@ public class StartMenu implements GameListener
 		}
 	    }
 	    else{System.exit(0);}
-
 
 
 	}
