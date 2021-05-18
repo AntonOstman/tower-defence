@@ -15,8 +15,9 @@ public class Entity
 
     protected Point2D position;
     protected Color color;
-    protected double drawScale;
+    protected double drawScale; // many fields, can any be removed/moved?
     protected double speed;
+    protected static int tileSize; // this should definately be changed later to not be hard coded
 
 
     public Entity(final Color color, final double drawScale, final double speed) {
@@ -24,6 +25,7 @@ public class Entity
         this.color = color;
         this.drawScale = drawScale;
         this.speed = speed;
+
     }
     // towers dont need a speed
     public Entity(final Color color, final double drawScale) {
@@ -33,18 +35,26 @@ public class Entity
         this.speed = 0;
     }
 
+    public Entity(int tileSize) {
+        this.tileSize = tileSize;
+    }
+
     public void move(Point2D deltaDirection){
 
         double deltaX = deltaDirection.getX() - position.getX();
         double deltaY = deltaDirection.getY() - position.getY();
+
+        double distance = Math.sqrt(HelperFunctions.pythagoras(deltaX,deltaY));
+        //should use Math.hypot() instead
 
         // normalise the delta x and y direction to an angle
         double direction = Math.atan2(deltaY , deltaX);
         // use the angle to calcutate the x and y  relations
         double directionY = Math.sin(direction);
         double directionX = Math.cos(direction);
+//        double directionY = Math.sin(deltaY/distance);
+//        double directionX = Math.cos(deltaX/distance);
 
-        // an entity's speed alters how much its position increases with every move method call
         double newY = position.getY() + directionY * speed ;
         double newX = position.getX() + directionX * speed ;
 

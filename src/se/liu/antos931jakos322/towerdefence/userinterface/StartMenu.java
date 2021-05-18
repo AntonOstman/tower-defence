@@ -15,6 +15,8 @@ public class StartMenu implements GameListener
     private JFrame frame;
     private GameHandler gameHandler;
     private GameViewer viewer;
+    private final static int TILE_SIZE = 70;
+
     public StartMenu() {
 	this.frame = null;
 	this.gameHandler = null;
@@ -143,8 +145,8 @@ public class StartMenu implements GameListener
 	}
 
 
-	gameHandler = new GameHandler(gameMap);
-	viewer = new GameViewer(gameHandler);
+	gameHandler = new GameHandler(gameMap, TILE_SIZE);
+	viewer = new GameViewer(gameHandler, TILE_SIZE);
 	gameHandler.addListener(this);
 	gameHandler.startGame();
 	viewer.show();

@@ -113,7 +113,7 @@ public abstract class Tower extends Entity
         //g2d.drawString("5",drawPosX+tileSize/2, drawPosY+tileSize/2);
         g2d.setFont(new Font("TimesRoman", Font.PLAIN, tileSize/3));
         int textPosX = (int) towerPosX * tileSize + tileSize / 3;
-        int textPosY = (int) towerPosY * tileSize + tileSize / 3;
+        int textPosY = (int) towerPosY * tileSize + tileSize /2;
         g2d.drawString(String.valueOf(level), textPosX, textPosY);
     }
 

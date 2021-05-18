@@ -24,21 +24,23 @@ public class GameViewer
     private ButtonGroup buttonGroup;
     private JTextArea towerDescription;
     private Tower clickedTower;
+    private int tileSize;
 
-    public GameViewer(GameHandler gameHandler) {
+    public GameViewer(GameHandler gameHandler, int tileSize) {
         this.gameHandler = gameHandler;
         this.selectedTower = TowerType.NONE;
 	this.frame = null;
 	this.towerDescription = null;
 	this.buttonGroup = null;
 	this.clickedTower = null;
+	this.tileSize = tileSize;
     }
 
     public void show(){
 
         frame = new JFrame();
 	MenuComponent menuComponent = new MenuComponent(gameHandler);
-	GameComponent gameComponent = new GameComponent(gameHandler);
+	GameComponent gameComponent = new GameComponent(gameHandler, tileSize);
 
 	// create the panels of the UI In the gridLayout the first agrument represent amout of rows and seconds amout of coloumns
 	// in the gridlayout

@@ -1,5 +1,6 @@
 package se.liu.antos931jakos322.towerdefence.gamelogic;
 
+import se.liu.antos931jakos322.towerdefence.entities.Entity;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 import se.liu.antos931jakos322.towerdefence.entities.towers.Tower;
 import se.liu.antos931jakos322.towerdefence.entities.towers.Projectile;
@@ -36,7 +37,7 @@ public class GameHandler
     private boolean gamePaused;
     private boolean gameOver;
 
-    public GameHandler(GameMap gameMap) {
+    public GameHandler(GameMap gameMap, int tileSize) {
         this.gameMap = gameMap;
         this.enemies = new ArrayList<>();
         this.towers = new ArrayList<>();
@@ -49,15 +50,21 @@ public class GameHandler
         this.tickTimer = new Timer(tickDelay, new DoOneStep()); // timer is set when the game starts in method startgame
         this.gamePaused = true;
         this.gameOver = false;
+        Entity a = new Entity(tileSize);
     }
     public void tick(){
+
         setGameOver();
         activateTowers();
         moveProjectiles();
-        enemies.addAll(waveMaker.update());
+        createEnemies();
         moveEnemy();
         notifyListeners();
 
+    }
+
+    public void createEnemies(){
+        enemies.addAll(waveMaker.update());
     }
 
     public void setGameOver(){

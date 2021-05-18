@@ -69,7 +69,7 @@ public abstract class Enemy extends Entity
 
 	// below is for the healthbar
 	// first we add a red bar to background...
-	final int healthBarHeight = 7;
+	final int healthBarHeight = tileSize/5;
 	g2d.setColor(Color.red);
 	g2d.fillRect(drawPositionX + offset,drawPositionY, size , healthBarHeight);
 
