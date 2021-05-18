@@ -83,6 +83,11 @@ public abstract class Tower extends Entity
         return cost;
     }
 
+    public void activate(){
+        // does something
+        return;
+    }
+
     public void draw(final Graphics2D g2d, final int tileSize) {
 
         int towerSize = (int) (tileSize * drawScale);
@@ -90,8 +95,8 @@ public abstract class Tower extends Entity
         double towerPosY = position.getY();
 
         final int towerOffset = tileSize/2 - towerSize/2; // the ratio to keep a tower centered on a tile
-        int drawX = (int) towerPosX * tileSize + towerOffset;
-        int drawY = (int) towerPosY * tileSize + towerOffset;
+        int drawX = (int) (towerPosX * tileSize) + towerOffset;
+        int drawY = (int) (towerPosY * tileSize) + towerOffset;
         g2d.setColor(getColor());
         g2d.fillRect(drawX, drawY, towerSize, towerSize);
 
@@ -103,8 +108,8 @@ public abstract class Tower extends Entity
             }
             int pixelRange = range*tileSize;
 
-            int circleX = (int)towerPosX * tileSize - pixelRange + tileSize/2;
-            int circleY = (int)towerPosY * tileSize - pixelRange + tileSize/2;
+            int circleX = (int) (towerPosX * tileSize) - pixelRange + tileSize/2;
+            int circleY = (int) (towerPosY * tileSize) - pixelRange + tileSize/2;
 
             g2d.drawOval(circleX, circleY, range*tileSize*2, range*tileSize*2);
             rangeTickCounter++;
@@ -112,8 +117,8 @@ public abstract class Tower extends Entity
         g2d.setColor(Color.white);
 
         g2d.setFont(new Font("TimesRoman", Font.PLAIN, tileSize/3));
-        int textPosX = (int) towerPosX * tileSize + tileSize / 3;
-        int textPosY = (int) towerPosY * tileSize + tileSize /2;
+        int textPosX = (int) (towerPosX * tileSize) + tileSize / 3;
+        int textPosY = (int) (towerPosY * tileSize) + tileSize /2;
         g2d.drawString(String.valueOf(level), textPosX, textPosY);
     }
 

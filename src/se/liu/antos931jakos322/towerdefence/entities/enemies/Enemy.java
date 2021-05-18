@@ -4,6 +4,7 @@ package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
+import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -79,17 +80,6 @@ public abstract class Enemy extends Entity
 
     }
 
-    public boolean isNear(Point2D position, double distance){
-
-        double deltaPositionX = this.position.getX() - position.getX();
-        double deltaPositionY = this.position.getY() - position.getY();
-	double distanceFrom = Math.hypot(deltaPositionX, deltaPositionY);
-	if (distanceFrom < distance){
-	    return true;
-	}
-	return false;
-    }
-
 
      public void moveEnemy(Point2D nextTile, Point2D lastTile){
 	// Gives Enemy a starting position
@@ -102,7 +92,7 @@ public abstract class Enemy extends Entity
 //			   nextTile.getY()-position.getY());
 	move(nextTile);
 
-	if(isNear(nextTile,0.2)){
+	if(HelperFunctions.isNear(position, nextTile, 0.2)){
 	    // If this is the last block --> Enemy is done with the path
 	    if (nextTile.equals(lastTile)){
 	        finished = true;

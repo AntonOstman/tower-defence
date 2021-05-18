@@ -4,6 +4,7 @@ import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 import se.liu.antos931jakos322.towerdefence.entities.towers.Tower;
 import se.liu.antos931jakos322.towerdefence.entities.towers.Projectile;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.WaveMaker;
+import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 import se.liu.antos931jakos322.towerdefence.userinterface.GameListener;
 
 import javax.swing.*;
@@ -151,6 +152,7 @@ public class GameHandler
 
     public void activateTowers(){
         for (Tower tower: towers){
+            tower.activate();
             Enemy closestEnemy = getClosestEnemy(tower.getPosition(), tower.getRange());
             if (closestEnemy == null){
                 return;
@@ -266,8 +268,7 @@ public class GameHandler
 
     public Tower getTowerOnPoint(Point2D coord){
         for(Tower tower : towers){
-            if (coord.equals(tower.getPosition())){
-                tower.setSelected(true);
+            if(HelperFunctions.isNear(tower.getPosition(), coord,0.5)){
                 return tower;
             }
         }

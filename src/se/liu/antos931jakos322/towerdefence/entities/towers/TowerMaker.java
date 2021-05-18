@@ -39,6 +39,7 @@ public class TowerMaker
 	towerMap.put(TowerType.ARROW,createArrowTower());
 	towerMap.put(TowerType.CANON,createCanonTower());
 	towerMap.put(TowerType.MACHINE_GUN, createMachineGunTower());
+	towerMap.put(TowerType.AIRPLANE, createAirplaneTower());
 
 	return towerMap.get(type);
     }
@@ -54,6 +55,17 @@ public class TowerMaker
         return arrowTower;
     }
 
+    private static Tower createAirplaneTower(){
+	final int attackpower = 10;
+	final int cost = 7;
+	final int range = 5;
+	final int upgradeCost = 1;
+	final int attackSpeed = 1;
+	final Color arrowColor = Color.red;
+	Tower arrowTower = new AirplaneTower(TowerType.AIRPLANE, arrowColor, cost, attackpower, range, upgradeCost,
+					     ProjectileType.MACHINE, attackSpeed);
+	return arrowTower;
+    }
     private static Tower createCanonTower(){
 	final int canonAttackpower = 5;
 	final int canonCost = 7;
