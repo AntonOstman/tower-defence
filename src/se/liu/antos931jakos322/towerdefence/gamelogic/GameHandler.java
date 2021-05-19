@@ -17,7 +17,14 @@ import java.util.List;
 
 /**
  *
- * Starts the game and controls what happens in the game
+ * Gamehandler is the core class which contains the logic for starting and running the game.
+ * Gamehandlers main way of running the game is by using the tick() method which is activated by a timer.
+ * when the tick() method is called the game progresses one step by calling the logic entities.
+ * Since GameHandler controls the game that also means it handles the interactions between the game map and entities.
+ * Which means for example GameHandler means GameHandler knows when
+ * enemies have come to the end of the game map and the player should take damage.
+ *
+ * GameHandler also has information for player health, money and wheter the game is over or not and handles that information.
  *
  */
 
@@ -118,21 +125,19 @@ public class GameHandler
         List<Projectile> projectilesToRemove = new ArrayList<>();
 
         for (Projectile projectile : projectiles){
-
-
+            // start by moving all projectiles
            projectile.move();
-           Point2D projectilePosition = projectile.getPosition();
-           //check on the tile the projectile is on if there are any enemies on it
-           List<Enemy> potentialTargets = getEnemiesWithin(projectilePosition, projectile.getProjectileSize());
-
-           if (!potentialTargets.isEmpty()) {
-               // if there are enemies let the projectile attack them
-               projectile.attack(potentialTargets);
-           }
-           // if the projectile cannot penetrate through any more enemies, remove it
+            // check if a projectile can attack an enemy and in that case attack the enemy
+            for (Enemy enemy : enemies){
+                if (projectile.canAttack(enemy)) {
+                    projectile.attack(enemy);
+                }
+            }
+            // if the projectile cannot penetrate through any more enemies, remove it
            if (projectile.getPenetrationAmount() <= 0){
                projectilesToRemove.add(projectile);
            }
+            Point2D projectilePosition = projectile.getPosition();
             // if there are any projectiles outside the game add them to the remove list
             boolean lessThanBounds = projectilePosition.getY() < 0 || projectilePosition.getX() < 0;
             boolean greaterThanBounds = projectilePosition.getX() > gameMap.getWidth() || projectilePosition.getY() > gameMap.getHeight();
@@ -146,19 +151,18 @@ public class GameHandler
         }
     }
 
-    public void attackAllEnemies(){
-
-    }
 
     public void activateTowers(){
         for (Tower tower: towers){
             tower.activate();
+            // get the enemy closest to the tower...
             Enemy closestEnemy = getClosestEnemy(tower.getPosition(), tower.getRange());
             if (closestEnemy == null){
-                return;
+                continue;
             }
-
-            if (tower.canAttack()) {
+            // if the enemy can be attacked
+            if (tower.canAttack(closestEnemy)) {
+                // then send a projectile to that enemy
                 Projectile projectile = tower.createProjectile(closestEnemy);
                 projectiles.add(projectile);
 
@@ -175,28 +179,57 @@ public class GameHandler
         return health;
     }
 
-     public void moveEnemy(){
+    public void moveEnemy2() {
 
         Iterator<Enemy> i = enemies.iterator();
-        while(i.hasNext()){
+
+        while (i.hasNext()) {
             Enemy enemy = i.next();
             int nextTile = enemy.getPathPosition();
-            Point lastTile = gameMap.getLastTile();
             enemy.setLastPosition(gameMap.getLastTile());
-            //enemy.setNextPosition();
             enemy.move(gameMap.getPath(nextTile));
             // if the enemy has come to the end of the map damage the player
-            if(enemy.isFinished()){
+            if (enemy.isFinished()) {
                 takeDamage(enemy.getDamage());
                 i.remove();
             }
             // if an enemy is defeated remove it and give the player money
-            else if (enemy.getHealth() <= 0){
+            else if (enemy.getHealth() <= 0) {
                 i.remove();
                 money += enemy.getRewardMoney();
             }
 
         }
+    }
+
+
+        public void moveEnemy(){
+
+        Iterator<Enemy> i = enemies.iterator();
+        List<Enemy> removeEnemies = new ArrayList<>();
+
+        for (Enemy enemy : enemies){
+            int nextTile = enemy.getPathPosition();
+            enemy.setLastPosition(gameMap.getLastTile());
+            enemy.move(gameMap.getPath(nextTile));
+            // if the enemy has come to the end of the map damage the player
+            if(enemy.isFinished()){
+                takeDamage(enemy.getDamage());
+                removeEnemies.add(enemy);
+            }
+            // if an enemy is defeated remove it and give the player money
+            else if (enemy.getHealth() <= 0){
+                removeEnemies.add(enemy);
+                money += enemy.getRewardMoney();
+            }
+
+        }
+
+        for(Enemy enemy : removeEnemies){
+            enemies.remove(enemy);
+        }
+
+
     }
 
 

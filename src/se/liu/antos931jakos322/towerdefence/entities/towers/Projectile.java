@@ -2,6 +2,7 @@ package se.liu.antos931jakos322.towerdefence.entities.towers;
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
+import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -35,11 +36,17 @@ public abstract class Projectile extends Entity
 	targetPosition = newPos;
     }
 
+    public boolean canAttack(Enemy enemy){
+	if (HelperFunctions.isNear(position, enemy.getPosition(), projectileSize)) {
+	return true;
+	}
+	else{ return false;}
+    }
 
-    public void attack(List<Enemy> enemies){
-        Enemy firstEnemy = enemies.get(0);
-        firstEnemy.takeDamage(attackPower);
-	penetrationAmount -= 1;
+    public void attack(Enemy enemy){
+	    enemy.takeDamage(attackPower);
+	    penetrationAmount -= 1;
+
     }
 
     //sets the direction for the projectile by calculating the change in x and y

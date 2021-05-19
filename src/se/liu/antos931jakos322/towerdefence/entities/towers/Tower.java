@@ -2,6 +2,7 @@ package se.liu.antos931jakos322.towerdefence.entities.towers;
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
+import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 
 import java.awt.*;
 
@@ -53,15 +54,27 @@ public abstract class Tower extends Entity
 
 
 
-    public boolean canAttack(){
-        if (attackSpeedCharge == attackSpeed){
+    public boolean canAttack(Enemy enemy){
+
+        // if the tower needs to recharge before it can shoot....
+        if (attackSpeedCharge != attackSpeed){
+            // recharge and...
+            attackSpeedCharge++;
+            // return false.
+            return false;
+        }
+
+        // if the enemy is inside range and the tower could shoot...
+        else if (HelperFunctions.isNear(position, enemy.getPosition() , range)){
+            // set that the tower needs to recharge...
             attackSpeedCharge = 0;
+            // and return that the tower can attack
             return true;
         }
         else{
-         attackSpeedCharge++;
-         return false;
+            return false;
         }
+
     }
 
     public Projectile createProjectile(Enemy enemy) {
@@ -86,7 +99,6 @@ public abstract class Tower extends Entity
 
     public void activate(){
         // can be used by towers to do something special on a tick example: airplanetower moves
-        return;
     }
 
     public void draw(final Graphics2D g2d, final int tileSize) {

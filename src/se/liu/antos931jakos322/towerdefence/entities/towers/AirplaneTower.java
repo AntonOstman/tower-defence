@@ -42,7 +42,5 @@ public class AirplaneTower extends Tower
 
         Point2D newPos = new Point2D.Double(newX,newY);
 	position = newPos;
-        //
-	//super.move(newPos);
     }
 }
