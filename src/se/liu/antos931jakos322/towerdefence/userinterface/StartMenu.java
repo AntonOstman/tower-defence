@@ -197,7 +197,7 @@ public class StartMenu implements GameListener
 
     }
 
-    @Override public void mapChanged() {
+    @Override public void gameChanged() {
 	boolean gameOver = gameHandler.isGameOver();
 	if (gameOver) {
 	    int option = JOptionPane.showOptionDialog(null, "Do you want to play again?", "Choose",

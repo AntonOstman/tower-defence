@@ -5,10 +5,10 @@ import java.awt.*;
 /**
  *
  * This tower represents a normal tower without any special methods or attribues
- * This tower can be set to have different colors, damage values etc..
- * StandardTower is a skeleton tower which can be used to create other different towers in the game
+ * StandardTower is placed on one location and does not move from it
+ * StandardTower is a skeleton tower which can be used to create other different towers
  * Example:
- * 	StandardTower is used in the game to create a MachineGunTower which sends projectiles faster than other towers
+ * 	StandardTower can be used in a game to create a MachineGunTower which sends projectiles faster than other towers
  * 	but each projectile does less damage.
  *
  */

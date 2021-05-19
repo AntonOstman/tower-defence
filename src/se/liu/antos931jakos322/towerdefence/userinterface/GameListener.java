@@ -2,13 +2,15 @@ package se.liu.antos931jakos322.towerdefence.userinterface;
 
 /**
  *
- * MapListener is a class used by grapchis components who need to know when to redraw the game
+ * MapListener is used by graphics components to listen to game
+ * Classes implementing this interface can therefore get knowledge when a change has occured that needs to be acted upon.
+ * In conjunction with adding with calling it with gameChanged
  *
  */
 
 public interface GameListener
 {
 
-    public void mapChanged();
+    public void gameChanged();
 
 }

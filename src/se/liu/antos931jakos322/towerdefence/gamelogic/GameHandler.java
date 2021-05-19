@@ -271,7 +271,7 @@ public class GameHandler
 
     public void notifyListeners(){
         for(GameListener listener: gameListeners){
-            listener.mapChanged();
+            listener.gameChanged();
         }
     }
 

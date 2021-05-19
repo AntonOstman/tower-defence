@@ -26,7 +26,7 @@ public class MenuComponent extends JComponent implements GameListener
 
 
 
-    @Override public void mapChanged() {
+    @Override public void gameChanged() {
 	repaint();
     }
 

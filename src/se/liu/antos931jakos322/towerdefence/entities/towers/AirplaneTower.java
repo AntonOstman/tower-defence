@@ -1,5 +1,13 @@
 package se.liu.antos931jakos322.towerdefence.entities.towers;
 
+/**
+ *
+ * AirplaneTower is a class extending the absract class Tower
+ * AirplaneTower can move in circles while still acting as a Tower
+ *
+ */
+
+
 import java.awt.*;
 import java.awt.geom.Point2D;
 

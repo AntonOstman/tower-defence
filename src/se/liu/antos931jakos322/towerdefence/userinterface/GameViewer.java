@@ -4,16 +4,22 @@ import se.liu.antos931jakos322.towerdefence.entities.towers.Tower;
 import se.liu.antos931jakos322.towerdefence.entities.towers.TowerMaker;
 import se.liu.antos931jakos322.towerdefence.entities.towers.TowerType;
 import se.liu.antos931jakos322.towerdefence.gamelogic.GameHandler;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.util.List;
+
 /**
  *
- * Starts the GUI on which the player interacts with and can view the game
- * Controls the frame and panels contained in the frame
+ * GameViewer controls the main user interface of the game.
+ * GameViewer takes input from the user in the form of buttons presses and clicks on its panels
+ * GameViewer can therefore for example decide where game objects should be placed by calculating the pixel to gamescale relation when
+ * the player clicks on the game panel
+ *
+ * GameViewer contains the menus, the panels containg graphical components, and buttons
+ * GameViewer also facilitates the game by interacting with GameHandler by for example
+ * telling it where the player is trying to place objects
  *
  */
 public class GameViewer

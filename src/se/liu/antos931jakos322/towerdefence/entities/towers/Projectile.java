@@ -3,9 +3,23 @@ package se.liu.antos931jakos322.towerdefence.entities.towers;
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
-
 import java.awt.*;
 import java.awt.geom.Point2D;
+
+
+/**
+ * Projectile is the abstract class for all projectiles in the game
+ * Projectile represents an object that is moving and can do damage to enemies
+ * Projectiles have various unique properties:
+ * attackPower - represents how much damage the projectile does on a hit
+ * PenetrationAmount - represents how many times the projectile can do damage before being "destroyed"
+ *
+ * Example use:
+ * 	Projectile gets created by another entity that tells projectile what to target
+ * 	when the projectile is near the something it damages it with attack()
+ *
+ */
+
 
 public abstract class Projectile extends Entity
 {
@@ -27,7 +41,7 @@ public abstract class Projectile extends Entity
     }
 
 
-    public void move(){
+    @Override public void move(){
 	move(targetPosition);
 	// we increase the target position with the deltax and deltay to keep the projectile from stopping once it reaches the position
 	Point2D deltaPos = new Point2D.Double(targetPosition.getX() - position.getX(), targetPosition.getY() - position.getY());
@@ -43,8 +57,8 @@ public abstract class Projectile extends Entity
     }
 
     public void attack(Enemy enemy){
-	    enemy.takeDamage(attackPower);
-	    penetrationAmount -= 1;
+	enemy.takeDamage(attackPower);
+	penetrationAmount -= 1;
 
     }
 

@@ -6,9 +6,9 @@ import java.awt.geom.Point2D;
 public class StandardProjectile extends Projectile
 {
 
-    public StandardProjectile(final Color color, final double drawScale, final double projectileSpeed, final Point2D position,
+    public StandardProjectile(final Color color, final double size, final double projectileSpeed, final Point2D position,
 			      final int penetrationAmount, final int attackPower)
     {
-	super(color, drawScale, projectileSpeed, position, penetrationAmount, attackPower);
+	super(color, size, projectileSpeed, position, penetrationAmount, attackPower);
     }
 }

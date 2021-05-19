@@ -7,10 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * MapComponent draws everything in the game contained in map but does not itself have knowledge how
- * Example
- * 	Does not know how to draw a tower. But uses the towers own draw method to draw it.
  *
+ * MapComponent controls the main drawing of objects that exist on the game map
+ * MapComponent draws objects by using their own drawing methods
+ * That means MapComponent only controls how objects are drawn in relation to eachother but does not contain information
+ * on how to draw indivudual objects.
+ *
+ * MapComponent also implements gameListener which can be used to let mapComponent know of changes made to the game.
+ * In which case it needs act on those changes to update the UI.
  *
  */
 
@@ -38,7 +42,7 @@ public class GameComponent extends JComponent implements GameListener
 
     }
 
-    @Override public void mapChanged() {
+    @Override public void gameChanged() {
 	repaint();
     }
 
