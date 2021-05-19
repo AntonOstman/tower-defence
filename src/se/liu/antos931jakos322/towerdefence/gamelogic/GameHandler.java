@@ -80,8 +80,6 @@ public class GameHandler
         }
     }
 
-
-
     public Enemy getClosestEnemy(Point2D towerPos, int range){
         Enemy closestEnemy = null;
 

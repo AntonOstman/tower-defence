@@ -28,15 +28,12 @@ public class AirplaneTower extends Tower
         super.setPosition(position);
     }
 
-    @Override public void draw(final Graphics2D g2d, final int tileSize) {
-        super.draw(g2d, tileSize);
-
-    }
-
     @Override public void move() {
 	speed = 0.03;
 	final int radius = 4;
 	angle += speed; // in this context speed is a angle speed
+	// use sin and cos combined with the changing angle to circle the tower
+	// around where it was placed
         double newX = startPoint.getX() + radius * Math.sin(angle);
         double newY = startPoint.getY() + radius * Math.cos(angle);
 

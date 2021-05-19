@@ -6,7 +6,6 @@ import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.util.List;
 
 public abstract class Projectile extends Entity
 {
@@ -18,10 +17,10 @@ public abstract class Projectile extends Entity
     private Point2D targetPosition;
 
 
-    protected Projectile(final Color color, final double drawScale, double speed, Point2D position, int penetrationAmount, int attackPower) {
-	super(color, drawScale, speed);
+    protected Projectile(final Color color, final double size, double speed, Point2D position, int penetrationAmount, int attackPower) {
+	super(color, size, speed);
 	this.targetPosition = null;
-	this.projectileSize = drawScale*2 ;
+	this.projectileSize = size * 2;
 	this.attackPower = attackPower;
 	this.startPoint = position; // the start position is always a normal point
 	this.penetrationAmount = penetrationAmount;
@@ -61,7 +60,7 @@ public abstract class Projectile extends Entity
 
 	g2d.setColor(color);
 
-	final int size = (int) (tileSize * drawScale);
+	final int size = (int) (tileSize * this.size);
 	final int offset = tileSize / 2 - size / 2;
 
 	int drawPositionX = (int) (position.getX() * tileSize) + offset;

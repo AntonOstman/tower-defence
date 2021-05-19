@@ -10,22 +10,22 @@ public class Entity
 
     protected Point2D position;
     protected Color color;
-    protected double drawScale;
+    protected double size;
     protected double speed;
 
 
-    public Entity(final Color color, final double drawScale, final double speed) {
+    public Entity(final Color color, final double size, final double speed) {
         this.position = null;
         this.color = color;
-        this.drawScale = drawScale;
+        this.size = size;
         this.speed = speed;
 
     }
     // towers dont always need a speed so create another constructor for those
-    public Entity(final Color color, final double drawScale) {
+    public Entity(final Color color, final double size) {
         this.position = null;
         this.color = color;
-        this.drawScale = drawScale;
+        this.size = size;
         this.speed = 0;
     }
 

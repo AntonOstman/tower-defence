@@ -52,8 +52,6 @@ public abstract class Tower extends Entity
         this.level = 1;
     }
 
-
-
     public boolean canAttack(Enemy enemy){
 
         // if the tower needs to recharge before it can shoot....
@@ -103,7 +101,7 @@ public abstract class Tower extends Entity
 
     public void draw(final Graphics2D g2d, final int tileSize) {
 
-        int towerSize = (int) (tileSize * drawScale);
+        int towerSize = (int) (tileSize * size);
         double towerPosX = position.getX();
         double towerPosY = position.getY();
 

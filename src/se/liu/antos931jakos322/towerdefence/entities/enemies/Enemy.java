@@ -64,7 +64,7 @@ public abstract class Enemy extends Entity
 	int drawPositionX = (int) (position.getX() * tileSize);
 	int drawPositionY = (int) (position.getY() * tileSize);
 
-	final int size = (int) (tileSize * drawScale);
+	final int size = (int) (tileSize * this.size);
 	final int offset = tileSize / 2 - size / 2;
 	double percentageHealth = (double) health / maxHealth;
 	g2d.fillOval(drawPositionX + offset, drawPositionY + offset, size, size);
