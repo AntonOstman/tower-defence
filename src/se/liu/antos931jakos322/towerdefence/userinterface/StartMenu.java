@@ -35,7 +35,8 @@ public class StartMenu implements GameListener
     public void createStartMenu(){
 
         startLogger(classLogger);
-	readNewMap(gameMap);
+	startLogger(gameMap.getLogger());
+        readNewMap(gameMap);
 
 	Color background = new Color(100,100,100);
 

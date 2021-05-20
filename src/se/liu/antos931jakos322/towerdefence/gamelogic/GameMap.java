@@ -41,7 +41,6 @@ public class GameMap
 	this.tiles = null;
 	this.path = null;
 	this.mapInfo = null;
-
 	//loadMap(); loadmap throws IO excpetion and the correct usage is probably to try loading in tester class?
 	// cool usage would be to load map with the "selected map index" you want to load
 	// that way the player could choose map
@@ -255,5 +254,7 @@ public class GameMap
 	return height;
     }
 
-
+    public Logger getLogger() {
+	return logger;
+    }
 }
