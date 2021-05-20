@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import se.liu.antos931jakos322.towerdefence.userinterface.StartMenu;
 
 import java.awt.*;
 import java.io.FileWriter;
@@ -33,7 +34,7 @@ public class GameMap
     private List<Point> path;
     private Point dimensions;
     private List<MapInfo> mapInfo;
-    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public GameMap()  {
 	this.dimensions = null;
@@ -190,7 +191,7 @@ public class GameMap
 
     public void readMap() throws IOException {
 
-
+	StartMenu.startLogger(logger);
 	Reader reader = Files.newBufferedReader(Paths.get("maps.json"));
 
 
@@ -203,7 +204,7 @@ public class GameMap
 	    }.getType());
 	}
 	catch (JsonSyntaxException jsonSyntaxException){
-	    LOGGER.log(Level.SEVERE, "maps file has been corrupted and can not be read", jsonSyntaxException);
+	    logger.log(Level.SEVERE, "maps file has been corrupted and can not be read", jsonSyntaxException);
 	    throw new IOException("maps file has been corrupted and can not be read \n" + jsonSyntaxException);
 	}
 	reader.close();

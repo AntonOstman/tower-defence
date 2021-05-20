@@ -21,7 +21,7 @@ public class TowerMaker
     // tower to create when for eg. getting a string "arrow"
     // instead of if arrow do this, if cannon do this....
 
-    final static double TOWER_SIZE = 0.6;
+    private final static double TOWER_SIZE = 0.6;
 
     public static List<TowerType> getAllTowers(){
 
