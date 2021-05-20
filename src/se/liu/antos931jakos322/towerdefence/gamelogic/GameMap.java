@@ -51,7 +51,7 @@ public class GameMap
 	Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 	// OBS when creating the path, the path is using a margin on one tile over the edge to make for a smooth enering and exit
-	// Creates the path for map 1
+	// Creates the path for map 1 "cicle"
 	List<Point> path1 = Arrays.asList(new Point(-1,4),
 					  new Point(0,4),
 					  new Point(1,4),
@@ -84,7 +84,7 @@ public class GameMap
 					  new Point(14,2),
 					  new Point(15,2));
 
-	// Creates the path for map 2
+	// Creates the path for map 2 "Curve"
 	List<Point> path2 = Arrays.asList(new Point(-1,5),
 					  new Point(0,5),
 					  new Point(1,5),
@@ -100,8 +100,19 @@ public class GameMap
 					  new Point(7,5),
 					  new Point(8,5),
 					  new Point(9,5),
-					  new Point(10,5));
+					  new Point(10,5),
+					  new Point(10,4),
+					  new Point(10,3),
+					  new Point(11,3),
+					  new Point(12,3),
+					  new Point(12,3),
+					  new Point(12,4),
+					  new Point(12,5),
+					  new Point(13,5),
+					  new Point(14,5),
+					  new Point(15,5));
 
+	//"Flying"
 	List<Point> path3 = Arrays.asList(new Point(-1,5),
 					  new Point(0,5),
 					  new Point(1,5),
@@ -118,13 +129,32 @@ public class GameMap
 					  new Point(7,7),
 					  new Point(8,7),
 					  new Point(9,7),
-					  new Point(10,5));
+					  new Point(6,9),
+					  new Point(7,9),
+					  new Point(8,9),
+					  new Point(9,9),
+					  new Point(10,9),
+					  new Point(11,9),
+					  new Point(12,9),
+					  new Point(13,9),
+					  new Point(14,9),
+					  new Point(15,9));
+	//"Zigzag"
+	List<Point> path4 = Arrays.asList(new Point(-1,4),
+					  new Point(0,5),
+					  new Point(3,12),
+					  new Point(6,9),
+					  new Point(9,11),
+					  new Point(12,4),
+					  new Point(14,7),
+					  new Point(15,7));
 
 
 
 	// Creates a list for mapInfo objects, MapInfo have height width and the path as input parameters.
 	List<MapInfo> mapInfo = Arrays.asList(new MapInfo(new Point(15, 15), path1),
 					      new MapInfo(new Point(15, 15), path2),
+					      new MapInfo(new Point(15, 15), path4),
 					      new MapInfo(new Point(15, 15), path3));
 
 	String mapInfoAsJson = gson.toJson(mapInfo);
@@ -179,6 +209,10 @@ public class GameMap
 	reader.close();
 
 
+    }
+
+    public int getNumberOfMaps(){
+        return mapInfo.size();
     }
 
     public Tile getTile(Point pos){

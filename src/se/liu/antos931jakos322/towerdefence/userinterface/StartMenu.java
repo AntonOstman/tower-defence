@@ -60,41 +60,42 @@ public class StartMenu implements GameListener
 	header.add(label);
 
 	// these magic constans should not be magic.. get the information from gamemap and loop through the maps
-	for (int j = 0; j < 2; j++) {
-	    for (int i = 0; i < 3; i++) {
-	        ButtonEvent buttonListener = new ButtonEvent(i);
-	        gameMap.loadMap(i);
-		JButton b = new JButton();
-		// these should probably be decided from the amount of images to draw
-		final int bufferedImageWidth = 105;
-		final int bufferedImageHeight = 105;
-		BufferedImage lineImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight,
-							    BufferedImage.TYPE_INT_RGB);
 
-		Graphics2D bg2d = lineImage.createGraphics();
+	for (int i = 0; i < gameMap.getNumberOfMaps(); i++) {
+	    ButtonEvent buttonListener = new ButtonEvent(i);
+	    gameMap.loadMap(i);
+	    JButton b = new JButton();
+	    // these should probably be decided from the amount of images to draw
+	    final int bufferedImageWidth = 105;
+	    final int bufferedImageHeight = 105;
+	    BufferedImage lineImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight,
+							BufferedImage.TYPE_INT_RGB);
 
-		int mapY = gameMap.getHeight();
-		int mapX = gameMap.getWidth();
-		for (int y = 0; y < mapY; y++) {
-		    for (int x = 0; x < mapX; x++) {
-			Tile currentTile = gameMap.getTile(new Point(x, y));
-			currentTile.drawTile(bg2d, 0, 7);
-		    }
+	    Graphics2D bg2d = lineImage.createGraphics();
+
+	    int mapY = gameMap.getHeight();
+	    int mapX = gameMap.getWidth();
+	    for (int y = 0; y < mapY; y++) {
+		for (int x = 0; x < mapX; x++) {
+		    Tile currentTile = gameMap.getTile(new Point(x, y));
+		    currentTile.drawTile(bg2d, 0, 7);
 		}
-		b.addActionListener(buttonListener);
-		b.setIcon(new ImageIcon(lineImage));
-		b.setSize(new Dimension(105, 105));
-		b.setPreferredSize(new Dimension(105, 105));
-		b.setBorderPainted(false);
-		b.setBackground(background);
-		//b.setVisible(false);
-		mapSelect.add(b);
 	    }
+	    b.addActionListener(buttonListener);
+	    b.setIcon(new ImageIcon(lineImage));
+	    b.setSize(new Dimension(105, 105));
+	    b.setPreferredSize(new Dimension(105, 105));
+	    b.setBorderPainted(false);
+	    b.setBackground(background);
+	    //b.setVisible(false);
+	    mapSelect.add(b);
 	}
+
 
 
 	mainPanel.add(header);
 	mainPanel.add(mapSelect);
+	mapSelect.setBackground(background);
 
 
 	frame = new JFrame();

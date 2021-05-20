@@ -37,22 +37,17 @@ public abstract class Enemy extends Entity
     }
 
     public void takeDamage(int damage){
-	if (health - damage < 0) {
-	    health = 0;
-	}
-	else {
-	    health -= damage;
-	}
-	    double percentageHealth = (double) health / maxHealth;
-	    double inverceProcentageHP = 1 - percentageHealth;
+	if (health - damage < 0) { health = 0; }
+	else { health -= damage; }
 
-	    //color = new Color(255, (int) (inverceProcentageHP * 255), (int) (inverceProcentageHP * 255));
-	    color = new Color( 	(int) (color.getRed()	+ (255- color.getRed())   * inverceProcentageHP),
-				      (int) (color.getGreen()	+ (255- color.getGreen()) * inverceProcentageHP),
-				      (int) (color.getBlue()	+ (255- color.getBlue())  * inverceProcentageHP));
-	    // the reason that a red enemy becomes fully white on half hp
-	    // is because if the colors value start on 128 128 128
-	    // and when precentageHP is 0.5 it will become 128 + 128 ( i think)
+	double percentageHealth = (double) health / maxHealth;
+	double inverceProcentageHP = 1 - percentageHealth;
+	color = new Color( (int) (color.getRed()   + (255- color.getRed())   * inverceProcentageHP),
+			   (int) (color.getGreen() + (255- color.getGreen()) * inverceProcentageHP),
+			   (int) (color.getBlue()  + (255- color.getBlue())  * inverceProcentageHP));
+	// the reason that a red enemy becomes fully white on half hp
+	// is because if the colors value start on 128 128 128
+	// and when precentageHP is 0.5 it will become 128 + 128 ( i think)
 
 
     }

@@ -136,7 +136,7 @@ public class GameViewer
 	mainMenuPanel.add(towerDescriptionPanel);
 	mainMenuPanel.add(towerUpgradesPanel);
 	mainMenuPanel.add(pauseAndQuitPanel);
-	mainMenuPanel.setPreferredSize(new Dimension(200,500));
+	mainMenuPanel.setPreferredSize(new Dimension(gameScale*4,gameScale*10));
 	mainMenuPanel.setBackground(backGroundColor);
 
 
