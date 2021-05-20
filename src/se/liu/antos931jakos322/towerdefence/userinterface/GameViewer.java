@@ -67,17 +67,6 @@ public class GameViewer
 	interactivePanelLayout.setVgap(margin);
 
 
-	/*
-	// set borders on all panels for easier debugging
-	interactivePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-	gamePanel.setBorder(BorderFactory.createLineBorder(Color.RED));
-	mainPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
-	mainMenuPanel.setBorder(BorderFactory.createLineBorder(Color.cyan));
-	textPanel.setBorder(BorderFactory.createLineBorder(Color.YELLOW));
-	*/
-	// should be changed to be more generic, take all types from towermaker?
-
-
 	//menupanel has the information the player needs and is used for choosing towers
 
 	// create and set the buttons for placing towers

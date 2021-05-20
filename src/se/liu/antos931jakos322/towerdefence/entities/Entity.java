@@ -66,14 +66,6 @@ public abstract class Entity
         this.position = new Point2D.Double(newX, newY);
     }
 
-    /*
-    *
-    * This is the method which is overridden by entities so they can create their own moving patterns
-    * using the move(Point2d movePosition) method
-    * this is later called by other classes to move the entity using its own logic for moving
-    * */
-
-
     public void setPosition(final Point2D position) { this.position = position; }
 
     public Point2D getPosition() { return position; }
