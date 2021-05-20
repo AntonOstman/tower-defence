@@ -27,14 +27,10 @@ public abstract class Projectile extends Entity
     private int attackPower;
     private Point2D startPoint;
     private int penetrationAmount;
-    private double projectileSize;
-    private Point2D targetPosition;
 
 
     protected Projectile(final Color color, final double size, double speed, Point2D position, int penetrationAmount, int attackPower) {
 	super(color, size, speed);
-	this.targetPosition = null;
-	this.projectileSize = size * 2;
 	this.attackPower = attackPower;
 	this.startPoint = position; // the start position is always a normal point
 	this.penetrationAmount = penetrationAmount;
@@ -42,14 +38,15 @@ public abstract class Projectile extends Entity
 
 
     @Override public void move(){
-	move(targetPosition);
+	super.move();
 	// we increase the target position with the deltax and deltay to keep the projectile from stopping once it reaches the position
-	Point2D deltaPos = new Point2D.Double(targetPosition.getX() - position.getX(), targetPosition.getY() - position.getY());
-	Point2D newPos = new Point2D.Double(targetPosition.getX() + deltaPos.getX(),targetPosition.getY() + deltaPos.getY());
-	targetPosition = newPos;
+	Point2D deltaPos = new Point2D.Double(movePosition.getX() - position.getX(), movePosition.getY() - position.getY());
+	Point2D newPos = new Point2D.Double(movePosition.getX() + deltaPos.getX(),movePosition.getY() + deltaPos.getY());
+	movePosition = newPos;
     }
 
     public boolean canAttack(Enemy enemy){
+        double projectileSize = size * 2;
 	if (HelperFunctions.isNear(position, enemy.getPosition(), projectileSize)) {
 	return true;
 	}
@@ -64,7 +61,7 @@ public abstract class Projectile extends Entity
 
     //sets the direction for the projectile by calculating the change in x and y
     public void setTarget(final Enemy target) {
-	this.targetPosition = target.getPosition();
+	this.movePosition = target.getPosition();
 	this.position = startPoint;
     }
 
@@ -81,10 +78,6 @@ public abstract class Projectile extends Entity
 	int drawPositionY = (int) (position.getY() * tileSize) + offset;
 
 	g2d.fillOval(drawPositionX, drawPositionY, size, size);
-    }
-
-    public double getProjectileSize() {
-	return projectileSize;
     }
 
     public int getPenetrationAmount() {

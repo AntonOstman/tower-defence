@@ -18,9 +18,9 @@ public class AirplaneTower extends Tower
     private Point2D startPoint;
 
     public AirplaneTower(final TowerType towerType, final Color color, final int cost, final int attackPower, final int range,
-			 final int upgradeCost, final ProjectileType projectileType, final int attackSpeed)
+			 final int upgradeCost, final ProjectileType projectileType, final int attackSpeed, final double speed, final double size)
     {
-	super(towerType, color, cost, attackPower, range, upgradeCost, projectileType, attackSpeed);
+	super(towerType, color, cost, attackPower, range, upgradeCost, projectileType, attackSpeed, speed, size);
 	this.angle = 0;
 	this.startPoint = null;
     }
@@ -28,7 +28,6 @@ public class AirplaneTower extends Tower
 
     @Override public void activate() {
 	move();
-        super.activate();
     }
 
     @Override public void setPosition(final Point2D position) {

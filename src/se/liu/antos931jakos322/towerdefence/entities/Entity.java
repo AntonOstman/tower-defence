@@ -2,52 +2,65 @@ package se.liu.antos931jakos322.towerdefence.entities;
 
 
 
+import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
+
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-public class Entity
+public abstract class Entity
 {
 
     protected Point2D position;
     protected Color color;
     protected double size;
     protected double speed;
+    protected Point2D movePosition;
 
-
-    public Entity(final Color color, final double size, final double speed) {
+    protected Entity(final Color color, final double size, final double speed) {
         this.position = null;
         this.color = color;
         this.size = size;
         this.speed = speed;
-
+        this.movePosition = null;
     }
     // towers dont always need a speed so create another constructor for those
-    public Entity(final Color color, final double size) {
+    protected Entity(final Color color, final double size) {
         this.position = null;
         this.color = color;
         this.size = size;
         this.speed = 0;
+        this.movePosition = null;
     }
 
-/*
-* This is the inner method which entities use to calculate and move towards a location
-* @params movePosition - the position which the entity moves towards
-* */
-    public void move(Point2D movePosition){
+    /**
+     * move() is the method entities can use to move towards the Point2D movePosition
+     *
+     * */
 
-        double deltaX = movePosition.getX() - position.getX();
-        double deltaY = movePosition.getY() - position.getY();
+    public void move(){
 
+        // if the entity is not near the movePosition it will continue moving
+        double newY;
+        double newX;
+        if (!HelperFunctions.isNear(position, movePosition, 0.1)) {
 
-        // normalise the delta x and y direction to an angle
-        double direction = Math.atan2(deltaY , deltaX);
-        // use the angle to calcutate the x and y  relations
-        double directionY = Math.sin(direction);
-        double directionX = Math.cos(direction);
+            double deltaX = movePosition.getX() - position.getX();
+            double deltaY = movePosition.getY() - position.getY();
 
-        double newY = position.getY() + directionY * speed ;
-        double newX = position.getX() + directionX * speed ;
+            // normalise the delta x and y direction to an angle
+            double direction = Math.atan2(deltaY , deltaX);
+            // use the angle to calcutate the x and y  relations
+            double directionY = Math.sin(direction);
+            double directionX = Math.cos(direction);
 
+            newY = position.getY() + directionY * speed;
+            newX = position.getX() + directionX * speed;
+        }
+        // otherwise the entity will stop moving
+        else{
+            newY = position.getY();
+            newX = position.getX();
+        }
         // change the actual position with the calculated coordinates
         this.position = new Point2D.Double(newX, newY);
     }
@@ -58,10 +71,6 @@ public class Entity
     * using the move(Point2d movePosition) method
     * this is later called by other classes to move the entity using its own logic for moving
     * */
-    public void move(){
-
-    }
-
 
 
     public void setPosition(final Point2D position) { this.position = position; }
