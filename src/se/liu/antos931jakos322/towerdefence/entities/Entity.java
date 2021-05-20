@@ -42,7 +42,8 @@ public abstract class Entity
         // if the entity is not near the movePosition it will continue moving
         double newY;
         double newX;
-        if (!HelperFunctions.isNear(position, movePosition, 0.1)) {
+        final double distance = 0.1;
+        if (!HelperFunctions.isNear(position, movePosition, distance)) {
 
             double deltaX = movePosition.getX() - position.getX();
             double deltaY = movePosition.getY() - position.getY();

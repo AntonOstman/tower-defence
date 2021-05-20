@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 /**
  *
- * MenuComponent controls the main text based information in the game
+ * MenuComponent draws the graphics of text based information
  * Example:
  * 	Draws the current player health and current money
  *

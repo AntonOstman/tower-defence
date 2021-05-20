@@ -279,9 +279,10 @@ public class GameHandler
     }
 
 
-    public Tower getTowerOnPoint(Point2D coord){
+    public Tower getTowerOnPoint(Point2D position){
+        final double distance = 0.5;
         for(Tower tower : towers){
-            if(HelperFunctions.isNear(tower.getPosition(), coord,0.5)){
+            if(HelperFunctions.isNear(tower.getPosition(), position, distance)){
                 return tower;
             }
         }

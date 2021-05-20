@@ -33,7 +33,6 @@ public abstract class Tower extends Entity
     protected TowerType towerType;
     protected ProjectileType projectileType;
     protected boolean selected;
-    protected int rangeTickCounter;
     protected int level;
 
 
@@ -49,7 +48,6 @@ public abstract class Tower extends Entity
         this.attackSpeed = attackSpeed;
         this.attackSpeedCharge = 0;
         this.selected = false;
-        this.rangeTickCounter = 0;
         this.level = 1;
     }
     // some towers do not require a speed so
@@ -65,7 +63,6 @@ public abstract class Tower extends Entity
         this.attackSpeed = attackSpeed;
         this.attackSpeedCharge = 0;
         this.selected = false;
-        this.rangeTickCounter = 0;
         this.level = 1;
     }
 
@@ -131,18 +128,13 @@ public abstract class Tower extends Entity
         g2d.fillRect(drawX, drawY, towerSize, towerSize);
 
         if(selected){
-            // Shows the range for a set number of ticks
-//            if(rangeTickCounter>30){
-//                selected = false;
-//                rangeTickCounter = 0;
-//            }
+
             int pixelRange = range*tileSize;
 
             int circleX = (int) (towerPosX * tileSize) - pixelRange + tileSize/2;
             int circleY = (int) (towerPosY * tileSize) - pixelRange + tileSize/2;
 
             g2d.drawOval(circleX, circleY, range*tileSize*2, range*tileSize*2);
-            rangeTickCounter++;
         }
         g2d.setColor(Color.white);
 

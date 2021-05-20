@@ -20,7 +20,7 @@ public class StartMenu implements GameListener
     private GameHandler gameHandler;
     private GameViewer viewer;
     private final static int GAME_SCALE = 50;
-    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private final Logger classLogger = Logger.getLogger(StartMenu.class.getName());
     private GameMap gameMap;
 
 
@@ -34,7 +34,7 @@ public class StartMenu implements GameListener
 
     public void createStartMenu(){
 
-        startLogger();
+        startLogger(classLogger);
 	readNewMap(gameMap);
 
 	Color background = new Color(100,100,100);
@@ -123,7 +123,7 @@ public class StartMenu implements GameListener
 	}
     }
 
-    public void startLogger() {
+    public static void startLogger(Logger logger) {
 
 	FileHandler fileTxt = null;
         try {
@@ -135,7 +135,7 @@ public class StartMenu implements GameListener
 	    String loadErrorMessage = e + " error starting logger do you want to try again?";
 	    int answer = JOptionPane.showConfirmDialog(null, loadErrorMessage);
 	    if (answer == JOptionPane.YES_OPTION){
-	        startLogger();
+	        startLogger(logger);
 	        return;
 	    }
 	    else {
@@ -145,8 +145,8 @@ public class StartMenu implements GameListener
         SimpleFormatter formatterTxt = new SimpleFormatter();
 	//XMLFormatter formatterTxt = new XMLFormatter();
 	fileTxt.setFormatter(formatterTxt);
-	LOGGER.setLevel(Level.FINE);
-	LOGGER.addHandler(fileTxt);
+	logger.setLevel(Level.FINE);
+	logger.addHandler(fileTxt);
     }
 
     public void readNewMap(GameMap gameMap){
@@ -154,18 +154,18 @@ public class StartMenu implements GameListener
 
 	try {
 	    gameMap.readMap();
-	    LOGGER.fine("succesfully loaded maps file");
+	    classLogger.fine("succesfully loaded maps file");
 
 	} catch (IOException e) {
 
-	    LOGGER.log(Level.WARNING, " could not find or read maps.json file, attempting to create a new one" , e);
+	    classLogger.log(Level.WARNING, " could not find or read maps.json file, attempting to create a new one" , e);
 		try {
 		    gameMap.createMap();
-		    LOGGER.fine("succesfully created new maps file");
+		    classLogger.fine("succesfully created new maps file");
 		    readNewMap(gameMap);
 
 		} catch (IOException ioException) {
-		    LOGGER.log(Level.WARNING,  " could not create maps.json file, asking user to try again", e);
+		    classLogger.log(Level.WARNING, " could not create maps.json file, asking user to try again", e);
 
 		    //ioException.printStackTrace();
 		    String createErrorMesage = ioException + "\n Error creating game map. \n Do you want to try again?";
