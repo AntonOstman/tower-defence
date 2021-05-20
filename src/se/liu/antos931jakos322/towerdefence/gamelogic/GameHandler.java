@@ -176,6 +176,10 @@ public class GameHandler
         return health;
     }
 
+    public int getLevel(){
+        return waveMaker.getWaveLevel();
+    }
+
 
     public void moveEnemy(){
 

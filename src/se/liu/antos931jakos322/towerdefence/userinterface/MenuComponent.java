@@ -36,14 +36,15 @@ public class MenuComponent extends JComponent implements GameListener
 	final Graphics2D g2d = (Graphics2D) g;
 	String health = "Life: " + gameHandler.getHealth();
 	String currentMoney = "Money: " + gameHandler.getMoney();
+	String level = "Level: " + gameHandler.getLevel();
 	g2d.setColor(Color.BLACK);
 	g2d.setFont(new Font("serif", Font.PLAIN, textSize));
 	final int positionX = 0;
 	final int healthPositionY = 30;
 	final int moneyPositionY = 60;
+	final int levelPositionY = 90;
 	g2d.drawString(health, positionX, healthPositionY);
-	// increase the position so the texts do not collide
-
     	g2d.drawString(currentMoney, positionX, moneyPositionY);
+	g2d.drawString(level, positionX, levelPositionY);
     }
 }

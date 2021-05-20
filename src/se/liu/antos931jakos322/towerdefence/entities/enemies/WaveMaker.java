@@ -48,12 +48,17 @@ public class WaveMaker
         return enemies;
     }
 
+    public int getWaveLevel() {
+        return waveLevel;
+    }
+
     // does the createWave method really need to have enemies as an argument?
     private List<Enemy> createWave(int waveLevel){
         // phases:
         //      1. Only generic
         //      2. Generic + speedy
-        //      3. Endless (all types)
+        //      3. Generic + speedy + boss
+        //      4. Endless (all types)
 
         // The amount is how many enemies of that type sparn in a wave.
         // The enemy type is determened by the type you send as parameter.
@@ -61,18 +66,25 @@ public class WaveMaker
         //      To change the spawning change speed, multiply / devide the wavelevel varible.
         Enemy genericEnemy = new StandardEnemy(100, 0.1, Color.RED, 0.5, 1);
         Enemy speedEnemy = new StandardEnemy(70, 0.2, Color.PINK, 0.3, 3);
-        Enemy bossEnemy = new StandardEnemy(100, 0.05, Color.GRAY, 0.9, 10);
+        Enemy bossEnemy = new StandardEnemy(1000, 0.05, Color.GRAY, 0.9, 10);
+        Enemy bigBossEnemy = new StandardEnemy(3000, 0.04, Color.CYAN, 1.2, 40);
 
 
         if(waveLevel < 5){
             spawnEnemy( 3 + waveLevel, genericEnemy);
+
         } else if(waveLevel < 10){
             spawnEnemy( -1 + waveLevel, genericEnemy);
             spawnEnemy( -1 + waveLevel, speedEnemy);
-        } else{
+        } else if(waveLevel < 15){
             spawnEnemy( -6 + waveLevel, genericEnemy);
             spawnEnemy( -6 + waveLevel, speedEnemy);
             spawnEnemy( -9 + waveLevel, bossEnemy);
+        } else{
+            spawnEnemy( -10 + waveLevel, genericEnemy);
+            spawnEnemy( -10 + waveLevel, speedEnemy);
+            spawnEnemy( -10 + waveLevel, bossEnemy);
+            spawnEnemy( 14 + waveLevel, bigBossEnemy);
         }
         return enemies;
     }
