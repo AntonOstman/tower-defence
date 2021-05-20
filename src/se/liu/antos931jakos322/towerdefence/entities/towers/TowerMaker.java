@@ -21,6 +21,8 @@ public class TowerMaker
     // tower to create when for eg. getting a string "arrow"
     // instead of if arrow do this, if cannon do this....
 
+    final static double TOWER_SIZE = 0.6;
+
     public static List<TowerType> getAllTowers(){
 
 	// return TowerType.values(); // this should be used in the final implementaion
@@ -54,7 +56,7 @@ public class TowerMaker
 	final int attackSpeed = 8;
 	final Color arrowColor = Color.BLUE;
         Tower arrowTower = new StandardTower(TowerType.ARROW, arrowColor, cost, attackpower, range, upgradeCost,
-					     ProjectileType.BULLET, attackSpeed);
+					     ProjectileType.BULLET, attackSpeed, TOWER_SIZE);
         return arrowTower;
     }
 
@@ -64,9 +66,10 @@ public class TowerMaker
 	final int range = 5;
 	final int upgradeCost = 1;
 	final int attackSpeed = 1;
+	final double speed = 0.03;
 	final Color arrowColor = Color.red;
 	Tower arrowTower = new AirplaneTower(TowerType.AIRPLANE, arrowColor, cost, attackpower, range, upgradeCost,
-					     ProjectileType.MACHINE, attackSpeed);
+					     ProjectileType.MACHINE, attackSpeed, speed,TOWER_SIZE);
 	return arrowTower;
     }
     private static Tower createCanonTower(){
@@ -77,7 +80,7 @@ public class TowerMaker
 	final int attackSpeed = 20;
 	final Color color = Color.ORANGE;
 	Tower canonTower = new StandardTower(TowerType.CANON, color, canonCost, canonAttackpower, canonRange, upgradeCost,
-					     ProjectileType.CANON, attackSpeed);
+					     ProjectileType.CANON, attackSpeed, TOWER_SIZE);
         return canonTower;
     }
 
@@ -89,7 +92,7 @@ public class TowerMaker
 	final int attackSpeed = 1;
 	final Color machineGunColor = Color.PINK;
 	Tower machineGunTower = new StandardTower(TowerType.MACHINE_GUN, machineGunColor, cost, attackPower, range, upgradeCost,
-						  ProjectileType.MACHINE, attackSpeed);
+						  ProjectileType.MACHINE, attackSpeed, TOWER_SIZE);
 	return machineGunTower;
 
 

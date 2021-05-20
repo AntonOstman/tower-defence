@@ -37,8 +37,9 @@ public abstract class Tower extends Entity
     protected int level;
 
 
-    protected Tower(TowerType towerType, Color color, int cost, int attackPower, int range, int upgradeCost, ProjectileType projectileType, int attackSpeed) {
-        super(color, 0.6);
+    protected Tower(TowerType towerType, Color color, int cost, int attackPower, int range, int upgradeCost, ProjectileType projectileType,
+                    int attackSpeed, double speed, double size) {
+        super(color, size, speed);
         this.cost = cost;
         this.attackPower = attackPower;
         this.range = range;
@@ -51,6 +52,23 @@ public abstract class Tower extends Entity
         this.rangeTickCounter = 0;
         this.level = 1;
     }
+    // some towers do not require a speed so
+    protected Tower(TowerType towerType, Color color, int cost, int attackPower, int range, int upgradeCost, ProjectileType projectileType,
+                    int attackSpeed, double size) {
+        super(color, size);
+        this.cost = cost;
+        this.attackPower = attackPower;
+        this.range = range;
+        this.towerType = towerType;
+        this.upgradeCost = upgradeCost;
+        this.projectileType = projectileType;
+        this.attackSpeed = attackSpeed;
+        this.attackSpeedCharge = 0;
+        this.selected = false;
+        this.rangeTickCounter = 0;
+        this.level = 1;
+    }
+
 
     public boolean canAttack(Enemy enemy){
 
@@ -95,9 +113,10 @@ public abstract class Tower extends Entity
         return cost;
     }
 
-    public void activate(){
+    public abstract void activate();
         // can be used by towers to do something special on a tick example: airplanetower moves
-    }
+
+
 
     public void draw(final Graphics2D g2d, final int tileSize) {
 

@@ -34,6 +34,7 @@ public abstract class Enemy extends Entity
     	this.damage = damage;
     	this.finished = false;
     	this.lastPosition = null;
+
     }
 
     public void takeDamage(int damage){
@@ -83,21 +84,20 @@ public abstract class Enemy extends Entity
     }
 
 
-     @Override public void move(Point2D nextPosition){
+     @Override public void move(){
 	// Gives Enemy a starting position
 	if(position == null){
-	    position = nextPosition;
+	    position = movePosition;
 	    pathPosition += 1;
 	}
-
-	super.move(nextPosition);
+	super.move();
 
 	// now the question is why does gamehandler know distances below for isNear?
 	 // is that not gameMaps job to know its own distances? i dont know what is best
 
-	if(HelperFunctions.isNear(position, nextPosition, 0.2)){
+	if(HelperFunctions.isNear(position, movePosition, 0.2)){
 	    // If this is the last block --> Enemy is done with the path
-	    if (nextPosition.equals(lastPosition)){
+	    if (movePosition.equals(lastPosition)){
 	        finished = true;
 	        return;
 	    }
@@ -125,4 +125,7 @@ public abstract class Enemy extends Entity
 
     public int getPathPosition() { return pathPosition; }
 
+    public void setMovePosition(final Point2D movePosition) {
+	this.movePosition = movePosition;
+    }
 }

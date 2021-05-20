@@ -12,7 +12,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -177,39 +176,16 @@ public class GameHandler
         return health;
     }
 
-    public void moveEnemy2() {
 
-        Iterator<Enemy> i = enemies.iterator();
+    public void moveEnemy(){
 
-        while (i.hasNext()) {
-            Enemy enemy = i.next();
-            int nextTile = enemy.getPathPosition();
-            enemy.setLastPosition(gameMap.getLastTile());
-            enemy.move(gameMap.getPath(nextTile));
-            // if the enemy has come to the end of the map damage the player
-            if (enemy.isFinished()) {
-                takeDamage(enemy.getDamage());
-                i.remove();
-            }
-            // if an enemy is defeated remove it and give the player money
-            else if (enemy.getHealth() <= 0) {
-                i.remove();
-                money += enemy.getRewardMoney();
-            }
-
-        }
-    }
-
-
-        public void moveEnemy(){
-
-        Iterator<Enemy> i = enemies.iterator();
         List<Enemy> removeEnemies = new ArrayList<>();
 
         for (Enemy enemy : enemies){
             int nextTile = enemy.getPathPosition();
             enemy.setLastPosition(gameMap.getLastTile());
-            enemy.move(gameMap.getPath(nextTile));
+            enemy.setMovePosition(gameMap.getPath(nextTile));
+            enemy.move();
             // if the enemy has come to the end of the map damage the player
             if(enemy.isFinished()){
                 takeDamage(enemy.getDamage());
