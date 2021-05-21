@@ -8,6 +8,8 @@ package se.liu.antos931jakos322.towerdefence.entities.towers;
  */
 
 
+import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileType;
+
 import java.awt.*;
 import java.awt.geom.Point2D;
 
@@ -19,12 +21,12 @@ public class AirplaneTower extends Tower
     private final static int COST = 7;
     private final static int RANGE = 5;
     private final static int UPGRADE_COST = 1;
-    private final static int ATTACK_SPEED = 1;
+    private final static int ATTACK_SPEED = 3;
     private final static double SPEED = 0.03;
     private final static double SIZE = 0.6;
     private final static Color COLOR = Color.red;
     private final static TowerType TOWER_TYPE = TowerType.AIRPLANE;
-    private final static ProjectileType PROJECTILE_TYPE = ProjectileType.MACHINE;
+    private final static ProjectileType PROJECTILE_TYPE = ProjectileType.MISSILE;
 
     public AirplaneTower()
     {

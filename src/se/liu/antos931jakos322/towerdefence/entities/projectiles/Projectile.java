@@ -1,4 +1,4 @@
-package se.liu.antos931jakos322.towerdefence.entities.towers;
+package se.liu.antos931jakos322.towerdefence.entities.projectiles;
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
@@ -29,10 +29,10 @@ public abstract class Projectile extends Entity
     private int penetrationAmount;
 
 
-    protected Projectile(final Color color, final double size, double speed, Point2D position, int penetrationAmount, int attackPower) {
+    protected Projectile(final Color color, final double size, double speed, int penetrationAmount) {
 	super(color, size, speed);
-	this.attackPower = attackPower;
-	this.startPosition = position;
+	this.attackPower = 0;
+	this.startPosition = null;
 	this.penetrationAmount = penetrationAmount;
     }
 
@@ -85,6 +85,10 @@ public abstract class Projectile extends Entity
 	int drawPositionY = (int) (position.getY() * tileSize) + offset;
 
 	g2d.fillOval(drawPositionX, drawPositionY, size, size);
+    }
+
+    public void setAttackPower(final int attackPower) {
+	this.attackPower = attackPower;
     }
 
     public int getPenetrationAmount() {

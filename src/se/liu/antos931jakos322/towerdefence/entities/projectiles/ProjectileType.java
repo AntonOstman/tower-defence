@@ -1,4 +1,4 @@
-package se.liu.antos931jakos322.towerdefence.entities.towers;
+package se.liu.antos931jakos322.towerdefence.entities.projectiles;
 
 
 /**
@@ -11,6 +11,6 @@ package se.liu.antos931jakos322.towerdefence.entities.towers;
 
 public enum ProjectileType
 {
-    ARROW, CANON, NONE, MACHINE
+    ARROW, CANON, NONE, MISSILE, MACHINE
 
 }

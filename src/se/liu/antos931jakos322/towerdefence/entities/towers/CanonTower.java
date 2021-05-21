@@ -1,5 +1,7 @@
 package se.liu.antos931jakos322.towerdefence.entities.towers;
 
+import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileType;
+
 import java.awt.*;
 
 public class CanonTower extends Tower

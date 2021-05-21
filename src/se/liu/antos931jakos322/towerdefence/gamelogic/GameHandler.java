@@ -2,7 +2,7 @@ package se.liu.antos931jakos322.towerdefence.gamelogic;
 
 import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 import se.liu.antos931jakos322.towerdefence.entities.towers.Tower;
-import se.liu.antos931jakos322.towerdefence.entities.towers.Projectile;
+import se.liu.antos931jakos322.towerdefence.entities.projectiles.Projectile;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.WaveMaker;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 import se.liu.antos931jakos322.towerdefence.userinterface.GameListener;
@@ -306,9 +306,10 @@ public class GameHandler
         return projectiles;
     }
 
-    public GameMap getMap() { // this should probably be changed so map cannot be directly accessed. Game handler controls map not others
+    public GameMap getGameMap() { // this should probably be changed so map cannot be directly accessed. Game handler controls map not others
         return gameMap;
     }
+
 
     public boolean isGamePaused() {
         return gamePaused;
