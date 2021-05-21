@@ -114,7 +114,7 @@ public class StartMenu implements GameListener
 
 	} catch (IOException ioException) {
 	    //logger.log(Level.SEVERE, " could not create maps.json file, asking user to try again", ioException);
-
+	    logger.log(Level.SEVERE,"could not create map", ioException);
 	    String errorMessage = ioException + "\n Error creating game map. \n Do you want to try again?";
 	    int userAnswer = JOptionPane.showConfirmDialog(null, errorMessage);
 	    if (userAnswer == JOptionPane.YES_OPTION){
