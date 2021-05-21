@@ -5,15 +5,15 @@ import java.awt.*;
 public class MachineGunTower extends Tower
 {
 
-    final static int ATTACK_POWER = 3;
-    final static int COST = 7;
-    final static int RANGE = 6;
-    final static int UPGRADE_COST = 1;
-    final static int ATTACK_SPEED = 1;
-    final static Color COLOR = Color.PINK;
-    final static TowerType TOWER_TYPE = TowerType.MACHINE_GUN;
-    final static double SIZE = 0.6;
-    final static ProjectileType PROJECTILE_TYPE = ProjectileType.MACHINE;
+    private final static int ATTACK_POWER = 3;
+    private final static int COST = 7;
+    private final static int RANGE = 6;
+    private final static int UPGRADE_COST = 1;
+    private final static int ATTACK_SPEED = 1;
+    private final static Color COLOR = Color.PINK;
+    private final static TowerType TOWER_TYPE = TowerType.MACHINE_GUN;
+    private final static double SIZE = 0.6;
+    private final static ProjectileType PROJECTILE_TYPE = ProjectileType.MACHINE;
 
     public MachineGunTower()
     {

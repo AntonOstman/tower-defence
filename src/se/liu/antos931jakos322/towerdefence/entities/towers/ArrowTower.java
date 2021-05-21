@@ -6,15 +6,15 @@ public class ArrowTower extends Tower
 {
 
 
-    static final int ATTACKPOWER = 10;
-    static final int COST = 7;
-    static final int RANGE = 5;
-    static final int UPGRADE_COST = 1;
-    static final int ATTACK_SPEED = 8;
-    static final Color COLOR = Color.BLUE;
-    static final double SIZE = 0.6;
-    static final ProjectileType PROJECTILE_TYPE = ProjectileType.ARROW;
-    static final TowerType TOWER_TYPE = TowerType.ARROW;
+    private static final int ATTACKPOWER = 10;
+    private static final int COST = 7;
+    private static final int RANGE = 5;
+    private static final int UPGRADE_COST = 1;
+    private static final int ATTACK_SPEED = 8;
+    private static final Color COLOR = Color.BLUE;
+    private static final double SIZE = 0.6;
+    private static final ProjectileType PROJECTILE_TYPE = ProjectileType.ARROW;
+    private static final TowerType TOWER_TYPE = TowerType.ARROW;
 
     public ArrowTower()
     {
