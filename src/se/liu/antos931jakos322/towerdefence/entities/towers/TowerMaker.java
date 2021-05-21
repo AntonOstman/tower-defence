@@ -72,6 +72,7 @@ public class TowerMaker
 					     ProjectileType.MACHINE, attackSpeed, speed,TOWER_SIZE);
 	return arrowTower;
     }
+
     private static Tower createCanonTower(){
 	final int canonAttackpower = 5;
 	final int canonCost = 7;

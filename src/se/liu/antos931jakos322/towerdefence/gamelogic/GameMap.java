@@ -204,7 +204,7 @@ public class GameMap
 	}
 	catch (JsonSyntaxException jsonSyntaxException){
 	    logger.log(Level.SEVERE, "maps file has been corrupted and can not be read", jsonSyntaxException);
-	    throw new IOException("maps file has been corrupted and can not be read \n" + jsonSyntaxException);
+	    throw jsonSyntaxException;
 	}
 	reader.close();
 

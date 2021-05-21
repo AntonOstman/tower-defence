@@ -41,16 +41,6 @@ public abstract class Enemy extends Entity
 	if (health - damage < 0) { health = 0; }
 	else { health -= damage; }
 
-	double percentageHealth = (double) health / maxHealth;
-	double inverceProcentageHP = 1 - percentageHealth;
-	color = new Color( (int) (color.getRed()   + (255- color.getRed())   * inverceProcentageHP),
-			   (int) (color.getGreen() + (255- color.getGreen()) * inverceProcentageHP),
-			   (int) (color.getBlue()  + (255- color.getBlue())  * inverceProcentageHP));
-	// the reason that a red enemy becomes fully white on half hp
-	// is because if the colors value start on 128 128 128
-	// and when precentageHP is 0.5 it will become 128 + 128 ( i think)
-
-
     }
 
     public void draw(final Graphics2D g2d, final int tileSize) {
