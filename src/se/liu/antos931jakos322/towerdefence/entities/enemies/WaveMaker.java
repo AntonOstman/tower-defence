@@ -72,14 +72,17 @@ public class WaveMaker
         Enemy speedEnemy = new SpeedEnemy();
         Enemy bossEnemy = new BossEnemy();
         Enemy bigBossEnemy = new BigBossEnemy();
+        Enemy explodingEnemy = new ExplodingEnemy();
 
 
         if(waveLevel < 5){
+
             spawnEnemy( 3 + waveLevel, genericEnemy);
 
         } else if(waveLevel < 10){
+            spawnEnemy( -4 + waveLevel, explodingEnemy);
             spawnEnemy( -1 + waveLevel, genericEnemy);
-            spawnEnemy( -1 + waveLevel, speedEnemy);
+            spawnEnemy( -2 + waveLevel, speedEnemy);
         } else if(waveLevel < 15){
             spawnEnemy( -6 + waveLevel, genericEnemy);
             spawnEnemy( -6 + waveLevel, speedEnemy);

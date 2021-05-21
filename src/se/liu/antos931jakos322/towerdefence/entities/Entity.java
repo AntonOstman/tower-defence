@@ -85,4 +85,7 @@ public abstract class Entity
     public double getSize() {
         return size;
     }
+    protected void setSpeed(int speed){
+        this.speed = speed;
+    }
 }

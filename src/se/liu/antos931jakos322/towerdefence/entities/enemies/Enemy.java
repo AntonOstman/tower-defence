@@ -8,6 +8,8 @@ import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An abstract class with the core elements of an enemy
@@ -22,7 +24,7 @@ public abstract class Enemy extends Entity
     protected final int maxHealth;
     protected final int rewardMoney;
     protected int damage;
-    private boolean finished;
+    protected boolean finished;
     private Point2D lastPosition;
 
     protected Enemy(final int maxHealth, final double speed, final Color color, final double size, int damage) {
@@ -112,5 +114,12 @@ public abstract class Enemy extends Entity
 
     public void setMovePosition(final Point2D movePosition) {
 	this.movePosition = movePosition;
+    }
+    public List<Enemy> split(){
+        return new ArrayList<>();
+    }
+
+    public void setPathPosition(final int pathPosition) {
+	this.pathPosition = pathPosition;
     }
 }

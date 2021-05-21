@@ -184,7 +184,7 @@ public class GameHandler
     public void moveEnemy(){
 
         List<Enemy> removeEnemies = new ArrayList<>();
-
+        List<Enemy> addEnemies = new ArrayList<>();
         for (Enemy enemy : enemies){
             int nextTile = enemy.getPathPosition();
             enemy.setLastPosition(gameMap.getLastTile());
@@ -192,16 +192,19 @@ public class GameHandler
             enemy.move();
             // if the enemy has come to the end of the map damage the player
             if(enemy.isFinished()){
+
                 takeDamage(enemy.getDamage());
                 removeEnemies.add(enemy);
             }
             // if an enemy is defeated remove it and give the player money
             else if (enemy.getHealth() <= 0){
+                addEnemies.addAll(enemy.split());          // If the enemy is "splittable" then add the splitts
                 removeEnemies.add(enemy);
                 money += enemy.getRewardMoney();
             }
 
         }
+        enemies.addAll(addEnemies);
 
         for(Enemy enemy : removeEnemies){
             enemies.remove(enemy);
