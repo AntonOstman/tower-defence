@@ -4,6 +4,17 @@ import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileType;
 
 import java.awt.*;
 
+/**
+ *
+ * ArrowTower extends Tower and has no extra functionallity
+ * ArrowTower is therefore a "stat holder" class
+ *
+ * ArrowTower has medium attack speed, high damage, medium range and uses Arrow projectiles
+ *
+ *
+ */
+
+
 public class ArrowTower extends Tower
 {
 

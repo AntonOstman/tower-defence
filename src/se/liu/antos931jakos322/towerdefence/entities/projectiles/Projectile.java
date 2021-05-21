@@ -9,14 +9,14 @@ import java.awt.geom.Point2D;
 
 /**
  * Projectile is the abstract class for all projectiles in the game
- * Projectile represents an object that is moving and can do damage to enemies
+ * Projectile represents an object that moves and can do damage to enemies
  * Projectiles have various unique properties:
  * attackPower - represents how much damage the projectile does on a hit
  * PenetrationAmount - represents how many times the projectile can do damage before being "destroyed"
  *
  * Example use:
  * 	Projectile gets created by another entity that tells projectile what to target
- * 	when the projectile is near the something it damages it with attack()
+ * 	when the projectile is near the target it does damage to it.
  *
  */
 
@@ -24,17 +24,21 @@ import java.awt.geom.Point2D;
 public abstract class Projectile extends Entity
 {
 
-    private int attackPower;
     private Point2D startPosition;
     private int penetrationAmount;
 
 
     protected Projectile(final Color color, final double size, double speed, int penetrationAmount) {
-	super(color, size, speed);
-	this.attackPower = 0;
+	super(color, size, speed, 0);
 	this.startPosition = null;
 	this.penetrationAmount = penetrationAmount;
     }
+
+    /**
+     * Move moves the projectile forwards towards the designated moveposition.
+     * To keep the projectile from stopping the movePosition is increased with the delta x and y coordinates
+     *
+     */
 
 
     @Override public void move(){
@@ -50,6 +54,13 @@ public abstract class Projectile extends Entity
 	movePosition = newPos;
     }
 
+    /**
+     * canAttack returns wheter a projectile can attack an enemy
+     *
+     * @param enemy the enemy object that is being checked if it is possible to attack
+     * @return true or false if an attack is possible or not
+     */
+
     public boolean canAttack(Enemy enemy){
         // the projectile hit range is increased with a constant to make sure it actually hits when near an enemy
         int hitRangeScale = 2;
@@ -60,35 +71,50 @@ public abstract class Projectile extends Entity
 	else{ return false;}
     }
 
+    /**
+     * attacks an enemy
+     *
+     * @param enemy the enemy object to attack
+     */
+
     public void attack(Enemy enemy){
 	enemy.takeDamage(attackPower);
 	penetrationAmount -= 1;
 
     }
 
-    //sets the direction for the projectile by calculating the change in x and y
+    /**
+     * Sets movePosition to the enemy target position
+     * Also saves the start positoin in startPosition
+     *
+     * @param target the enemy object to target
+     */
     public void setTarget(final Enemy target) {
 	this.movePosition = target.getPosition();
 	this.position = startPosition;
     }
 
-    public void draw(final Graphics2D g2d, final int tileSize){
+    /**
+     * draws the projectile as a circle with the specified size and color fields
+     * with an offset to center the projectile
+     *
+     * @param g2d grapchis object
+     * @param gameScale the scale of the game graphics
+     */
+
+    public void draw(final Graphics2D g2d, final int gameScale){
 	// drawPosX could be changed to a double and then in this draw method we cast to int
 	// problem with a direct int is for example we cannot go "between" tiles only straight to it
 
 	g2d.setColor(color);
 
-	final int size = (int) (tileSize * this.size);
-	final int offset = tileSize / 2 - size / 2;
+	final int size = (int) (gameScale * this.size);
+	final int offset = gameScale / 2 - size / 2;
 
-	int drawPositionX = (int) (position.getX() * tileSize) + offset;
-	int drawPositionY = (int) (position.getY() * tileSize) + offset;
+	int drawPositionX = (int) (position.getX() * gameScale) + offset;
+	int drawPositionY = (int) (position.getY() * gameScale) + offset;
 
 	g2d.fillOval(drawPositionX, drawPositionY, size, size);
-    }
-
-    public void setAttackPower(final int attackPower) {
-	this.attackPower = attackPower;
     }
 
     public int getPenetrationAmount() {

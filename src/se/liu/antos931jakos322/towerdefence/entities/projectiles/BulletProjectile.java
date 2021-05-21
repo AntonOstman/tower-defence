@@ -2,6 +2,15 @@ package se.liu.antos931jakos322.towerdefence.entities.projectiles;
 
 import java.awt.*;
 
+/**
+ *
+ * BulletProjectile is a projectile that is comparatively weak when looking at other projectiles.
+ * It moves at a fast speed, has a small size and it penetrates only one enemy.
+ * BulletProjectiles extends Projectile with no extra features and works as a "stat holder"
+ *
+ */
+
+
 public class BulletProjectile extends Projectile
 {
     private static final double SIZE = 0.15;

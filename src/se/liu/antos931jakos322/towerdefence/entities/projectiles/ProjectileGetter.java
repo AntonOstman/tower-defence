@@ -7,7 +7,7 @@ import java.util.EnumMap;
 
 /**
  *
- * ProjectileGetter is a classed used to return a projectile object
+ * ProjectileGetter is used to return depending on what projectiletype is given
  *  Example:
  *  	getProjectile(projectiletype) returns the a new projectile object of the desired type
  *

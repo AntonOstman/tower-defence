@@ -160,7 +160,7 @@ public class GameHandler
             // if the enemy can be attacked
             if (tower.canAttack(closestEnemy)) {
                 // then send a projectile to that enemy
-                Projectile projectile = tower.createProjectile(closestEnemy);
+                Projectile projectile = tower.createProjectileAttack(closestEnemy);
                 projectiles.add(projectile);
 
             }
@@ -193,7 +193,7 @@ public class GameHandler
             // if the enemy has come to the end of the map damage the player
             if(enemy.isFinished()){
 
-                takeDamage(enemy.getDamage());
+                takeDamage(enemy.getAttackPower());
                 removeEnemies.add(enemy);
             }
             // if an enemy is defeated remove it and give the player money
@@ -266,21 +266,6 @@ public class GameHandler
     // returnes the enemies within a ceratin range.
     // example: if range = 1 all enemies whithin 1 tiles range will be returned
 
-    public List<Enemy> getEnemiesWithin(Point2D coord, double range) {
-        List<Enemy> enemiesInRange = new ArrayList<>();
-        for (Enemy enemy : enemies) {
-            double difX = enemy.getX() - coord.getX();
-            double difY = enemy.getY() - coord.getY();
-
-           double distance = Math.hypot(difX,difY);
-           if (distance <= range){
-               enemiesInRange.add(enemy);
-
-            }
-        }
-        return enemiesInRange;
-    }
-
 
     public Tower getTowerOnPoint(Point2D position){
         final double distance = 0.5;
@@ -313,11 +298,9 @@ public class GameHandler
         return gameMap;
     }
 
-
     public boolean isGamePaused() {
         return gamePaused;
     }
-
 
     public int getEnemyAmount(){
         return enemies.size();
@@ -328,7 +311,6 @@ public class GameHandler
     }
 
     public int getTowerAmount(){
-
         return towers.size();
     }
 

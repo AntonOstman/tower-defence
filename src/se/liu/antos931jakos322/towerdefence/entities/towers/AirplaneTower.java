@@ -2,10 +2,16 @@ package se.liu.antos931jakos322.towerdefence.entities.towers;
 
 /**
  *
- * AirplaneTower is a class extending the absract class Tower
- * AirplaneTower can move in circles while still acting as a Tower
+ *
+ * AirplaneTower extends Tower and is a Tower that can move.
+ * AirplaneTower moves in circles around the startPosition to represent an airplane flying around.
+ *
+ * Otherwise AirplaneTower has the basic functionallity excpected by a tower.
+ * AirplaneTower shoots Missile projectiles and has medium stats
  *
  */
+
+
 
 
 import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileType;

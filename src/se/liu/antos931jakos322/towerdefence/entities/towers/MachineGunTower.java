@@ -4,12 +4,20 @@ import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileType;
 
 import java.awt.*;
 
+/**
+ *  BulletProjectile extends Tower and has no extra functionallity
+ *  BulletProjectile is therefore a "stat holder" class
+ *
+ *  MachineGunTower has high attack speed, low damage, high range and uses Bullet projectiles
+ *
+ */
+
 public class MachineGunTower extends Tower
 {
 
     private final static int ATTACK_POWER = 3;
     private final static int COST = 7;
-    private final static int RANGE = 6;
+    private final static int RANGE = 7;
     private final static int UPGRADE_COST = 1;
     private final static int ATTACK_SPEED = 1;
     private final static Color COLOR = Color.PINK;

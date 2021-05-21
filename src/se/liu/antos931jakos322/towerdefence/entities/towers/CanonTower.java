@@ -4,6 +4,15 @@ import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileType;
 
 import java.awt.*;
 
+/**
+ *  CanonTower extends Tower and has no extra functionallity
+ *  CanonTower is therefore a "stat holder" class
+ *
+ *  CanonTower has low attack speed, extra high damage, medium range and uses Canon projectiles
+ *
+ *
+ */
+
 public class CanonTower extends Tower
 {
     private final static int ATTACK_POWER = 5;

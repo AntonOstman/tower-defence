@@ -23,18 +23,16 @@ public abstract class Enemy extends Entity
     protected int pathPosition;
     protected final int maxHealth;
     protected final int rewardMoney;
-    protected int damage;
     protected boolean finished;
     private Point2D lastPosition;
 
-    protected Enemy(final int maxHealth, final double speed, final Color color, final double size, int damage) {
-	super(color, size, speed);
+    protected Enemy(final int maxHealth, final double speed, final Color color, final double size, int attackPower) {
+	super(color, size, speed, attackPower);
 	this.health = maxHealth;
 	this.maxHealth = maxHealth;
 	this.pathPosition = 0;
     	this.rewardMoney = 5;
-    	this.damage = damage;
-    	this.finished = false;
+	this.finished = false;
     	this.lastPosition = null;
 
     }
@@ -108,13 +106,9 @@ public abstract class Enemy extends Entity
     public void setLastPosition(Point2D position){
 	lastPosition = position;
     }
-    public int getDamage(){ return damage; }
 
     public int getPathPosition() { return pathPosition; }
 
-    public void setMovePosition(final Point2D movePosition) {
-	this.movePosition = movePosition;
-    }
     public List<Enemy> split(){
         return new ArrayList<>();
     }
