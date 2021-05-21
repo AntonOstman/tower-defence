@@ -3,7 +3,11 @@ package se.liu.antos931jakos322.towerdefence.entities.enemies;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * WaveMaker creates the enemies and returns the enemies that will
+ * be spawned on the map. The class returnes the enemies in waves that depend
+ * on the tickcount. WaveMaker should be activated every tick.
+ */
 public class WaveMaker
 {
     private int waveLevel;

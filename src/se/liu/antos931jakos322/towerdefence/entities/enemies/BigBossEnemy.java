@@ -1,7 +1,10 @@
 package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
 import java.awt.*;
-
+/**
+ * BigBossEnemy is an enemy type that extends the abstract class Enemy.
+ * BossEnemy have alot of health (more than BossEnemy) but moves slow.
+ */
 public class BigBossEnemy extends Enemy
 {
     private static final int HEALTH = 3000;

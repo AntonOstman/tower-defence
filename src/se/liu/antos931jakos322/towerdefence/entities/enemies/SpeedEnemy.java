@@ -1,7 +1,10 @@
 package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
 import java.awt.*;
-
+/**
+ * SpeedEnemy is an enemy type that extends the abstract class Enemy
+ * SpeedEnemy have low health but are fast.
+ */
 public class SpeedEnemy extends Enemy
 {
     private static final int HEALTH = 70;

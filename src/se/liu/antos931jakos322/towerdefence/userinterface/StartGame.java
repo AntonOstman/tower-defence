@@ -7,7 +7,10 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-
+/**
+ * StartGame starts the game.
+ * The class creates a start menu with the class StartMenu
+ */
 public class StartGame
 {
 	// set the global logger to be used in the whole project

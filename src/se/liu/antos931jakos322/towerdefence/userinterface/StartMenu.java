@@ -12,7 +12,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/**
+ * StartMenu opens a window where the user can click on on button
+ * to choose which map to play on, the class then starts a game
+ * on the choosen map.
+ */
 public class StartMenu implements GameListener
 {
     private JFrame frame;

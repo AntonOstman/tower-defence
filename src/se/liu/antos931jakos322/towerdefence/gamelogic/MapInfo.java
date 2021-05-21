@@ -2,7 +2,9 @@ package se.liu.antos931jakos322.towerdefence.gamelogic;
 
 import java.awt.*;
 import java.util.List;
-
+/**
+ * Mapinfo contains the information of a map.
+ */
 public class MapInfo
 {
     private Point dimensions;

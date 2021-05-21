@@ -4,7 +4,7 @@ import java.awt.*;
 
 /**
  *
- * A standard enemy
+ * A standard enemy. StandardEnemy extends the abstract class Enemy
  *
  */
 
