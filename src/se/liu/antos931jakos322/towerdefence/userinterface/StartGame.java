@@ -1,12 +1,49 @@
 package se.liu.antos931jakos322.towerdefence.userinterface;
 
 
+import javax.swing.*;
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
 public class StartGame
 {
+	// set the global logger to be used in the whole project
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static void main(String[] args) {
-	StartMenu startMenu = new StartMenu();
+        startLogger();
+        StartMenu startMenu = new StartMenu();
 	startMenu.createStartMenu();
+    }
+
+    public static void startLogger() {
+
+	FileHandler fileTxt = null;
+	try {
+	    fileTxt = new FileHandler("Logging.txt");
+	}
+	catch (IOException e){
+	    // the reason we dont log this exception is because there is no logger file yet.
+	    // The log file is what we are trying to create
+	    e.printStackTrace();
+	    String loadErrorMessage = e + " error starting logger do you want to try again?";
+	    int answer = JOptionPane.showConfirmDialog(null, loadErrorMessage);
+	    if (answer == JOptionPane.YES_OPTION){
+		startLogger();
+		return;
+	    }
+	    else {
+		System.exit(1);
+	    }
+	}
+	SimpleFormatter formatterTxt = new SimpleFormatter();
+	//XMLFormatter formatterTxt = new XMLFormatter();
+	fileTxt.setFormatter(formatterTxt);
+	LOGGER.setLevel(Level.FINE);
+	LOGGER.addHandler(fileTxt);
     }
 
 }

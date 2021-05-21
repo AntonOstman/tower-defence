@@ -5,6 +5,7 @@ import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 
 /**
  * Tower is the Abstract class for defensive structures in the game which also extends Entity
@@ -32,6 +33,7 @@ public abstract class Tower extends Entity
     protected int attackSpeedCharge;
     protected TowerType towerType;
     protected ProjectileType projectileType;
+    protected Point2D startPosition;
     protected boolean selected;
     protected int level;
 
@@ -45,6 +47,8 @@ public abstract class Tower extends Entity
         this.towerType = towerType;
         this.upgradeCost = upgradeCost;
         this.projectileType = projectileType;
+        this.startPosition = null;
+
         this.attackSpeed = attackSpeed;
         this.attackSpeedCharge = 0;
         this.selected = false;
@@ -57,6 +61,7 @@ public abstract class Tower extends Entity
         this.cost = cost;
         this.attackPower = attackPower;
         this.range = range;
+        this.startPosition = null;
         this.towerType = towerType;
         this.upgradeCost = upgradeCost;
         this.projectileType = projectileType;
@@ -154,9 +159,13 @@ public abstract class Tower extends Entity
         attackPower += 1;
         upgradeCost += 1;
         level++;
+
     }
 
-
+    @Override public void setPosition(final Point2D position) {
+        super.setPosition(position);
+        startPosition = position;
+    }
 
     public int getUpgradeCost() {
         return upgradeCost;

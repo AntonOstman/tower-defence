@@ -1,5 +1,6 @@
 package se.liu.antos931jakos322.towerdefence.userinterface;
 
+import com.google.gson.JsonSyntaxException;
 import se.liu.antos931jakos322.towerdefence.gamelogic.GameHandler;
 import se.liu.antos931jakos322.towerdefence.gamelogic.GameMap;
 import se.liu.antos931jakos322.towerdefence.gamelogic.Tile;
@@ -9,10 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 public class StartMenu implements GameListener
 {
@@ -20,9 +19,8 @@ public class StartMenu implements GameListener
     private GameHandler gameHandler;
     private GameViewer viewer;
     private final static int GAME_SCALE = 50;
-    private final Logger classLogger = Logger.getLogger(StartMenu.class.getName());
+    private final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private GameMap gameMap;
-
 
 
     public StartMenu() {
@@ -34,8 +32,6 @@ public class StartMenu implements GameListener
 
     public void createStartMenu(){
 
-        startLogger(classLogger);
-	startLogger(gameMap.getLogger());
         readNewMap(gameMap);
 
 	Color background = new Color(100,100,100);
@@ -124,64 +120,49 @@ public class StartMenu implements GameListener
 	}
     }
 
-    public static void startLogger(Logger logger) {
 
-	FileHandler fileTxt = null;
-        try {
-	    fileTxt = new FileHandler("Logging.txt");
+    public void createNewMap(GameMap gameMap){
+
+	try {
+	    gameMap.createMap();
+	    logger.fine("succesfully created new maps.json file");
+
+	} catch (IOException ioException) {
+	    //logger.log(Level.SEVERE, " could not create maps.json file, asking user to try again", ioException);
+
+	    String errorMessage = ioException + "\n Error creating game map. \n Do you want to try again?";
+	    int userAnswer = JOptionPane.showConfirmDialog(null, errorMessage);
+	    if (userAnswer == JOptionPane.YES_OPTION){
+		createNewMap(gameMap);
+	    }
+	    else {System.exit(1);}
+
 	}
-        // the reason we dont log this exception is because there is no logger yet. The log file is what we are trying to create
-	catch (IOException e){
-            e.printStackTrace();
-	    String loadErrorMessage = e + " error starting logger do you want to try again?";
-	    int answer = JOptionPane.showConfirmDialog(null, loadErrorMessage);
-	    if (answer == JOptionPane.YES_OPTION){
-	        startLogger(logger);
-	        return;
-	    }
-	    else {
-	        System.exit(1);
-	    }
-        }
-        SimpleFormatter formatterTxt = new SimpleFormatter();
-	//XMLFormatter formatterTxt = new XMLFormatter();
-	fileTxt.setFormatter(formatterTxt);
-	logger.setLevel(Level.FINE);
-	logger.addHandler(fileTxt);
+
     }
 
     public void readNewMap(GameMap gameMap){
 
-
 	try {
 	    gameMap.readMap();
-	    classLogger.fine("succesfully loaded maps file");
+	    logger.fine("succesfully loaded maps.json file");
 
-	} catch (IOException e) {
-
-	    classLogger.log(Level.WARNING, " could not find or read maps.json file, attempting to create a new one" , e);
-		try {
-		    gameMap.createMap();
-		    classLogger.fine("succesfully created new maps file");
-		    readNewMap(gameMap);
-
-		} catch (IOException ioException) {
-		    classLogger.log(Level.WARNING, " could not create maps.json file, asking user to try again", e);
-
-		    //ioException.printStackTrace();
-		    String createErrorMesage = ioException + "\n Error creating game map. \n Do you want to try again?";
-		    int createAnswer = JOptionPane.showConfirmDialog(null, createErrorMesage);
-		    if (createAnswer == JOptionPane.YES_OPTION){
-			readNewMap(gameMap);
-		    }
-		    else {System.exit(1);}
-
-	    }
-
-
-
+	} catch (IOException ioException) {
+	    // attempt to create new maps file and read it again
+	    // write to the log what has happend and the stackTrace
+	    // the error is also printed to the console
+	    String ioError = " could not find or read maps.json file, attempting to create a new one";
+	    logger.log(Level.WARNING, ioError, ioException);
+	    createNewMap(gameMap);
+	    readNewMap(gameMap);
 	}
-
+	catch (JsonSyntaxException jsonSyntaxException){
+	    // handled the same way as ioExceltion with the difference being non valid text was inside the file
+	    String jsonError = "maps.json does not contain valid json syntax, attempting to create a new maps.json file";
+	    logger.log(Level.WARNING, jsonError, jsonSyntaxException);
+	    createNewMap(gameMap);
+	    readNewMap(gameMap);
+	}
 
     }
 
@@ -189,7 +170,6 @@ public class StartMenu implements GameListener
 
 	//GameMap gameMap = new GameMap(); // move to gamehandelr?
 	gameMap.loadMap(mapIndex);
-
 
 	gameHandler = new GameHandler(gameMap);
 	viewer = new GameViewer(gameHandler, GAME_SCALE);

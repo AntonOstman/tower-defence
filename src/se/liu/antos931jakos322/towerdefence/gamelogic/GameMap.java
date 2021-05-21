@@ -166,6 +166,11 @@ public class GameMap
 
 	}
 
+	/** When maps.json has been read a map can be loaded into the game.
+	 * @param selectedMapIndex selects the map to load
+	 *
+	 * */
+
     public void loadMap(int selectedMapIndex){
 	// Updates varibles
 	MapInfo selectedMap = mapInfo.get(selectedMapIndex);
@@ -190,22 +195,12 @@ public class GameMap
 
     public void readMap() throws IOException {
 
-	StartMenu.startLogger(logger);
 	Reader reader = Files.newBufferedReader(Paths.get("maps.json"));
 
 
 	// convert JSON array to object
-	// if loading fails we should handle it by creating the map
-	//List<MapInfo> mapInfo;
-	try {
-	    mapInfo = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>()
-	    {
-	    }.getType());
-	}
-	catch (JsonSyntaxException jsonSyntaxException){
-	    logger.log(Level.SEVERE, "maps file has been corrupted and can not be read", jsonSyntaxException);
-	    throw jsonSyntaxException;
-	}
+
+	mapInfo = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>() {}.getType());
 	reader.close();
 
 
