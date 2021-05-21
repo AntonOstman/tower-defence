@@ -23,7 +23,7 @@ public class ProjectileMaker
     public static Projectile getProjectile(ProjectileType type, Point2D start, int attackPower){
 	EnumMap<ProjectileType, Projectile> projectileMap = new EnumMap<>(ProjectileType.class);
 
-	projectileMap.put(ProjectileType.BULLET, createBulletProjectile(start, attackPower));
+	projectileMap.put(ProjectileType.ARROW, createBulletProjectile(start, attackPower));
 	projectileMap.put(ProjectileType.CANON, createCanonProjectile(start, attackPower));
 	projectileMap.put(ProjectileType.MACHINE, createMachineProjectile(start, attackPower));
 	Projectile projectile = projectileMap.get(type);

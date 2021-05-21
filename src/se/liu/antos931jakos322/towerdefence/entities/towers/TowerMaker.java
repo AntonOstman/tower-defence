@@ -1,6 +1,5 @@
 package se.liu.antos931jakos322.towerdefence.entities.towers;
 
-import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -49,51 +48,24 @@ public class TowerMaker
     }
 
     private static Tower createArrowTower(){
-	final int attackpower = 10;
-        final int cost = 7;
-        final int range = 5;
-	final int upgradeCost = 1;
-	final int attackSpeed = 8;
-	final Color arrowColor = Color.BLUE;
-        Tower arrowTower = new StandardTower(TowerType.ARROW, arrowColor, cost, attackpower, range, upgradeCost,
-					     ProjectileType.BULLET, attackSpeed, TOWER_SIZE);
+        Tower arrowTower = new ArrowTower();
         return arrowTower;
     }
 
     private static Tower createAirplaneTower(){
-	final int attackpower = 10;
-	final int cost = 7;
-	final int range = 5;
-	final int upgradeCost = 1;
-	final int attackSpeed = 1;
-	final double speed = 0.03;
-	final Color arrowColor = Color.red;
-	Tower arrowTower = new AirplaneTower(TowerType.AIRPLANE, arrowColor, cost, attackpower, range, upgradeCost,
-					     ProjectileType.MACHINE, attackSpeed, speed,TOWER_SIZE);
+
+	Tower arrowTower = new AirplaneTower();
 	return arrowTower;
     }
 
     private static Tower createCanonTower(){
-	final int canonAttackpower = 5;
-	final int canonCost = 7;
-	final int canonRange = 3;
-	final int upgradeCost = 1;
-	final int attackSpeed = 20;
-	final Color color = Color.ORANGE;
-	Tower canonTower = new StandardTower(TowerType.CANON, color, canonCost, canonAttackpower, canonRange, upgradeCost,
-					     ProjectileType.CANON, attackSpeed, TOWER_SIZE);
-        return canonTower;
+
+	Tower canonTower = new CanonTower();
+	return canonTower;
     }
 
     private static Tower createMachineGunTower(){
-	final int attackPower = 3;
-	final int cost = 7;
-	final int range = 6;
-	final int upgradeCost = 1;
-	final int attackSpeed = 1;
-	final Color machineGunColor = Color.PINK;
-	Tower machineGunTower = new StandardTower(TowerType.MACHINE_GUN, machineGunColor, cost, attackPower, range, upgradeCost,
-						  ProjectileType.MACHINE, attackSpeed, TOWER_SIZE);
+	Tower machineGunTower = new MachineGunTower();
 	return machineGunTower;
 
 

@@ -39,15 +39,22 @@ public abstract class Projectile extends Entity
 
     @Override public void move(){
 	super.move();
-	Point2D deltaPos = new Point2D.Double(movePosition.getX() - position.getX(), movePosition.getY() - position.getY());
+	double moveX = movePosition.getX();
+	double moveY = movePosition.getY();
+	final int deltaScale = 10;
+	// we increse the delta with a constant to make sure when the projectile is shot near an enemy it does not bug out
+	double deltaX = deltaScale*(moveX - position.getX());
+	double deltaY = deltaScale*(moveY - position.getY());
 	// we increase the target position with the deltax and deltay to keep the projectile from stopping once it reaches the position
-	Point2D newPos = new Point2D.Double(movePosition.getX() + deltaPos.getX(),movePosition.getY() + deltaPos.getY());
+	Point2D newPos = new Point2D.Double(movePosition.getX() + deltaX,movePosition.getY() + deltaY);
 	movePosition = newPos;
     }
 
     public boolean canAttack(Enemy enemy){
-        double projectileSize = size;
-	if (HelperFunctions.isNear(position, enemy.getPosition(), projectileSize)) {
+        // the projectile hit range is increased with a constant to make sure it actually hits when near an enemy
+        int hitRangeScale = 2;
+        double hitRange = size * hitRangeScale;
+	if (HelperFunctions.isNear(position, enemy.getPosition(), hitRange)) {
 	return true;
 	}
 	else{ return false;}
