@@ -35,12 +35,19 @@ public class Tile
     }
 
     public void drawTile(final Graphics2D g2d, final int margin, final int tileSize){
+
 	g2d.setColor(tileColor);
 	g2d.fillRect(position.x * (margin + tileSize), position.y * (margin + tileSize), tileSize, tileSize);
+
     }
 
+    @Override public String toString() {
+	return tileType + " ";
+    }
+
+
     public Color randomNuance(){
-        Color oldColor = getStandardTileColor();
+        Color oldColor = getStandardTileColor(tileType);
         return new Color(getRandomColorChannel(oldColor.getRed()),
 			 getRandomColorChannel(oldColor.getGreen()),
 			 getRandomColorChannel(oldColor.getBlue()));
@@ -54,8 +61,12 @@ public class Tile
 
     }
 
-    private Color getStandardTileColor(){
-        if(tileType == TileType.GRASS){ return Color.GREEN; }
-	return Color.BLACK;
+    private static Color getStandardTileColor(TileType tileType){
+	EnumMap<TileType, Color> tileColors = new EnumMap<>(TileType.class);
+
+	tileColors.put(TileType.GRASS, Color.GREEN);
+	tileColors.put(TileType.ROAD, Color.BLACK);
+
+        return tileColors.get(tileType);
     }
 }

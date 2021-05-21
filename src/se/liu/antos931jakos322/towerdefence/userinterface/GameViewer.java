@@ -4,10 +4,14 @@ import se.liu.antos931jakos322.towerdefence.entities.towers.Tower;
 import se.liu.antos931jakos322.towerdefence.entities.towers.TowerMaker;
 import se.liu.antos931jakos322.towerdefence.entities.towers.TowerType;
 import se.liu.antos931jakos322.towerdefence.gamelogic.GameHandler;
+import se.liu.antos931jakos322.towerdefence.gamelogic.Tile;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
+import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 /**
@@ -43,7 +47,7 @@ public class GameViewer
     }
 
     public void show(){
-
+	final Color backGroundColor = new Color(92, 184, 92);
         frame = new JFrame();
 	MenuComponent menuComponent = new MenuComponent(gameHandler);
 	GameComponent gameComponent = new GameComponent(gameHandler, gameScale);
@@ -74,11 +78,33 @@ public class GameViewer
 	List<TowerType> towerTypes = TowerMaker.getAllTowers();
 	towerDescription = new JTextArea("No tower selected");
 
+	for (TowerType towerType: towerTypes) {
+	    ButtonEvent buttonEvent = new ButtonEvent(towerType, ButtonType.MENU);
+	    JToggleButton b = new JToggleButton();
+	    final int bufferedImageWidth = gameScale/2;
+	    final int bufferedImageHeight = gameScale/2;
+	    BufferedImage lineImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight,
+							BufferedImage.TYPE_INT_RGB);
+	    Graphics2D bg2d = lineImage.createGraphics();
+	    Tower tower = TowerMaker.getTower(towerType);
+	    double towerOffset = (1/2.0 - tower.getSize()/2);
+	    tower.setPosition(new Point2D.Double(-towerOffset,-towerOffset));
+	    tower.draw(bg2d, gameScale);
+	    b.addActionListener(buttonEvent);
+	    b.setIcon(new ImageIcon(lineImage));
+	    b.setBorderPainted(false);
+	    b.setBackground(backGroundColor);
+	    buttonGroup.add(b);
+	    interactivePanel.add(b);
+	    UIManager.put(b.isSelected(),Color.BLACK);
+	}
 	// iterate over all towerstypes that exist and get the information about certain towers from towermaker
 	// and create buttons with that information
+	/*
 	for (TowerType towerType: towerTypes) {
 	    ButtonEvent buttonEvent = new ButtonEvent(towerType, ButtonType.MENU);
 	    Color buttonColor = TowerMaker.getTower(towerType).getColor();
+
 	    JToggleButton b = new JToggleButton();
 	    b.setBackground(buttonColor);
 	    b.addActionListener(buttonEvent);
@@ -86,10 +112,10 @@ public class GameViewer
 	    interactivePanel.add(b);
 	    UIManager.put(b.isSelected(),Color.BLACK);
 	}
-
+	*/
 
 	textPanel.add(menuComponent);
-	final Color backGroundColor = new Color(92, 184, 92);
+
 
 	//gamepanel has the map compopnent and shows the running game
 	gamePanel.add(gameComponent);

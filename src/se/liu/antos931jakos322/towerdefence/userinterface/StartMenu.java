@@ -84,7 +84,6 @@ public class StartMenu implements GameListener
 	    b.setPreferredSize(new Dimension(105, 105));
 	    b.setBorderPainted(false);
 	    b.setBackground(background);
-	    //b.setVisible(false);
 	    mapSelect.add(b);
 	}
 

@@ -82,4 +82,7 @@ public abstract class Entity
         return position.getY();
     }
 
+    public double getSize() {
+        return size;
+    }
 }
