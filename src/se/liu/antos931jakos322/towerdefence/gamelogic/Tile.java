@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.EnumMap;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -34,62 +35,27 @@ public class Tile
     }
 
     public void drawTile(final Graphics2D g2d, final int margin, final int tileSize){
-
 	g2d.setColor(tileColor);
 	g2d.fillRect(position.x * (margin + tileSize), position.y * (margin + tileSize), tileSize, tileSize);
-
-    }
-
-    @Override public String toString() {
-	return tileType + " ";
     }
 
     public Color randomNuance(){
-        // changes the nuances of the tile color
-	EnumMap<TileType, Color> tileColorEnum = createColorMap();
-	Color color = tileColorEnum.get(tileType);
+        Color oldColor = getStandardTileColor();
+        return new Color(getRandomColorChannel(oldColor.getRed()),
+			 getRandomColorChannel(oldColor.getGreen()),
+			 getRandomColorChannel(oldColor.getBlue()));
+    }
 
-
-	List<Integer> colors = new ArrayList<>();
-
-	// add the colors in order red green blue
-	colors.add(color.getRed());
-	colors.add(color.getGreen());
-	colors.add(color.getBlue());
-
-	final int colorSpan = 50; // the span in which the colors can differs for a tile
+    private int getRandomColorChannel(int oldColor){
+	final int colorSpan = 50;
 	final int randomInt = RND.nextInt(colorSpan);
-	final int colorAmount = 3;
+	if(oldColor - randomInt >= 0){ return oldColor - randomInt; }
+	else{ return oldColor + randomInt; }
 
-	for (int i = 0; i < colorAmount; i++) {
-	    int oldColor = colors.get(i);
-	    int newColor;
-	    if(oldColor - randomInt >= 0){
-		newColor = oldColor - randomInt;
-	    }
-	    else{
-		newColor = oldColor + randomInt;
-	    }
-	    colors.set(i, newColor);
-	}
-	// we added red first, then green then blue to the colors list.
-	int newRed = colors.get(0);
-	int newGreen = colors.get(1);
-	int newBlue = colors.get(2);
-
-	Color newColor = new Color(newRed, newGreen, newBlue);
-
-	return newColor;
     }
 
-    private static EnumMap<TileType, Color> createColorMap(){
-
-        EnumMap<TileType, Color> tileColors = new EnumMap<>(TileType.class);
-
-        tileColors.put(TileType.GRASS, Color.GREEN);
-	tileColors.put(TileType.ROAD, Color.BLACK);
-
-        return tileColors;
+    private Color getStandardTileColor(){
+        if(tileType == TileType.GRASS){ return Color.GREEN; }
+	return Color.BLACK;
     }
-
 }
