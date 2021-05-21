@@ -4,19 +4,18 @@ package se.liu.antos931jakos322.towerdefence.gamelogic;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import se.liu.antos931jakos322.towerdefence.userinterface.StartMenu;
 
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -194,10 +193,12 @@ public class GameMap
     }
 
     public void readMap() throws IOException {
+	// load the map resource
+        String name = "maps/maps.json";
+        URL url = ClassLoader.getSystemResource(name);
+	InputStream inputStream = url.openStream();
 
-	Reader reader = Files.newBufferedReader(Paths.get("maps.json"));
-
-
+	Reader reader = new BufferedReader(new InputStreamReader(inputStream));
 	// convert JSON array to object
 
 	mapInfo = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>() {}.getType());

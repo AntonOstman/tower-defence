@@ -116,7 +116,7 @@ public abstract class Tower extends Entity
     }
 
     public abstract void activate();
-        // can be used by towers to do something special on a tick example: airplanetower moves
+        // can be used by towers to do something special example: airplanetower moves
 
 
 

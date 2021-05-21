@@ -25,11 +25,11 @@ public class StartGame
 	try {
 	    fileTxt = new FileHandler("Logging.txt");
 	}
-	catch (IOException e){
+	catch (IOException ioException){
 	    // the reason we dont log this exception is because there is no logger file yet.
 	    // The log file is what we are trying to create
-	    e.printStackTrace();
-	    String loadErrorMessage = e + " error starting logger do you want to try again?";
+	    ioException.printStackTrace();
+	    String loadErrorMessage = ioException + " error starting logger do you want to try again?";
 	    int answer = JOptionPane.showConfirmDialog(null, loadErrorMessage);
 	    if (answer == JOptionPane.YES_OPTION){
 		startLogger();

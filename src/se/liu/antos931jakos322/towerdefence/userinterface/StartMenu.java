@@ -104,21 +104,6 @@ public class StartMenu implements GameListener
 	frame.setVisible(true);
     }
 
-    public class ButtonEvent extends AbstractAction{
-
-	private int index;
-	public ButtonEvent(int i) {
-	    this.index = i;
-	}
-
-	@Override public void actionPerformed(final ActionEvent e) {
-	    //System.out.println(index);
-
-	    startGame(index);
-
-	    frame.setVisible(false);
-	}
-    }
 
 
     public void createNewMap(GameMap gameMap){
@@ -141,6 +126,16 @@ public class StartMenu implements GameListener
 
     }
 
+    public void readNewMapError(Exception e){
+
+	String errorMessage = e + "\n Error reading maps.json file. \n Do you want to try again?";
+	int userAnswer = JOptionPane.showConfirmDialog(null, errorMessage);
+	if (userAnswer == JOptionPane.YES_OPTION){
+	    readNewMap(gameMap);
+	}
+	else {System.exit(1);}
+    }
+
     public void readNewMap(GameMap gameMap){
 
 	try {
@@ -151,17 +146,15 @@ public class StartMenu implements GameListener
 	    // attempt to create new maps file and read it again
 	    // write to the log what has happend and the stackTrace
 	    // the error is also printed to the console
-	    String ioError = " could not find or read maps.json file, attempting to create a new one";
+	    String ioError = " could not find or read maps.json file, asking user to try again";
 	    logger.log(Level.WARNING, ioError, ioException);
-	    createNewMap(gameMap);
-	    readNewMap(gameMap);
+	    readNewMapError(ioException);
 	}
 	catch (JsonSyntaxException jsonSyntaxException){
 	    // handled the same way as ioExceltion with the difference being non valid text was inside the file
-	    String jsonError = "maps.json does not contain valid json syntax, attempting to create a new maps.json file";
+	    String jsonError = "maps.json does not contain valid json syntax, asking user to try again";
 	    logger.log(Level.WARNING, jsonError, jsonSyntaxException);
-	    createNewMap(gameMap);
-	    readNewMap(gameMap);
+	    readNewMapError(jsonSyntaxException);
 	}
 
     }
@@ -203,6 +196,23 @@ public class StartMenu implements GameListener
 
 	}
 
-
     }
+
+    public class ButtonEvent extends AbstractAction{
+
+	private int index;
+	public ButtonEvent(int i) {
+	    this.index = i;
+	}
+
+	@Override public void actionPerformed(final ActionEvent e) {
+
+	    startGame(index);
+	    frame.setVisible(false);
+	}
+    }
+
+
+
+
 }

@@ -25,28 +25,28 @@ public abstract class Projectile extends Entity
 {
 
     private int attackPower;
-    private Point2D startPoint;
+    private Point2D startPosition;
     private int penetrationAmount;
 
 
     protected Projectile(final Color color, final double size, double speed, Point2D position, int penetrationAmount, int attackPower) {
 	super(color, size, speed);
 	this.attackPower = attackPower;
-	this.startPoint = position; // the start position is always a normal point
+	this.startPosition = position;
 	this.penetrationAmount = penetrationAmount;
     }
 
 
     @Override public void move(){
 	super.move();
-	// we increase the target position with the deltax and deltay to keep the projectile from stopping once it reaches the position
 	Point2D deltaPos = new Point2D.Double(movePosition.getX() - position.getX(), movePosition.getY() - position.getY());
+	// we increase the target position with the deltax and deltay to keep the projectile from stopping once it reaches the position
 	Point2D newPos = new Point2D.Double(movePosition.getX() + deltaPos.getX(),movePosition.getY() + deltaPos.getY());
 	movePosition = newPos;
     }
 
     public boolean canAttack(Enemy enemy){
-        double projectileSize = size * 2;
+        double projectileSize = size;
 	if (HelperFunctions.isNear(position, enemy.getPosition(), projectileSize)) {
 	return true;
 	}
@@ -62,7 +62,7 @@ public abstract class Projectile extends Entity
     //sets the direction for the projectile by calculating the change in x and y
     public void setTarget(final Enemy target) {
 	this.movePosition = target.getPosition();
-	this.position = startPoint;
+	this.position = startPosition;
     }
 
     public void draw(final Graphics2D g2d, final int tileSize){
