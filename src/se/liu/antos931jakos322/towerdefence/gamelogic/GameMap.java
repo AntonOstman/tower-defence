@@ -194,8 +194,7 @@ public class GameMap
 
     public void readMap() throws IOException {
 	// load the map resource
-        String name = "maps/maps.json";
-        URL url = ClassLoader.getSystemResource(name);
+        URL url = ClassLoader.getSystemResource("maps/maps.json");
 	InputStream inputStream = url.openStream();
 
 	Reader reader = new BufferedReader(new InputStreamReader(inputStream));
