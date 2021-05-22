@@ -18,7 +18,7 @@ import java.awt.*;
 public class ArrowTower extends Tower
 {
 
-
+    // the inspections are false positive these constants should not be enum's
     private static final int ATTACK_POWER = 10;
     private static final int COST = 6;
     private static final int RANGE = 5;

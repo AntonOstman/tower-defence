@@ -1,5 +1,13 @@
 package se.liu.antos931jakos322.towerdefence.entities.towers;
 
+
+
+
+import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileType;
+
+import java.awt.*;
+import java.awt.geom.Point2D;
+
 /**
  *
  *
@@ -12,18 +20,13 @@ package se.liu.antos931jakos322.towerdefence.entities.towers;
  */
 
 
-
-
-import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileType;
-
-import java.awt.*;
-import java.awt.geom.Point2D;
-
 public class AirplaneTower extends Tower
 {
 
+
     private double angle;
     private double positionRadius;
+    // the inspections are false positive these constants should not be enum's
     private final static int ATTACK_POWER = 3;
     private final static int COST = 15;
     private final static int RANGE = 4;

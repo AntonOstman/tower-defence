@@ -8,7 +8,7 @@ import java.util.List;
  *
  * TowerGetter returns a new Tower object of the desired towerType
  *  Example:
- *  	getTower(TowerType) returns the a new Tower object of the desired type
+ *  	TowerGetter.getTower(TowerType) returns the a new Tower object of the desired type
  *
  */
 public class TowerGetter

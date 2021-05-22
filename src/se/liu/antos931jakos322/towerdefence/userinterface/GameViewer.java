@@ -267,7 +267,7 @@ public class GameViewer
 	private void displayTowerInfo(Point clickedPoint){
 
 	    if (clickedTower != null){
-	        gameHandler.unSelectTower(clickedTower);
+	        gameHandler.deselectTower(clickedTower);
 	    }
 	    Tower newClickedTower = gameHandler.getTowerOnPoint(clickedPoint);
 	    // if there is no tower on the point exit

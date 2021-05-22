@@ -18,7 +18,8 @@ import java.util.List;
  *
  * Gamehandler is the core class which contains the logic for starting and running the game.
  * Gamehandlers main way of running the game is by using the tick() method which is activated by a timer.
- * when the tick() method is called the game progresses one step by calling the entity handelding methods.
+ *
+ * when the tick() method is called the game progresses one step by calling the methods handeling entity's
  * Since GameHandler controls the game that also means it handles the interactions between the game map and entities.
  * Which means for example GameHandler means GameHandler knows when
  * enemies have come to the end of the game map and the player should take damage.
@@ -54,6 +55,12 @@ public class GameHandler
         this.gamePaused = true;
         this.gameOver = false;
     }
+
+    /**
+     * Calls all methods which progress the game one step or "tick"
+     *
+     */
+
     public void tick(){
 
         setGameOver();
@@ -65,9 +72,19 @@ public class GameHandler
 
     }
 
+    /**
+     * Adds all enemies waveMaker decides make up a new wave
+     */
+
     public void createEnemies(){
         addAllEnemies(waveMaker.update());
     }
+
+    /**
+     * Adds all enemies in a list to the game
+     *
+     * @param enemiesToAdd enemies which should be added to the game
+     */
 
     public void addAllEnemies(List<Enemy> enemiesToAdd){
         for(Enemy enemy : enemiesToAdd){
@@ -76,6 +93,9 @@ public class GameHandler
         }
     }
 
+    /**
+     * Sets game over and pauses the game if the player's life is 0 or less
+     */
     public void setGameOver(){
 
         if (health <= 0) {
@@ -88,6 +108,12 @@ public class GameHandler
         return gameOver;
     }
 
+    /**
+     * Initialises the game timer if it is not set and starts the tickertimer.
+     * Also sets gamePaused to false
+     *
+     */
+
     public void startGame() {
     if (tickTimer == null){
         final int tickDelay = 30;
@@ -98,10 +124,22 @@ public class GameHandler
     gamePaused = false;
     }
 
+    /**
+     * Stops the game timer and sets gamePaused to flase
+     *
+     */
     public void pauseGame(){
         tickTimer.stop();
         gamePaused = true;
     }
+
+    /**
+     * Handles the logic for game projectiles.
+     * Does so by moving the projectiles, checking enemies if there is anyone the projectile can attack.
+     * Removes the projectiles that cannot penetrate more enemies.
+     * Also removes projectiles which are outside of the game map.
+     *
+     */
 
     public void moveProjectiles(){
         List<Projectile> projectilesToRemove = new ArrayList<>();
@@ -133,6 +171,13 @@ public class GameHandler
         projectiles.removeAll(projectilesToRemove);
     }
 
+    /**
+     * Handles the logic for towers every tick.
+     * Does so by first activating the Tower's special functionallity method
+     * Then all towers decide which enemy to target.
+     * Lastley towers attack the enemies which it has chosen to target
+     *
+     */
 
     public void activateTowers(){
         for (Tower tower: towers){
@@ -163,6 +208,14 @@ public class GameHandler
         return waveMaker.getWaveLevel();
     }
 
+    /**
+     * Handles the main logic for enemies.
+     * Does so by mainly moving all enemies along the pre decided game path.
+     * This means it also handles wheter an enemy is defeated or has come to the end of the path.
+     * In both cases the enemy is removed from the game.
+     * If it came to the end the player takes damage.
+     *
+     */
 
     public void moveEnemy(){
 
@@ -193,6 +246,11 @@ public class GameHandler
     }
 
 
+    /**
+     *
+     *
+     * @param tower the tower to add to the game
+     */
 
     public void addTower(Tower tower){
         money -= tower.getCost();
@@ -202,7 +260,7 @@ public class GameHandler
 
     public boolean canAffordAndPlaceTower(Tower tower){
         Point2D towerPos = tower.getPosition();
-        Point towerPosPoint = new Point((int)towerPos.getX(),(int)towerPos.getY());
+        Point towerPosPoint = new Point((int)towerPos.getX(), (int)towerPos.getY());
 
         TileType desiredPlacementTile  = gameMap.getTile(towerPosPoint).getTileType();
 
@@ -270,7 +328,7 @@ public class GameHandler
         tower.setSelected(true);
         notifyListeners();
     }
-    public void unSelectTower(Tower tower){
+    public void deselectTower(Tower tower){
         tower.setSelected(false);
         notifyListeners();
     }

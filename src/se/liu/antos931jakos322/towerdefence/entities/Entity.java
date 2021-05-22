@@ -1,16 +1,21 @@
 package se.liu.antos931jakos322.towerdefence.entities;
 
 
-/**
- * Entity is an abstract which can move has a Point2D position, size, attackpower and movement speed.
- *
- * attackpower defines how much damage the entity does with some sort of attack
- */
+
 
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
-
 import java.awt.*;
 import java.awt.geom.Point2D;
+
+/**
+ * Entity is an abstract class which represnts a physical thing in the game.
+ * Entity can be attacked and take damage, move, has an attackpower and health.
+ * However Entity's are only supposed to be able to take damage if the canBeAttacked method allows it.
+ *
+ * When movePosition is set the Entity will move towards that location if move() is called
+ *
+ *
+ */
 
 public abstract class Entity
 {
@@ -22,6 +27,16 @@ public abstract class Entity
     protected Point2D movePosition;
     protected int attackPower;
     protected int health;
+
+    /**
+     * Constructs an entity with inital speed and health points
+     *
+     * @param health the entity health points
+     * @param color the entity color
+     * @param size the entity size
+     * @param speed the entity speed
+     * @param attackPower attackpower or "damage" of the Entity
+     */
 
     protected Entity(final Color color, final double size, final double speed, int attackPower, int health)
     {
@@ -40,7 +55,7 @@ public abstract class Entity
      * @param color the entity color
      * @param size the entity size
      * @param speed the entity speed
-     * @param attackPower attackpower or "damage" of the tower
+     * @param attackPower attackpower or "damage" of the Entity
      */
 
 
@@ -59,7 +74,7 @@ public abstract class Entity
      *
      * @param color the entity color
      * @param size the entity size
-     * @param attackPower attackpower or "damage" of the tower
+     * @param attackPower attackpower or "damage" of the Entity
      */
     protected Entity(final Color color, final double size, int attackPower) {
         this.attackPower = attackPower;
@@ -73,6 +88,7 @@ public abstract class Entity
 
     /**
      * Used by entites to move towards movePosition
+     * When the entity is near the location it will stop moving
      *
      * */
 
@@ -105,6 +121,13 @@ public abstract class Entity
         this.position = new Point2D.Double(newX, newY);
     }
 
+    /**
+     * Damages the entity by lower its health with the damage amount.
+     * When health is 0 it cannot go lower.
+     *
+     * @param damage amount of damage to deal
+     */
+
     public void takeDamage(int damage){
         if (health - damage < 0) {
             health = 0;
@@ -115,6 +138,11 @@ public abstract class Entity
 
     }
 
+    /**
+     * Implements the method to check wheter an entity can be attacked or not
+     *
+     * @return true of false if the entity can be attacked
+     */
     public abstract boolean canBeAttacked();
 
     public abstract void draw(Graphics2D g2d, int gameScale);
