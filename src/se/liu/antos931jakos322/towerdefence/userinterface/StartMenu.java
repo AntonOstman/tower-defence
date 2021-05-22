@@ -76,10 +76,12 @@ public class StartMenu implements GameListener
 
 	    int mapY = gameMap.getHeight();
 	    int mapX = gameMap.getWidth();
+	    final int tileSize = 7;
+	    final int margin = 0;
 	    for (int y = 0; y < mapY; y++) {
 		for (int x = 0; x < mapX; x++) {
 		    Tile currentTile = gameMap.getTile(new Point(x, y));
-		    currentTile.drawTile(bg2d, 0, 7);
+		    currentTile.drawTile(bg2d, margin, tileSize);
 		}
 	    }
 	    b.addActionListener(buttonListener);

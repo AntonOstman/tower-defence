@@ -68,7 +68,7 @@ public abstract class Projectile extends EntityAttacker
 	if(!super.canAttack(entity)){
 	    return false;
 	}
-	int hitRangeScale = 2;
+	final int hitRangeScale = 2;
         double hitRange = size * hitRangeScale;
 	if (HelperFunctions.isNear(position, entity.getPosition(), hitRange)) {
 	return true;

@@ -226,12 +226,14 @@ public abstract class Tower extends EntityAttacker
 
             int circleX = (int) (towerPosX * gameScale) - pixelRange + gameScale / 2;
             int circleY = (int) (towerPosY * gameScale) - pixelRange + gameScale / 2;
+            int diameter = range * 2;
 
-            g2d.drawOval(circleX, circleY, range * gameScale * 2, range * gameScale * 2);
+            g2d.drawOval(circleX, circleY, diameter * gameScale , gameScale * diameter);
         }
         g2d.setColor(Color.white);
-
-        g2d.setFont(new Font("TimesRoman", Font.PLAIN, gameScale / 3));
+        int textScale = 3;
+        int textSize = gameScale / textScale;
+        g2d.setFont(new Font("TimesRoman", Font.PLAIN , textSize));
         int textPosX = (int) (towerPosX * gameScale) + gameScale / 3;
         int textPosY = (int) (towerPosY * gameScale) + gameScale / 2;
         g2d.drawString(String.valueOf(level), textPosX, textPosY);

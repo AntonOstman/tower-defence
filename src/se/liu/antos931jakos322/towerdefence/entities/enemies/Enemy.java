@@ -53,13 +53,16 @@ public abstract class Enemy extends Entity
 	int drawPositionY = (int) (position.getY() * gameScale);
 
 	final int size = (int) (gameScale * this.size);
+	// since the object is drawn from the "corner" and not in the middle
+	// we find this offest by writing up two squares on a piece of paper calculating how much x and y must move to center the small one.
 	final int offset = gameScale / 2 - size / 2;
 	double percentageHealth = (double) health / maxHealth;
 	g2d.fillOval(drawPositionX + offset, drawPositionY + offset, size, size);
 
 	// below is for the healthbar
 	// first we add a red bar to background...
-	final int healthBarHeight = gameScale/5;
+	final int healthBarScale = 5;
+	final int healthBarHeight = gameScale/healthBarScale;
 	g2d.setColor(Color.red);
 	g2d.fillRect(drawPositionX + offset,drawPositionY, size , healthBarHeight);
 

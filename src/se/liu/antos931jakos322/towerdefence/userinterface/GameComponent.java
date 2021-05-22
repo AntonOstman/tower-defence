@@ -21,24 +21,24 @@ import java.awt.*;
 public class GameComponent extends JComponent implements GameListener
 {
     private GameHandler gameHandler;
-    private final int mapX;
-    private final int mapY;
+    private final int mapWidth;
+    private final int mapHeight;
     private int gameScale;
     private final static int MARGIN = 0;
 
     public GameComponent(GameHandler gameHandler, int gameScale) {
 	this.gameHandler = gameHandler;
-	this.mapY = gameHandler.getGameMap().getDimensions().y;
-	this.mapX = gameHandler.getGameMap().getDimensions().x;
+	this.mapHeight = gameHandler.getGameMap().getDimensions().y;
+	this.mapWidth = gameHandler.getGameMap().getDimensions().x;
 	this.gameScale = gameScale;
     }
 
 
     public Dimension getPreferredSize(){
 
-	int width = mapX*(MARGIN + gameScale);
-	int height = mapY*(MARGIN + gameScale);
-        return new Dimension(width, height);
+	int gameWidth = mapWidth * (MARGIN + gameScale);
+	int gameHeight = mapHeight * (MARGIN + gameScale);
+        return new Dimension(gameWidth, gameHeight);
 
     }
 
@@ -51,8 +51,8 @@ public class GameComponent extends JComponent implements GameListener
 
 	final Graphics2D g2d = (Graphics2D) g;
 
-	for (int y = 0; y < mapY; y++) {
-	    for (int x = 0; x < mapX; x++) {
+	for (int y = 0; y < mapHeight; y++) {
+	    for (int x = 0; x < mapWidth; x++) {
 		Tile currentTile = gameHandler.getGameMap().getTile(new Point(x, y));
 		currentTile.drawTile(g2d, MARGIN, gameScale);
 	    }
