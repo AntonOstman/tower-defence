@@ -10,7 +10,7 @@ public class BossEnemy extends Enemy
 {
     private static final int HEALTH = 1000;
     private static final double SPEED = 0.05;
-    private static final Color COLOR = Color.PINK;
+    private static final Color COLOR = Color.GRAY;
     private static final double SIZE = 0.9;
     private static final int DAMAGE = 10;
 

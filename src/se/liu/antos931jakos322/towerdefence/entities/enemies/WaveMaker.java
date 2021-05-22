@@ -91,6 +91,7 @@ public class WaveMaker
             spawnEnemy( -10 + waveLevel, speedEnemy);
             spawnEnemy( -10 + waveLevel, bossEnemy);
             spawnEnemy( -14 + waveLevel, bigBossEnemy);
+            spawnEnemy( -14 + waveLevel, explodingEnemy);
         }
         return enemies;
     }
