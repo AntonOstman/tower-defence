@@ -111,7 +111,10 @@ public abstract class Tower extends Entity
         if (targetEnemy == null){
             return false;
         }
-
+        if (targetEnemy.isFinished()){
+            targetEnemy = null;
+            return false;
+        }
         if (targetEnemy.getHealth() <= 0){
             targetEnemy = null;
             return false;
@@ -173,8 +176,6 @@ public abstract class Tower extends Entity
 
         }
 
-
-
     }
 
     public void setSelected(final boolean selected) {
@@ -189,8 +190,12 @@ public abstract class Tower extends Entity
         return cost;
     }
 
+    /**
+     *
+     * Can be used by towers to do something
+     *
+     */
     public abstract void activate();
-        // can be used by towers to do something special example: airplanetower moves
 
     /**
      * draws a on the Tower position as a square with the designated Color.

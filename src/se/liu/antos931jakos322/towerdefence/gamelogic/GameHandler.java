@@ -217,8 +217,6 @@ public class GameHandler
         addAllEnemies(addEnemies);
         enemies.removeAll(removeEnemies);
 
-
-
     }
 
 
