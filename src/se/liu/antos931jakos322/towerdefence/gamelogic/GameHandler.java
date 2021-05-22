@@ -198,6 +198,7 @@ public class GameHandler
     public void addTower(Tower tower){
         money -= tower.getCost();
         towers.add(tower);
+        notifyListeners();
     }
 
     public void addProjectile(Projectile projectile){
