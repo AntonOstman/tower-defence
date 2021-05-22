@@ -247,7 +247,7 @@ public class GameHandler
 
 
     /**
-     *
+     * Adds a tower and takes away the cost from the play money
      *
      * @param tower the tower to add to the game
      */
@@ -257,6 +257,13 @@ public class GameHandler
         towers.add(tower);
         notifyListeners();
     }
+
+    /**
+     * checks if the player can afford to place the tower and also if the tower itself can be placed on that position.
+     *
+     * @param tower the tower to check
+     * @return if the tower can be placed
+     */
 
     public boolean canAffordAndPlaceTower(Tower tower){
         Point2D towerPos = tower.getPosition();
@@ -297,11 +304,14 @@ public class GameHandler
     }
 
 
-    // returnes the enemies within a ceratin range.
-    // example: if range = 1 all enemies whithin 1 tiles range will be returned
-
-
-    public Tower getTowerOnPoint(Point2D position){
+    /**
+     * Returns the tower near the position.
+     * If there is no tower returns null.
+     *
+     * @param position the position to check for
+     * @return the tower near the position
+     */
+    public Tower getTowerNearPosition(Point2D position){
         final double distance = 0.5;
         for(Tower tower : towers){
             if(HelperFunctions.isNear(tower.getPosition(), position, distance)){
@@ -311,12 +321,24 @@ public class GameHandler
         return null;
     }
 
+    /**
+     * Checks if the player can afford to upgrade the tower
+     *
+     * @param tower the tower to check
+     * @return if the tower is upgradable
+     */
+
     public boolean isTowerUpgradable(Tower tower){
         if (money - tower.getUpgradeCost() < 0){
             return false;
         }
         return true;
     }
+
+    /**
+     * upgrades a tower
+     * @param tower the tower to upgrade
+     */
 
     public void upgradeTower(Tower tower){
         money -= tower.getUpgradeCost();

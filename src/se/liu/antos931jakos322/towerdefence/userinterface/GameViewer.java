@@ -30,7 +30,6 @@ public class GameViewer
     private GameHandler gameHandler;
     private JFrame frame;
     private TowerType selectedTower;
-    private ButtonGroup buttonGroup;
     private JTextArea towerDescription;
     private Tower clickedTower;
     private int gameScale;
@@ -47,13 +46,17 @@ public class GameViewer
         this.selectedTower = TowerType.NONE;
 	this.frame = null;
 	this.towerDescription = null;
-	this.buttonGroup = null;
 	this.clickedTower = null;
 	this.gameScale = gameScale;
     }
 
+    /**
+     * creates the buttons,
+     * Also shows the frame after completion.
+     *
+     */
 
-    public void show(){
+    public void createInterface(){
 	final Color backGroundColor = new Color(92, 184, 92);
 	MenuComponent menuComponent = new MenuComponent(gameHandler, gameScale);
 	GameComponent gameComponent = new GameComponent(gameHandler, gameScale);
@@ -87,7 +90,7 @@ public class GameViewer
 	//menupanel has the information the player needs and is used for choosing towers
 
 	// create and set the buttons for placing towers
-	buttonGroup = new ButtonGroup(); // create button group to deselect buttons when antoher is clicked
+	ButtonGroup buttonGroup = new ButtonGroup(); // create button group to deselect buttons when antoher is clicked
 	List<TowerType> towerTypes = TowerGetter.getAllTowers();
 	towerDescription = new JTextArea("No tower selected");
 
@@ -118,7 +121,7 @@ public class GameViewer
 	//gamepanel has the map compopnent and shows the running game
 	gamePanel.add(gameComponent);
 	gamePanel.setBorder(BorderFactory.createLineBorder(Color.black));
-	gamePanel.addMouseListener(new MouseEvent(towerDescription));
+	gamePanel.addMouseListener(new MouseEvent(towerDescription, buttonGroup));
 
 	//tower description panel config
 	textScrollPane.getViewport().add(towerDescription);
@@ -181,16 +184,34 @@ public class GameViewer
 	private ButtonType buttonType;
 	private JButton jButton;
 
+	/**
+	 * Constructs a ButtonEvent
+	 *
+	 */
 	public ButtonEvent(TowerType towerType, ButtonType buttonType) {
 	    this.towerType = towerType;
 	    this.buttonType = buttonType;
 	    this.jButton = null;
 	}
+
+	/**
+	 * Constructs a ButtonEvent with the type of button
+	 *
+	 * @param buttonType type of button
+	 */
+
 	public ButtonEvent(ButtonType buttonType) {
 	    this.towerType = TowerType.NONE;
 	    this.buttonType = buttonType;
 	    this.jButton = null;
 	}
+
+	/**
+	 * Constructs a ButtonEvent with a buttonType and a jButton object
+	 *
+	 * @param buttonType the type of button
+	 * @param jButton the used button
+	 */
 	public ButtonEvent(ButtonType buttonType, JButton jButton) {
 	    this.towerType = TowerType.NONE;
 	    this.buttonType = buttonType;
@@ -211,7 +232,6 @@ public class GameViewer
 		    break;
 		case MENU:
 	        // player is trying to press a tower on the menu
-
 		selectedTower = towerType;
 		String towerDesc = TowerGetter.getTower(towerType).getDescription();
 		towerDescription.setText(towerDesc);
@@ -231,7 +251,7 @@ public class GameViewer
 		case QUIT:
 		System.exit(0);
 		default:
-		     throw new IllegalArgumentException("button did not have valid action string");
+		     throw new IllegalArgumentException("button did not have valid action");
 	    }
 
 	}
@@ -241,9 +261,13 @@ public class GameViewer
     public class MouseEvent extends MouseAdapter
     {
 	private JTextArea textArea;
-	public MouseEvent(JTextArea textArea) {
+	private ButtonGroup buttonGroup;
+
+	public MouseEvent(JTextArea textArea, ButtonGroup buttonGroup){
 	    this.textArea = textArea;
+	    this.buttonGroup = buttonGroup;
 	}
+
 
 	@Override public void mouseClicked(final java.awt.event.MouseEvent e) {
 	    System.out.println(e);
@@ -268,7 +292,7 @@ public class GameViewer
 	    if (clickedTower != null){
 	        gameHandler.deselectTower(clickedTower);
 	    }
-	    Tower newClickedTower = gameHandler.getTowerOnPoint(clickedPoint);
+	    Tower newClickedTower = gameHandler.getTowerNearPosition(clickedPoint);
 	    // if there is no tower on the point exit
 	    if (newClickedTower == null){ return;}
 	    textArea.setText(newClickedTower.getDescription());
@@ -292,7 +316,7 @@ public class GameViewer
 	    else{
 		// otherwise place the tower for where the player has requested
 		gameHandler.addTower(newTower);
-		// lastely deselct the tower button and set the selcted tower to nothing,
+		// lastely deselct the tower button and set the selcted tower to nothing
 		buttonGroup.clearSelection();
 		selectedTower = TowerType.NONE;
 		//if the player wants to place another
