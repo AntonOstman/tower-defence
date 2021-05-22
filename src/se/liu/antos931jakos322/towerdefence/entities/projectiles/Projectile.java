@@ -27,12 +27,13 @@ public abstract class Projectile extends EntityAttacker
 
     private Point2D startPosition;
     private int penetrationAmount;
-
+    private Entity prevAttackedEntity;
 
     protected Projectile(final Color color, final double size, double speed, int penetrationAmount) {
 	super(color, size, speed, 0);
 	this.startPosition = null;
 	this.penetrationAmount = penetrationAmount;
+	this.prevAttackedEntity = null;
     }
 
     /**
@@ -85,15 +86,21 @@ public abstract class Projectile extends EntityAttacker
     }
 
     /**
-     * attacks an entity
+     * attacks an entity and penetrates if it has already attack that enemy
      *
      * @param entity the entity object to attack
      */
 
     public void attack(Entity entity){
+        if (prevAttackedEntity == null){
+            prevAttackedEntity = entity;
+	}
+        else if (entity.equals(prevAttackedEntity)){
+            return;
+	}
 	entity.takeDamage(attackPower);
 	penetrationAmount -= 1;
-
+	prevAttackedEntity = entity;
     }
 
     /**

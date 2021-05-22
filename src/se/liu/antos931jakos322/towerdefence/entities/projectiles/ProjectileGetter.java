@@ -22,7 +22,7 @@ public class ProjectileGetter
 	projectileMap.put(ProjectileType.ARROW, new ArrowProjectile());
 	projectileMap.put(ProjectileType.CANON, new CanonProjectile());
 	projectileMap.put(ProjectileType.MACHINE, new BulletProjectile());
-	projectileMap.put(ProjectileType.MISSILE, new MissileProjectile());
+	projectileMap.put(ProjectileType.MISSILE, new StickyProjectile());
 
 	return projectileMap.get(type);
     }

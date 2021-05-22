@@ -6,14 +6,15 @@ import java.awt.*;
  *
  * MissileProjectile is a projectile that is comparatively average when looking at other projectiles.
  * It moves at a medium speed, has a medium size and it penetrates only two enemies.
- * MissileProjectile also implements a new move() method to imitate a target heatseaking behaviour.
+ * StickyProjectile also implements a new move() method to imitate something sticking to the enemy.
+ * also plants itself on the ground after the enemy is defeated.
  * otherwise extends Projectile with no extra features and works as a "stat holder"
  *
  */
 
 
 
-public class MissileProjectile extends Projectile
+public class StickyProjectile extends Projectile
 {
     private static final double SIZE = 0.20;
     private static final double SPEED = 0.26;
@@ -22,11 +23,12 @@ public class MissileProjectile extends Projectile
 
 
     @Override public void move() {
-        super.move();
         movePosition = targetEntity.getPosition();
+        super.move();
+
     }
 
-    public MissileProjectile() {
+    public StickyProjectile() {
 	super(COLOR, SIZE, SPEED, PENETRATION_AMOUNT);
     }
 }
