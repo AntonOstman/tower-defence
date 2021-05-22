@@ -268,7 +268,7 @@ public class GameHandler
     public void upgradeTower(Tower tower){
         money -= tower.getUpgradeCost();
         tower.upgrade();
-
+        notifyListeners();
     }
 
     public GameMap getGameMap() { // this should probably be changed so map cannot be directly accessed. Game handler controls map not others
