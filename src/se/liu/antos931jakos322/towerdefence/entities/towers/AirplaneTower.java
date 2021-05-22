@@ -23,6 +23,7 @@ public class AirplaneTower extends Tower
 {
 
     private double angle;
+    private double positionRadius;
     private final static int ATTACK_POWER = 5;
     private final static int COST = 7;
     private final static int RANGE = 5;
@@ -38,6 +39,7 @@ public class AirplaneTower extends Tower
     {
 	super(TOWER_TYPE, COLOR, COST, ATTACK_POWER, RANGE, UPGRADE_COST, PROJECTILE_TYPE, ATTACK_SPEED, SPEED, SIZE);
 	this.angle = 0;
+	this.positionRadius = 2;
     }
 
 
@@ -45,15 +47,17 @@ public class AirplaneTower extends Tower
 	move();
     }
 
-
+    @Override public void upgrade() {
+	super.upgrade();
+	positionRadius += 0.5;
+    }
 
     @Override public void move() {
-	final int radius = 4;
 	angle += SPEED; // in this context speed is a angle speed
 	// use sin and cos combined with the changing angle to circle the tower
 	// around where it was placed
-        double newX = startPosition.getX() + radius * Math.sin(angle);
-        double newY = startPosition.getY() + radius * Math.cos(angle);
+        double newX = startPosition.getX() + positionRadius * Math.sin(angle);
+        double newY = startPosition.getY() + positionRadius * Math.cos(angle);
 
         Point2D newPos = new Point2D.Double(newX,newY);
 	position = newPos;

@@ -44,7 +44,7 @@ public class WaveMaker
                 activeWave = false;
             } else {
                 activeWaveCounter++;
-                // does the createWave method really need to have enemies as an argument?
+
                 return createWave(waveLevel);
             }
         }
@@ -56,7 +56,6 @@ public class WaveMaker
         return waveLevel;
     }
 
-    // does the createWave method really need to have enemies as an argument?
     private List<Enemy> createWave(int waveLevel){
         // phases:
         //      1. Only generic

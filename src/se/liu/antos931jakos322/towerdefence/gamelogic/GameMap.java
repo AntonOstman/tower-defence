@@ -235,8 +235,8 @@ public class GameMap
 	return path.get(index);
     }
 
-    public Point getLastTile(){
-        return path.get(path.size()-1);
+    public int getLastPath(){
+        return path.size() - 1;
     }
 
     public int getWidth(){

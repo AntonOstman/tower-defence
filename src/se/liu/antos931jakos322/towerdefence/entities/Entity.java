@@ -2,8 +2,9 @@ package se.liu.antos931jakos322.towerdefence.entities;
 
 
 /**
- * Entity is an abstract which can move has a Point2D position, size and movement speed.
+ * Entity is an abstract which can move has a Point2D position, size, attackpower and movement speed.
  *
+ * attackpower defines how much damage the entity does with some sort of attack
  */
 
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
@@ -88,6 +89,8 @@ public abstract class Entity
         // change the actual position with the calculated coordinates
         this.position = new Point2D.Double(newX, newY);
     }
+
+    public abstract void draw(Graphics2D g2d, int gameScale);
 
     public void setPosition(final Point2D position) { this.position = position; }
 

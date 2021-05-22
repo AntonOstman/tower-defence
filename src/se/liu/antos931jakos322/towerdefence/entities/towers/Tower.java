@@ -38,6 +38,7 @@ public abstract class Tower extends Entity
     protected Point2D startPosition;
     protected boolean selected;
     protected int level;
+    protected Enemy targetEnemy;
 
     /**
      *  Constructs a Tower for towers with an inital moving speed
@@ -66,6 +67,7 @@ public abstract class Tower extends Entity
         this.attackSpeedCharge = 0;
         this.selected = false;
         this.level = 1;
+        this.targetEnemy = null;
     }
 
     /**
@@ -94,6 +96,7 @@ public abstract class Tower extends Entity
         this.attackSpeedCharge = 0;
         this.selected = false;
         this.level = 1;
+        this.targetEnemy = null;
     }
 
     /**
@@ -102,7 +105,7 @@ public abstract class Tower extends Entity
      * @param enemy the enemy to check wheter an attack is possible
      * @return true if attack is possible otherwise false
      */
-    public boolean canAttack(Enemy enemy){
+    public boolean canAttack(){
 
         // if the tower needs to recharge before it can shoot....
         if (attackSpeedCharge != attackSpeed){
@@ -113,7 +116,7 @@ public abstract class Tower extends Entity
         }
 
         // if the enemy is inside range and the tower could shoot...
-        else if (HelperFunctions.isNear(position, enemy.getPosition() , range)){
+        else if (HelperFunctions.isNear(position, targetEnemy.getPosition() , range)){
             // set that the tower needs to recharge...
             attackSpeedCharge = 0;
             // and return that the tower can attack
@@ -133,14 +136,37 @@ public abstract class Tower extends Entity
      * @param enemy the enemey to attack
      * @return the projectile to attack with
      */
-    public Projectile createProjectileAttack(Enemy enemy) {
+    public Projectile createProjectileAttack() {
 
         Projectile projectile = ProjectileGetter.getProjectile(projectileType);
-        projectile.setTarget(enemy);
+        projectile.setTarget(targetEnemy);
         projectile.setPosition(position);
         projectile.setAttackPower(attackPower);
 
         return projectile;
+    }
+
+    public void decideAttack(Enemy enemy){
+        if (targetEnemy == null){
+            targetEnemy = enemy;
+        }
+        Point2D enemyPos = enemy.getPosition();
+        Point2D targetEnemyPos = targetEnemy.getPosition();
+
+        Point2D targetRelativePosition = new Point2D.Double(position.getX() - targetEnemyPos.getX(), position.getY() - targetEnemyPos.getY());
+
+        Point2D potentialTargetRelativeDistance = new Point2D.Double(position.getX() - enemyPos.getX(), position.getY() - enemyPos.getY());
+        double targetDistance = Math.hypot(targetRelativePosition.getX(), targetRelativePosition.getY());
+        double potentialTargetDistance = Math.hypot(potentialTargetRelativeDistance.getX(), potentialTargetRelativeDistance.getY());
+        // get the "real" distance
+
+        if(potentialTargetDistance < targetDistance){
+            targetEnemy = enemy;
+
+        }
+
+
+
     }
 
     public void setSelected(final boolean selected) {
@@ -166,7 +192,7 @@ public abstract class Tower extends Entity
      * @param gameScale the scale of the game in which the Tower needs to draw with
      */
 
-    public void draw(final Graphics2D g2d, final int gameScale) {
+    @Override public void draw(final Graphics2D g2d, final int gameScale) {
 
         int towerSize = (int) (gameScale * size);
         double towerPosX = position.getX();
@@ -207,6 +233,7 @@ public abstract class Tower extends Entity
         level++;
 
     }
+
 
     @Override public void setPosition(final Point2D position) {
         super.setPosition(position);

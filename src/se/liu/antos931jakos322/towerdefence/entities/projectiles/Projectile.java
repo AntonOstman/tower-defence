@@ -102,9 +102,7 @@ public abstract class Projectile extends Entity
      * @param gameScale the scale of the game graphics
      */
 
-    public void draw(final Graphics2D g2d, final int gameScale){
-	// drawPosX could be changed to a double and then in this draw method we cast to int
-	// problem with a direct int is for example we cannot go "between" tiles only straight to it
+    @Override public void draw(final Graphics2D g2d, final int gameScale){
 
 	g2d.setColor(color);
 

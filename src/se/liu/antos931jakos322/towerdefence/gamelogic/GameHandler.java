@@ -68,7 +68,14 @@ public class GameHandler
     }
 
     public void createEnemies(){
-        enemies.addAll(waveMaker.update());
+        addAllEnemies(waveMaker.update());
+    }
+
+    public void addAllEnemies(List<Enemy> enemiesToAdd){
+        for(Enemy enemy : enemiesToAdd){
+            enemy.setLastPosition(gameMap.getLastPath());
+            enemies.add(enemy);
+        }
     }
 
     public void setGameOver(){
@@ -122,7 +129,7 @@ public class GameHandler
         List<Projectile> projectilesToRemove = new ArrayList<>();
 
         for (Projectile projectile : projectiles){
-            // start by moving all projectiles
+
            projectile.move();
             // check if a projectile can attack an enemy and in that case attack the enemy
             for (Enemy enemy : enemies){
@@ -143,24 +150,22 @@ public class GameHandler
             }
         }
         // remove the projectiles designated to be removed
-        for (Projectile projectile : projectilesToRemove){
-            projectiles.remove(projectile);
-        }
+        projectiles.removeAll(projectilesToRemove);
     }
 
 
     public void activateTowers(){
         for (Tower tower: towers){
+
             tower.activate();
             // get the enemy closest to the tower...
-            Enemy closestEnemy = getClosestEnemy(tower.getPosition(), tower.getRange());
-            if (closestEnemy == null){
-                continue;
+            for(Enemy enemy: enemies){
+                tower.decideAttack(enemy);
             }
             // if the enemy can be attacked
-            if (tower.canAttack(closestEnemy)) {
+            if (tower.canAttack()) {
                 // then send a projectile to that enemy
-                Projectile projectile = tower.createProjectileAttack(closestEnemy);
+                Projectile projectile = tower.createProjectileAttack();
                 projectiles.add(projectile);
 
             }
@@ -186,9 +191,9 @@ public class GameHandler
         List<Enemy> removeEnemies = new ArrayList<>();
         List<Enemy> addEnemies = new ArrayList<>();
         for (Enemy enemy : enemies){
-            int nextTile = enemy.getPathPosition();
-            enemy.setLastPosition(gameMap.getLastTile());
-            enemy.setMovePosition(gameMap.getPath(nextTile));
+            int currentPath = enemy.getPathProgress();
+
+            enemy.setMovePosition(gameMap.getPath(currentPath));
             enemy.move();
             // if the enemy has come to the end of the map damage the player
             if(enemy.isFinished()){
@@ -204,11 +209,9 @@ public class GameHandler
             }
 
         }
-        enemies.addAll(addEnemies);
+        addAllEnemies(addEnemies);
+        enemies.removeAll(removeEnemies);
 
-        for(Enemy enemy : removeEnemies){
-            enemies.remove(enemy);
-        }
 
 
     }

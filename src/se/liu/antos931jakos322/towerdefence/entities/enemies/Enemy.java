@@ -20,20 +20,20 @@ import java.util.List;
 public abstract class Enemy extends Entity
 {
     protected int health;
-    protected int pathPosition;
+    protected int pathProgress;
     protected final int maxHealth;
     protected final int rewardMoney;
     protected boolean finished;
-    private Point2D lastPosition;
+    private int lastPosition;
 
     protected Enemy(final int maxHealth, final double speed, final Color color, final double size, int attackPower) {
 	super(color, size, speed, attackPower);
 	this.health = maxHealth;
 	this.maxHealth = maxHealth;
-	this.pathPosition = 0;
+	this.pathProgress = 0;
     	this.rewardMoney = 5;
 	this.finished = false;
-    	this.lastPosition = null;
+    	this.lastPosition = -1;
 
     }
 
@@ -43,21 +43,21 @@ public abstract class Enemy extends Entity
 
     }
 
-    public void draw(final Graphics2D g2d, final int tileSize) {
-	//super.draw(g2d, tileSize);
+    @Override public void draw(final Graphics2D g2d, final int gameScale) {
+
 
 	g2d.setColor(color);
-	int drawPositionX = (int) (position.getX() * tileSize);
-	int drawPositionY = (int) (position.getY() * tileSize);
+	int drawPositionX = (int) (position.getX() * gameScale);
+	int drawPositionY = (int) (position.getY() * gameScale);
 
-	final int size = (int) (tileSize * this.size);
-	final int offset = tileSize / 2 - size / 2;
+	final int size = (int) (gameScale * this.size);
+	final int offset = gameScale / 2 - size / 2;
 	double percentageHealth = (double) health / maxHealth;
 	g2d.fillOval(drawPositionX + offset, drawPositionY + offset, size, size);
 
 	// below is for the healthbar
 	// first we add a red bar to background...
-	final int healthBarHeight = tileSize/5;
+	final int healthBarHeight = gameScale/5;
 	g2d.setColor(Color.red);
 	g2d.fillRect(drawPositionX + offset,drawPositionY, size , healthBarHeight);
 
@@ -73,7 +73,7 @@ public abstract class Enemy extends Entity
 	// Gives Enemy a starting position
 	if(position == null){
 	    position = movePosition;
-	    pathPosition += 1;
+	    pathProgress += 1;
 	}
 	super.move();
 
@@ -82,11 +82,11 @@ public abstract class Enemy extends Entity
 	final double distance = 0.2;
 	if(HelperFunctions.isNear(position, movePosition, distance)){
 	    // If this is the last block --> Enemy is done with the path
-	    if (movePosition.equals(lastPosition)){
+	    if (pathProgress == lastPosition){
 	        finished = true;
 	        return;
 	    }
-	    pathPosition += 1;
+	    pathProgress += 1;
 
 	}
 	// If all movements have been done for a block
@@ -103,17 +103,17 @@ public abstract class Enemy extends Entity
 
     public int getRewardMoney() { return rewardMoney; }
 
-    public void setLastPosition(Point2D position){
+    public void setLastPosition(int position){
 	lastPosition = position;
     }
 
-    public int getPathPosition() { return pathPosition; }
+    public int getPathProgress() { return pathProgress; }
 
     public List<Enemy> split(){
         return new ArrayList<>();
     }
 
-    public void setPathPosition(final int pathPosition) {
-	this.pathPosition = pathPosition;
+    public void setPathProgress(final int pathProgress) {
+	this.pathProgress = pathProgress;
     }
 }
