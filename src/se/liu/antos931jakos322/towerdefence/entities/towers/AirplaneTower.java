@@ -14,8 +14,7 @@ import java.awt.geom.Point2D;
  * AirplaneTower extends Tower and is a Tower that can move.
  * AirplaneTower moves in circles around the startPosition to represent an airplane flying around.
  *
- * Otherwise AirplaneTower has the basic functionallity excpected by a tower.
- * AirplaneTower shoots Missile projectiles and has medium stats
+ * AirplaneTower shoots Missile projectiles and has average stats
  *
  */
 

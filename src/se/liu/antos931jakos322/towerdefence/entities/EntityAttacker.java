@@ -2,6 +2,15 @@ package se.liu.antos931jakos322.towerdefence.entities;
 
 import java.awt.*;
 
+/**
+ * EntityAttacker is a type of Entity with the extended functionallity of attacking other entities.
+ *
+ * EntityAttackers use the logic in decideTarget(Entity) to choose an Entity target.
+ * EntityAttackers can use this in conjunction canAttack(Entity) to check if the specifik target can be attack
+ * By default EntityAttacker can not be attacked which is decided by the overridden canBeAttacked() method
+ */
+
+
 public abstract class EntityAttacker extends Entity
 {
     protected Entity targetEntity;
@@ -48,7 +57,7 @@ public abstract class EntityAttacker extends Entity
     }
 
     /**
-     * The abstract method entites implement to decide if it can be attacked
+     * The method entites used to decide if this Entity can be attacked
      *
      * @return if the entity can be attacked
      */
@@ -58,7 +67,7 @@ public abstract class EntityAttacker extends Entity
 
 
     /**
-     * Decides wheter the targeted enemy can be attacked or not.
+     * Decides wheter the targeted Entity can be attacked or not.
      * Can be used by subclases to implement further logic if an entity can be attacked or not
      *
      * @param entity the entity to attack

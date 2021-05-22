@@ -12,17 +12,17 @@ import java.awt.geom.Point2D;
 
 /**
  * Tower is the Abstract class for defensive structures in the game which also extends Entity
- * Tower facilitates the use of projectiles and also has properties...
+ * Towers shoot projectiles and also has various properties
  * These properties are:
  * attackpower - represents how much damage the tower's projectiles do
  * cost - represents how much a tower costs to create
- * attackspeed - how often a tower can send a projectile
- * range - how close the tower needs to be a target to send a projectile
+ * attackspeed - how often a tower can shoot a projectile
+ * range - how close the tower needs to be a target to shoot a projectile
  * Level - represents how much Tower has upgraded where each level increases the strength of Tower
  *
- * a Tower can attack enemies by first checking if it canAttack() to make sure it is following the specific tower's attacking rules.
- * Then using the createProjectile(enemy) method which returns the projectile that will be shot towards the enemy.
- * Tower
+ * Tower can attack Entities by first deciding what entity to target with decideTarget() then using canAttack()
+ * to make sure it is following the specific tower's attacking rules.
+ * Then using the createProjectileAttack(enemy) method which returns the projectile that will be shot towards the enemy.
  *
  */
 
@@ -41,7 +41,7 @@ public abstract class Tower extends EntityAttacker
     protected int level;
 
     /**
-     *  Constructs a Tower for towers with an inital moving speed
+     *  Constructs a Tower for towers with an added inital speed
      *
      * @param speed the speed which the tower moves with
      * @param towerType the type of tower
@@ -197,7 +197,7 @@ public abstract class Tower extends EntityAttacker
     /**
      * draws a on the Tower position as a square with the designated Color.
      * Also draws the tower level on the tower.
-     * When tower is selectd draws the range of the tower in a circle
+     * When tower is selectd draws the range of the tower
      * @param g2d the grapichs object to draw with
      * @param gameScale the scale of the game in which the Tower needs to draw with
      */
