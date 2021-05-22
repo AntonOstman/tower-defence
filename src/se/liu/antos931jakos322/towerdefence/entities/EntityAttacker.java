@@ -44,5 +44,4 @@ public abstract class EntityAttacker extends Entity
 	return targetEntity;
     }
 
-    public abstract void draw(final Graphics2D g2d, final int gameScale);
 }

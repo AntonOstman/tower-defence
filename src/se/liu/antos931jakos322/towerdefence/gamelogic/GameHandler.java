@@ -38,7 +38,6 @@ public class GameHandler
     private List<GameListener> gameListeners;
     private WaveMaker waveMaker;
     private Timer tickTimer;
-    private int tickDelay;
     private boolean gamePaused;
     private boolean gameOver;
 
@@ -51,7 +50,6 @@ public class GameHandler
         this.money = 10;
         this.gameListeners = new ArrayList<>();
         this.waveMaker = new WaveMaker();
-        this.tickDelay = 30;
         this.tickTimer = null; // timer is set when the game starts in method startgame
         this.gamePaused = true;
         this.gameOver = false;
@@ -92,6 +90,7 @@ public class GameHandler
 
     public void startGame() {
     if (tickTimer == null){
+        int tickDelay = 30;
         tickTimer = new Timer(tickDelay, new DoOneStep());
     }
 
@@ -199,10 +198,6 @@ public class GameHandler
         money -= tower.getCost();
         towers.add(tower);
         notifyListeners();
-    }
-
-    public void addProjectile(Projectile projectile){
-        projectiles.add(projectile);
     }
 
     public boolean canAffordAndPlaceTower(Tower tower){

@@ -45,7 +45,7 @@ public abstract class Enemy extends Entity
     }
 
 
-    @Override public void draw(final Graphics2D g2d, final int gameScale) {
+    public void draw(final Graphics2D g2d, final int gameScale) {
 
 
 	g2d.setColor(color);

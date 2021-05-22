@@ -214,7 +214,6 @@ public class GameViewer
 	        // player is trying to press a tower on the menu
 
 		selectedTower = towerType;
-
 		String towerDesc = TowerGetter.getTower(towerType).getDescription();
 		towerDescription.setText(towerDesc);
 

@@ -249,7 +249,4 @@ public class GameMap
 	return height;
     }
 
-    public Logger getLogger() {
-	return logger;
-    }
 }

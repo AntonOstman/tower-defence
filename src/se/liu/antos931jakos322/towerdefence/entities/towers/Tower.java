@@ -185,9 +185,6 @@ public abstract class Tower extends EntityAttacker
         this.selected = selected;
     }
 
-    public int getRange() {
-        return range;
-    }
 
     public int getCost() {
         return cost;
