@@ -22,7 +22,7 @@ public class StartMenu implements GameListener
     private JFrame frame;
     private GameHandler gameHandler;
     private GameViewer viewer;
-    private final static int GAME_SCALE = 50;
+    private final static int GAME_SCALE = 30;
     private final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private GameMap gameMap;
 

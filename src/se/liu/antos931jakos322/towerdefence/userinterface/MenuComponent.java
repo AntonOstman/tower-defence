@@ -17,11 +17,13 @@ import java.awt.*;
 public class MenuComponent extends JComponent implements GameListener
 {
     private GameHandler gameHandler;
-    private int textSize;
 
-    public MenuComponent(final GameHandler gameHandler) {
+    private int gameScale;
+
+    public MenuComponent(final GameHandler gameHandler, final int gameScale) {
         this.gameHandler = gameHandler;
-	this.textSize = 20;
+        this.gameScale = gameScale;
+
     }
 
 
@@ -36,13 +38,15 @@ public class MenuComponent extends JComponent implements GameListener
 	final Graphics2D g2d = (Graphics2D) g;
 	String health = "Life: " + gameHandler.getHealth();
 	String currentMoney = "Money: " + gameHandler.getMoney();
-	String level = "Level: " + gameHandler.getLevel();
+	String level = "Wave level: " + gameHandler.getLevel();
 	g2d.setColor(Color.BLACK);
-	g2d.setFont(new Font("serif", Font.PLAIN, textSize));
+	g2d.setFont(new Font("serif", Font.PLAIN, gameScale/2));
 	final int positionX = 0;
-	final int healthPositionY = 30;
-	final int moneyPositionY = 60;
-	final int levelPositionY = 90;
+
+	final int margin = gameScale/2;
+	final int healthPositionY = gameScale;
+	final int moneyPositionY = gameScale + margin;
+	final int levelPositionY = gameScale + margin*2;
 	g2d.drawString(health, positionX, healthPositionY);
     	g2d.drawString(currentMoney, positionX, moneyPositionY);
 	g2d.drawString(level, positionX, levelPositionY);
