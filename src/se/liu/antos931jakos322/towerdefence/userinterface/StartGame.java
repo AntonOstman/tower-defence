@@ -10,6 +10,7 @@ import java.util.logging.SimpleFormatter;
 /**
  * StartGame starts the game.
  * The class creates a start menu with the class StartMenu
+ * Also starts and configures the global logger
  */
 public class StartGame
 {

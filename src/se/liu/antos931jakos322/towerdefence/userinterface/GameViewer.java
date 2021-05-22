@@ -35,6 +35,13 @@ public class GameViewer
     private Tower clickedTower;
     private int gameScale;
 
+    /**
+     * Constructs a GameViewer object with
+     *
+     * @param gameHandler the object that controls the game
+     * @param gameScale the graphical scale of the game
+     */
+
     public GameViewer(GameHandler gameHandler, int gameScale) {
         this.gameHandler = gameHandler;
         this.selectedTower = TowerType.NONE;
@@ -45,14 +52,19 @@ public class GameViewer
 	this.gameScale = gameScale;
     }
 
+
     public void show(){
 	final Color backGroundColor = new Color(92, 184, 92);
-        frame = new JFrame();
 	MenuComponent menuComponent = new MenuComponent(gameHandler, gameScale);
 	GameComponent gameComponent = new GameComponent(gameHandler, gameScale);
 
+	gameHandler.addListener(menuComponent);
+	gameHandler.addListener(gameComponent);
+
+
 	// create the panels of the UI In the gridLayout the first agrument represent amout of rows and seconds amout of coloumns
 	// in the gridlayout
+	// 0 stands for unlimited amount
 	JPanel mainPanel = new JPanel();
 	JPanel gamePanel = new JPanel(new GridLayout(1,1));
 	JPanel mainMenuPanel = new JPanel(new GridLayout(5,1));
@@ -61,6 +73,8 @@ public class GameViewer
 	JPanel towerDescriptionPanel = new JPanel(new GridLayout(1,1));
 	JPanel textPanel = new JPanel(new BorderLayout());
 	JScrollPane scrollableInteractivePanel = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	JScrollPane textScrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
 	// create the interactive panel
 	final int unlimitedRows = 0;
 	GridLayout interactivePanelLayout = new GridLayout(unlimitedRows, 2);
@@ -97,21 +111,6 @@ public class GameViewer
 	    interactivePanel.add(b);
 	    UIManager.put(b.isSelected(),Color.BLACK);
 	}
-	// iterate over all towerstypes that exist and get the information about certain towers from towermaker
-	// and create buttons with that information
-	/*
-	for (TowerType towerType: towerTypes) {
-	    ButtonEvent buttonEvent = new ButtonEvent(towerType, ButtonType.MENU);
-	    Color buttonColor = TowerGetter.getTower(towerType).getColor();
-
-	    JToggleButton b = new JToggleButton();
-	    b.setBackground(buttonColor);
-	    b.addActionListener(buttonEvent);
-	    buttonGroup.add(b);
-	    interactivePanel.add(b);
-	    UIManager.put(b.isSelected(),Color.BLACK);
-	}
-	*/
 
 	textPanel.add(menuComponent);
 
@@ -122,7 +121,8 @@ public class GameViewer
 	gamePanel.addMouseListener(new MouseEvent(towerDescription));
 
 	//tower description panel config
-	towerDescriptionPanel.add(towerDescription);
+	textScrollPane.getViewport().add(towerDescription);
+	towerDescriptionPanel.add(textScrollPane);
 	towerDescriptionPanel.setBackground(backGroundColor);
 	//towerDesripction.setBorder(BorderFactory.createLineBorder(Color.black));
 
@@ -139,13 +139,14 @@ public class GameViewer
 	JButton quitButton = new JButton(new ButtonEvent(ButtonType.QUIT));
 	JButton pauseButton = new JButton();
 	pauseButton.setAction(new ButtonEvent(ButtonType.PAUSE, pauseButton));
+
 	// the game starts paused so start with the startgame text
 	pauseButton.setText("Start game");
 	quitButton.setText("Quit game");
 	pauseAndQuitPanel.add(pauseButton);
 	pauseAndQuitPanel.add(quitButton);
 
-	// now add all panels we have created to the main
+	// now add all panels we have created to the mainMenuPanel
 	mainMenuPanel.add(menuComponent);
 	mainMenuPanel.add(towerDescriptionPanel);
 	mainMenuPanel.add(scrollableInteractivePanel);
@@ -157,16 +158,14 @@ public class GameViewer
 	mainMenuPanel.setPreferredSize(new Dimension(mainMenuWidth, mainMenuHeight));
 	mainMenuPanel.setBackground(backGroundColor);
 
-
+	// add the panel controlling the game and the menus to the main panel
 	mainPanel.add(gamePanel);
 	mainPanel.add(mainMenuPanel);
 	mainPanel.setBackground(backGroundColor);
 
+	frame = new JFrame();
 	frame.setLayout(new BorderLayout());
-	gameHandler.addListener(menuComponent);
-	gameHandler.addListener(gameComponent);
 	frame.add(mainPanel);
-
 	frame.pack();
 	frame.setVisible(true);
 

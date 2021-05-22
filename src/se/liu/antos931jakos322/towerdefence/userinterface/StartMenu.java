@@ -4,7 +4,6 @@ import com.google.gson.JsonSyntaxException;
 import se.liu.antos931jakos322.towerdefence.gamelogic.GameHandler;
 import se.liu.antos931jakos322.towerdefence.gamelogic.GameMap;
 import se.liu.antos931jakos322.towerdefence.gamelogic.Tile;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,11 +11,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
  * StartMenu opens a window where the user can click on on button
  * to choose which map to play on, the class then starts a game
  * on the choosen map.
  */
+
 public class StartMenu implements GameListener
 {
     private JFrame frame;
@@ -42,17 +43,10 @@ public class StartMenu implements GameListener
 
 
 	JPanel mainPanel = new JPanel(new GridLayout(2, 1));
-	//mainPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-
 	JPanel header = new JPanel();
-	//header.setBorder(BorderFactory.createLineBorder(Color.GREEN));
-	//JPanel empty = new JPanel();
-	//empty.setBorder(BorderFactory.createLineBorder(Color.ORANGE));
 	JPanel mapSelect = new JPanel(new GridLayout(2, 4));
-	//mapSelect.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 
 	JLabel label = new JLabel("Select a map to play");
-
 	label.setSize(new Dimension(200, 200));
 
 	label.setFont(new Font("TimesRoman", Font.PLAIN, 50));
@@ -60,13 +54,12 @@ public class StartMenu implements GameListener
 	header.setBackground(background);
 	header.add(label);
 
-	// these magic constans should not be magic.. get the information from gamemap and loop through the maps
 
 	for (int i = 0; i < gameMap.getNumberOfMaps(); i++) {
 	    ButtonEvent buttonListener = new ButtonEvent(i);
 	    gameMap.loadMap(i);
 	    JButton b = new JButton();
-	    // these should probably be decided from the amount of images to draw
+
 	    final int bufferedImageWidth = 105;
 	    final int bufferedImageHeight = 105;
 	    BufferedImage lineImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight,
@@ -187,12 +180,6 @@ public class StartMenu implements GameListener
 	        viewer.dispose();
 	        viewer = null;
 	        frame.setVisible(true);
-
-
-		// do something
-		// the best is probably to have the logic for game over in gameviewer
-		// though we need a tick function in gameViwer which chechs if the game is over
-		// or something
 	    }
 	else {
 	    System.exit(0);

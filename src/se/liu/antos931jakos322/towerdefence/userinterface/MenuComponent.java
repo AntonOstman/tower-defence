@@ -3,14 +3,13 @@ package se.liu.antos931jakos322.towerdefence.userinterface;
 
 
 import se.liu.antos931jakos322.towerdefence.gamelogic.GameHandler;
-
 import javax.swing.*;
 import java.awt.*;
+
 /**
  *
- * MenuComponent draws the graphics of text based information
- * Example:
- * 	Draws the current player health and current money
+ * MenuComponent draws the text graphics for game health, money and wave level
+ * MenuComponent implements GameListener which means it can listen to game changes and update the grapchis accordingly
  *
  *
  */
@@ -25,8 +24,6 @@ public class MenuComponent extends JComponent implements GameListener
         this.gameScale = gameScale;
 
     }
-
-
 
     @Override public void gameChanged() {
 	repaint();

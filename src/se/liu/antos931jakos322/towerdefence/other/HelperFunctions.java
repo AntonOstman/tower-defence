@@ -5,9 +5,7 @@ import java.awt.geom.Point2D;
 /**
  *
  * Class with various helper functions
- * The helper functions do directly have anyhting with the game to do
- * example:
- * 	Pythagoras therom is a general mathematical formula
+ * The helper functions do not directly have anyhting with the game to do for example mathematical calculation
  *
  */
 
@@ -15,13 +13,13 @@ import java.awt.geom.Point2D;
 public class HelperFunctions
 {
 
-//    public static double pythagoras(double a, double b){
-//	// returns the integer value of pythagoras therom for 2 integers
-//	double c = Math.pow((a), 2) + Math.pow((b), 2);
-//
-//	return c;
-//    }
-
+    /**
+     *
+     * @param position1 the first position to compare
+     * @param position2 the second position to compare
+     * @param distance the allowed distance for the two positions
+     * @return if the two positions are within the distance from eachother
+     */
 
     public static boolean isNear(Point2D position1, Point2D position2, double distance){
 
