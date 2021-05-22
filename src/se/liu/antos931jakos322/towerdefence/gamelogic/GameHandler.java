@@ -271,6 +271,11 @@ public class GameHandler
         notifyListeners();
     }
 
+    public void selectTower(Tower tower, boolean select){
+        tower.setSelected(select);
+        notifyListeners();
+    }
+
     public GameMap getGameMap() { // this should probably be changed so map cannot be directly accessed. Game handler controls map not others
         return gameMap;
     }

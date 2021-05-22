@@ -266,14 +266,14 @@ public class GameViewer
 	private void displayTowerInfo(Point clickedPoint){
 
 	    if (clickedTower != null){
-	        clickedTower.setSelected(false);
+	        gameHandler.selectTower(clickedTower, false);
 	    }
-	    Tower clickedTow = gameHandler.getTowerOnPoint(clickedPoint);
+	    Tower newClickedTower = gameHandler.getTowerOnPoint(clickedPoint);
 	    // if there is no tower on the point exit
-	    if (clickedTow == null){ return;}
-	    textArea.setText(clickedTow.getDescription());
-	    clickedTower = clickedTow;
-	    clickedTower.setSelected(true);
+	    if (newClickedTower == null){ return;}
+	    textArea.setText(newClickedTower.getDescription());
+	    clickedTower = newClickedTower;
+	    gameHandler.selectTower(clickedTower,true);
 	}
 
 
