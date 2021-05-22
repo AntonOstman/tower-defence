@@ -90,7 +90,7 @@ public class GameHandler
 
     public void startGame() {
     if (tickTimer == null){
-        int tickDelay = 30;
+        final int tickDelay = 30;
         tickTimer = new Timer(tickDelay, new DoOneStep());
     }
 

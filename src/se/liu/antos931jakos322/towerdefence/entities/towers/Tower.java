@@ -104,19 +104,16 @@ public abstract class Tower extends EntityAttacker
      */
     public boolean canAttack(Entity entity){
 
-        if (!super.canAttack(entity)){
-            return false;
-        }
-
-        // if the tower needs to recharge before it can shoot....
-        if (attackSpeedCharge != attackSpeed){
-            // recharge and...
+        // the tower has a recharge rate and if it has not yet
+        // recharged then charge up a bit and return false
+        if (attackSpeedCharge != attackSpeed) {
             attackSpeedCharge++;
-            // return false.
             return false;
         }
 
-        // if the entity is inside range and the tower could shoot...
+        else if (!super.canAttack(entity)){
+            return false;
+        }
         else if (HelperFunctions.isNear(position, entity.getPosition() , range)){
             // set that the tower needs to recharge...
             attackSpeedCharge = 0;
@@ -228,7 +225,7 @@ public abstract class Tower extends EntityAttacker
             g2d.drawOval(circleX, circleY, diameter * gameScale , gameScale * diameter);
         }
         g2d.setColor(Color.white);
-        int textScale = 3;
+        final int textScale = 3;
         int textSize = gameScale / textScale;
         g2d.setFont(new Font("TimesRoman", Font.PLAIN , textSize));
         int textPosX = (int) (towerPosX * gameScale) + gameScale / 3;

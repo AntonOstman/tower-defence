@@ -19,7 +19,7 @@ public class ArrowTower extends Tower
 {
 
 
-    private static final int ATTACKPOWER = 10;
+    private static final int ATTACK_POWER = 10;
     private static final int COST = 6;
     private static final int RANGE = 5;
     private static final int UPGRADE_COST = 1;
@@ -31,7 +31,7 @@ public class ArrowTower extends Tower
 
     public ArrowTower()
     {
-	super(TOWER_TYPE, COLOR, COST, ATTACKPOWER, RANGE, UPGRADE_COST, PROJECTILE_TYPE, ATTACK_SPEED, SIZE);
+	super(TOWER_TYPE, COLOR, COST, ATTACK_POWER, RANGE, UPGRADE_COST, PROJECTILE_TYPE, ATTACK_SPEED, SIZE);
     }
 
     @Override public void activate() {

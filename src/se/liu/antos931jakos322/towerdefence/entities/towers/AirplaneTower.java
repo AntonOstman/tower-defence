@@ -49,8 +49,8 @@ public class AirplaneTower extends Tower
 
     @Override public void upgrade() {
 	super.upgrade();
-	double radiusIncrase = 0.5;
-	positionRadius += radiusIncrase;
+	final double radiusIncrease = 0.5;
+	positionRadius += radiusIncrease;
     }
 
     @Override public void move() {

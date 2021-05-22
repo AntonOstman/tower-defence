@@ -216,7 +216,4 @@ public class StartMenu implements GameListener
 	}
     }
 
-
-
-
 }

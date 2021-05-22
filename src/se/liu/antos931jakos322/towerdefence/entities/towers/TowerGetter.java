@@ -22,13 +22,13 @@ public class TowerGetter
     public static List<TowerType> getAllTowers(){
 
 	// return TowerType.values(); // this should be used in the final implementaion
-	List<TowerType> towerList = new ArrayList<>();
+	List<TowerType> towers = new ArrayList<>();
 	for(TowerType towerType: TowerType.values()){
 	    if (towerType != TowerType.NONE){
-	        towerList.add(towerType);
+	        towers.add(towerType);
 	    }
 	}
-	return towerList;
+	return towers;
 	// hard coded only to test
     }
 
