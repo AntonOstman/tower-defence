@@ -108,6 +108,14 @@ public abstract class Tower extends Entity
     public boolean canAttack(){
 
         // if the tower needs to recharge before it can shoot....
+        if (targetEnemy == null){
+            return false;
+        }
+
+        if (targetEnemy.getHealth() <= 0){
+            targetEnemy = null;
+            return false;
+        }
         if (attackSpeedCharge != attackSpeed){
             // recharge and...
             attackSpeedCharge++;

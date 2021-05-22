@@ -18,7 +18,7 @@ import java.util.List;
  *
  * Gamehandler is the core class which contains the logic for starting and running the game.
  * Gamehandlers main way of running the game is by using the tick() method which is activated by a timer.
- * when the tick() method is called the game progresses one step by calling the logic entities.
+ * when the tick() method is called the game progresses one step by calling the entity handelding methods.
  * Since GameHandler controls the game that also means it handles the interactions between the game map and entities.
  * Which means for example GameHandler means GameHandler knows when
  * enemies have come to the end of the game map and the player should take damage.
@@ -52,7 +52,7 @@ public class GameHandler
         this.gameListeners = new ArrayList<>();
         this.waveMaker = new WaveMaker();
         this.tickDelay = 30;
-        this.tickTimer = new Timer(tickDelay, new DoOneStep()); // timer is set when the game starts in method startgame
+        this.tickTimer = null; // timer is set when the game starts in method startgame
         this.gamePaused = true;
         this.gameOver = false;
     }
@@ -115,6 +115,9 @@ public class GameHandler
     }
 
     public void startGame() {
+    if (tickTimer == null){
+        tickTimer = new Timer(tickDelay, new DoOneStep());
+    }
 
     tickTimer.start();
     gamePaused = false;
@@ -135,12 +138,14 @@ public class GameHandler
             for (Enemy enemy : enemies){
                 if (projectile.canAttack(enemy)) {
                     projectile.attack(enemy);
+                    // if the projectile cannot penetrate through any more enemies, remove it
+                    if (projectile.getPenetrationAmount() <= 0){
+                        projectilesToRemove.add(projectile);
+                    }
+
                 }
             }
-            // if the projectile cannot penetrate through any more enemies, remove it
-           if (projectile.getPenetrationAmount() <= 0){
-               projectilesToRemove.add(projectile);
-           }
+
             Point2D projectilePosition = projectile.getPosition();
             // if there are any projectiles outside the game add them to the remove list
             boolean lessThanBounds = projectilePosition.getY() < 0 || projectilePosition.getX() < 0;
@@ -191,9 +196,9 @@ public class GameHandler
         List<Enemy> removeEnemies = new ArrayList<>();
         List<Enemy> addEnemies = new ArrayList<>();
         for (Enemy enemy : enemies){
-            int currentPath = enemy.getPathProgress();
+            int pathProgress = enemy.getPathProgress();
 
-            enemy.setMovePosition(gameMap.getPath(currentPath));
+            enemy.setMovePosition(gameMap.getPath(pathProgress));
             enemy.move();
             // if the enemy has come to the end of the map damage the player
             if(enemy.isFinished()){
@@ -293,10 +298,6 @@ public class GameHandler
 
     }
 
-    public List<Projectile> getProjectiles() {
-        return projectiles;
-    }
-
     public GameMap getGameMap() { // this should probably be changed so map cannot be directly accessed. Game handler controls map not others
         return gameMap;
     }
@@ -325,9 +326,9 @@ public class GameHandler
         return towers.get(number);
     }
 
-    public Enemy getEnemy(int number){
+    public Enemy getEnemy(int index){
 
-        return enemies.get(number);
+        return enemies.get(index);
     }
 
     public class DoOneStep extends AbstractAction{
