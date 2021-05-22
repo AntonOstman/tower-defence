@@ -1,5 +1,7 @@
 package se.liu.antos931jakos322.towerdefence.entities.projectiles;
 
+import se.liu.antos931jakos322.towerdefence.entities.Entity;
+
 import java.awt.*;
 
 /**
@@ -19,6 +21,11 @@ public class MissileProjectile extends Projectile
     private static final int PENETRATION_AMOUNT = 2;
     private static final Color COLOR = Color.CYAN;
 
+
+    @Override public void move() {
+        super.move();
+        movePosition = targetEntity.getPosition();
+    }
 
     public MissileProjectile() {
 	super(COLOR, SIZE, SPEED, PENETRATION_AMOUNT);

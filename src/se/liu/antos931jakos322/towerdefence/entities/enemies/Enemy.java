@@ -19,7 +19,6 @@ import java.util.List;
 
 public abstract class Enemy extends Entity
 {
-    protected int health;
     protected int pathProgress;
     protected final int maxHealth;
     protected final int rewardMoney;
@@ -27,8 +26,7 @@ public abstract class Enemy extends Entity
     private int lastPosition;
 
     protected Enemy(final int maxHealth, final double speed, final Color color, final double size, int attackPower) {
-	super(color, size, speed, attackPower);
-	this.health = maxHealth;
+	super(color, size, speed, attackPower, maxHealth);
 	this.maxHealth = maxHealth;
 	this.pathProgress = 0;
     	this.rewardMoney = 5;
@@ -37,11 +35,18 @@ public abstract class Enemy extends Entity
 
     }
 
-    public void takeDamage(int damage){
-	if (health - damage < 0) { health = 0; }
-	else { health -= damage; }
-
+    @Override public boolean canBeAttacked() {
+	if (isFinished()){
+	    return false;
+	}
+        if(health <= 0){
+            return false;
+	}
+        else{
+            return true;
+	}
     }
+
 
     @Override public void draw(final Graphics2D g2d, final int gameScale) {
 

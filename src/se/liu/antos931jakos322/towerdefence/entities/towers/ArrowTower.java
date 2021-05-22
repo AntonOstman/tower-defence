@@ -20,7 +20,7 @@ public class ArrowTower extends Tower
 
 
     private static final int ATTACKPOWER = 10;
-    private static final int COST = 7;
+    private static final int COST = 6;
     private static final int RANGE = 5;
     private static final int UPGRADE_COST = 1;
     private static final int ATTACK_SPEED = 8;

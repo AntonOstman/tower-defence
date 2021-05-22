@@ -1,6 +1,7 @@
 package se.liu.antos931jakos322.towerdefence.entities.projectiles;
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
+import se.liu.antos931jakos322.towerdefence.entities.EntityAttacker;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 import java.awt.*;
@@ -21,7 +22,7 @@ import java.awt.geom.Point2D;
  */
 
 
-public abstract class Projectile extends Entity
+public abstract class Projectile extends EntityAttacker
 {
 
     private Point2D startPosition;
@@ -55,30 +56,42 @@ public abstract class Projectile extends Entity
     }
 
     /**
-     * canAttack returns wheter a projectile can attack an enemy
+     * canAttack returns wheter a projectile can attack an entity
      *
-     * @param enemy the enemy object that is being checked if it is possible to attack
+     * @param entity the entity object that is being checked if it is possible to attack
      * @return true or false if an attack is possible or not
      */
 
-    public boolean canAttack(Enemy enemy){
-        // the projectile hit range is increased with a constant to make sure it actually hits when near an enemy
-        int hitRangeScale = 2;
+    @Override public boolean canAttack(Entity entity){
+        // the projectile hit range is increased with a constant to make sure it actually hits when near an entity
+
+	if(!super.canAttack(entity)){
+	    return false;
+	}
+	int hitRangeScale = 2;
         double hitRange = size * hitRangeScale;
-	if (HelperFunctions.isNear(position, enemy.getPosition(), hitRange)) {
+	if (HelperFunctions.isNear(position, entity.getPosition(), hitRange)) {
 	return true;
 	}
 	else{ return false;}
     }
 
+    @Override public void decideTarget(Entity entity) {
+	super.decideTarget(entity);
+	this.targetEntity = entity;
+	this.movePosition = entity.getPosition();
+	this.position = startPosition;
+
+    }
+
     /**
-     * attacks an enemy
+     * attacks an entity
      *
-     * @param enemy the enemy object to attack
+     * @param entity the entity object to attack
      */
 
-    public void attack(Enemy enemy){
-	enemy.takeDamage(attackPower);
+    public void attack(Entity entity){
+	entity.takeDamage(attackPower);
 	penetrationAmount -= 1;
 
     }
@@ -89,10 +102,10 @@ public abstract class Projectile extends Entity
      *
      * @param target the enemy object to target
      */
-    public void setTarget(final Enemy target) {
-	this.movePosition = target.getPosition();
-	this.position = startPosition;
-    }
+//    public void setTarget(final Enemy target) {
+//	this.movePosition = target.getPosition();
+//	this.position = startPosition;
+//    }
 
     /**
      * draws the projectile as a circle with the specified size and color fields

@@ -16,7 +16,7 @@ import java.awt.*;
 public class CanonTower extends Tower
 {
     private final static int ATTACK_POWER = 5;
-    private final static int COST = 7;
+    private final static int COST = 6;
     private final static int RANGE = 3;
     private final static int UPGRADE_COST = 1;
     private final static int ATTACK_SPEED = 20;

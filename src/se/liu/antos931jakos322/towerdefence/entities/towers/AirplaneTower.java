@@ -25,7 +25,7 @@ public class AirplaneTower extends Tower
     private double angle;
     private double positionRadius;
     private final static int ATTACK_POWER = 5;
-    private final static int COST = 7;
+    private final static int COST = 12;
     private final static int RANGE = 5;
     private final static int UPGRADE_COST = 1;
     private final static int ATTACK_SPEED = 3;

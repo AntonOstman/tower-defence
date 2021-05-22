@@ -16,7 +16,7 @@ public class MachineGunTower extends Tower
 {
 
     private final static int ATTACK_POWER = 3;
-    private final static int COST = 7;
+    private final static int COST = 4;
     private final static int RANGE = 7;
     private final static int UPGRADE_COST = 1;
     private final static int ATTACK_SPEED = 1;

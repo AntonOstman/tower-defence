@@ -1,6 +1,7 @@
 package se.liu.antos931jakos322.towerdefence.entities.towers;
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
+import se.liu.antos931jakos322.towerdefence.entities.EntityAttacker;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 import se.liu.antos931jakos322.towerdefence.entities.projectiles.Projectile;
 import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileGetter;
@@ -20,13 +21,14 @@ import java.awt.geom.Point2D;
  * range - how close the tower needs to be a target to send a projectile
  * Level - represents how much Tower has upgraded where each level increases the strength of Tower
  *
- * a Tower can attack enemies by first checking if it canAttack() to make sure it is following the specific tower's attacking rules
- * then using the createProjectile(enemy) method which returns the projectile which will be shot towards the enemy.
+ * a Tower can attack enemies by first checking if it canAttack() to make sure it is following the specific tower's attacking rules.
+ * Then using the createProjectile(enemy) method which returns the projectile that will be shot towards the enemy.
+ * Tower
  *
  */
 
 
-public abstract class Tower extends Entity
+public abstract class Tower extends EntityAttacker
 {
     protected int range;
     protected int cost;
@@ -38,7 +40,6 @@ public abstract class Tower extends Entity
     protected Point2D startPosition;
     protected boolean selected;
     protected int level;
-    protected Enemy targetEnemy;
 
     /**
      *  Constructs a Tower for towers with an inital moving speed
@@ -67,7 +68,6 @@ public abstract class Tower extends Entity
         this.attackSpeedCharge = 0;
         this.selected = false;
         this.level = 1;
-        this.targetEnemy = null;
     }
 
     /**
@@ -96,29 +96,20 @@ public abstract class Tower extends Entity
         this.attackSpeedCharge = 0;
         this.selected = false;
         this.level = 1;
-        this.targetEnemy = null;
     }
 
     /**
-     * returns wheter a attack on the desired enemy is possible
+     * returns wheter a attack on the targeted entity is possible
      *
-     * @param enemy the enemy to check wheter an attack is possible
      * @return true if attack is possible otherwise false
      */
-    public boolean canAttack(){
+    public boolean canAttack(Entity entity){
+
+        if (!super.canAttack(entity)){
+            return false;
+        }
 
         // if the tower needs to recharge before it can shoot....
-        if (targetEnemy == null){
-            return false;
-        }
-        if (targetEnemy.isFinished()){
-            targetEnemy = null;
-            return false;
-        }
-        if (targetEnemy.getHealth() <= 0){
-            targetEnemy = null;
-            return false;
-        }
         if (attackSpeedCharge != attackSpeed){
             // recharge and...
             attackSpeedCharge++;
@@ -126,8 +117,8 @@ public abstract class Tower extends Entity
             return false;
         }
 
-        // if the enemy is inside range and the tower could shoot...
-        else if (HelperFunctions.isNear(position, targetEnemy.getPosition() , range)){
+        // if the entity is inside range and the tower could shoot...
+        else if (HelperFunctions.isNear(position, entity.getPosition() , range)){
             // set that the tower needs to recharge...
             attackSpeedCharge = 0;
             // and return that the tower can attack
@@ -141,7 +132,7 @@ public abstract class Tower extends Entity
 
 
     /**
-     * Used by towers to attack enemies.
+     * Used by towers to attack entities.
      * Returns the projectile object the tower is attacking with.
      *
      * @param enemy the enemey to attack
@@ -150,32 +141,45 @@ public abstract class Tower extends Entity
     public Projectile createProjectileAttack() {
 
         Projectile projectile = ProjectileGetter.getProjectile(projectileType);
-        projectile.setTarget(targetEnemy);
+        projectile.decideTarget(targetEntity);
         projectile.setPosition(position);
         projectile.setAttackPower(attackPower);
 
         return projectile;
     }
 
-    public void decideAttack(Enemy enemy){
-        if (targetEnemy == null){
-            targetEnemy = enemy;
+    /**
+     * Decides if the targetEntity should be changed.
+     * The chosen target enemy is the closest one in relation to the tower.
+     *
+     * @param entity the entity to check for an attack
+     */
+
+    @Override public void decideTarget(Entity entity){
+        super.decideTarget(entity);
+
+        // the target is chosen by first checking if the currently targeted enemy can be attacked.
+        // if not we want to change target
+        if ( !targetEntity.canBeAttacked()){
+            targetEntity = entity;
+            return;
         }
-        Point2D enemyPos = enemy.getPosition();
-        Point2D targetEnemyPos = targetEnemy.getPosition();
+
+        // then we check the distance in relation with the tower for both potential enemy and the currently targeted
+        // if the current enemy is closer than the targetet one then we change target
+
+        Point2D enemyPos = entity.getPosition();
+        Point2D targetEnemyPos = targetEntity.getPosition();
 
         Point2D targetRelativePosition = new Point2D.Double(position.getX() - targetEnemyPos.getX(), position.getY() - targetEnemyPos.getY());
-
         Point2D potentialTargetRelativeDistance = new Point2D.Double(position.getX() - enemyPos.getX(), position.getY() - enemyPos.getY());
+
         double targetDistance = Math.hypot(targetRelativePosition.getX(), targetRelativePosition.getY());
         double potentialTargetDistance = Math.hypot(potentialTargetRelativeDistance.getX(), potentialTargetRelativeDistance.getY());
-        // get the "real" distance
 
-        if(potentialTargetDistance < targetDistance){
-            targetEnemy = enemy;
-
+        if (potentialTargetDistance < targetDistance){
+            targetEntity = entity;
         }
-
     }
 
     public void setSelected(final boolean selected) {

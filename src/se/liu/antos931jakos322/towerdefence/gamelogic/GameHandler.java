@@ -86,30 +86,6 @@ public class GameHandler
         }
     }
 
-    public Enemy getClosestEnemy(Point2D towerPos, int range){
-        Enemy closestEnemy = null;
-
-        if (!enemies.isEmpty()){
-            double closestDistance = Double.POSITIVE_INFINITY;
-            // for every enemy check if another is closer and is in range.
-            // If one closer is found save that enemy, do that for all enemies
-            // if no enemies in range are found return null
-            for(Enemy enemy: enemies){
-                Point2D enemyPos = enemy.getPosition();
-                Point2D relativePoint = new Point2D.Double(towerPos.getX() - enemyPos.getX(),towerPos.getY() - enemyPos.getY());
-                double currentDistance = Math.hypot(relativePoint.getX(), relativePoint.getY());
-                // get the "real" distance
-
-                if(currentDistance < closestDistance && currentDistance <= range){
-                    closestEnemy = enemy;
-                    closestDistance = currentDistance;
-
-                }
-            }
-        }
-        return closestEnemy;
-    }
-
     public boolean isGameOver() {
         return gameOver;
     }
@@ -163,18 +139,16 @@ public class GameHandler
         for (Tower tower: towers){
 
             tower.activate();
-            // get the enemy closest to the tower...
+            // let the tower decide who to attack
             for(Enemy enemy: enemies){
-                tower.decideAttack(enemy);
+                tower.decideTarget(enemy);
             }
             // if the enemy can be attacked
-            if (tower.canAttack()) {
+            if (tower.canAttack(tower.getTargetEntity())) {
                 // then send a projectile to that enemy
                 Projectile projectile = tower.createProjectileAttack();
                 projectiles.add(projectile);
-
             }
-
         }
     }
 

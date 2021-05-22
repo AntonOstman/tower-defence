@@ -21,6 +21,18 @@ public abstract class Entity
     protected double speed;
     protected Point2D movePosition;
     protected int attackPower;
+    protected int health;
+
+    protected Entity(final Color color, final double size, final double speed, int attackPower, int health)
+    {
+        this.position = null;
+        this.color = color;
+        this.size = size;
+        this.speed = speed;
+        this.movePosition = null;
+        this.attackPower = attackPower;
+        this.health = health;
+    }
 
     /**
      * Constructs an entity with inital speed
@@ -31,6 +43,7 @@ public abstract class Entity
      * @param attackPower attackpower or "damage" of the tower
      */
 
+
     protected Entity(final Color color, final double size, final double speed, int attackPower) {
         this.position = null;
         this.color = color;
@@ -38,6 +51,7 @@ public abstract class Entity
         this.speed = speed;
         this.movePosition = null;
         this.attackPower = attackPower;
+        this.health = 0;
     }
 
     /**
@@ -54,6 +68,7 @@ public abstract class Entity
         this.size = size;
         this.speed = 0;
         this.movePosition = null;
+        this.health = 0;
     }
 
     /**
@@ -66,7 +81,7 @@ public abstract class Entity
         // if the entity is not near the movePosition it will continue moving
         double newY;
         double newX;
-        final double distance = 0.1;
+        final double distance = 0.2;
         if (!HelperFunctions.isNear(position, movePosition, distance)) {
 
             double deltaX = movePosition.getX() - position.getX();
@@ -89,6 +104,18 @@ public abstract class Entity
         // change the actual position with the calculated coordinates
         this.position = new Point2D.Double(newX, newY);
     }
+
+    public void takeDamage(int damage){
+        if (health - damage < 0) {
+            health = 0;
+        }
+        else {
+            health -= damage;
+        }
+
+    }
+
+    public abstract boolean canBeAttacked();
 
     public abstract void draw(Graphics2D g2d, int gameScale);
 
