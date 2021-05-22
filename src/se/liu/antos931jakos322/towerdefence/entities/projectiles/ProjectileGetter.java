@@ -1,7 +1,5 @@
 package se.liu.antos931jakos322.towerdefence.entities.projectiles;
 
-import java.awt.*;
-import java.awt.geom.Point2D;
 import java.util.EnumMap;
 
 

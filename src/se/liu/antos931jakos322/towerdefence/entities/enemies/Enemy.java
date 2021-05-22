@@ -1,13 +1,10 @@
 package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
 
-
-
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,10 +97,6 @@ public abstract class Enemy extends Entity
 
     public boolean isFinished(){
 	return finished;
-    }
-
-    public int getHealth(){
-	return health;
     }
 
     public int getRewardMoney() { return rewardMoney; }

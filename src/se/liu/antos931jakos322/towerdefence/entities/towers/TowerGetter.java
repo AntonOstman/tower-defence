@@ -1,8 +1,8 @@
 package se.liu.antos931jakos322.towerdefence.entities.towers;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 
 /**
  *

@@ -2,8 +2,8 @@ package se.liu.antos931jakos322.towerdefence.entities.projectiles;
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
 import se.liu.antos931jakos322.towerdefence.entities.EntityAttacker;
-import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
+
 import java.awt.*;
 import java.awt.geom.Point2D;
 
@@ -12,8 +12,8 @@ import java.awt.geom.Point2D;
  * Projectile is the abstract class for all projectiles in the game
  * Projectile represents an object that moves and can do damage to enemies
  * Projectiles have various unique properties:
- * attackPower - represents how much damage the projectile does on a hit
  * PenetrationAmount - represents how many times the projectile can do damage before being "destroyed"
+ *
  *
  * Example use:
  * 	Projectile gets created by another entity that tells projectile what to target

@@ -1,7 +1,5 @@
 package se.liu.antos931jakos322.towerdefence.entities;
 
-import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
-
 import java.awt.*;
 
 public abstract class EntityAttacker extends Entity
@@ -46,7 +44,5 @@ public abstract class EntityAttacker extends Entity
 	return targetEntity;
     }
 
-    @Override public void draw(final Graphics2D g2d, final int gameScale) {
-
-    }
+    public abstract void draw(final Graphics2D g2d, final int gameScale);
 }

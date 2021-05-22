@@ -1,6 +1,5 @@
 package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 /**

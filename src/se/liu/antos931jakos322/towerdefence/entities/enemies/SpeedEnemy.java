@@ -1,9 +1,6 @@
 package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * SpeedEnemy is an enemy type that extends the abstract class Enemy

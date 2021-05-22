@@ -135,6 +135,10 @@ public abstract class Entity
         return size;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
     public void setAttackPower(final int attackPower) {
         this.attackPower = attackPower;
     }

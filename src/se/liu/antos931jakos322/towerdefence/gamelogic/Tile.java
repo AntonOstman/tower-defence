@@ -1,12 +1,8 @@
 package se.liu.antos931jakos322.towerdefence.gamelogic;
 
 
-
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.EnumMap;
-import java.util.Objects;
 import java.util.Random;
 
 /**

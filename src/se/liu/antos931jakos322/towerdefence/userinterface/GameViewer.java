@@ -4,7 +4,6 @@ import se.liu.antos931jakos322.towerdefence.entities.towers.Tower;
 import se.liu.antos931jakos322.towerdefence.entities.towers.TowerGetter;
 import se.liu.antos931jakos322.towerdefence.entities.towers.TowerType;
 import se.liu.antos931jakos322.towerdefence.gamelogic.GameHandler;
-import se.liu.antos931jakos322.towerdefence.gamelogic.Tile;
 
 import javax.swing.*;
 import java.awt.*;
