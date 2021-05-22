@@ -170,7 +170,6 @@ public class StartMenu implements GameListener
 	gameHandler = new GameHandler(gameMap);
 	viewer = new GameViewer(gameHandler, GAME_SCALE);
 	gameHandler.addListener(this);
-	gameHandler.startGame();
 	viewer.show();
 
     }

@@ -137,11 +137,13 @@ public class GameViewer
 
 	// pause and quit buttons
 	JButton quitButton = new JButton(new ButtonEvent(ButtonType.QUIT));
-	JButton pauseButton = new JButton(new ButtonEvent(ButtonType.PAUSE));
+	JButton pauseButton = new JButton();
+	pauseButton.setAction(new ButtonEvent(ButtonType.PAUSE, pauseButton));
+	// the game starts paused so start with the startgame text
+	pauseButton.setText("Start game");
 	quitButton.setText("Quit game");
-	pauseButton.setText("Pause game");
-	pauseAndQuitPanel.add(quitButton);
 	pauseAndQuitPanel.add(pauseButton);
+	pauseAndQuitPanel.add(quitButton);
 
 	// now add all panels we have created to the main
 	mainMenuPanel.add(menuComponent);
@@ -176,15 +178,22 @@ public class GameViewer
 
         private TowerType towerType;
 	private ButtonType buttonType;
-
+	private JButton jButton;
 
 	public ButtonEvent(TowerType towerType, ButtonType buttonType) {
 	    this.towerType = towerType;
 	    this.buttonType = buttonType;
+	    this.jButton = null;
 	}
 	public ButtonEvent(ButtonType buttonType) {
 	    this.towerType = TowerType.NONE;
 	    this.buttonType = buttonType;
+	    this.jButton = null;
+	}
+	public ButtonEvent(ButtonType buttonType, JButton jButton) {
+	    this.towerType = TowerType.NONE;
+	    this.buttonType = buttonType;
+	    this.jButton = jButton;
 	}
 
 	@Override public void actionPerformed(final ActionEvent e) {
@@ -209,12 +218,13 @@ public class GameViewer
 
 		break;
 		case PAUSE:
-
 	     	if (gameHandler.isGamePaused()){
-	     	    gameHandler.startGame();
+		    jButton.setText("Pause game");
+		    gameHandler.startGame();
 		}
 	     	else{
-	        gameHandler.pauseGame();
+		    jButton.setText("Start game");
+		    gameHandler.pauseGame();
 	     	}
 
 		    break;
