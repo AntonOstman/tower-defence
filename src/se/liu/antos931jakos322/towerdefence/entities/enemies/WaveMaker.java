@@ -75,6 +75,7 @@ public class WaveMaker
 
         if(waveLevel < 5){
             spawnEnemy( 3 + waveLevel, genericEnemy);
+            spawnEnemy( 0 + waveLevel, explodingEnemy);
 
         } else if(waveLevel < 10){
             spawnEnemy( -4 + waveLevel, explodingEnemy);

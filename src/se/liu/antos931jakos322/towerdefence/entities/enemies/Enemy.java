@@ -2,9 +2,11 @@ package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
+import se.liu.antos931jakos322.towerdefence.entities.towers.TowerType;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -23,6 +25,9 @@ public abstract class Enemy extends Entity
     protected boolean finished;
     private int lastPosition;
     private final static Random RND = new Random();
+    private EnemyType enemyType;
+    private int numberOfSplits;
+    private int splitDistance;
 
     protected Enemy(final int maxHealth, final double speed, final Color color, final double size, int attackPower) {
 	super(color, size, speed, attackPower, maxHealth);
@@ -31,6 +36,20 @@ public abstract class Enemy extends Entity
     	this.rewardMoney = 5;
 	this.finished = false;
     	this.lastPosition = -1;
+    	this.numberOfSplits = 0;
+    }
+    protected Enemy(final int maxHealth, final double speed, final Color color, final double size,
+		    int attackPower, int numberOfSplits, EnemyType enemyType, int splitDistance) {
+
+	super(color, size, speed, attackPower, maxHealth);
+	this.maxHealth = maxHealth;
+	this.pathProgress = 0;
+	this.rewardMoney = 5;
+	this.finished = false;
+	this.lastPosition = -1;
+	this.numberOfSplits = numberOfSplits;
+	this.enemyType = enemyType;
+	this.splitDistance = splitDistance;
 
     }
 
@@ -113,7 +132,16 @@ public abstract class Enemy extends Entity
     public int getPathProgress() { return pathProgress; }
 
     public List<Enemy> split(){
-        return new ArrayList<>();
+	List<Enemy> enemies = new ArrayList<>();
+
+	for (int i = 0; i < numberOfSplits; i++) {
+	    Enemy s = EnemyGetter.getEnemy(enemyType);
+	    s.setPosition(new Point2D.Double(position.getX() + splitRandomPos(splitDistance), position.getY() + splitRandomPos(splitDistance)));
+	    s.setPathProgress(pathProgress);
+	    enemies.add(s);
+	}
+
+	return enemies;
     }
 
     public void setPathProgress(final int pathProgress) {

@@ -17,22 +17,11 @@ public class BigBossEnemy extends Enemy
     private static final double SIZE = 1.2;
     private static final int DAMAGE = 30;
 
+    private static final int NUMBER_OF_SPLITS = 2;
+    private static final EnemyType SPLIT_TYPE = EnemyType.BossEnemy;
+    private static final int SPLIT_DISTANCE = 2;
+
     public BigBossEnemy() {
-	super(HEALTH, SPEED, COLOR, SIZE, DAMAGE);
-    }
-
-    @Override public java.util.List<Enemy> split(){
-        List<Enemy> enemies = new ArrayList<>();
-
-        final int distance = 2;
-        final int numberOfSpawnedEnemeies = 2;
-        for (int i = 0; i < numberOfSpawnedEnemeies; i++) {
-            BossEnemy b = new BossEnemy();
-            b.setPosition(new Point2D.Double(position.getX() + splitRandomPos(distance), position.getY() + splitRandomPos(distance)));
-            b.setPathProgress(pathProgress);
-            enemies.add(b);
-        }
-
-        return enemies;
+        super(HEALTH, SPEED, COLOR, SIZE, DAMAGE, NUMBER_OF_SPLITS, SPLIT_TYPE, SPLIT_DISTANCE);
     }
 }

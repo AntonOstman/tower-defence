@@ -18,26 +18,17 @@ public class ExplodingEnemy extends Enemy
     private static final double SIZE = 0.7;
     private static final int DAMAGE = 10;
 
+    private static final int NUMBER_OF_SPLITS = 4;
+    private static final EnemyType SPLIT_TYPE = EnemyType.SpeedEnemy;
+    private static final int SPLIT_DISTANCE = 5;
+
 
 
     public ExplodingEnemy() {
-	super(HEALTH, SPEED, COLOR, SIZE, DAMAGE);
+        super(HEALTH, SPEED, COLOR, SIZE, DAMAGE, NUMBER_OF_SPLITS, SPLIT_TYPE, SPLIT_DISTANCE);
     }
 
-    @Override public List<Enemy> split(){
-	List<Enemy> enemies = new ArrayList<>();
-	
-	final int distance = 5;
-	final int numberOfSpawnedEnemeies = 4;
-	for (int i = 0; i < numberOfSpawnedEnemeies; i++) {
-	    SpeedEnemy s = new SpeedEnemy();
-	    s.setPosition(new Point2D.Double(position.getX() + splitRandomPos(distance), position.getY() + splitRandomPos(distance)));
-	    s.setPathProgress(pathProgress);
-	    enemies.add(s);
-	}
 
-	return enemies;
-    }
 
 
 
