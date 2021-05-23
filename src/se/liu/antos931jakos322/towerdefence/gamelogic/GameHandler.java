@@ -150,10 +150,10 @@ public class GameHandler
             for (Enemy enemy : enemies){
                 if (projectile.canAttack(enemy)) {
                     projectile.attack(enemy);
-                    // if the projectile cannot penetrate through any more enemies, remove it
 
                 }
             }
+            // if the projectile cannot penetrate through any more enemies, remove it
             if (projectile.getPenetrationAmount() <= 0){
                 projectilesToRemove.add(projectile);
             }
