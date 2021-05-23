@@ -48,10 +48,11 @@ public abstract class Projectile extends EntityAttacker
 	double moveX = movePosition.getX();
 	double moveY = movePosition.getY();
 	final int deltaScale = 10;
-	// we increse the delta with a constant to make sure when the projectile is shot near an enemy it does not bug out
+	// we increse the delta with a constant to make sure when the projectile
+	// is shot near an enemy it does not stop from being to near
 	double deltaX = deltaScale*(moveX - position.getX());
 	double deltaY = deltaScale*(moveY - position.getY());
-	// we increase the target position with the deltax and deltay to keep the projectile from stopping once it reaches the position
+	// we then increase the target position with the deltax and deltay to keep the projectile from stopping once it reaches the position
 	Point2D newPos = new Point2D.Double(movePosition.getX() + deltaX,movePosition.getY() + deltaY);
 	movePosition = newPos;
     }

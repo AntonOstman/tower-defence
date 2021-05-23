@@ -1,4 +1,11 @@
-package se.liu.antos931jakos322.towerdefence.entities.enemies;
+package se.liu.antos931jakos322.towerdefence.gamelogic;
+
+import se.liu.antos931jakos322.towerdefence.entities.enemies.BigBossEnemy;
+import se.liu.antos931jakos322.towerdefence.entities.enemies.BossEnemy;
+import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
+import se.liu.antos931jakos322.towerdefence.entities.enemies.ExplodingEnemy;
+import se.liu.antos931jakos322.towerdefence.entities.enemies.SpeedEnemy;
+import se.liu.antos931jakos322.towerdefence.entities.enemies.StandardEnemy;
 
 import java.util.ArrayList;
 import java.util.List;
