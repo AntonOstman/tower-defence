@@ -96,7 +96,7 @@ public class GameViewer
 	towerDescription = new JTextArea("No tower selected");
 
 	for (TowerType towerType: towerTypes) {
-	    ButtonEvent buttonEvent = new ButtonEvent(towerType, ButtonType.MENU);
+	    ButtonEvent buttonEvent = new ButtonEvent(towerType, ButtonType.TOWER_BUTTON);
 	    JToggleButton b = new JToggleButton();
 	    final int bufferedImageWidth = gameScale/2;
 	    final int bufferedImageHeight = gameScale/2;
@@ -232,7 +232,7 @@ public class GameViewer
 
 		}
 		    break;
-		case MENU:
+		case TOWER_BUTTON:
 	        // player is trying to press a tower on the menu
 		selectedTower = towerType;
 		String towerDesc = TowerGetter.getTower(towerType).getDescription();

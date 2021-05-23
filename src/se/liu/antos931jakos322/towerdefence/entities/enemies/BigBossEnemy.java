@@ -1,9 +1,6 @@
 package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * BigBossEnemy is an enemy type that extends the abstract class Enemy.
@@ -18,7 +15,7 @@ public class BigBossEnemy extends Enemy
     private static final int DAMAGE = 30;
 
     private static final int NUMBER_OF_SPLITS = 2;
-    private static final EnemyType SPLIT_TYPE = EnemyType.BossEnemy;
+    private static final EnemyType SPLIT_TYPE = EnemyType.BOSS;
     private static final int SPLIT_DISTANCE = 2;
 
     public BigBossEnemy() {

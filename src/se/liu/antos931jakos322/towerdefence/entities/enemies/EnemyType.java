@@ -2,5 +2,5 @@ package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
 public enum EnemyType
 {
-    BigBossEnemy, BossEnemy, SpeedEnemy, StandardEnemy, ExplodingEnemy
+    BIG_BOSS, BOSS, SPEED, STANDARD, EXPLODING
 }

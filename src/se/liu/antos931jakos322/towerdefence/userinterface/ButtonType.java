@@ -9,6 +9,6 @@ package se.liu.antos931jakos322.towerdefence.userinterface;
 
 public enum ButtonType
 {
-UPGRADE, MENU, PAUSE, QUIT
+UPGRADE, TOWER_BUTTON, PAUSE, QUIT
 
 }

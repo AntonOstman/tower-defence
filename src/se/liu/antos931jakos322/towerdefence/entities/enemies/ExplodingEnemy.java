@@ -1,9 +1,6 @@
 package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * ExplodingEnemy is an enemy type that extends the abstract class Enemy.
@@ -19,7 +16,7 @@ public class ExplodingEnemy extends Enemy
     private static final int DAMAGE = 10;
 
     private static final int NUMBER_OF_SPLITS = 4;
-    private static final EnemyType SPLIT_TYPE = EnemyType.SpeedEnemy;
+    private static final EnemyType SPLIT_TYPE = EnemyType.SPEED;
     private static final int SPLIT_DISTANCE = 5;
 
 
