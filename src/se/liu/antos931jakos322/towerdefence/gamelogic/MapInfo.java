@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.List;
 /**
  * Mapinfo contains the information of a map.
+ * This includes the path, and the map diementions.
  */
 public class MapInfo
 {

@@ -33,7 +33,7 @@ public class GameMap
     private List<Point> path;
     private Point dimensions;
     private List<MapInfo> mapInfo;
-    private final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    //private final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public GameMap()  {
 	this.dimensions = null;
@@ -44,126 +44,6 @@ public class GameMap
 	// cool usage would be to load map with the "selected map index" you want to load
 	// that way the player could choose map
     }
-
-
-    public void createMap() throws IOException{
-	Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-	// OBS when creating the path, the path is using a margin on one tile over the edge to make for a smooth enering and exit
-	// Creates the path for map 1 "cicle"
-	List<Point> path1 = Arrays.asList(new Point(-1,4),
-					  new Point(0,4),
-					  new Point(1,4),
-					  new Point(2,4),
-					  new Point(3,4),
-					  new Point(4,4),
-					  new Point(5,4),
-					  new Point(6,4),
-					  new Point(7,4),
-					  new Point(7,5),
-					  new Point(7,6),
-					  new Point(7,7),
-					  new Point(7,8),
-					  new Point(6,8),
-					  new Point(5,8),
-					  new Point(5,7),
-					  new Point(5,6),
-					  new Point(5,5),
-					  new Point(5,4),
-					  new Point(5,3),
-					  new Point(5,2),
-					  new Point(6,2),
-					  new Point(7,2),
-					  new Point(8,2),
-					  new Point(9,2),
-					  new Point(10,2),
-					  new Point(11,2),
-					  new Point(12,2),
-					  new Point(13,2),
-					  new Point(14,2),
-					  new Point(15,2));
-
-	// Creates the path for map 2 "Curve"
-	List<Point> path2 = Arrays.asList(new Point(-1,5),
-					  new Point(0,5),
-					  new Point(1,5),
-					  new Point(2,5),
-					  new Point(3,5),
-					  new Point(4,5),
-					  new Point(5,5),
-					  new Point(5,6),
-					  new Point(5,7),
-					  new Point(6,7),
-					  new Point(7,7),
-					  new Point(7,6),
-					  new Point(7,5),
-					  new Point(8,5),
-					  new Point(9,5),
-					  new Point(10,5),
-					  new Point(10,4),
-					  new Point(10,3),
-					  new Point(11,3),
-					  new Point(12,3),
-					  new Point(12,3),
-					  new Point(12,4),
-					  new Point(12,5),
-					  new Point(13,5),
-					  new Point(14,5),
-					  new Point(15,5));
-
-	//"Flying"
-	List<Point> path3 = Arrays.asList(new Point(-1,5),
-					  new Point(0,5),
-					  new Point(1,5),
-					  new Point(2,5),
-					  new Point(3,5),
-					  new Point(4,5),
-					  new Point(4,5),
-					  new Point(4,5),
-					  new Point(5,5),
-					  new Point(6,5),
-					  new Point(4,7),
-					  new Point(5,7),
-					  new Point(6,7),
-					  new Point(7,7),
-					  new Point(8,7),
-					  new Point(9,7),
-					  new Point(6,9),
-					  new Point(7,9),
-					  new Point(8,9),
-					  new Point(9,9),
-					  new Point(10,9),
-					  new Point(11,9),
-					  new Point(12,9),
-					  new Point(13,9),
-					  new Point(14,9),
-					  new Point(15,9));
-	//"Zigzag"
-	List<Point> path4 = Arrays.asList(new Point(-1,4),
-					  new Point(0,5),
-					  new Point(3,12),
-					  new Point(6,9),
-					  new Point(9,11),
-					  new Point(12,4),
-					  new Point(14,7),
-					  new Point(15,7));
-
-
-
-	// Creates a list for mapInfo objects, MapInfo have height width and the path as input parameters.
-	List<MapInfo> mapInfo = Arrays.asList(new MapInfo(new Point(15, 15), path1),
-					      new MapInfo(new Point(15, 15), path2),
-					      new MapInfo(new Point(15, 15), path4),
-					      new MapInfo(new Point(15, 15), path3));
-
-	String mapInfoAsJson = gson.toJson(mapInfo);
-
-	FileWriter writer = new FileWriter("maps.json");
-	writer.write(mapInfoAsJson);
-	writer.close();
-
-
-	}
 
 	/** When maps.json has been read a map can be loaded into the game.
 	 * @param selectedMapIndex selects the map to load

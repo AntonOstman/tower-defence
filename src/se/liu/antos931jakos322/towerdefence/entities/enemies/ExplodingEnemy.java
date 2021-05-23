@@ -4,8 +4,11 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
+/**
+ * ExplodingEnemy is an enemy type that extends the abstract class Enemy.
+ * ExplodingEnemy have low health but when health reaches 0, 4 speedEnemy spawns.
+ */
 public class ExplodingEnemy extends Enemy
 {
 
@@ -14,7 +17,7 @@ public class ExplodingEnemy extends Enemy
     private static final Color COLOR = Color.ORANGE;
     private static final double SIZE = 0.7;
     private static final int DAMAGE = 10;
-    private final static Random RND = new Random();
+
 
 
     public ExplodingEnemy() {
@@ -23,34 +26,19 @@ public class ExplodingEnemy extends Enemy
 
     @Override public List<Enemy> split(){
 	List<Enemy> enemies = new ArrayList<>();
-	SpeedEnemy s1 = new SpeedEnemy();
-	SpeedEnemy s2 = new SpeedEnemy();
-	SpeedEnemy s3 = new SpeedEnemy();
-	SpeedEnemy s4 = new SpeedEnemy();
-
-	s1.setPosition(new Point2D.Double(position.getX()+randomPos(), position.getY()+randomPos()));
-	s2.setPosition(new Point2D.Double(position.getX()+randomPos(), position.getY()+randomPos()));
-	s3.setPosition(new Point2D.Double(position.getX()+randomPos(), position.getY()+randomPos()));
-	s4.setPosition(new Point2D.Double(position.getX()+randomPos(), position.getY()+randomPos()));
-
-	s1.setPathProgress(pathProgress);
-	s2.setPathProgress(pathProgress);
-	s3.setPathProgress(pathProgress);
-	s4.setPathProgress(pathProgress);
-
-	enemies.add(s1);
-	enemies.add(s2);
-	enemies.add(s3);
-	enemies.add(s4);
+	
+	final int distance = 5;
+	final int numberOfSpawnedEnemeies = 4;
+	for (int i = 0; i < numberOfSpawnedEnemeies; i++) {
+	    SpeedEnemy s = new SpeedEnemy();
+	    s.setPosition(new Point2D.Double(position.getX() + splitRandomPos(distance), position.getY() + splitRandomPos(distance)));
+	    s.setPathProgress(pathProgress);
+	    enemies.add(s);
+	}
 
 	return enemies;
     }
 
-    public int randomPos(){
-	final int span = 5;
-	final int minPosition = -3;
-	int randomPos = RND.nextInt(span) + minPosition;
-	return randomPos;
-    }
+
 
 }
