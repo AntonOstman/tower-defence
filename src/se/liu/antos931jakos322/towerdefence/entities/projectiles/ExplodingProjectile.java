@@ -6,9 +6,8 @@ import java.awt.*;
 
 /**
  *
- * CanonProjectile is a projectile that is comparatively strong when looking at other projectiles.
- * It moves at a slow speed, has a large size and it penetrates 10 enemies.
- * BulletProjectiles extends Projectile with no extra features and works as a "stat holder"
+ * ExplodingProjectile is a projectile that explodes when hitting an enemy.
+ * It moves at a slow speed, has a large size after explosion and remains in place for a couple of ticks after exploding
  *
  */
 
