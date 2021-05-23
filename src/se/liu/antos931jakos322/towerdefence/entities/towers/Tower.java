@@ -105,7 +105,7 @@ public abstract class Tower extends EntityAttacker
      *
      * @return true if attack is possible otherwise false
      */
-    public boolean canAttack(Entity entity){
+    @Override public boolean canAttack(Entity entity){
 
         // the tower has a recharge rate and if it has not yet
         // recharged then charge up a bit and return false
@@ -192,9 +192,7 @@ public abstract class Tower extends EntityAttacker
     }
 
     /**
-     *
-     * Can be used by towers to do something
-     *
+     * Used by Towers to do something unique of the specifik tower.
      */
     public abstract void activate();
 

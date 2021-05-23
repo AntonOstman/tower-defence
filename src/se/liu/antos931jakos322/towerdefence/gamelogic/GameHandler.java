@@ -1,7 +1,6 @@
 package se.liu.antos931jakos322.towerdefence.gamelogic;
 
 import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
-import se.liu.antos931jakos322.towerdefence.entities.enemies.WaveMaker;
 import se.liu.antos931jakos322.towerdefence.entities.projectiles.Projectile;
 import se.liu.antos931jakos322.towerdefence.entities.towers.Tower;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;

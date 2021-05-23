@@ -58,13 +58,12 @@ public abstract class EntityAttacker extends Entity
 
     /**
      * The method entites used to decide if this Entity can be attacked
-     *
-     * @return if the entity can be attacked
+     *	By default EntityAttackers can not be attacked.
+     * @return false
      */
     @Override public boolean canBeAttacked() {
 	return false;
     }
-
 
     /**
      * Decides wheter the targeted Entity can be attacked or not.
