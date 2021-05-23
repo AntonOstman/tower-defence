@@ -100,8 +100,15 @@ public abstract class Projectile extends EntityAttacker
             return;
 	}
 	entity.takeDamage(attackPower);
-	penetrationAmount -= 1;
+	reducePenetration();
 	prevAttackedEntity = entity;
+    }
+
+    public void reducePenetration(){
+	if (penetrationAmount > 0 ) {
+	    penetrationAmount -= 1;
+	}
+
     }
 
     /**

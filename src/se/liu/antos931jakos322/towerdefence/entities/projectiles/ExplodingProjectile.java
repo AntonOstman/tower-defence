@@ -20,31 +20,37 @@ public class ExplodingProjectile extends Projectile
     private static final double SPEED = 0.15;
     private static final int PENETRATION_AMOUNT = 10;
     private final static Color COLOR = Color.DARK_GRAY;
-    private final static int EXPLOSION_TIME = 10;
-    private int explosionTimer;
     private boolean isExploding;
 
     public ExplodingProjectile() {
         super(COLOR, SIZE, SPEED, PENETRATION_AMOUNT);
-        this.explosionTimer = 1;
         this.isExploding = false;
     }
 
+    /**
+     * Moves the projectiles or reduces the penertation while the projectile is exploding.
+     *
+     */
     @Override public void move() {
         super.move();
-        if(explosionTimer == 0){
-            penetrationAmount = 0;
-        }
-        else if(isExploding){
-            explosionTimer--;
+        if(isExploding){
+            reducePenetration();
         }
     }
 
+    /**
+     * When the projectile hits an enemy the projectile explodes and stops moving.
+     * The projectile can attack the same target several times
+     *
+     * @param entity the entity object to attack
+     */
+
     @Override public void attack(final Entity entity) {
         super.attack(entity);
+        // set prevousily attacked enemy to null so that the same target inside the explosion takes damage
+        prevAttackedEntity = null;
         if(!isExploding) {
             movePosition = position;
-            explosionTimer = EXPLOSION_TIME;
             isExploding = true;
             this.color = Color.ORANGE;
             size = SIZE * 3;
