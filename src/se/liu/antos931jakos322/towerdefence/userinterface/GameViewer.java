@@ -51,7 +51,8 @@ public class GameViewer
     }
 
     /**
-     * creates the buttons,
+     * Creates the entire user interface on which the game is played
+     *
      * Also shows the frame after completion.
      *
      */
@@ -81,7 +82,7 @@ public class GameViewer
 	// create the interactive panel
 	final int unlimitedRows = 0;
 	GridLayout interactivePanelLayout = new GridLayout(unlimitedRows, 2);
-	JPanel interactivePanel = new JPanel(interactivePanelLayout);
+	JPanel towerButtonPanel = new JPanel(interactivePanelLayout);
 	final int margin = 10;
 	interactivePanelLayout.setHgap(margin);
 	interactivePanelLayout.setVgap(margin);
@@ -111,27 +112,27 @@ public class GameViewer
 	    b.setBorderPainted(false);
 	    b.setBackground(backGroundColor);
 	    buttonGroup.add(b);
-	    interactivePanel.add(b);
+	    towerButtonPanel.add(b);
 	    UIManager.put(b.isSelected(),Color.BLACK);
 	}
 
+	//add the text component contaning health, wave level and money
 	textPanel.add(menuComponent);
-
 
 	//gamepanel has the map compopnent and shows the running game
 	gamePanel.add(gameComponent);
 	gamePanel.setBorder(BorderFactory.createLineBorder(Color.black));
 	gamePanel.addMouseListener(new MouseEvent(towerDescription, buttonGroup));
 
-	//tower description panel config
+	//adds the textarea describing towers a scrollpanel and then to the description panel
 	textScrollPane.getViewport().add(towerDescription);
 	towerDescriptionPanel.add(textScrollPane);
 	towerDescriptionPanel.setBackground(backGroundColor);
-	//towerDesripction.setBorder(BorderFactory.createLineBorder(Color.black));
 
-	// interactive panel configuareuon
-	interactivePanel.setBackground(backGroundColor);
-	scrollableInteractivePanel.getViewport().add(interactivePanel);
+	// adds the tower buttons to a scrollable panel
+	towerButtonPanel.setBackground(backGroundColor);
+	scrollableInteractivePanel.getViewport().add(towerButtonPanel);
+
 	// upgrade panel configuratoin
 	towerUpgradesPanel.setBackground(Color.blue);
 	JButton upgradeButton = new JButton(new ButtonEvent(ButtonType.UPGRADE));
@@ -142,7 +143,6 @@ public class GameViewer
 	JButton quitButton = new JButton(new ButtonEvent(ButtonType.QUIT));
 	JButton pauseButton = new JButton();
 	pauseButton.setAction(new ButtonEvent(ButtonType.PAUSE, pauseButton));
-
 	// the game starts paused so start with the startgame text
 	pauseButton.setText("Start game");
 	quitButton.setText("Quit game");
@@ -161,11 +161,12 @@ public class GameViewer
 	mainMenuPanel.setPreferredSize(new Dimension(mainMenuWidth, mainMenuHeight));
 	mainMenuPanel.setBackground(backGroundColor);
 
-	// add the panel controlling the game and the menus to the main panel
+	// add the two panels contaning Menus and game to the main panel
 	mainPanel.add(gamePanel);
 	mainPanel.add(mainMenuPanel);
 	mainPanel.setBackground(backGroundColor);
 
+	// create the frame add the main panel and show the frame
 	frame = new JFrame();
 	frame.setLayout(new BorderLayout());
 	frame.add(mainPanel);

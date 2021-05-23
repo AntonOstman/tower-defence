@@ -34,7 +34,7 @@ public class StartGame
 	    // the reason we dont log this exception is because there is no logger file yet.
 	    // The log file is what we are trying to create
 	    ioException.printStackTrace();
-	    String loadErrorMessage = ioException + " error starting logger do you want to try again?";
+	    String loadErrorMessage = ioException + " error creating logging.txt in source folder do you want to try again?";
 	    int answer = JOptionPane.showConfirmDialog(null, loadErrorMessage);
 	    if (answer == JOptionPane.YES_OPTION){
 		startLogger();
@@ -45,7 +45,6 @@ public class StartGame
 	    }
 	}
 	SimpleFormatter formatterTxt = new SimpleFormatter();
-	//XMLFormatter formatterTxt = new XMLFormatter();
 	fileTxt.setFormatter(formatterTxt);
 	LOGGER.setLevel(Level.FINE);
 	LOGGER.addHandler(fileTxt);
