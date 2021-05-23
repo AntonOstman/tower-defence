@@ -28,7 +28,7 @@ public class GameComponent extends JComponent implements GameListener
 
     public GameComponent(GameHandler gameHandler, int gameScale) {
 	this.gameHandler = gameHandler;
-	Point mapDimensions = gameHandler.getGameMap().getDimensions();
+	Point mapDimensions = gameHandler.getMapDimensions();
 	this.mapHeight = mapDimensions.y;
 	this.mapWidth = mapDimensions.x;
 	this.gameScale = gameScale;
@@ -54,7 +54,7 @@ public class GameComponent extends JComponent implements GameListener
 
 	for (int y = 0; y < mapHeight; y++) {
 	    for (int x = 0; x < mapWidth; x++) {
-		Tile currentTile = gameHandler.getGameMap().getTile(new Point(x, y));
+		Tile currentTile = gameHandler.getMapTile(new Point(x, y));
 		currentTile.drawTile(g2d, MARGIN, gameScale);
 	    }
 	}

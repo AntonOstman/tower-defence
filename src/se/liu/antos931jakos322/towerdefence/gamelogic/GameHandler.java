@@ -355,10 +355,12 @@ public class GameHandler
         notifyListeners();
     }
 
+    public Point getMapDimensions(){
+        return gameMap.getDimensions();
+    }
 
-
-    public GameMap getGameMap() { // this should probably be changed so map cannot be directly accessed. Game handler controls map not others
-        return gameMap;
+    public Tile getMapTile(Point pos){
+        return gameMap.getTile(pos);
     }
 
     public boolean isGamePaused() {

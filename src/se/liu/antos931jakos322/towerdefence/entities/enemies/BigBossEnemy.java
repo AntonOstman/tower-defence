@@ -23,14 +23,15 @@ public class BigBossEnemy extends Enemy
 
     @Override public java.util.List<Enemy> split(){
         List<Enemy> enemies = new ArrayList<>();
-        BossEnemy e1 = new BossEnemy();
-        e1.setPosition(new Point2D.Double(position.getX() + 1, position.getY() + 1));
-        e1.setPathProgress(pathProgress);
-        enemies.add(e1);
-        BossEnemy e2 = new BossEnemy();
-        e2.setPosition(new Point2D.Double(position.getX()-1, position.getY()-1));
-        e2.setPathProgress(pathProgress);
-        enemies.add(e2);
+
+        final int distance = 2;
+        final int numberOfSpawnedEnemeies = 2;
+        for (int i = 0; i < numberOfSpawnedEnemeies; i++) {
+            BossEnemy b = new BossEnemy();
+            b.setPosition(new Point2D.Double(position.getX() + splitRandomPos(distance), position.getY() + splitRandomPos(distance)));
+            b.setPathProgress(pathProgress);
+            enemies.add(b);
+        }
 
         return enemies;
     }

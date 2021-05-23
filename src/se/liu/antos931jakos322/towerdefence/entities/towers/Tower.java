@@ -228,8 +228,10 @@ public abstract class Tower extends EntityAttacker
         final int textScale = 3;
         int textSize = gameScale / textScale;
         g2d.setFont(new Font("TimesRoman", Font.PLAIN , textSize));
-        int textPosX = (int) (towerPosX * gameScale) + gameScale / 3;
-        int textPosY = (int) (towerPosY * gameScale) + gameScale / 2;
+        final int textOffsetX = gameScale / 3;
+        final int textOffsetY = gameScale / 2;
+        int textPosX = (int) (towerPosX * gameScale) + textOffsetX;
+        int textPosY = (int) (towerPosY * gameScale) + textOffsetY;
         g2d.drawString(String.valueOf(level), textPosX, textPosY);
     }
 

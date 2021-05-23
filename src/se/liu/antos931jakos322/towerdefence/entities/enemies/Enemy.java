@@ -7,6 +7,7 @@ import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * An abstract class with the core elements of an enemy
@@ -21,6 +22,7 @@ public abstract class Enemy extends Entity
     protected final int rewardMoney;
     protected boolean finished;
     private int lastPosition;
+    private final static Random RND = new Random();
 
     protected Enemy(final int maxHealth, final double speed, final Color color, final double size, int attackPower) {
 	super(color, size, speed, attackPower, maxHealth);
@@ -116,5 +118,11 @@ public abstract class Enemy extends Entity
 
     public void setPathProgress(final int pathProgress) {
 	this.pathProgress = pathProgress;
+    }
+
+    public int splitRandomPos(final int span){
+	final int minPosition = -span+ (span/2);
+	int randomPos = RND.nextInt(span) + minPosition;
+	return randomPos;
     }
 }
