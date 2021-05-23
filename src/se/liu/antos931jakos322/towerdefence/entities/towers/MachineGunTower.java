@@ -30,6 +30,9 @@ public class MachineGunTower extends Tower
 	super(TOWER_TYPE, COLOR, COST, ATTACK_POWER, RANGE, UPGRADE_COST, PROJECTILE_TYPE, ATTACK_SPEED, SIZE);
     }
 
+    /**
+     * no special extra functionality
+     */
     @Override public void activate() {
 
     }
