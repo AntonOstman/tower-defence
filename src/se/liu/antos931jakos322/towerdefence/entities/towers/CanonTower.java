@@ -45,7 +45,7 @@ public class CanonTower extends Tower
 
     @Override public void upgrade() {
         super.upgrade();
-        if(level == 3) {
+        if(level >= 3) {
             projectileType = ProjectileType.EXPLODING;
         }
     }
