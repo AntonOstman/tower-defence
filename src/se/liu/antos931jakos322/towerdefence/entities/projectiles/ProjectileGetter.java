@@ -15,14 +15,13 @@ import java.util.EnumMap;
 public class ProjectileGetter
 {
 
-
     public static Projectile getProjectile(ProjectileType type){
 	EnumMap<ProjectileType, Projectile> projectileMap = new EnumMap<>(ProjectileType.class);
 
 	projectileMap.put(ProjectileType.ARROW, new ArrowProjectile());
 	projectileMap.put(ProjectileType.CANON, new CanonProjectile());
 	projectileMap.put(ProjectileType.MACHINE, new BulletProjectile());
-	projectileMap.put(ProjectileType.MISSILE, new StickyProjectile());
+	projectileMap.put(ProjectileType.STICKY, new StickyProjectile());
 
 	return projectileMap.get(type);
     }

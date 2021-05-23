@@ -15,13 +15,12 @@ public class TowerGetter
 {
 
     /**
-     * Returns a list of towerTypes that can be used in the game
+     * Returns a list of the towerTypes that can be used in the game
      *
-     * @return list with all tower types
+     * @return list with all towerTypes
      */
     public static List<TowerType> getAllTowers(){
 
-	// return TowerType.values(); // this should be used in the final implementaion
 	List<TowerType> towers = new ArrayList<>();
 	for(TowerType towerType: TowerType.values()){
 	    if (towerType != TowerType.NONE){
@@ -29,7 +28,6 @@ public class TowerGetter
 	    }
 	}
 	return towers;
-	// hard coded only to test
     }
 
     /**

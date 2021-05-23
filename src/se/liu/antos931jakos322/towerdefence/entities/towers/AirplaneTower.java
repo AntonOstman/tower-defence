@@ -35,7 +35,7 @@ public class AirplaneTower extends Tower
     private final static double SIZE = 0.6;
     private final static Color COLOR = Color.red;
     private final static TowerType TOWER_TYPE = TowerType.AIRPLANE;
-    private final static ProjectileType PROJECTILE_TYPE = ProjectileType.MISSILE;
+    private final static ProjectileType PROJECTILE_TYPE = ProjectileType.STICKY;
 
     public AirplaneTower()
     {
@@ -44,16 +44,30 @@ public class AirplaneTower extends Tower
 	this.positionRadius = 2;
     }
 
+    /**
+     * moves the Tower
+     *
+     */
 
     @Override public void activate() {
 	move();
     }
+
+    /**
+     * Upgrades the tower but also increases the radius of circle it spins around.
+     *
+     */
 
     @Override public void upgrade() {
 	super.upgrade();
 	final double radiusIncrease = 0.5;
 	positionRadius += radiusIncrease;
     }
+
+    /**
+     * Moves the tower in a circle around the starting position
+     *
+     */
 
     @Override public void move() {
 	angle += SPEED; // in this context speed is a angle speed
