@@ -150,12 +150,11 @@ public class GameViewer
 	pauseAndQuitPanel.add(quitButton);
 
 	// now add all panels we have created to the mainMenuPanel
-	mainMenuPanel.add(menuComponent);
-	mainMenuPanel.add(towerDescriptionPanel);
-	mainMenuPanel.add(scrollableInteractivePanel);
-	mainMenuPanel.add(towerDescriptionPanel);
-	mainMenuPanel.add(towerUpgradesPanel);
-	mainMenuPanel.add(pauseAndQuitPanel);
+	mainMenuPanel.add(menuComponent);		// EX. level, health
+	mainMenuPanel.add(scrollableInteractivePanel);	// The tower buttons
+	mainMenuPanel.add(towerDescriptionPanel);	// the tower description
+	mainMenuPanel.add(towerUpgradesPanel);		// The upgrade button
+	mainMenuPanel.add(pauseAndQuitPanel);		// pasuse and quit button
 	int widthScale = 4;
 	int heightScale = 10;
 	int mainMenuWidth = gameScale * widthScale;

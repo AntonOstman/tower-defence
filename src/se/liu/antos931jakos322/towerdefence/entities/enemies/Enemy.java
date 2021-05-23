@@ -94,7 +94,10 @@ public abstract class Enemy extends Entity
 
     }
 
-
+    /**
+     * Moves the enemy towards movePosition
+     *
+     */
      @Override public void move(){
 	// Gives Enemy a starting position
 	if(position == null){
@@ -131,6 +134,11 @@ public abstract class Enemy extends Entity
 
     public int getPathProgress() { return pathProgress; }
 
+    /**
+     * Creates enemies of the specified type and amount.
+     *
+     * @return a list of the created enemies
+     */
     public List<Enemy> split(){
 	List<Enemy> enemies = new ArrayList<>();
 
