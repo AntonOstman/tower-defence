@@ -63,7 +63,7 @@ public class GameHandler
 
     public void tick(){
 
-        setGameOver();
+        inspectHealth();
         activateTowers();
         moveProjectiles();
         createEnemies();
@@ -96,7 +96,7 @@ public class GameHandler
     /**
      * Sets game over and pauses the game if the player's life is 0 or less
      */
-    public void setGameOver(){
+    public void inspectHealth(){
 
         if (health <= 0) {
             pauseGame();
