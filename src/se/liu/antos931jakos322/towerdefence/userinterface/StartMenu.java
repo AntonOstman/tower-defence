@@ -4,6 +4,7 @@ import com.google.gson.JsonSyntaxException;
 import se.liu.antos931jakos322.towerdefence.gamelogic.GameHandler;
 import se.liu.antos931jakos322.towerdefence.gamelogic.GameMap;
 import se.liu.antos931jakos322.towerdefence.gamelogic.Tile;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -103,28 +104,7 @@ public class StartMenu implements GameListener
     }
 
 
-//
-//    public void createNewMap(GameMap gameMap){
-//
-//	try {
-//	    gameMap.createMap();
-//	    logger.fine("succesfully created new maps.json file");
-//
-//	} catch (IOException ioException) {
-//	    //logger.log(Level.SEVERE, " could not create maps.json file, asking user to try again", ioException);
-//	    logger.log(Level.SEVERE,"could not create map", ioException);
-//	    String errorMessage = ioException + "\n Error creating game map. \n Do you want to try again?";
-//	    int userAnswer = JOptionPane.showConfirmDialog(null, errorMessage);
-//	    if (userAnswer == JOptionPane.YES_OPTION){
-//		createNewMap(gameMap);
-//	    }
-//	    else {System.exit(1);}
-//
-//	}
-//
-//    }
-
-    public void readNewMapError(Exception e){
+    public void readNewMapError(Exception e, GameMap gameMap){
 
 	String errorMessage = e + "\n Error reading maps.json file. \n Do you want to try again?";
 	int userAnswer = JOptionPane.showConfirmDialog(null, errorMessage);
@@ -142,17 +122,17 @@ public class StartMenu implements GameListener
 
 	} catch (IOException ioException) {
 	    // attempt to create new maps file and read it again
-	    // write to the log what has happend and the stackTrace
-	    // the error is also printed to the console
+	    // write what has happend and the stacktrace to the log file
+	    // the stacktrace is also found in the console
 	    String ioError = " could not find or read maps.json file, asking user to try again";
 	    logger.log(Level.WARNING, ioError, ioException);
-	    readNewMapError(ioException);
+	    readNewMapError(ioException, gameMap);
 	}
 	catch (JsonSyntaxException jsonSyntaxException){
 	    // handled the same way as ioExceltion with the difference being non valid text was inside the file
 	    String jsonError = "maps.json does not contain valid json syntax, asking user to try again";
 	    logger.log(Level.WARNING, jsonError, jsonSyntaxException);
-	    readNewMapError(jsonSyntaxException);
+	    readNewMapError(jsonSyntaxException, gameMap);
 	}
 
     }

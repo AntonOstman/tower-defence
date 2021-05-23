@@ -9,9 +9,6 @@ import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
 
 /**
  * Tower is the Abstract class for defensive structures in the game which also extends Entity
@@ -112,11 +109,12 @@ public abstract class Tower extends EntityAttacker
 
         // the tower has a recharge rate and if it has not yet
         // recharged then charge up a bit and return false
+        // the inspection warning about map does not fit here as we are only returning true or false
+        // a map for true or false is very redundant and reduces code readability
         if (attackSpeedCharge != attackSpeed) {
             attackSpeedCharge++;
             return false;
         }
-
         else if (!super.canAttack(entity)){
             return false;
         }
@@ -161,7 +159,7 @@ public abstract class Tower extends EntityAttacker
         super.decideTarget(entity);
 
         // the target is chosen by first checking if the currently targeted enemy can be attacked.
-        // if not we want to change target
+        // if not we want to change target to the one the method is called with
         if ( !targetEntity.canBeAttacked()){
             targetEntity = entity;
             return;
@@ -234,6 +232,8 @@ public abstract class Tower extends EntityAttacker
         final int textScale = 3;
         int textSize = gameScale / textScale;
         g2d.setFont(new Font("TimesRoman", Font.PLAIN , textSize));
+
+        // the offset to get the text in the middle of a tower, magic numbers 3 and 2 found by trial and error.
         final int textOffsetX = gameScale / 3;
         final int textOffsetY = gameScale / 2;
         int textPosX = (int) (towerPosX * gameScale) + textOffsetX;

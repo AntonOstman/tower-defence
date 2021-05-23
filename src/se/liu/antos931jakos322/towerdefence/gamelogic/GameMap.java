@@ -1,22 +1,17 @@
 package se.liu.antos931jakos322.towerdefence.gamelogic;
 
 
-
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.awt.*;
 import java.io.BufferedReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
 
 /**
@@ -33,16 +28,13 @@ public class GameMap
     private List<Point> path;
     private Point dimensions;
     private List<MapInfo> mapInfo;
-    //private final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public GameMap()  {
 	this.dimensions = null;
 	this.tiles = null;
 	this.path = null;
 	this.mapInfo = null;
-	//loadMap(); loadmap throws IO excpetion and the correct usage is probably to try loading in tester class?
-	// cool usage would be to load map with the "selected map index" you want to load
-	// that way the player could choose map
+
     }
 
 	/** When maps.json has been read a map can be loaded into the game.

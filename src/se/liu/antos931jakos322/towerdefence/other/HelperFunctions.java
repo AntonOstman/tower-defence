@@ -14,6 +14,7 @@ public class HelperFunctions
 {
 
     /**
+     *	Returns wheter two positions are within a certain distance
      *
      * @param position1 the first position to compare
      * @param position2 the second position to compare
