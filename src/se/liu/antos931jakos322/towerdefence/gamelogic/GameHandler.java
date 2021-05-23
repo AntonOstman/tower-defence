@@ -151,11 +151,11 @@ public class GameHandler
                 if (projectile.canAttack(enemy)) {
                     projectile.attack(enemy);
                     // if the projectile cannot penetrate through any more enemies, remove it
-                    if (projectile.getPenetrationAmount() <= 0){
-                        projectilesToRemove.add(projectile);
-                    }
 
                 }
+            }
+            if (projectile.getPenetrationAmount() <= 0){
+                projectilesToRemove.add(projectile);
             }
 
             Point2D projectilePosition = projectile.getPosition();
