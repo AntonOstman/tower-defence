@@ -24,7 +24,7 @@ public class CanonTower extends Tower
     private final static double SIZE = 0.6;
     private final static TowerType TOWER_TYPE = TowerType.CANON;
     private final static Color COLOR = Color.ORANGE;
-    private final static ProjectileType PROJECTILE_TYPE = ProjectileType.CANON;
+    private final static ProjectileType PROJECTILE_TYPE = ProjectileType.PENETRATING;
 
     public CanonTower()
     {
@@ -36,4 +36,18 @@ public class CanonTower extends Tower
     @Override public void activate() {
 
     }
+
+    /**
+     * Upgrades the Tower attackpower and increses tower level
+     * When canon tower reaches level 3 it's projecticles are replaced with exploding projectiles
+     *
+     */
+
+    @Override public void upgrade() {
+        super.upgrade();
+        if(level == 3) {
+            projectileType = ProjectileType.EXPLODING;
+        }
+    }
+
 }

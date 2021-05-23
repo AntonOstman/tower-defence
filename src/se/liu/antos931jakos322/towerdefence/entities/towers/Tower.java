@@ -245,6 +245,12 @@ public abstract class Tower extends EntityAttacker
 
         return description;
     }
+
+
+    /**
+     * Upgrades the Tower attackpower, increses level and further upgrade cost
+     *
+     */
     public void upgrade(){
         attackPower += 1;
         upgradeCost += 1;

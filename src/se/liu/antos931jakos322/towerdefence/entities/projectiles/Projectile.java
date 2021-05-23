@@ -25,9 +25,9 @@ import java.awt.geom.Point2D;
 public abstract class Projectile extends EntityAttacker
 {
 
-    private Point2D startPosition;
-    private int penetrationAmount;
-    private Entity prevAttackedEntity;
+    protected Point2D startPosition;
+    protected int penetrationAmount;
+    protected Entity prevAttackedEntity;
 
     protected Projectile(final Color color, final double size, double speed, int penetrationAmount) {
 	super(color, size, speed, 0);

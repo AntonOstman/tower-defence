@@ -19,9 +19,11 @@ public class ProjectileGetter
 	EnumMap<ProjectileType, Projectile> projectileMap = new EnumMap<>(ProjectileType.class);
 
 	projectileMap.put(ProjectileType.ARROW, new ArrowProjectile());
-	projectileMap.put(ProjectileType.CANON, new CanonProjectile());
+	projectileMap.put(ProjectileType.EXPLODING, new ExplodingProjectile());
 	projectileMap.put(ProjectileType.MACHINE, new BulletProjectile());
 	projectileMap.put(ProjectileType.STICKY, new StickyProjectile());
+	projectileMap.put(ProjectileType.PENETRATING, new PenetratingProjectiles());
+
 
 	return projectileMap.get(type);
     }
