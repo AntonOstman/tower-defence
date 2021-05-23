@@ -232,6 +232,8 @@ public abstract class Tower extends EntityAttacker
         final int textScale = 3;
         int textSize = gameScale / textScale;
         g2d.setFont(new Font("TimesRoman", Font.PLAIN , textSize));
+
+        // the offset to get the text in the middle of a tower, magic numbers 3 and 2 found by trial and error.
         final int textOffsetX = gameScale / 3;
         final int textOffsetY = gameScale / 2;
         int textPosX = (int) (towerPosX * gameScale) + textOffsetX;
