@@ -28,12 +28,14 @@ public class ExplodingProjectile extends Projectile
     }
 
     /**
-     * Moves the projectiles or reduces the penertation while the projectile is exploding.
+     * Moves the projectiles towards the targetEnemy
+     * and reduces the penertation while the projectile is exploding.
      *
      */
     @Override public void move() {
         super.move();
         if(isExploding){
+            // reducing the penertation means the projectile will be removed after when it hits 0
             reducePenetration();
         }
     }
