@@ -1,6 +1,6 @@
 package se.liu.antos931jakos322.towerdefence.userinterface;
 
-import se.liu.antos931jakos322.towerdefence.entities.EntityGetter;
+import se.liu.antos931jakos322.towerdefence.entities.EntityFactory;
 import se.liu.antos931jakos322.towerdefence.entities.towers.Tower;
 import se.liu.antos931jakos322.towerdefence.entities.towers.TowerType;
 import se.liu.antos931jakos322.towerdefence.gamelogic.GameHandler;
@@ -106,14 +106,14 @@ public class GameViewer
 	    // When a button is activated the other buttons in the same group are deselected
 	    JToggleButton b = new JToggleButton();
 
-	    Tower tower = EntityGetter.getTower(towerType);
+	    Tower tower = EntityFactory.getTower(towerType);
 	    // Create a drawing area at the size of the tower
 	    final int bufferedImageWidth = (int) (tower.getSize()*gameScale);
 	    final int bufferedImageHeight = (int) (tower.getSize()*gameScale);
 	    BufferedImage lineImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight,
 							BufferedImage.TYPE_INT_RGB);
 	    Graphics2D bg2d = lineImage.createGraphics();
-	    Tower tower = EntityFactory.getTower(towerType);
+
 	    double towerOffset = (1/2.0 - tower.getSize()/2);
 	    tower.setPosition(new Point2D.Double(-towerOffset,-towerOffset));
 	    tower.draw(bg2d, gameScale);
@@ -245,7 +245,7 @@ public class GameViewer
 		case TOWER_BUTTON:
 	        // player is trying to press a tower on the menu
 		selectedTower = towerType;
-		String towerDesc = EntityGetter.getTower(towerType).getDescription();
+		String towerDesc = EntityFactory.getTower(towerType).getDescription();
 		towerDescription.setText(towerDesc);
 
 		break;
@@ -318,7 +318,7 @@ public class GameViewer
 
 	private void placeTower(Point clickedPoint){
 
-	    Tower newTower = EntityGetter.getTower(selectedTower);
+	    Tower newTower = EntityFactory.getTower(selectedTower);
 	    newTower.setPosition(clickedPoint);
 	    boolean canPlaceTower = gameHandler.canAffordAndPlaceTower(newTower);
 

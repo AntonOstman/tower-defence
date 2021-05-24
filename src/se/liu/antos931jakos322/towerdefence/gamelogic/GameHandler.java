@@ -408,6 +408,12 @@ public class GameHandler
         return enemies.get(index);
     }
 
+    public int getHealth() {
+        return health;
+    }
+    public int getLevel(){
+        return waveMaker.getWaveLevel();
+    }
     /**
      * The Action which the GameHandler timer performs every time it activates
      */
