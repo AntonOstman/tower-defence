@@ -2,8 +2,8 @@ package se.liu.antos931jakos322.towerdefence.entities.towers;
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
 import se.liu.antos931jakos322.towerdefence.entities.EntityAttacker;
+import se.liu.antos931jakos322.towerdefence.entities.EntityGetter;
 import se.liu.antos931jakos322.towerdefence.entities.projectiles.Projectile;
-import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileGetter;
 import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileType;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 
@@ -140,7 +140,7 @@ public abstract class Tower extends EntityAttacker
      */
     public Projectile createProjectileAttack() {
 
-        Projectile projectile = ProjectileGetter.getProjectile(projectileType);
+        Projectile projectile = EntityGetter.getProjectile(projectileType);
         projectile.decideTarget(targetEntity);
         projectile.setPosition(position);
         projectile.setAttackPower(attackPower);

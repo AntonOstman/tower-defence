@@ -2,6 +2,7 @@ package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
+import se.liu.antos931jakos322.towerdefence.entities.EntityGetter;
 import se.liu.antos931jakos322.towerdefence.entities.towers.TowerType;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 
@@ -143,7 +144,7 @@ public abstract class Enemy extends Entity
 	List<Enemy> enemies = new ArrayList<>();
 
 	for (int i = 0; i < numberOfSplits; i++) {
-	    Enemy s = EnemyGetter.getEnemy(enemyType);
+	    Enemy s = EntityGetter.getEnemy(enemyType);
 	    s.setPosition(new Point2D.Double(position.getX() + splitRandomPos(splitDistance), position.getY() + splitRandomPos(splitDistance)));
 	    s.setPathProgress(pathProgress);
 	    enemies.add(s);
