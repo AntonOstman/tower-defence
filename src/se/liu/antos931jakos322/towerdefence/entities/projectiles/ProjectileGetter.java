@@ -20,7 +20,7 @@ public class ProjectileGetter
 
 	projectileMap.put(ProjectileType.ARROW, new ArrowProjectile());
 	projectileMap.put(ProjectileType.EXPLODING, new ExplodingProjectile());
-	projectileMap.put(ProjectileType.MACHINE, new BulletProjectile());
+	projectileMap.put(ProjectileType.BULLET, new BulletProjectile());
 	projectileMap.put(ProjectileType.STICKY, new StickyProjectile());
 	projectileMap.put(ProjectileType.PENETRATING, new PenetratingProjectile());
 

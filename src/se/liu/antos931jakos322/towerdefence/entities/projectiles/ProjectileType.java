@@ -11,6 +11,6 @@ package se.liu.antos931jakos322.towerdefence.entities.projectiles;
 
 public enum ProjectileType
 {
-    ARROW, EXPLODING, NONE, STICKY, MACHINE, PENETRATING
+    ARROW, EXPLODING, NONE, STICKY, BULLET, PENETRATING
 
 }

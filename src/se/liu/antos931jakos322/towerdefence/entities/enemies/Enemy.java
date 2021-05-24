@@ -33,7 +33,7 @@ public abstract class Enemy extends Entity
 	super(color, size, speed, attackPower, maxHealth);
 	this.maxHealth = maxHealth;
 	this.pathProgress = 0;
-    	this.rewardMoney = 5;
+    	this.rewardMoney = 1;
 	this.finished = false;
     	this.lastPosition = -1;
     	this.numberOfSplits = 0;

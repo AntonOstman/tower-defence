@@ -241,7 +241,7 @@ public abstract class Tower extends EntityAttacker
 
     public String getDescription() {
         String description = towerType +" TOWER\nattack power: " + attackPower + "\ncost: " + cost + "\nupgrade cost: " + upgradeCost +
-                             "\nrange: " + range + "\nattack speed: " + attackSpeed ;
+                             "\nrange: " + range + "\nattack speed: " + attackSpeed + "\nprojectiles: " + projectileType;
 
         return description;
     }

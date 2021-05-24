@@ -23,7 +23,7 @@ public class MachineGunTower extends Tower
     private final static Color COLOR = Color.PINK;
     private final static TowerType TOWER_TYPE = TowerType.MACHINE_GUN;
     private final static double SIZE = 0.6;
-    private final static ProjectileType PROJECTILE_TYPE = ProjectileType.MACHINE;
+    private final static ProjectileType PROJECTILE_TYPE = ProjectileType.BULLET;
 
     public MachineGunTower()
     {
