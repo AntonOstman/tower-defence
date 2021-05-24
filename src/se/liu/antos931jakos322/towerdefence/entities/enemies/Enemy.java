@@ -38,6 +38,8 @@ public abstract class Enemy extends Entity
 	this.finished = false;
     	this.lastPosition = -1;
     	this.numberOfSplits = 0;
+    	this.enemyType = null;
+    	this.splitDistance = 0;
     }
     protected Enemy(final int maxHealth, final double speed, final Color color, final double size,
 		    int attackPower, int numberOfSplits, EnemyType enemyType, int splitDistance) {
