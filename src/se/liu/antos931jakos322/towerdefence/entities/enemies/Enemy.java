@@ -30,6 +30,16 @@ public abstract class Enemy extends Entity
     private int numberOfSplits;
     private int splitDistance;
 
+
+    /**
+     * Constructs an entity with inital speed and health points
+     *
+     * @param maxHealth the enemy health points
+     * @param speed the speed of the enemy
+     * @param color the color of the enemy
+     * @param size the size of an enemy relative to the size of a tile
+     * @param attackPower attackpower or "damage" the the enemy can give to the player
+     */
     protected Enemy(final int maxHealth, final double speed, final Color color, final double size, int attackPower) {
 	super(color, size, speed, attackPower, maxHealth);
 	this.maxHealth = maxHealth;
@@ -39,6 +49,19 @@ public abstract class Enemy extends Entity
     	this.lastPosition = -1;
     	this.numberOfSplits = 0;
     }
+
+    /**
+     * Constructs an entity with inital speed and health points
+     *
+     * @param maxHealth the enemy health points
+     * @param speed the speed of the enemy
+     * @param color the color of the enemy
+     * @param size the size of an enemy relative to the size of a tile
+     * @param attackPower attackpower or "damage" the the enemy can give to the player
+     * @param numberOfSplits how many enemies this enemy can create
+     * @param enemyType the type of enemy this enemy creates
+     * @param splitDistance the distans relative to this enemy postion the new enemies are created
+     */
     protected Enemy(final int maxHealth, final double speed, final Color color, final double size,
 		    int attackPower, int numberOfSplits, EnemyType enemyType, int splitDistance) {
 
@@ -119,8 +142,6 @@ public abstract class Enemy extends Entity
 	    pathProgress += 1;
 
 	}
-	// If all movements have been done for a block
-
     }
 
     public boolean isFinished(){
@@ -153,12 +174,17 @@ public abstract class Enemy extends Entity
 	return enemies;
     }
 
-    public void setPathProgress(final int pathProgress) {
+    private void setPathProgress(final int pathProgress) {
 	this.pathProgress = pathProgress;
     }
 
-    public int splitRandomPos(final int span){
-	final int minPosition = -span+ (span/2);
+    /**
+     * creates a random number in the span. The range is -span/2 to span/2
+     * @param span the range in the random number can generate
+     * @return a random number within the range of the span
+     */
+    private int splitRandomPos(final int span){
+	final int minPosition = -(span/2);
 	int randomPos = RND.nextInt(span) + minPosition;
 	return randomPos;
     }

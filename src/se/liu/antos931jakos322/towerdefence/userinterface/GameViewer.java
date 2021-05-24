@@ -99,14 +99,19 @@ public class GameViewer
 	towerDescription = new JTextArea("No tower selected");
 
 	for (TowerType towerType: towerTypes) {
+	    // when the button is clicked -> buttonEvent class is activated
 	    ButtonEvent buttonEvent = new ButtonEvent(towerType, ButtonType.TOWER_BUTTON);
+	    // When a button is activated the other buttons in the same group are deselected
 	    JToggleButton b = new JToggleButton();
-	    final int bufferedImageWidth = gameScale/2;
-	    final int bufferedImageHeight = gameScale/2;
+
+	    Tower tower = EntityGetter.getTower(towerType);
+	    // Create a drawing area at the size of the tower
+	    final int bufferedImageWidth = (int) (tower.getSize()*gameScale);
+	    final int bufferedImageHeight = (int) (tower.getSize()*gameScale);
 	    BufferedImage lineImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight,
 							BufferedImage.TYPE_INT_RGB);
 	    Graphics2D bg2d = lineImage.createGraphics();
-	    Tower tower = EntityGetter.getTower(towerType);
+	    // The towers are at a offset to be centered at a tile. This removes the offset
 	    final double towerOffset = (1/2.0 - tower.getSize()/2);
 	    tower.setPosition(new Point2D.Double(-towerOffset,-towerOffset));
 	    tower.draw(bg2d, gameScale);
