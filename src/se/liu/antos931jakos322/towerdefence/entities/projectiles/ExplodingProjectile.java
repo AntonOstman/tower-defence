@@ -35,6 +35,7 @@ public class ExplodingProjectile extends Projectile
         super.move();
         if(isExploding){
             // reducing the penertation means the projectile will be removed after when it hits 0
+            // this is to simulate the explosion "going away"
             reducePenetration();
         }
     }

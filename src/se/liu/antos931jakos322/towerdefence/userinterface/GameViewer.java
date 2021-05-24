@@ -12,6 +12,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,6 +35,7 @@ public class GameViewer
     private JTextArea towerDescription;
     private Tower clickedTower;
     private int gameScale;
+    private final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * Constructs a GameViewer object with
@@ -253,7 +256,10 @@ public class GameViewer
 		case QUIT:
 		System.exit(0);
 		default:
-		     throw new IllegalArgumentException("button did not have valid action");
+		    IllegalArgumentException illegalArgumentException = new IllegalArgumentException("ButtonEvent did not have valid ButtonType");
+		    logger.log(Level.SEVERE, "ButtonEvent in GameViewer did not recognize ButtonType.\nButtonType: " + buttonType +
+					     "\n", illegalArgumentException);
+		    throw illegalArgumentException;
 	    }
 
 	}
