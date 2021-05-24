@@ -33,7 +33,4 @@ public class MachineGunTower extends Tower
     /**
      * no special extra functionality
      */
-    @Override public void activate() {
-
-    }
 }

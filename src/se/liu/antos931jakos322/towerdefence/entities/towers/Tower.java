@@ -194,7 +194,10 @@ public abstract class Tower extends EntityAttacker
     /**
      * Used by Towers to do something unique of the specifik tower.
      */
-    public abstract void activate();
+    // default
+    public void activate(){
+
+    }
 
     /**
      * draws a on the Tower position as a square with the designated Color.

@@ -37,7 +37,4 @@ public class ArrowTower extends Tower
     /**
      * no special extra functionality
      */
-    @Override public void activate() {
-
-    }
 }

@@ -33,9 +33,6 @@ public class CanonTower extends Tower
     /**
      * no special extra functionality
      */
-    @Override public void activate() {
-
-    }
 
     /**
      * Upgrades the Tower attackpower and increses tower level
