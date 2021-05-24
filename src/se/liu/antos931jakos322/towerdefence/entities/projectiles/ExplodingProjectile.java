@@ -57,6 +57,5 @@ public class ExplodingProjectile extends Projectile
             this.color = Color.ORANGE;
             size = SIZE * 3;
         }
-
     }
 }

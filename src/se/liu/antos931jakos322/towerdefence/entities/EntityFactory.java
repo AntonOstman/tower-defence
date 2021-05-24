@@ -20,40 +20,61 @@ import se.liu.antos931jakos322.towerdefence.entities.towers.CanonTower;
 import se.liu.antos931jakos322.towerdefence.entities.towers.MachineGunTower;
 import se.liu.antos931jakos322.towerdefence.entities.towers.Tower;
 import se.liu.antos931jakos322.towerdefence.entities.towers.TowerType;
+
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
- * EntityGetter is a class with static methods that can return a new Entity object with the Entity specific Enum as argument.
- * Example: EntityGetter.getTower(TowerType.CANON) returns a new CanonTower object.
- * Can also return the list of avaible TowerType's by using EntityGetter.getAllTowers()
- *
+ * EntityGetter is a class with static methods that can return a new Entity object with the Entity specific Enum as argument. Example:
+ * EntityGetter.getTower(TowerType.CANON) returns a new CanonTower object. Can also return the list of avaible TowerType's by using
+ * EntityGetter.getAllTowers()
  */
 
-public class EntityGetter
+public class EntityFactory
 {
 
-    public static Projectile getProjectile(ProjectileType type) throws IllegalArgumentException{
-	switch (type) {
-	    case ARROW: return new ArrowProjectile();
-	    case EXPLODING: return new ExplodingProjectile();
-	    case BULLET: return new BulletProjectile();
-	    case STICKY: return new StickyProjectile();
-	    case PENETRATING: return new PenetratingProjectile();
+    /**
+     * Returns a projectile of the specified projectileType
+     *
+     * @param projectileType the projectile to get
+     * @return a new Projectile object of the specified enemyType
+     */
+
+    public static Projectile getProjectile(ProjectileType projectileType) throws IllegalArgumentException {
+	switch (projectileType) {
+	    case ARROW:
+		return new ArrowProjectile();
+	    case EXPLODING:
+		return new ExplodingProjectile();
+	    case BULLET:
+		return new BulletProjectile();
+	    case STICKY:
+		return new StickyProjectile();
+	    case PENETRATING:
+		return new PenetratingProjectile();
 	    default:
-	        return null;
+		return null;
 	}
     }
+    /**
+     * Returns an enemy of the specified towerType
+     *
+     * @param enemyType the enemy to get
+     * @return a new Enemy object of the specified enemyType
+     */
 
-    public static Enemy getEnemy(EnemyType type) throws IllegalArgumentException{
-	switch (type) {
-	    case BIG_BOSS: return new BigBossEnemy();
-	    case BOSS: return new BossEnemy();
-	    case SPEED: return new SpeedEnemy();
-	    case EXPLODING: return new ExplodingEnemy();
-	    case STANDARD: return new StandardEnemy();
+    public static Enemy getEnemy(EnemyType enemyType) throws IllegalArgumentException {
+	switch (enemyType) {
+	    case BIG_BOSS:
+		return new BigBossEnemy();
+	    case BOSS:
+		return new BossEnemy();
+	    case SPEED:
+		return new SpeedEnemy();
+	    case EXPLODING:
+		return new ExplodingEnemy();
+	    case STANDARD:
+		return new StandardEnemy();
 	    default:
 		return null;
 	}
@@ -64,11 +85,11 @@ public class EntityGetter
      *
      * @return list with all towerTypes
      */
-    public static List<TowerType> getAllTowers(){
+    public static List<TowerType> getAllTowers() {
 
 	List<TowerType> towers = new ArrayList<>();
-	for(TowerType towerType: TowerType.values()){
-	    if (towerType != TowerType.NONE){
+	for (TowerType towerType : TowerType.values()) {
+	    if (towerType != TowerType.NONE) {
 		towers.add(towerType);
 	    }
 	}
@@ -78,16 +99,20 @@ public class EntityGetter
     /**
      * Returns a tower of the specified towerType
      *
-     * @param type the towerType to get
+     * @param towerType the towerType to get
      * @return a new Tower object of the specified towerType
      */
-    public static Tower getTower(TowerType type){
+    public static Tower getTower(TowerType towerType) {
 
-	switch (type) {
-	    case ARROW: return new ArrowTower();
-	    case CANON: return new CanonTower();
-	    case MACHINE_GUN: return new MachineGunTower();
-	    case AIRPLANE: return new AirplaneTower();
+	switch (towerType) {
+	    case ARROW:
+		return new ArrowTower();
+	    case CANON:
+		return new CanonTower();
+	    case MACHINE_GUN:
+		return new MachineGunTower();
+	    case AIRPLANE:
+		return new AirplaneTower();
 	    default:
 		return null;
 	}

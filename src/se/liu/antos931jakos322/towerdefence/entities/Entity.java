@@ -140,7 +140,7 @@ public abstract class Entity
     /**
      * Implements the method to check wheter an entity can be attacked or not
      *
-     * @return true of false if the entity can be attacked
+     * @return if the entity can be attacked
      */
     public abstract boolean canBeAttacked();
 

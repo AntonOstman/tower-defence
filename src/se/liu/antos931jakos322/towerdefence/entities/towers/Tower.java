@@ -2,7 +2,7 @@ package se.liu.antos931jakos322.towerdefence.entities.towers;
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
 import se.liu.antos931jakos322.towerdefence.entities.EntityAttacker;
-import se.liu.antos931jakos322.towerdefence.entities.EntityGetter;
+import se.liu.antos931jakos322.towerdefence.entities.EntityFactory;
 import se.liu.antos931jakos322.towerdefence.entities.projectiles.Projectile;
 import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileType;
 import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
@@ -140,7 +140,7 @@ public abstract class Tower extends EntityAttacker
      */
     public Projectile createProjectileAttack() {
 
-        Projectile projectile = EntityGetter.getProjectile(projectileType);
+        Projectile projectile = EntityFactory.getProjectile(projectileType);
         projectile.decideTarget(targetEntity);
         projectile.setPosition(position);
         projectile.setAttackPower(attackPower);
@@ -182,21 +182,14 @@ public abstract class Tower extends EntityAttacker
         }
     }
 
-    public void setSelected(final boolean selected) {
-        this.selected = selected;
-    }
-
-
-    public int getCost() {
-        return cost;
-    }
 
     /**
-     * Used by Towers to do something unique of the specifik tower.
+     * Used by Towers to do something unique.
      */
-    // default
-    public void activate(){
 
+    public void activate(){
+    // empty by default is the desired behaviour since all Tower objects don't do "something unique"
+    // the inspection is therefore incorrect
     }
 
     /**
@@ -242,6 +235,10 @@ public abstract class Tower extends EntityAttacker
         g2d.drawString(String.valueOf(level), textPosX, textPosY);
     }
 
+    /**
+     * @return String with the tower stats
+     */
+
     public String getDescription() {
         String description = towerType +" TOWER\nattack power: " + attackPower + "\ncost: " + cost + "\nupgrade cost: " + upgradeCost +
                              "\nrange: " + range + "\nattack speed: " + attackSpeed + "\nprojectiles: " + projectileType;
@@ -261,6 +258,14 @@ public abstract class Tower extends EntityAttacker
 
     }
 
+    public void setSelected(final boolean selected) {
+        this.selected = selected;
+    }
+
+
+    public int getCost() {
+        return cost;
+    }
 
     @Override public void setPosition(final Point2D position) {
         super.setPosition(position);

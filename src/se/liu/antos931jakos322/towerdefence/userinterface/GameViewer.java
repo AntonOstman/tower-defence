@@ -1,6 +1,6 @@
 package se.liu.antos931jakos322.towerdefence.userinterface;
 
-import se.liu.antos931jakos322.towerdefence.entities.EntityGetter;
+import se.liu.antos931jakos322.towerdefence.entities.EntityFactory;
 import se.liu.antos931jakos322.towerdefence.entities.towers.Tower;
 import se.liu.antos931jakos322.towerdefence.entities.towers.TowerType;
 import se.liu.antos931jakos322.towerdefence.gamelogic.GameHandler;
@@ -95,7 +95,7 @@ public class GameViewer
 
 	// create and set the buttons for placing towers
 	ButtonGroup buttonGroup = new ButtonGroup(); // create button group to deselect buttons when antoher is clicked
-	List<TowerType> towerTypes = EntityGetter.getAllTowers();
+	List<TowerType> towerTypes = EntityFactory.getAllTowers();
 	towerDescription = new JTextArea("No tower selected");
 	final int textSize = 10;
 	towerDescription.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, textSize));
@@ -108,7 +108,7 @@ public class GameViewer
 	    BufferedImage lineImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight,
 							BufferedImage.TYPE_INT_RGB);
 	    Graphics2D bg2d = lineImage.createGraphics();
-	    Tower tower = EntityGetter.getTower(towerType);
+	    Tower tower = EntityFactory.getTower(towerType);
 	    double towerOffset = (1/2.0 - tower.getSize()/2);
 	    tower.setPosition(new Point2D.Double(-towerOffset,-towerOffset));
 	    tower.draw(bg2d, gameScale);
@@ -240,7 +240,7 @@ public class GameViewer
 		case TOWER_BUTTON:
 	        // player is trying to press a tower on the menu
 		selectedTower = towerType;
-		String towerDesc = EntityGetter.getTower(towerType).getDescription();
+		String towerDesc = EntityFactory.getTower(towerType).getDescription();
 		towerDescription.setText(towerDesc);
 
 		break;
@@ -313,7 +313,7 @@ public class GameViewer
 
 	private void placeTower(Point clickedPoint){
 
-	    Tower newTower = EntityGetter.getTower(selectedTower);
+	    Tower newTower = EntityFactory.getTower(selectedTower);
 	    newTower.setPosition(clickedPoint);
 	    boolean canPlaceTower = gameHandler.canAffordAndPlaceTower(newTower);
 
