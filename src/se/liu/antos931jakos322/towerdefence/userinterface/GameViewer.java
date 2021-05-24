@@ -97,6 +97,8 @@ public class GameViewer
 	ButtonGroup buttonGroup = new ButtonGroup(); // create button group to deselect buttons when antoher is clicked
 	List<TowerType> towerTypes = EntityGetter.getAllTowers();
 	towerDescription = new JTextArea("No tower selected");
+	final int textSize = 10;
+	towerDescription.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, textSize));
 
 	for (TowerType towerType: towerTypes) {
 	    ButtonEvent buttonEvent = new ButtonEvent(towerType, ButtonType.TOWER_BUTTON);
