@@ -302,7 +302,6 @@ public class GameHandler
         gameListeners.add(listener);
     }
 
-
     /**
      * Returns the tower near the position.
      * If there is no tower returns null.

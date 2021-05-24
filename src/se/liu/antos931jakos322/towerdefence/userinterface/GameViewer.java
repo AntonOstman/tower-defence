@@ -107,7 +107,7 @@ public class GameViewer
 							BufferedImage.TYPE_INT_RGB);
 	    Graphics2D bg2d = lineImage.createGraphics();
 	    Tower tower = EntityGetter.getTower(towerType);
-	    double towerOffset = (1/2.0 - tower.getSize()/2);
+	    final double towerOffset = (1/2.0 - tower.getSize()/2);
 	    tower.setPosition(new Point2D.Double(-towerOffset,-towerOffset));
 	    tower.draw(bg2d, gameScale);
 	    b.addActionListener(buttonEvent);
