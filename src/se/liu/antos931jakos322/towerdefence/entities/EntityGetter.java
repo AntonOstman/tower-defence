@@ -20,10 +20,16 @@ import se.liu.antos931jakos322.towerdefence.entities.towers.CanonTower;
 import se.liu.antos931jakos322.towerdefence.entities.towers.MachineGunTower;
 import se.liu.antos931jakos322.towerdefence.entities.towers.Tower;
 import se.liu.antos931jakos322.towerdefence.entities.towers.TowerType;
-
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+
+/**
+ * EntityGetter is a class with static methods that can return a new Entity object with the Entity specific Enum as argument.
+ * Example: EntityGetter.getTower(TowerType.CANON) returns a new CanonTower object.
+ * Can also return the list of avaible TowerType's by using EntityGetter.getAllTowers()
+ *
+ */
 
 public class EntityGetter
 {
