@@ -95,8 +95,10 @@ public class GameViewer
 
 	// create and set the buttons for placing towers
 	ButtonGroup buttonGroup = new ButtonGroup(); // create button group to deselect buttons when antoher is clicked
-	List<TowerType> towerTypes = EntityGetter.getAllTowers();
+	List<TowerType> towerTypes = EntityFactory.getAllTowers();
 	towerDescription = new JTextArea("No tower selected");
+	final int textSize = 10;
+	towerDescription.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, textSize));
 
 	for (TowerType towerType: towerTypes) {
 	    // when the button is clicked -> buttonEvent class is activated
@@ -111,8 +113,8 @@ public class GameViewer
 	    BufferedImage lineImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight,
 							BufferedImage.TYPE_INT_RGB);
 	    Graphics2D bg2d = lineImage.createGraphics();
-	    // The towers are at a offset to be centered at a tile. This removes the offset
-	    final double towerOffset = (1/2.0 - tower.getSize()/2);
+	    Tower tower = EntityFactory.getTower(towerType);
+	    double towerOffset = (1/2.0 - tower.getSize()/2);
 	    tower.setPosition(new Point2D.Double(-towerOffset,-towerOffset));
 	    tower.draw(bg2d, gameScale);
 	    b.addActionListener(buttonEvent);

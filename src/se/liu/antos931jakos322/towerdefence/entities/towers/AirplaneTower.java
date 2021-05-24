@@ -25,7 +25,7 @@ public class AirplaneTower extends Tower
 
     private double angle;
     private double positionRadius;
-    // the inspections are false positive these constants should not be enum's
+    // ------ the inspections are false positive these constants are random properties and should not be enum's ------
     private final static int ATTACK_POWER = 3;
     private final static int COST = 15;
     private final static int RANGE = 4;

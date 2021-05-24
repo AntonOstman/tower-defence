@@ -41,6 +41,11 @@ public class GameHandler
     private boolean gamePaused;
     private boolean gameOver;
 
+    /**
+     * Constructs a GameHandler object with the specified gameMap
+     *
+     * @param gameMap the gameMap which the game should be played on
+     */
     public GameHandler(GameMap gameMap) {
         this.gameMap = gameMap;
         this.enemies = new ArrayList<>();
@@ -124,7 +129,7 @@ public class GameHandler
     }
 
     /**
-     * Stops the game timer and sets gamePaused to flase
+     * Stops the game timer and sets gamePaused to false
      *
      */
     public void pauseGame(){
@@ -195,17 +200,15 @@ public class GameHandler
         }
     }
 
+    /**
+     * Damages the player with the specified amount
+     *
+     * @param damage amount of damamge player should take
+     */
     public void takeDamage(int damage){
         health -= damage;
     }
 
-    public int getHealth() {
-        return health;
-    }
-
-    public int getLevel(){
-        return waveMaker.getWaveLevel();
-    }
 
     /**
      * Handles the main logic for enemies.
@@ -246,7 +249,7 @@ public class GameHandler
 
 
     /**
-     * Adds a tower and takes away the cost from the play money
+     * Adds a tower and takes away the cost from the  money
      *
      * @param tower the tower to add to the game
      */
@@ -291,6 +294,10 @@ public class GameHandler
     public int getMoney() {
         return money;
     }
+
+    /**
+     * Notifies all graphics listners that the game some graphical elements have moved
+     */
 
     public void notifyListeners(){
         for(GameListener listener: gameListeners){
@@ -344,10 +351,21 @@ public class GameHandler
         notifyListeners();
     }
 
+    /**
+     * sets the tower to be selected
+     *
+     * @param tower the tower to select
+     */
     public void selectTower(Tower tower){
         tower.setSelected(true);
         notifyListeners();
     }
+    /**
+     * Sets the tower to not be selected
+     *
+     * @param tower the tower to deselect
+     */
+
     public void deselectTower(Tower tower){
         tower.setSelected(false);
         notifyListeners();
@@ -390,6 +408,9 @@ public class GameHandler
         return enemies.get(index);
     }
 
+    /**
+     * The Action which the GameHandler timer performs every time it activates
+     */
     public class DoOneStep extends AbstractAction{
 
         @Override public void actionPerformed(final ActionEvent e){
