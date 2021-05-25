@@ -1,6 +1,5 @@
 package se.liu.antos931jakos322.towerdefence.entities;
 
-import se.liu.antos931jakos322.towerdefence.entities.enemies.BigBossEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.BossEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.EnemyType;
@@ -69,8 +68,6 @@ public class EntityFactory
         // A map could be used instead of switch case but this means new objects will be created
 	// when we only want to return a specific one. So a switch case seems more appropriate in this case
 	switch (enemyType) {
-	    case BIG_BOSS:
-		return new BigBossEnemy();
 	    case BOSS:
 		return new BossEnemy();
 	    case SPEED:
