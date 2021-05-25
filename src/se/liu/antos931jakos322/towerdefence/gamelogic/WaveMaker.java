@@ -4,6 +4,7 @@ import se.liu.antos931jakos322.towerdefence.entities.enemies.BigBossEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.BossEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.ExplodingEnemy;
+import se.liu.antos931jakos322.towerdefence.entities.enemies.FlyingEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.SpeedEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.StandardEnemy;
 
@@ -78,12 +79,14 @@ public class WaveMaker
         Enemy bossEnemy = new BossEnemy();
         Enemy bigBossEnemy = new BigBossEnemy();
         Enemy explodingEnemy = new ExplodingEnemy();
+        Enemy flyingEnemy = new FlyingEnemy();
 
 
         if(waveLevel < 5){
-            spawnEnemy( 3 + waveLevel, genericEnemy);
+            spawnEnemy( 2 + waveLevel, genericEnemy);
 
         } else if(waveLevel < 10){
+            spawnEnemy( -4 + waveLevel, flyingEnemy);
             spawnEnemy( -4 + waveLevel, explodingEnemy);
             spawnEnemy( -1 + waveLevel, genericEnemy);
             spawnEnemy( -2 + waveLevel, speedEnemy);
