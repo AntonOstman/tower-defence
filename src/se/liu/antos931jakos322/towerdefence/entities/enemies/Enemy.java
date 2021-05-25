@@ -32,6 +32,7 @@ public abstract class Enemy extends Entity
 
     /**
      * Constructs an Enemy with inital speed and health points
+     * Used by enemies who do not split when health reaches 0
      *
      * @param maxHealth the enemy health points
      * @param speed the speed of the enemy
@@ -53,7 +54,7 @@ public abstract class Enemy extends Entity
 
     /**
      * Constructs an Enemy with inital speed and health points
-     * Designed to used by "stronger" enemies who also split
+     * Used by enemies who split when health reaches 0
      *
      * @param maxHealth the enemy health points
      * @param speed the speed of the enemy
