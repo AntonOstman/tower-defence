@@ -4,6 +4,7 @@ import se.liu.antos931jakos322.towerdefence.entities.enemies.BossEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.Enemy;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.EnemyType;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.ExplodingEnemy;
+import se.liu.antos931jakos322.towerdefence.entities.enemies.FlyingEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.SpeedEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.enemies.StandardEnemy;
 import se.liu.antos931jakos322.towerdefence.entities.projectiles.ArrowProjectile;
@@ -68,6 +69,8 @@ public class EntityFactory
         // A map could be used instead of switch case but this means new objects will be created
 	// when we only want to return a specific one. So a switch case seems more appropriate in this case
 	switch (enemyType) {
+	    case FLYING:
+	        return new FlyingEnemy();
 	    case BOSS:
 		return new BossEnemy();
 	    case SPEED:
@@ -76,6 +79,7 @@ public class EntityFactory
 		return new ExplodingEnemy();
 	    case STANDARD:
 		return new StandardEnemy();
+
 	    default:
 		return null;
 	}
