@@ -23,11 +23,11 @@ public abstract class Enemy extends Entity
     protected final int maxHealth;
     protected final int rewardMoney;
     protected boolean finished;
-    private int lastPosition;
-    private final static Random RND = new Random();
-    private EnemyType enemyType;
-    private int numberOfSplits;
-    private int splitDistance;
+    protected int lastPosition;
+    protected final static Random RND = new Random();
+    protected EnemyType enemyType;
+    protected int numberOfSplits;
+    protected int splitDistance;
 
 
     /**
@@ -139,16 +139,15 @@ public abstract class Enemy extends Entity
 	    pathProgress += 1;
 	}
 	super.move();
-
+	 if (pathProgress == lastPosition){
+	     finished = true;
+	     return;
+	 }
 	// now the question is why does gamehandler know distances below for isNear?
 	 // is that not gameMaps job to know its own distances? i dont know what is best
 	final double distance = 0.2;
 	if(HelperFunctions.isNear(position, movePosition, distance)){
 	    // If this is the last block --> Enemy is done with the path
-	    if (pathProgress == lastPosition){
-	        finished = true;
-	        return;
-	    }
 	    pathProgress += 1;
 
 	}

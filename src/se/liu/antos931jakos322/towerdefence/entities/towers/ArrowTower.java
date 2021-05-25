@@ -1,7 +1,6 @@
 package se.liu.antos931jakos322.towerdefence.entities.towers;
 
 import se.liu.antos931jakos322.towerdefence.entities.Entity;
-import se.liu.antos931jakos322.towerdefence.entities.projectiles.Projectile;
 import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileType;
 
 import java.awt.*;
@@ -9,8 +8,7 @@ import java.awt.*;
 /**
  *
  * ArrowTower is a tower with burst-fire. This means the tower shoots 3 projectiles at once
- *
- * ArrowTower has medium attack speed, high damage, medium range and uses Arrow projectiles
+ * ArrowTower has medium attack speed, medium damage, medium range and uses Arrow projectiles
  *
  *
  */
@@ -45,8 +43,10 @@ public class ArrowTower extends Tower
      * @return if the tower can attack
      */
     @Override public boolean canAttack(final Entity entity) {
-        final int burstTime = 2;
-        if(super.canAttack(entity) && burstFireCharge <= burstTime){
+        // since the attackSpeedCharge decides how much the tower has "charged" we set it to be attackspeed three times
+        // before needing to "charge" again
+        final int burstAmount = 3;
+        if(super.canAttack(entity) && burstFireCharge < burstAmount){
             attackSpeedCharge = attackSpeed;
             burstFireCharge++;
             return true;
