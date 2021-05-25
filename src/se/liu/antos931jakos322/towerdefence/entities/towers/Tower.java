@@ -129,7 +129,6 @@ public abstract class Tower extends EntityAttacker
 
     }
 
-
     /**
      * Used by towers to attack entities.
      * Returns the projectile object the tower is attacking with.
