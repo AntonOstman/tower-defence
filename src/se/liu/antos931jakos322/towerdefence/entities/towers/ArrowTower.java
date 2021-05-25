@@ -22,7 +22,7 @@ public class ArrowTower extends Tower
     private static final int ATTACK_POWER = 10;
     private static final int COST = 6;
     private static final int RANGE = 5;
-    private static final int UPGRADE_COST = 1;
+    private static final int UPGRADE_COST = 2;
     private static final int ATTACK_SPEED = 8;
     private static final Color COLOR = Color.BLUE;
     private static final double SIZE = 0.6;
@@ -34,7 +34,4 @@ public class ArrowTower extends Tower
 	super(TOWER_TYPE, COLOR, COST, ATTACK_POWER, RANGE, UPGRADE_COST, PROJECTILE_TYPE, ATTACK_SPEED, SIZE);
     }
 
-    /**
-     * no special extra functionality
-     */
 }

@@ -19,7 +19,7 @@ public class CanonTower extends Tower
     private final static int ATTACK_POWER = 5;
     private final static int COST = 6;
     private final static int RANGE = 3;
-    private final static int UPGRADE_COST = 1;
+    private final static int UPGRADE_COST = 4;
     private final static int ATTACK_SPEED = 20;
     private final static double SIZE = 0.6;
     private final static TowerType TOWER_TYPE = TowerType.CANON;
@@ -30,9 +30,6 @@ public class CanonTower extends Tower
     {
 	super(TOWER_TYPE, COLOR, COST, ATTACK_POWER, RANGE, UPGRADE_COST, PROJECTILE_TYPE, ATTACK_SPEED, SIZE);
     }
-    /**
-     * no special extra functionality
-     */
 
     /**
      * Upgrades the Tower attackpower and increses tower level

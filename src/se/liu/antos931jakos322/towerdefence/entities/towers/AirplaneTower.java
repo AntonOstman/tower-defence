@@ -27,12 +27,12 @@ public class AirplaneTower extends Tower
     private double positionRadius;
     // ------ the inspections are false positive these constants are random properties and should not be enum's ------
     private final static int ATTACK_POWER = 3;
-    private final static int COST = 15;
+    private final static int COST = 10;
     private final static int RANGE = 4;
-    private final static int UPGRADE_COST = 1;
+    private final static int UPGRADE_COST = 3;
     private final static int ATTACK_SPEED = 3;
     private final static double SPEED = 0.03;
-    private final static double SIZE = 0.6;
+    private final static double SIZE = 0.5;
     private final static Color COLOR = Color.red;
     private final static TowerType TOWER_TYPE = TowerType.AIRPLANE;
     private final static ProjectileType PROJECTILE_TYPE = ProjectileType.STICKY;

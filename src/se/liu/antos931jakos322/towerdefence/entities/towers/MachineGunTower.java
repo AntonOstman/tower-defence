@@ -14,7 +14,7 @@ import java.awt.*;
 
 public class MachineGunTower extends Tower
 {
-    // ------ the inspections are false positive these constants are random properties and should not be enum's ------
+    // ------ the inspections are false positive these constants are randomly chosen properties and should not be enum's ------
     private final static int ATTACK_POWER = 3;
     private final static int COST = 4;
     private final static int RANGE = 7;
@@ -30,7 +30,4 @@ public class MachineGunTower extends Tower
 	super(TOWER_TYPE, COLOR, COST, ATTACK_POWER, RANGE, UPGRADE_COST, PROJECTILE_TYPE, ATTACK_SPEED, SIZE);
     }
 
-    /**
-     * no special extra functionality
-     */
 }

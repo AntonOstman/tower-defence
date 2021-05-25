@@ -1,6 +1,7 @@
 package se.liu.antos931jakos322.towerdefence.entities;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 
 /**
  * EntityAttacker is a type of Entity with the extended functionallity of attacking other entities.
@@ -14,6 +15,7 @@ import java.awt.*;
 public abstract class EntityAttacker extends Entity
 {
     protected Entity targetEntity;
+    protected Point2D startPosition;
 
     /**
      * Constructs an EntityAttacker that also has inital speed on creation
@@ -27,6 +29,7 @@ public abstract class EntityAttacker extends Entity
     protected EntityAttacker(final Color color, final double size, final double speed, final int attackPower) {
 	super(color, size, speed, attackPower);
 	this.targetEntity = null;
+	this.startPosition = null;
     }
 
     /**
@@ -39,6 +42,7 @@ public abstract class EntityAttacker extends Entity
     protected EntityAttacker(final Color color, final double size, final int attackPower) {
 	super(color, size, attackPower);
 	this.targetEntity = null;
+	this.startPosition = null;
     }
 
     /**
@@ -88,4 +92,8 @@ public abstract class EntityAttacker extends Entity
 	return targetEntity;
     }
 
+    @Override public void setPosition(final Point2D position) {
+        super.setPosition(position);
+        startPosition = position;
+    }
 }

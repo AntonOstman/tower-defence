@@ -39,9 +39,9 @@ public abstract class Tower extends EntityAttacker
     protected int attackSpeedCharge;
     protected TowerType towerType;
     protected ProjectileType projectileType;
-    protected Point2D startPosition;
     protected boolean selected;
     protected int level;
+    
 
     /**
      *  Constructs a Tower for towers with an inital speed
@@ -65,7 +65,6 @@ public abstract class Tower extends EntityAttacker
         this.towerType = towerType;
         this.upgradeCost = upgradeCost;
         this.projectileType = projectileType;
-        this.startPosition = null;
         this.attackSpeed = attackSpeed;
         this.attackSpeedCharge = 0;
         this.selected = false;
@@ -90,7 +89,6 @@ public abstract class Tower extends EntityAttacker
         super(color, size, attackPower);
         this.cost = cost;
         this.range = range;
-        this.startPosition = null;
         this.towerType = towerType;
         this.upgradeCost = upgradeCost;
         this.projectileType = projectileType;
@@ -265,11 +263,6 @@ public abstract class Tower extends EntityAttacker
 
     public int getCost() {
         return cost;
-    }
-
-    @Override public void setPosition(final Point2D position) {
-        super.setPosition(position);
-        startPosition = position;
     }
 
     public int getUpgradeCost() {

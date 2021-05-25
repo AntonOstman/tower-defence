@@ -25,13 +25,11 @@ import java.awt.geom.Point2D;
 public abstract class Projectile extends EntityAttacker
 {
 
-    protected Point2D startPosition;
     protected int penetrationAmount;
     protected Entity prevAttackedEntity;
 
     protected Projectile(final Color color, final double size, double speed, int penetrationAmount) {
 	super(color, size, speed, 0);
-	this.startPosition = null;
 	this.penetrationAmount = penetrationAmount;
 	this.prevAttackedEntity = null;
     }
@@ -65,12 +63,13 @@ public abstract class Projectile extends EntityAttacker
      */
 
     @Override public boolean canAttack(Entity entity){
-        // the projectile hit range is increased with a constant to make sure it actually hits when near an entity
 
 	if(!super.canAttack(entity)){
 	    return false;
 	}
-	final int hitRangeScale = 2;
+
+	// the projectile hit range is increased with a constant to make sure it actually hits when near an entity
+	final double hitRangeScale = 1.5;
         double hitRange = size * hitRangeScale;
 	if (HelperFunctions.isNear(position, entity.getPosition(), hitRange)) {
 	return true;
@@ -78,16 +77,24 @@ public abstract class Projectile extends EntityAttacker
 	else{ return false;}
     }
 
+    /**
+     * Projectile contains no extra logic for selecting target.
+     * Sets the Entity given as the current target.
+     *
+     * Also changes movePostion so the projectile moves towards the Entity
+     * @param entity the entity to attack
+     */
     @Override public void decideTarget(Entity entity) {
 	super.decideTarget(entity);
-	this.targetEntity = entity;
-	this.movePosition = entity.getPosition();
-	this.position = startPosition;
+	targetEntity = entity;
+	movePosition = entity.getPosition();
+	position = startPosition;
 
     }
 
     /**
-     * attacks an entity and penetrates if it has already attack that enemy
+     * attacks an entity and ignores if it has already attack that enemy
+     *
      *
      * @param entity the entity object to attack
      */
@@ -111,16 +118,6 @@ public abstract class Projectile extends EntityAttacker
 
     }
 
-    /**
-     * Sets movePosition to the enemy target position
-     * Also saves the start positoin in startPosition
-     *
-     * @param target the enemy object to target
-     */
-//    public void setTarget(final Enemy target) {
-//	this.movePosition = target.getPosition();
-//	this.position = startPosition;
-//    }
 
     /**
      * draws the projectile as a circle with the specified size and color fields

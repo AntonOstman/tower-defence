@@ -62,12 +62,11 @@ public class GameViewer
 
     public void createInterface(){
 	final Color backGroundColor = new Color(92, 184, 92);
-	MenuComponent menuComponent = new MenuComponent(gameHandler, gameScale);
-	GameComponent gameComponent = new GameComponent(gameHandler, gameScale);
+	MenuComponent menuComponent = new MenuComponent(gameHandler);
+	GameComponent gameComponent = new GameComponent(gameHandler);
 
 	gameHandler.addListener(menuComponent);
 	gameHandler.addListener(gameComponent);
-
 
 	// create the panels of the UI In the gridLayout the first agrument represent amout of rows and seconds amout of coloumns
 	// in the gridlayout

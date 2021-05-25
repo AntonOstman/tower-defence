@@ -23,22 +23,20 @@ public class GameComponent extends JComponent implements GameListener
     private GameHandler gameHandler;
     private final int mapWidth;
     private final int mapHeight;
-    private int gameScale;
     private final static int MARGIN = 0;
 
-    public GameComponent(GameHandler gameHandler, int gameScale) {
+    public GameComponent(GameHandler gameHandler) {
 	this.gameHandler = gameHandler;
 	Point mapDimensions = gameHandler.getMapDimensions();
 	this.mapHeight = mapDimensions.y;
 	this.mapWidth = mapDimensions.x;
-	this.gameScale = gameScale;
     }
 
 
     public Dimension getPreferredSize(){
 
-	int gameWidth = mapWidth * (MARGIN + gameScale);
-	int gameHeight = mapHeight * (MARGIN + gameScale);
+	int gameWidth = mapWidth * (MARGIN + GAME_SCALE);
+	int gameHeight = mapHeight * (MARGIN + GAME_SCALE);
         return new Dimension(gameWidth, gameHeight);
 
     }
@@ -55,18 +53,18 @@ public class GameComponent extends JComponent implements GameListener
 	for (int y = 0; y < mapHeight; y++) {
 	    for (int x = 0; x < mapWidth; x++) {
 		Tile currentTile = gameHandler.getMapTile(new Point(x, y));
-		currentTile.drawTile(g2d, MARGIN, gameScale);
+		currentTile.drawTile(g2d, MARGIN, GAME_SCALE);
 	    }
 	}
 
 	for(int i = 0; i < gameHandler.getProjectileAmount(); i++ ){
-	    gameHandler.getProjectile(i).draw(g2d, gameScale);
+	    gameHandler.getProjectile(i).draw(g2d, GAME_SCALE);
 	}
 	for(int i = 0; i < gameHandler.getEnemyAmount(); i++){
-	    gameHandler.getEnemy(i).draw(g2d, gameScale);
+	    gameHandler.getEnemy(i).draw(g2d, GAME_SCALE);
 	}
 	for (int i = 0; i < gameHandler.getTowerAmount(); i++) {
-	    gameHandler.getTower(i).draw(g2d, gameScale);
+	    gameHandler.getTower(i).draw(g2d, GAME_SCALE);
 	}
 
     }

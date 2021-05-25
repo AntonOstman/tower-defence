@@ -31,7 +31,7 @@ public abstract class Enemy extends Entity
 
 
     /**
-     * Constructs an entity with inital speed and health points
+     * Constructs an Enemy with inital speed and health points
      *
      * @param maxHealth the enemy health points
      * @param speed the speed of the enemy
@@ -52,7 +52,8 @@ public abstract class Enemy extends Entity
     }
 
     /**
-     * Constructs an entity with inital speed and health points
+     * Constructs an Enemy with inital speed and health points
+     * Designed to used by "stronger" enemies who also split
      *
      * @param maxHealth the enemy health points
      * @param speed the speed of the enemy
@@ -77,6 +78,13 @@ public abstract class Enemy extends Entity
 	this.splitDistance = splitDistance;
 
     }
+
+    /**
+     * Returns if the Enemy can be attacked.
+     * False if health is less than 0 or the enemy is finished
+     *
+     * @return if the entity can be attacked
+     */
 
     @Override public boolean canBeAttacked() {
 	if (isFinished()){
@@ -145,17 +153,6 @@ public abstract class Enemy extends Entity
 	}
     }
 
-    public boolean isFinished(){
-	return finished;
-    }
-
-    public int getRewardMoney() { return rewardMoney; }
-
-    public void setLastPosition(int position){
-	lastPosition = position;
-    }
-
-    public int getPathProgress() { return pathProgress; }
 
     /**
      * Creates enemies of the specified type and amount.
@@ -189,4 +186,18 @@ public abstract class Enemy extends Entity
 	int randomPos = RND.nextInt(span) + minPosition;
 	return randomPos;
     }
+    public boolean isFinished(){
+	return finished;
+    }
+
+    public int getRewardMoney() { return rewardMoney; }
+
+    public void setLastPosition(int position){
+	lastPosition = position;
+    }
+
+    public int getPathProgress() { return pathProgress; }
+
+
+
 }

@@ -3,6 +3,7 @@ package se.liu.antos931jakos322.towerdefence.gamelogic;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import se.liu.antos931jakos322.towerdefence.userinterface.GameListener;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -68,13 +69,13 @@ public class GameMap
 	// load the map resource
         URL url = ClassLoader.getSystemResource("maps/maps.json");
 	InputStream inputStream = url.openStream();
-
 	Reader reader = new BufferedReader(new InputStreamReader(inputStream));
-	// convert JSON array to object
 
+	// convert JSON array to object.
+	// The maps.json file has been created in before hand by code now removed.
+	// But we can still read the Json file which reads the "old" MapInfo objects
 	mapInfo = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>() {}.getType());
 	reader.close();
-
 
     }
 

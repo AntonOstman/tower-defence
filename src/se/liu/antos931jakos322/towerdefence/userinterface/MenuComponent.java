@@ -17,11 +17,9 @@ public class MenuComponent extends JComponent implements GameListener
 {
     private GameHandler gameHandler;
 
-    private int gameScale;
 
-    public MenuComponent(final GameHandler gameHandler, final int gameScale) {
+    public MenuComponent(final GameHandler gameHandler) {
         this.gameHandler = gameHandler;
-        this.gameScale = gameScale;
 
     }
 
@@ -37,13 +35,13 @@ public class MenuComponent extends JComponent implements GameListener
 	String currentMoney = "Money: " + gameHandler.getMoney();
 	String level = "Wave level: " + gameHandler.getLevel();
 	g2d.setColor(Color.BLACK);
-	g2d.setFont(new Font("serif", Font.PLAIN, gameScale/2));
+	g2d.setFont(new Font("serif", Font.PLAIN, GAME_SCALE / 2));
 	final int positionX = 0;
 
-	final int margin = gameScale/2;
-	final int healthPositionY = gameScale;
-	final int moneyPositionY = gameScale + margin;
-	final int levelPositionY = gameScale + margin*2;
+	final int margin = GAME_SCALE / 2;
+	final int healthPositionY = GAME_SCALE;
+	final int moneyPositionY = GAME_SCALE + margin;
+	final int levelPositionY = GAME_SCALE + margin * 2;
 	g2d.drawString(health, positionX, healthPositionY);
     	g2d.drawString(currentMoney, positionX, moneyPositionY);
 	g2d.drawString(level, positionX, levelPositionY);

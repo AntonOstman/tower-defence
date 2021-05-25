@@ -24,7 +24,6 @@ public class StartMenu implements GameListener
     private JFrame frame;
     private GameHandler gameHandler;
     private GameViewer viewer;
-    private final static int GAME_SCALE = 50;
     private final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private GameMap gameMap;
 
@@ -139,7 +138,6 @@ public class StartMenu implements GameListener
 
     public void startGame(int mapIndex) {
 
-	//GameMap gameMap = new GameMap(); // move to gamehandelr?
 	gameMap.loadMap(mapIndex);
 
 	gameHandler = new GameHandler(gameMap);
@@ -164,9 +162,7 @@ public class StartMenu implements GameListener
 	else {
 	    System.exit(0);
 	    }
-
 	}
-
     }
 
     public class ButtonEvent extends AbstractAction{
