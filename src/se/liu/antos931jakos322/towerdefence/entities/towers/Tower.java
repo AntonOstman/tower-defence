@@ -107,8 +107,9 @@ public abstract class Tower extends EntityAttacker
 
         // the tower has a recharge rate and if it has not yet
         // recharged then charge up a bit and return false
-        // the inspection warning about map does not fit here as we are only returning true or false
-        // a map for true or false is very redundant and reduces code readability
+        // ----- the inspection warning about using map here does not fit as we are not only returning a constant value ----
+        // ----- but also adding logic to how towers "charge" their firing rate. -----
+        // ----- we are also acting on
         if (attackSpeedCharge != attackSpeed) {
             attackSpeedCharge++;
             return false;
