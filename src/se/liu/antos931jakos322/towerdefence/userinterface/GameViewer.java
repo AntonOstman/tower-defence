@@ -165,8 +165,8 @@ public class GameViewer
 	mainMenuPanel.add(towerDescriptionPanel);	// the tower description
 	mainMenuPanel.add(towerUpgradesPanel);		// The upgrade button
 	mainMenuPanel.add(pauseAndQuitPanel);		// pasuse and quit button
-	int widthScale = 4;
-	int heightScale = 10;
+	final int widthScale = 4;
+	final int heightScale = 10;
 	int mainMenuWidth = gameScale * widthScale;
 	int mainMenuHeight = gameScale * heightScale;
 	mainMenuPanel.setPreferredSize(new Dimension(mainMenuWidth, mainMenuHeight));

@@ -44,7 +44,7 @@ public abstract class Tower extends EntityAttacker
     protected int level;
 
     /**
-     *  Constructs a Tower for towers with an added inital speed
+     *  Constructs a Tower for towers with an inital speed
      *
      * @param speed the speed which the tower moves with
      * @param towerType the type of tower
