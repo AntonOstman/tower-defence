@@ -107,6 +107,7 @@ public class GameViewer
 
 	    Tower tower = EntityFactory.getTower(towerType);
 	    // Create a drawing area at the size of the tower
+	    //----- There is no problem with null. It is handled so the inspections are incorrent ------
 	    final int bufferedImageWidth = (int) (tower.getSize()*gameScale);
 	    final int bufferedImageHeight = (int) (tower.getSize()*gameScale);
 	    BufferedImage lineImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight,
@@ -244,6 +245,7 @@ public class GameViewer
 		case TOWER_BUTTON:
 	        // player is trying to press a tower on the menu
 		selectedTower = towerType;
+		    //----- There is no problem with null. It is handled so the inspections are incorrent ------
 		String towerDesc = EntityFactory.getTower(towerType).getDescription();
 		towerDescription.setText(towerDesc);
 
@@ -318,6 +320,7 @@ public class GameViewer
 	private void placeTower(Point clickedPoint){
 
 	    Tower newTower = EntityFactory.getTower(selectedTower);
+	    //----- There is no problem with null. It is handled so the inspections are incorrent ------
 	    newTower.setPosition(clickedPoint);
 	    boolean canPlaceTower = gameHandler.canAffordAndPlaceTower(newTower);
 

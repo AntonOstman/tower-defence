@@ -21,6 +21,12 @@ import java.util.logging.Logger;
 
 public class StartMenu implements GameListener
 {
+    // ---------- in response the the inspection about similar children ------
+    //------- While GameComponent and menuComponent could have an abstract class in this instance it feels redundat -------
+    // ------ it will be one class with gameHandler and the method gamechanged. ------
+    // ------ in the future if adding more componentes who uses this code it would make sense more sense. ------
+    // ----- Otherwise it is just bloating the project with classes -------
+    // -----also because Startmenu who uses the gamelistner interface implements its own gameChanged and does not extend JComponent -----
     private JFrame frame;
     private GameHandler gameHandler;
     private GameViewer viewer;

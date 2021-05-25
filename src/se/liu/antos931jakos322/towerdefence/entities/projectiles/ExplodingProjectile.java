@@ -55,7 +55,7 @@ public class ExplodingProjectile extends Projectile
             movePosition = position;
             isExploding = true;
             this.color = Color.ORANGE;
-            int sizeScale = 3;
+            final int sizeScale = 3;
             size = SIZE * sizeScale;
         }
     }

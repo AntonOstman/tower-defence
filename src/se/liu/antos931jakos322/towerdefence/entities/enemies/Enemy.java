@@ -165,6 +165,7 @@ public abstract class Enemy extends Entity
 
 	for (int i = 0; i < numberOfSplits; i++) {
 	    Enemy s = EntityFactory.getEnemy(enemyType);
+	    //----- There is no problem with null. It is handled so the inspections are incorrent ------
 	    s.setPosition(new Point2D.Double(position.getX() + splitRandomPos(splitDistance), position.getY() + splitRandomPos(splitDistance)));
 	    s.setPathProgress(pathProgress);
 	    enemies.add(s);

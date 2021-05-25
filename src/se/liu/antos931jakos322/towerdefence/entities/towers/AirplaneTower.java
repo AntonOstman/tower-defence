@@ -45,8 +45,8 @@ public class AirplaneTower extends Tower
     }
 
     /**
-     * moves the Tower
-     *
+     * Airplane tower has the "unique action" of moving in a circle
+     * So activate moves the tower in a circle
      */
 
     @Override public void activate() {

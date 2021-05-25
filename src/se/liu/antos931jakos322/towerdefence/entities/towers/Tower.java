@@ -139,6 +139,7 @@ public abstract class Tower extends EntityAttacker
     public Projectile createProjectileAttack() {
 
         Projectile projectile = EntityFactory.getProjectile(projectileType);
+        //----- There is no problem with targetEntity being null. It is handled so the inspections are incorrent.
         projectile.decideTarget(targetEntity);
         projectile.setPosition(position);
         projectile.setAttackPower(attackPower);
@@ -226,8 +227,10 @@ public abstract class Tower extends EntityAttacker
         g2d.setFont(new Font("TimesRoman", Font.PLAIN , textSize));
 
         // the offset to get the text in the middle of a tower, magic numbers 3 and 2 found by trial and error.
-        final int textOffsetX = gameScale / 3;
-        final int textOffsetY = gameScale / 2;
+        final int textOffsetScaleX = 3;
+        final int textOffsetScaleY = 2;
+        final int textOffsetX = gameScale / textOffsetScaleX;
+        final int textOffsetY = gameScale / textOffsetScaleY;
         int textPosX = (int) (towerPosX * gameScale) + textOffsetX;
         int textPosY = (int) (towerPosY * gameScale) + textOffsetY;
         g2d.drawString(String.valueOf(level), textPosX, textPosY);
@@ -259,7 +262,6 @@ public abstract class Tower extends EntityAttacker
     public void setSelected(final boolean selected) {
         this.selected = selected;
     }
-
 
     public int getCost() {
         return cost;

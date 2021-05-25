@@ -144,6 +144,9 @@ public abstract class Entity
      */
     public abstract boolean canBeAttacked();
 
+    // -------- in respone to inspection about unsued method. While draw is not implementet in any polymorphic way --------
+    // -------- it makes sense to force children to implement draw ------
+    // -------- also see GameComponent's paintComponent method for explination on why polymorphism is not used -------
     public abstract void draw(Graphics2D g2d, int gameScale);
 
     public void setPosition(final Point2D position) { this.position = position; }
