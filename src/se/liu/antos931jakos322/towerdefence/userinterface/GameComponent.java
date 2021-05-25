@@ -57,6 +57,10 @@ public class GameComponent extends JComponent implements GameListener
 	    }
 	}
 
+	// since we want projectiles to be drawn "in the bottom" and tower "on top of enemies"
+	// We do draw every Entity in an independat loop. However a solution which maybe looks nicer is to use
+	// polymorphism by instead getting all Entity objects in Gamehandler and then drawing them.
+	// Then these three for loops would be one and only entity.draw() would have to be written.
 	for(int i = 0; i < gameHandler.getProjectileAmount(); i++ ){
 	    gameHandler.getProjectile(i).draw(g2d, GAME_SCALE);
 	}

@@ -3,7 +3,6 @@ package se.liu.antos931jakos322.towerdefence.gamelogic;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import se.liu.antos931jakos322.towerdefence.userinterface.GameListener;
 
 import java.awt.*;
 import java.io.BufferedReader;
