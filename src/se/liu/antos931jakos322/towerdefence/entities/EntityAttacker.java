@@ -99,6 +99,8 @@ public abstract class EntityAttacker extends Entity
      */
     @Override public void setPosition(final Point2D position) {
         super.setPosition(position);
-        startPosition = position;
+        if (startPosition == null) {
+	    startPosition = position;
+	}
     }
 }

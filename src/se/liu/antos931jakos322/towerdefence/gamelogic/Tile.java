@@ -26,9 +26,6 @@ public class Tile
 	this.position = position;
     }
 
-    public TileType getTileType() {
-	return tileType;
-    }
 
     public void draw(final Graphics2D g2d, final int margin, final int tileSize){
 
@@ -68,4 +65,9 @@ public class Tile
 
         return tileColors.get(tileType);
     }
+    public TileType getTileType() {
+	return tileType;
+    }
+
+
 }
