@@ -68,8 +68,8 @@ public class StartMenu implements GameListener
 
 	    // Every block drawn on the button is 7px * 7px
 	    final int tileSize = 7;
-	    int mapY = gameMap.getDimension().x;
-	    int mapX = gameMap.getDimension().y;
+	    int mapY = gameMap.getDimension().y;
+	    int mapX = gameMap.getDimension().x;
 	    final int bufferedImageWidth = mapX * tileSize ;
 	    final int bufferedImageHeight = mapY * tileSize;
 	    BufferedImage lineImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight,
