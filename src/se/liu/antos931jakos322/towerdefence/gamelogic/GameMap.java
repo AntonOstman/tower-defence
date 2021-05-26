@@ -28,11 +28,11 @@ public class GameMap
 {
     private Tile[][] tiles;
     private List<Point> path;
-    private Point dimensions;
+    private Point dimension;
     private List<MapInfo> mapInfoContainer;
 
     public GameMap()  {
-	this.dimensions = null;
+	this.dimension = null;
 	this.tiles = null;
 	this.path = null;
 	this.mapInfoContainer = null;
@@ -48,13 +48,13 @@ public class GameMap
     public void loadMap(int selectedMapIndex){
 	// first gets the mapInfo object which should be loaded and replace all fields with the mapinfo scale
 	MapInfo selectedMap = mapInfoContainer.get(selectedMapIndex);
-	this.dimensions = selectedMap.getDimensions();
-	this.tiles = new Tile[dimensions.y][dimensions.x];
+	this.dimension = selectedMap.getDimensions();
+	this.tiles = new Tile[dimension.y][dimension.x];
 	this.path = selectedMap.getPath();
 
 	// Creates the base map with all grass tiles
-	for (int h = 0; h < dimensions.y; h++) {
-	    for (int w = 0; w < dimensions.x; w++) {
+	for (int h = 0; h < dimension.y; h++) {
+	    for (int w = 0; w < dimension.x; w++) {
 		tiles[h][w] = new Tile(new Point(w, h), TileType.GRASS);
 	    }
 	}
@@ -91,10 +91,8 @@ public class GameMap
      * Returns the dimensions but as a new Point object
      * @return the game dimensions
      */
-    public Point getDimensions() {
-        int width = dimensions.x;
-        int height = dimensions.y;
-	return new Point(width, height);
+    public Point getDimension() {
+	return dimension;
     }
 
     /**
@@ -118,14 +116,6 @@ public class GameMap
 
     public int getNumberOfMaps(){
 	return mapInfoContainer.size();
-    }
-
-    public int getWidth(){
-        return dimensions.x;
-    }
-
-    public int getHeight(){
-	return dimensions.y;
     }
 
 }

@@ -162,7 +162,8 @@ public class GameHandler
             Point2D projectilePosition = projectile.getPosition();
             // if there are any projectiles outside the game add them to the remove list
             boolean lessThanBounds = projectilePosition.getY() < 0 || projectilePosition.getX() < 0;
-            boolean greaterThanBounds = projectilePosition.getX() > gameMap.getWidth() || projectilePosition.getY() > gameMap.getHeight();
+            boolean greaterThanBounds = projectilePosition.getX() > gameMap.getDimension().x ||
+                                        projectilePosition.getY() > gameMap.getDimension().y;
             if(lessThanBounds || greaterThanBounds){
                 projectilesToRemove.add(projectile);
             }
@@ -368,7 +369,7 @@ public class GameHandler
     }
 
     public Point getMapDimensions(){
-        return gameMap.getDimensions();
+        return gameMap.getDimension();
     }
 
     public Tile getMapTile(Point pos){
