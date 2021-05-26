@@ -4,6 +4,13 @@ import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
 
 import java.awt.*;
 
+/**
+ * FlyingEnemy is an Enemy object.
+ * FlyingEnemy moves direcetly towards the end of the game path. Ignoring the path
+ *
+ */
+
+
 public class FlyingEnemy extends Enemy
 {
     private static final int HEALTH = 200;
@@ -15,6 +22,10 @@ public class FlyingEnemy extends Enemy
     public FlyingEnemy() {
 	super(HEALTH, SPEED, COLOR, SIZE, DAMAGE);
     }
+
+    /**
+     * Moves the FlyingEnemy directly towards the end of the game path
+     */
 
     @Override public void move() {
         // Skipp all positions to move to except for the last
