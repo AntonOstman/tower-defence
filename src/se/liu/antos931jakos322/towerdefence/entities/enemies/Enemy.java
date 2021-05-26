@@ -143,8 +143,7 @@ public abstract class Enemy extends Entity
 	     finished = true;
 	     return;
 	 }
-	// now the question is why does gamehandler know distances below for isNear?
-	 // is that not gameMaps job to know its own distances? i dont know what is best
+
 	final double distance = 0.2;
 	if(HelperFunctions.isNear(position, movePosition, distance)){
 	    // If this is the last block --> Enemy is done with the path

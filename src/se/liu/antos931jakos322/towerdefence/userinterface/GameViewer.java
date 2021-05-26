@@ -233,36 +233,33 @@ public class GameViewer
 	@Override public void actionPerformed(final ActionEvent e) {
 	    switch (buttonType){
 		case UPGRADE:
-	        // player is trying to upgrade a tower
-	        if(clickedTower != null) {
-		    if (gameHandler.isTowerUpgradable(clickedTower)) {
-			gameHandler.upgradeTower(clickedTower);
-			towerDescription.setText(clickedTower.getDescription());
+		    // player is trying to upgrade a tower
+		    if(clickedTower != null) {
+			if (gameHandler.isTowerUpgradable(clickedTower)) {
+			    gameHandler.upgradeTower(clickedTower);
+			    towerDescription.setText(clickedTower.getDescription());
+			}
 		    }
-
-		}
 		    break;
 		case TOWER_BUTTON:
-	        // player is trying to press a tower on the menu
-		selectedTower = towerType;
-		    //----- There is no problem with null. It is handled so the inspections are incorrent ------
-		String towerDesc = EntityFactory.getTower(towerType).getDescription();
-		towerDescription.setText(towerDesc);
-
-		break;
+		    // player is trying to press a tower on the menu
+		    selectedTower = towerType;
+			//----- There is no problem with null. It is handled so the inspections are incorrent ------
+		    String towerDesc = EntityFactory.getTower(towerType).getDescription();
+		    towerDescription.setText(towerDesc);
+		    break;
 		case PAUSE:
-	     	if (gameHandler.isGamePaused()){
-		    jButton.setText("Pause game");
-		    gameHandler.startGame();
-		}
-	     	else{
-		    jButton.setText("Start game");
-		    gameHandler.pauseGame();
-	     	}
-
+		    if (gameHandler.isGamePaused()){
+			jButton.setText("Pause game");
+			gameHandler.startGame();
+		    }
+		    else{
+			jButton.setText("Start game");
+			gameHandler.pauseGame();
+		    }
 		    break;
 		case QUIT:
-		System.exit(0);
+		    System.exit(0);
 		default:
 		    IllegalArgumentException illegalArgumentException = new IllegalArgumentException("ButtonEvent did not have valid ButtonType");
 		    logger.log(Level.SEVERE, "ButtonEvent in GameViewer did not recognize ButtonType.\nButtonType: " + buttonType +
