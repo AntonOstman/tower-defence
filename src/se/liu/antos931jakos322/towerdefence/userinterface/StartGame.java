@@ -19,35 +19,41 @@ public class StartGame
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static void main(String[] args) {
-        startLogger();
+        // attempt to start the logger. while the logger is not started.
+	// the game will not start.
+        boolean loggerSuccess = false;
+        while(!loggerSuccess){
+            loggerSuccess = attemptStartLogger();
+	}
         StartMenu startMenu = new StartMenu();
 	startMenu.createStartMenu();
     }
 
-    public static void startLogger() {
+    public static boolean attemptStartLogger() {
 
-	FileHandler fileTxt = null;
+
 	try {
-	    fileTxt = new FileHandler("Logging.txt");
+	    FileHandler fileTxt = new FileHandler("logging.txt");
+	    SimpleFormatter formatterTxt = new SimpleFormatter();
+	    fileTxt.setFormatter(formatterTxt);
+	    LOGGER.setLevel(Level.FINE);
+	    LOGGER.addHandler(fileTxt);
+	    return true;
 	}
 	catch (IOException ioException){
 	    // the reason we dont log this exception is because there is no logger file yet.
 	    // The log file is what we are trying to create
 	    ioException.printStackTrace();
-	    String loadErrorMessage = ioException + " error creating logging.txt in source folder do you want to try again?";
+	    String loadErrorMessage = ioException + "\nerror creating logging.txt in source folder do you want to try again?";
 	    int answer = JOptionPane.showConfirmDialog(null, loadErrorMessage);
 	    if (answer == JOptionPane.YES_OPTION){
-		startLogger();
-		return;
+		return false;
 	    }
 	    else {
 		System.exit(1);
 	    }
 	}
-	SimpleFormatter formatterTxt = new SimpleFormatter();
-	fileTxt.setFormatter(formatterTxt);
-	LOGGER.setLevel(Level.FINE);
-	LOGGER.addHandler(fileTxt);
+	return false;
     }
 
 }
