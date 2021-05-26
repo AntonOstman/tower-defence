@@ -72,7 +72,7 @@ public class AirplaneTower extends Tower
     @Override public void move() {
 	angle += SPEED; // in this context speed is a angle speed
 	// use sin and cos combined with the changing angle to circle the tower
-	// around where it was placed
+	// around where it was first placed
         double newX = startPosition.getX() + positionRadius * Math.sin(angle);
         double newY = startPosition.getY() + positionRadius * Math.cos(angle);
 

@@ -37,9 +37,7 @@ public abstract class Projectile extends EntityAttacker
     /**
      * Move moves the projectile forwards towards the designated moveposition.
      * To keep the projectile from stopping the movePosition is increased with the delta x and y coordinates
-     *
      */
-
 
     @Override public void move(){
 	super.move();
@@ -89,12 +87,10 @@ public abstract class Projectile extends EntityAttacker
 	targetEntity = entity;
 	movePosition = entity.getPosition();
 	position = startPosition;
-
     }
 
     /**
      * attacks an entity and ignores if it has already attack that enemy
-     *
      *
      * @param entity the entity object to attack
      */
@@ -111,6 +107,9 @@ public abstract class Projectile extends EntityAttacker
 	prevAttackedEntity = entity;
     }
 
+    /**
+     * Reduces the penetration value for the projectile but not lower than 0
+     */
     public void reducePenetration(){
 	if (penetrationAmount > 0 ) {
 	    penetrationAmount -= 1;

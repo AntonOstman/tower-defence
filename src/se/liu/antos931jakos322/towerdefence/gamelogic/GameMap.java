@@ -18,8 +18,10 @@ import java.util.List;
  *
  * Map contain the core background information of the game.
  * It structures the tiles which the game is played on.
- * It contains information related to the game such as how much money the player has
  *
+ * GameMap also loads and reads the maps.json file which contains all the json MapInfo objects.
+ * Which means GameMap loads the MapInfo objects dimensions and the path.
+ * Path is a sorted list. This means the index 0 in path is the first position on the path, index 1 is the second position on the path etc.
  */
 
 public class GameMap
@@ -27,24 +29,25 @@ public class GameMap
     private Tile[][] tiles;
     private List<Point> path;
     private Point dimensions;
-    private List<MapInfo> mapInfo;
+    private List<MapInfo> mapInfoContainer;
 
     public GameMap()  {
 	this.dimensions = null;
 	this.tiles = null;
 	this.path = null;
-	this.mapInfo = null;
+	this.mapInfoContainer = null;
 
     }
 
-	/** When maps.json has been read a map can be loaded into the game.
-	 * @param selectedMapIndex selects the map to load
+	/**
+	 * When maps.json has been read a map can be loaded into the game.
 	 *
+	 * @param selectedMapIndex selects the map to load
 	 * */
 
     public void loadMap(int selectedMapIndex){
-	// Updates varibles
-	MapInfo selectedMap = mapInfo.get(selectedMapIndex);
+	// first gets the mapInfo object which should be loaded and replace all fields with the mapinfo scale
+	MapInfo selectedMap = mapInfoContainer.get(selectedMapIndex);
 	this.dimensions = selectedMap.getDimensions();
 	this.tiles = new Tile[dimensions.y][dimensions.x];
 	this.path = selectedMap.getPath();
@@ -57,13 +60,18 @@ public class GameMap
 	}
 
 	// Overrides some of the grass tiles with road blocks
-	// The path uses one tile margin that should not be shown
+	// The path uses one tile margin that should not be shown so enemies dont instantly show and instead "walk into" the map
 	for (int i = 1; i < path.size()-1; i++) {
 	    Point pathTile = path.get(i);
 	    tiles[pathTile.y][pathTile.x] = new Tile(new Point(pathTile.x, pathTile.y), TileType.ROAD);
 	}
     }
 
+    /**
+     * reads the maps.json file which loads all mapInfo objects into the field mapInfoContainer
+     *
+     * @throws IOException if reading the file fails
+     */
     public void readMap() throws IOException {
 	// load the map resource
         URL url = ClassLoader.getSystemResource("maps/maps.json");
@@ -73,37 +81,30 @@ public class GameMap
 	// convert JSON array to object.
 	// The maps.json file has been created in before hand by code now removed.
 	// But we can still read the Json file which reads the "old" MapInfo objects
-	mapInfo = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>() {}.getType());
+	mapInfoContainer = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>() {}.getType());
 	reader.close();
 
     }
 
-    public int getNumberOfMaps(){
-        return mapInfo.size();
-    }
 
-    public Tile getTile(Point pos){
-        return tiles[pos.y][pos.x];
-    }
-
+    /**
+     * Returns the dimensions but as a new Point object
+     * @return the game dimensions
+     */
     public Point getDimensions() {
         int width = dimensions.x;
         int height = dimensions.y;
-
 	return new Point(width, height);
     }
 
-    @Override public String toString() {
-	for (int h = 0; h < dimensions.y; h++) {
-	    for (int w = 0; w < dimensions.x; w++) {
-		System.out.print(tiles[h][w]);
-	    }
-	    System.out.println();
-	}
-    return null;
-    }
-
-    public Point getPath(int index) {
+    /**
+     * Returns the Position of the specified path index
+     * Eg. to return the first postion of the path, index should be 0
+     *
+     * @param index the path to return.
+     * @return Point2D object of the specifed path index
+     */
+    public Point getPathPosition(int index) {
 	return path.get(index);
     }
 
@@ -111,14 +112,20 @@ public class GameMap
         return path.size() - 1;
     }
 
+    public Tile getTile(Point pos){
+	return tiles[pos.y][pos.x];
+    }
+
+    public int getNumberOfMaps(){
+	return mapInfoContainer.size();
+    }
+
     public int getWidth(){
-        int width = dimensions.x;
-        return width;
+        return dimensions.x;
     }
 
     public int getHeight(){
-	int height = dimensions.y;
-	return height;
+	return dimensions.y;
     }
 
 }

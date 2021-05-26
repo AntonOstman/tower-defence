@@ -109,7 +109,6 @@ public abstract class Tower extends EntityAttacker
         // recharged then charge up a bit and return false
         // ----- the inspection warning about using map here does not fit as we are not only returning a constant value ----
         // ----- but also adding logic to how towers "charge" their firing rate. -----
-        // ----- we are also acting on
         if (attackSpeedCharge != attackSpeed) {
             attackSpeedCharge++;
             return false;
@@ -192,7 +191,7 @@ public abstract class Tower extends EntityAttacker
     }
 
     /**
-     * draws a on the Tower position as a square with the designated Color.
+     * draws a Tower on the position as a square with the designated Color.
      * Also draws the tower level on the tower.
      * When tower is selectd draws the range of the tower
      * @param g2d the grapichs object to draw with
@@ -211,6 +210,7 @@ public abstract class Tower extends EntityAttacker
         g2d.setColor(getColor());
         g2d.fillRect(drawX, drawY, towerSize, towerSize);
 
+        // if the tower is selected then paint a circle around it to show the range of the tower
         if(selected){
 
             int pixelRange = range * gameScale;
@@ -221,6 +221,7 @@ public abstract class Tower extends EntityAttacker
 
             g2d.drawOval(circleX, circleY, diameter * gameScale , gameScale * diameter);
         }
+        // display the level of the currently selected tower
         g2d.setColor(Color.white);
         final int textScale = 3;
         int textSize = gameScale / textScale;

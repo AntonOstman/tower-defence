@@ -108,10 +108,6 @@ public class GameHandler
         }
     }
 
-    public boolean isGameOver() {
-        return gameOver;
-    }
-
     /**
      * Initialises the game timer if it is not set and starts the tickertimer.
      * Also sets gamePaused to false
@@ -226,7 +222,7 @@ public class GameHandler
         for (Enemy enemy : enemies){
             int pathProgress = enemy.getPathProgress();
 
-            enemy.setMovePosition(gameMap.getPath(pathProgress));
+            enemy.setMovePosition(gameMap.getPathPosition(pathProgress));
             enemy.move();
             // if the enemy has come to the end of the map damage the player
             if(enemy.isFinished()){
@@ -406,6 +402,10 @@ public class GameHandler
     public Enemy getEnemy(int index){
 
         return enemies.get(index);
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 
     public int getHealth() {

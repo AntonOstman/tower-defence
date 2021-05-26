@@ -92,8 +92,15 @@ public abstract class EntityAttacker extends Entity
 	return targetEntity;
     }
 
+    /**
+     * sets the position for the EntityAttacker
+     * Also sets startPosition to that position
+     * @param position
+     */
     @Override public void setPosition(final Point2D position) {
         super.setPosition(position);
-        startPosition = position;
+        if (startPosition == null) {
+	    startPosition = position;
+	}
     }
 }

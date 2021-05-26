@@ -5,9 +5,8 @@ import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileType;
 import java.awt.*;
 
 /**
- *  CanonTower extends Tower and has no extra functionallity
- *  CanonTower is therefore a "stat holder" class
- *
+ *  CanopnTower is a Tower object
+ *  CanonTower has the added functionallity of changing its projectiles to ExplosiveProjectiles once it reaches level 3.
  *  CanonTower has low attack speed, extra high damage, medium range and uses Canon projectiles
  *
  *
