@@ -22,6 +22,9 @@ import java.util.List;
  * GameMap also loads and reads the maps.json file which contains all the json MapInfo objects.
  * Which means GameMap loads the MapInfo objects dimensions and the path.
  * Path is a sorted list. This means the index 0 in path is the first position on the path, index 1 is the second position on the path etc.
+ *
+ * To change the dimensions of a map change the dimension declarations in the maps.json file. However make sure the path does not go outside
+ * of the dimensions or there will be an index error
  */
 
 public class GameMap
