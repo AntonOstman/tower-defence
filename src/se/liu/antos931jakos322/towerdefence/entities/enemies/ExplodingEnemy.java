@@ -8,7 +8,7 @@ import java.awt.*;
  */
 public class ExplodingEnemy extends Enemy
 {
-
+    // ------ the inspections are false positive these constants are random properties and should not be enum's ------
     private static final int HEALTH = 150;
     private static final double SPEED = 0.03;
     private static final Color COLOR = Color.ORANGE;

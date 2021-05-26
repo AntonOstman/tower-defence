@@ -36,13 +36,15 @@ public class WaveMaker
         this.tickCounter = waveTimer-1;    // The first wave start after 10 tick
         this.waveActiveTime = 100;          // the wave duration
         this.enemies = new ArrayList<>();
-        this.spawningRate = createEnumSpawningrate();
+        this.spawningRate = createEnumSpawningRate();
 
     }
 
-    private static AbstractMap<EnemyType, List<Integer>> createEnumSpawningrate(){
+    private static AbstractMap<EnemyType, List<Integer>> createEnumSpawningRate(){
         AbstractMap<EnemyType, List<Integer>> spawningRate = new EnumMap<>(EnemyType.class);
         // In the arrayList, the number represent the spawningrate in diffrent phases. Starting at index 0.
+        // ------ the inspections are false positive. These constants are random and are stored in and EnumMap ------
+        // ------ the alternativ would be to have 20 varibles declairing these constants, which was decided to not be preferable. ------
         spawningRate.put(EnemyType.STANDARD,    Arrays.asList(2, 3, 4, 5));
         spawningRate.put(EnemyType.SPEED,       Arrays.asList(0, 1, 4, 5));
         spawningRate.put(EnemyType.FLYING,      Arrays.asList(0, 1, 2, 3));
@@ -119,9 +121,13 @@ public class WaveMaker
      */
     private int getSpawningRate(EnemyType enemyType) {
         // The diffrent phases. Starting from index 0. To add a phase you need to add a number in the list in the enummap spawningrate
-        final List<Integer> phases = Arrays.asList(0, 5, 10, 15);
+        final int phaseZero = 0;
+        final int phaseOne = 5;
+        final int phaseTwo = 10;
+        final int phaseThree = 15;
+        final List<Integer> phases = Arrays.asList(phaseZero, phaseOne, phaseTwo, phaseThree);
 
-        for (int i = phases.size() - 2; i >= 0; i--) {
+        for (int i = 0; i < phases.size(); i++) {
             if (waveLevel >= phases.get(i)) {
                 // If the enummap have a 0 as spawningrate -> no enemies of specified type will spawn this phase.
                 int spawns = spawningRate.get(enemyType).get(i);
@@ -130,6 +136,17 @@ public class WaveMaker
                 }
             }
         }
+
+        /*
+        for (int i = phases.size() - 1; i >= 0; i--) {
+            if (waveLevel >= phases.get(i)) {
+                // If the enummap have a 0 as spawningrate -> no enemies of specified type will spawn this phase.
+                int spawns = spawningRate.get(enemyType).get(i);
+                if( spawns != 0){
+                    return spawningRate.get(enemyType).get(i)  + waveLevel - phases.get(i);
+                }
+            }
+        }*/
         return 0;
     }
 
