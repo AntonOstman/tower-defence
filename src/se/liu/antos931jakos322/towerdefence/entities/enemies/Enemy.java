@@ -148,14 +148,15 @@ public abstract class Enemy extends Entity
 	// move enemy towards the movePosition
 	super.move();
 	 // If this is the last block --> Enemy is done with the path
-	 if (pathProgress == lastPosition){
-	     finished = true;
-	     return;
-	 }
-	final double distance = 0.2;
+	 final double distance = 0.2;
+
 	 // if the enemy is near the position it was moving towards
 	 // increase the path progression
 	if(HelperFunctions.isNear(position, movePosition, distance)){
+	    if (pathProgress == lastPosition){
+		finished = true;
+		return;
+	    }
 	    pathProgress += 1;
 
 	}
