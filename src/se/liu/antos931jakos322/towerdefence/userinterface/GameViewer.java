@@ -230,9 +230,16 @@ public class GameViewer
 	    this.jButton = jButton;
 	}
 
+	/**
+	 * actionPerformed performs the action that specified Button types should do.
+	 *
+	 * @param e
+	 */
 	@Override public void actionPerformed(final ActionEvent e) {
 	    switch (buttonType){
-		case UPGRADE:
+		// if the button is a upgrade button then check if the tower can be upgraded, in that case upgrade the tower
+		// and change the description of the textArea towerDescriton
+	        case UPGRADE:
 		    // player is trying to upgrade a tower
 		    if(clickedTower != null) {
 			if (gameHandler.isTowerUpgradable(clickedTower)) {
@@ -241,6 +248,8 @@ public class GameViewer
 			}
 		    }
 		    break;
+		    // if the button is a tower button then the player is trying to buy a tower
+			// so set the selected tower and change the tower description to that tower
 		case TOWER_BUTTON:
 		    // player is trying to press a tower on the menu
 		    selectedTower = towerType;
@@ -248,6 +257,7 @@ public class GameViewer
 		    String towerDesc = EntityFactory.getTower(towerType).getDescription();
 		    towerDescription.setText(towerDesc);
 		    break;
+		    // if the button type is a pause button then pause the game when the player presses it, or resume if it is paused.
 		case PAUSE:
 		    if (gameHandler.isGamePaused()){
 			jButton.setText("Pause game");
@@ -258,9 +268,13 @@ public class GameViewer
 			gameHandler.pauseGame();
 		    }
 		    break;
+		    // quit the game if the player presses on a quit button
 		case QUIT:
 		    System.exit(0);
 		default:
+		    // give and exception if somehow no valid button type was given.
+		    // the exception does not need to be handeld since it is a IllegalArgumentException and there is something
+		    // wrong with the game code
 		    IllegalArgumentException illegalArgumentException = new IllegalArgumentException("ButtonEvent did not have valid ButtonType");
 		    logger.log(Level.SEVERE, "ButtonEvent in GameViewer did not recognize ButtonType.\nButtonType: " + buttonType +
 					     "\n", illegalArgumentException);
@@ -270,7 +284,10 @@ public class GameViewer
 	}
     }
 
-
+    /**
+     * MouseEvent contains the logic for handelding placing towers and displaying tower info on a specific point.
+     * MouseEvent uses MouseAdapter which contains the logic for mouse listening
+     */
     public class MouseEvent extends MouseAdapter
     {
 	private JTextArea textArea;
@@ -281,13 +298,18 @@ public class GameViewer
 	    this.buttonGroup = buttonGroup;
 	}
 
-
+	/**
+	 * Either places a tower on the pressed location
+	 * or displays info of the tower the player has pressed.
+	 *
+	 * @param e the MouseEvent object with info about click location
+	 */
 	@Override public void mouseClicked(final java.awt.event.MouseEvent e) {
 	    Point clickedPoint = e.getPoint();
 	    // we get the gameScale and translate from pixel coordinates to map coordinates
 	    int mapPosX = clickedPoint.x/gameScale;
 	    int mapPosY = clickedPoint.y/gameScale;
-
+	    // since we do not want to place the tower "in between" tiles we use a normal point and not Point2D.Double
 	    Point mapPoint = new Point(mapPosX, mapPosY);
 	    // if no tower is selected the player is trying to get info from a tower placed on the map
 	    if (selectedTower == TowerType.NONE) {
@@ -298,6 +320,13 @@ public class GameViewer
 	    placeTower(mapPoint);
 
 	}
+
+	/**
+	 * Displays information of the tower on a specific clicked point.
+	 * Also sets the tower to be selected and deselctes the previous tower
+	 *
+	 * @param clickedPoint the point of the potential tower
+	 */
 	private void displayTowerInfo(Point clickedPoint){
 	    // if the clicked tower is not null, the player has clicked
 	    // on another tower so deselect to current one
@@ -314,7 +343,11 @@ public class GameViewer
 	    gameHandler.selectTower(clickedTower);
 	}
 
-
+	/**
+	 * places a tower of the selectedTower type field on the clicked point
+	 *
+	 * @param clickedPoint the clicked point to place the tower
+	 */
 	private void placeTower(Point clickedPoint){
 	    /*
 	    First check if the selected tower can be placed.
