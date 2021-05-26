@@ -99,6 +99,12 @@ public abstract class Enemy extends Entity
 	}
     }
 
+    /**
+     * Draws the enemy on the position it is in the game.
+     * Also draws a healthbar for the enemy
+     * @param g2d the graphics object to draw with
+     * @param gameScale the scale of the game graphics
+     */
 
     public void draw(final Graphics2D g2d, final int gameScale) {
 
