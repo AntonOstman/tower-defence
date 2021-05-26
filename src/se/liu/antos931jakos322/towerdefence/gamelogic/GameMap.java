@@ -25,6 +25,8 @@ import java.util.List;
  *
  * To change the dimensions of a map change the dimension declarations in the maps.json file. However make sure the path does not go outside
  * of the dimensions or there will be an index error
+ *
+ * GameMap
  */
 
 public class GameMap
@@ -86,7 +88,6 @@ public class GameMap
 	// But we can still read the Json file which reads the "old" MapInfo objects
 	mapInfoContainer = new Gson().fromJson(reader, new TypeToken<List<MapInfo>>() {}.getType());
 	reader.close();
-
     }
 
 

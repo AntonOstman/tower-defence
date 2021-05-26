@@ -6,7 +6,8 @@ import java.util.EnumMap;
 import java.util.Random;
 
 /**
- * Uses a tileType to decide which type of tile itself is. Depending on what type of tile a tile is it is drawn in different ways
+ * Uses a tileType to decide which type of tile itself is.
+ * Depending on what type of tile a tile is it is drawn in different ways
  */
 
 public class Tile

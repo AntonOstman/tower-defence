@@ -43,6 +43,8 @@ public class StartGame
 	catch (IOException ioException){
 	    // the reason we dont log this exception is because there is no logger file yet.
 	    // The log file is what we are trying to create
+	    // this is not a catch and forget. If we cant load the file we ask the user to try again.
+	    // and do it until the user has fixed the issue
 	    ioException.printStackTrace();
 	    String loadErrorMessage = ioException + "\nerror creating logging.txt in source folder do you want to try again?";
 	    int answer = JOptionPane.showConfirmDialog(null, loadErrorMessage);

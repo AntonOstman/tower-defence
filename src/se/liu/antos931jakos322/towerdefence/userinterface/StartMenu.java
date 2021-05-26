@@ -132,6 +132,10 @@ public class StartMenu implements GameListener
 	    logger.fine("succesfully loaded maps.json file");
 
 	} catch (IOException ioException) {
+	    // this is not a catch and forget. If we cant load the file we ask the user to try again.
+	    // and do it until the user has fixed the issue.
+	    // Since the issue is not with the code itself but rather likely folder permissions
+
 	    // attempt ask the user to try again
 	    // write what has happend and the stacktrace to the log file
 	    // the stacktrace is also found in the console
@@ -141,6 +145,7 @@ public class StartMenu implements GameListener
 	}
 	catch (JsonSyntaxException jsonSyntaxException){
 	    // handled the same way as ioExceltion with the difference being non valid text was inside the file
+	    // the inspection error about catch and forget also has the same explination
 	    String jsonError = "maps.json does not contain valid json syntax, asking user to try again";
 	    logger.log(Level.WARNING, jsonError, jsonSyntaxException);
 	    readNewMapError(jsonSyntaxException, gameMap);
