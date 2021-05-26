@@ -63,18 +63,26 @@ public class WaveMaker
         if(tickCounter % waveTimer == 0){
             activeWave = true;
         }
+        // if there currently is an active wave -> handle the wave
         if(activeWave){
-            // If wave is done.
+            // if the waveCounter is ticked up to how long time the wave should be
+            // then we set that there is no active wave and reset the waveCounter
             if(activeWaveCounter == waveActiveTime){
                 waveLevel++;
                 activeWaveCounter = 0;
                 activeWave = false;
-            } else {
+
+            }
+            // otherwise if there is an active wave we increase the counter and create the wave
+            // for the wave the game is currently on
+            else {
                 activeWaveCounter++;
                 // during a wave createWave is activated every tick
                 return createWave(waveLevel);
             }
         }
+        // tick up how far the waveMaker has been active and return the enemies of the wave.
+        // the enemies can also be an empty list if there are no enemies
         tickCounter ++;
         return enemies;
     }
@@ -112,7 +120,7 @@ public class WaveMaker
         // The diffrent phases. Starting from index 0. To add a phase you need to add a number in the list in the enummap spawningrate
         final List<Integer> phases = Arrays.asList(0, 5, 10, 15);
 
-        for (int i = phases.size()-2; i >= 0; i--) {
+        for (int i = phases.size() - 2; i >= 0; i--) {
             if (waveLevel >= phases.get(i)) {
                 // Is the enummap have a 0 as spawningrate -> no enemies of specified type will spawn this phase.
                 int spawns = spawningRate.get(enemyType).get(i);
