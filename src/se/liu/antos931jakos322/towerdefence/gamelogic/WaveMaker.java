@@ -122,7 +122,7 @@ public class WaveMaker
 
         for (int i = phases.size() - 2; i >= 0; i--) {
             if (waveLevel >= phases.get(i)) {
-                // Is the enummap have a 0 as spawningrate -> no enemies of specified type will spawn this phase.
+                // If the enummap have a 0 as spawningrate -> no enemies of specified type will spawn this phase.
                 int spawns = spawningRate.get(enemyType).get(i);
                 if( spawns != 0){
                     return spawningRate.get(enemyType).get(i)  + waveLevel - phases.get(i);
