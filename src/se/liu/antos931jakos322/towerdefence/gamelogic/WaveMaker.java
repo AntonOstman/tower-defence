@@ -64,9 +64,9 @@ public class WaveMaker
 
     private List<Enemy> createWave(int waveLevel){
         // phases:
-        //      1. Only generic
-        //      2. Generic + speedy
-        //      3. Generic + speedy + boss
+        //      1. Generic
+        //      2. Generic + speedy + flying + exploding
+        //      3. Generic + speedy + flying + exploding
         //      4. Endless (all types)
 
         // The amount is how many enemies of that type sparn in a wave.
