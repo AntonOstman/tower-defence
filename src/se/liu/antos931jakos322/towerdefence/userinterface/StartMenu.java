@@ -42,13 +42,14 @@ public class StartMenu implements GameListener
     }
 
     public void createStartMenu(){
-
+	// Load the maps saved in a json file
         readNewMap(gameMap);
 
+        // A gray background
 	Color background = new Color(100,100,100);
 
 	JPanel mainPanel = new JPanel(new GridLayout(2, 1));
-	JPanel header = new JPanel();
+	JPanel header = new JPanel();		// The header is in to top half
 	JPanel mapSelect = new JPanel(new GridLayout(2, 4));
 
 	JLabel label = new JLabel("Select a map to play");
@@ -65,16 +66,18 @@ public class StartMenu implements GameListener
 	    gameMap.loadMap(i);
 	    JButton b = new JButton();
 
-	    final int bufferedImageWidth = 105;
-	    final int bufferedImageHeight = 105;
+	    // Every block drawn on the button is 7px * 7px
+	    final int tileSize = 7;
+	    int mapY = gameMap.getDimension().x;
+	    int mapX = gameMap.getDimension().y;
+	    final int bufferedImageWidth = mapX * tileSize ;
+	    final int bufferedImageHeight = mapY * tileSize;
 	    BufferedImage lineImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight,
 							BufferedImage.TYPE_INT_RGB);
 
 	    Graphics2D bg2d = lineImage.createGraphics();
 
-	    int mapY = gameMap.getDimension().x;
-	    int mapX = gameMap.getDimension().y;
-	    final int tileSize = 7;
+	    // Draws every block in the map on the button
 	    final int margin = 0;
 	    for (int y = 0; y < mapY; y++) {
 		for (int x = 0; x < mapX; x++) {
@@ -84,22 +87,23 @@ public class StartMenu implements GameListener
 	    }
 	    b.addActionListener(buttonListener);
 	    b.setIcon(new ImageIcon(lineImage));
-	    b.setSize(new Dimension(105, 105));
-	    b.setPreferredSize(new Dimension(105, 105));
+	    b.setSize(new Dimension(bufferedImageWidth, bufferedImageHeight));
+	    b.setPreferredSize(new Dimension(bufferedImageWidth, bufferedImageHeight));
 	    b.setBorderPainted(false);
-	    b.setBackground(background);
+	    b.setBackground(background); 	// Otherwise the button have a blue outline
 	    mapSelect.add(b);
 	}
 
-
-
+	// Adds the header and the buttons to the main panel
 	mainPanel.add(header);
 	mainPanel.add(mapSelect);
 	mapSelect.setBackground(background);
 
 
 	frame = new JFrame();
-	frame.setPreferredSize(new Dimension(700, 500));
+	final int frameHeight = 500;
+	final int frameWidth = 700;
+	frame.setPreferredSize(new Dimension(frameWidth, frameHeight));
 
 	frame.setLayout(new BorderLayout());
 	frame.add(mainPanel);
@@ -118,6 +122,9 @@ public class StartMenu implements GameListener
 	else {System.exit(1);}
     }
 
+    /**
+     * Load the map file in the class GameMap
+     */
     public void readNewMap(GameMap gameMap){
 
 	try {
@@ -141,6 +148,9 @@ public class StartMenu implements GameListener
 
     }
 
+    /**
+     * StartGame creates the class objects to run the game.
+     */
     public void startGame(int mapIndex) {
 
 	gameMap.loadMap(mapIndex);
@@ -169,7 +179,10 @@ public class StartMenu implements GameListener
 	    }
 	}
     }
-
+    /**
+     * The class is created with a index representing a map.
+     * When a button is clicked the method actionPerformed is activated.
+     */
     public class ButtonEvent extends AbstractAction{
 
 	private int index;
