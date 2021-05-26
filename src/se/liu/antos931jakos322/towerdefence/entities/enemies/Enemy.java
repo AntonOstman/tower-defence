@@ -25,7 +25,7 @@ public abstract class Enemy extends Entity
     protected boolean finished;
     protected int lastPosition;
     protected final static Random RND = new Random();
-    protected EnemyType enemyType;
+    protected EnemyType splitEnemyType;
     protected int numberOfSplits;
     protected int splitDistance;
 
@@ -48,7 +48,7 @@ public abstract class Enemy extends Entity
 	this.finished = false;
     	this.lastPosition = -1;
     	this.numberOfSplits = 0;
-    	this.enemyType = null;
+    	this.splitEnemyType = null;
     	this.splitDistance = 0;
     }
 
@@ -62,11 +62,11 @@ public abstract class Enemy extends Entity
      * @param size the size of an enemy relative to the size of a tile
      * @param attackPower attackpower or "damage" the the enemy can give to the player
      * @param numberOfSplits how many enemies this enemy can create
-     * @param enemyType the type of enemy this enemy creates
+     * @param splitEnemyType the type of enemy this enemy creates
      * @param splitDistance the distans relative to this enemy postion the new enemies are created
      */
     protected Enemy(final int maxHealth, final double speed, final Color color, final double size,
-		    int attackPower, int numberOfSplits, EnemyType enemyType, int splitDistance) {
+		    int attackPower, int numberOfSplits, EnemyType splitEnemyType, int splitDistance) {
 
 	super(color, size, speed, attackPower, maxHealth);
 	this.maxHealth = maxHealth;
@@ -75,7 +75,7 @@ public abstract class Enemy extends Entity
 	this.finished = false;
 	this.lastPosition = -1;
 	this.numberOfSplits = numberOfSplits;
-	this.enemyType = enemyType;
+	this.splitEnemyType = splitEnemyType;
 	this.splitDistance = splitDistance;
 
     }
@@ -129,8 +129,9 @@ public abstract class Enemy extends Entity
     }
 
     /**
-     * Moves the enemy towards movePosition
-     *
+     * Moves the enemy towards movePosition.
+     * The pathProgress is increased once the Enemy reaches the position it was moving towerds
+     * This allows the Enemy to follow the path
      */
      @Override public void move(){
 	// Gives Enemy a starting position
@@ -138,15 +139,17 @@ public abstract class Enemy extends Entity
 	    position = movePosition;
 	    pathProgress += 1;
 	}
+	// move enemy towards the movePosition
 	super.move();
+	 // If this is the last block --> Enemy is done with the path
 	 if (pathProgress == lastPosition){
 	     finished = true;
 	     return;
 	 }
-
 	final double distance = 0.2;
+	 // if the enemy is near the position it was moving towards
+	 // increase the path progression
 	if(HelperFunctions.isNear(position, movePosition, distance)){
-	    // If this is the last block --> Enemy is done with the path
 	    pathProgress += 1;
 
 	}
@@ -154,7 +157,11 @@ public abstract class Enemy extends Entity
 
 
     /**
-     * Creates enemies of the specified type and amount.
+     * Creates severeal more enemies.
+     * The amount of enemies added is numberOfSplits and they are spawned a random direction and distance from the Enemy.
+     * The maximum distance is SplitDistance
+     *
+     * and the type of enemy created is the splitEnemyType
      *
      * @return a list of the created enemies
      */
@@ -162,7 +169,7 @@ public abstract class Enemy extends Entity
 	List<Enemy> enemies = new ArrayList<>();
 
 	for (int i = 0; i < numberOfSplits; i++) {
-	    Enemy s = EntityFactory.getEnemy(enemyType);
+	    Enemy s = EntityFactory.getEnemy(splitEnemyType);
 	    //----- There is no problem with null. It is handled so the inspections are incorrent ------
 	    s.setPosition(new Point2D.Double(position.getX() + splitRandomPos(splitDistance), position.getY() + splitRandomPos(splitDistance)));
 	    s.setPathProgress(pathProgress);

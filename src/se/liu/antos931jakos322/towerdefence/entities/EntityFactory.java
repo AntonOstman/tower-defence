@@ -37,7 +37,7 @@ public class EntityFactory
      * Returns a projectile of the specified projectileType
      *
      * @param projectileType the projectile to get
-     * @return a new Projectile object of the specified enemyType
+     * @return a new Projectile object of the specified splitEnemyType
      */
 
     public static Projectile getProjectile(ProjectileType projectileType) throws IllegalArgumentException {
@@ -62,7 +62,7 @@ public class EntityFactory
      * Returns an enemy of the specified towerType
      *
      * @param enemyType the enemy to get
-     * @return a new Enemy object of the specified enemyType
+     * @return a new Enemy object of the specified splitEnemyType
      */
 
     public static Enemy getEnemy(EnemyType enemyType) throws IllegalArgumentException {
