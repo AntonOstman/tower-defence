@@ -78,12 +78,13 @@ public class WaveMaker
             else {
                 activeWaveCounter++;
                 // during a wave createWave is activated every tick
+                // This returns the enemies that will be added
                 return createWave(waveLevel);
             }
         }
-        // tick up how far the waveMaker has been active and return the enemies of the wave.
-        // the enemies can also be an empty list if there are no enemies
+        // tick up how far the waveMaker has been active when not in active waves
         tickCounter ++;
+        // This returns always an empty list
         return enemies;
     }
 
@@ -122,8 +123,7 @@ public class WaveMaker
 
         for (int i = phases.size() - 2; i >= 0; i--) {
             if (waveLevel >= phases.get(i)) {
-                // Is the enummap have a 0 as spawningrate -> no enemies of specified type will spawn this phase.
-
+                // If the enummap have a 0 as spawningrate -> no enemies of specified type will spawn this phase.
                 int spawns = spawningRate.get(enemyType).get(i);
                 if( spawns != 0){
                     return spawningRate.get(enemyType).get(i)  + waveLevel - phases.get(i);
