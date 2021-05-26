@@ -41,7 +41,8 @@ public class EntityFactory
      */
 
     public static Projectile getProjectile(ProjectileType projectileType) throws IllegalArgumentException {
-	// A map could be used instead of switch case but this means new objects will be created
+	// A map might look nicer and be more modular in the future, but this can be added if the future requires it.
+	// A map could be used instead of switch case but this means new objects will be unneccesarily created.
 	// when we only want to return a specific one. So a switch case seems more appropriate in this case
         switch (projectileType) {
 	    case ARROW:
@@ -66,7 +67,8 @@ public class EntityFactory
      */
 
     public static Enemy getEnemy(EnemyType enemyType) throws IllegalArgumentException {
-        // A map could be used instead of switch case but this means new objects will be created
+	// A map might look nicer and be more modular in the future, but this can be added if the future requires it.
+	// A map could be used instead of switch case but this means new objects will be unneccesarily created.
 	// when we only want to return a specific one. So a switch case seems more appropriate in this case
 	switch (enemyType) {
 	    case FLYING:
@@ -108,7 +110,8 @@ public class EntityFactory
      * @return a new Tower object of the specified towerType
      */
     public static Tower getTower(TowerType towerType) {
-	// A map could be used instead of switch case but this means new objects will be created
+	// A map might look nicer and be more modular in the future, but this can be added if the future requires it.
+	// A map could be used instead of switch case but this means new objects will be unneccesarily created.
 	// when we only want to return a specific one. So a switch case seems more appropriate in this case
 	switch (towerType) {
 	    case ARROW:
