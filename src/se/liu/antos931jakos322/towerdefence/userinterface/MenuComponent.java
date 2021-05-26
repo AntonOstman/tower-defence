@@ -30,10 +30,19 @@ public class MenuComponent extends JComponent implements GameListener
 
     }
 
+    /**
+     * GameComponent repaints the game when the game changes
+     */
     @Override public void gameChanged() {
 	repaint();
     }
 
+    /**
+     * Draws the Life, money and wave level text.
+     * Draws it from the up and down.
+     *
+     * @param g the graphics object to draw with
+     */
 
     @Override protected void paintComponent(final Graphics g) {
 	super.paintComponent(g);
