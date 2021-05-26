@@ -59,7 +59,7 @@ public class GameComponent extends JComponent implements GameListener
 	for (int y = 0; y < mapHeight; y++) {
 	    for (int x = 0; x < mapWidth; x++) {
 		Tile currentTile = gameHandler.getMapTile(new Point(x, y));
-		currentTile.drawTile(g2d, MARGIN, GAME_SCALE);
+		currentTile.draw(g2d, MARGIN, GAME_SCALE);
 	    }
 	}
 

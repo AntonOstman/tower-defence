@@ -30,7 +30,7 @@ public class Tile
 	return tileType;
     }
 
-    public void drawTile(final Graphics2D g2d, final int margin, final int tileSize){
+    public void draw(final Graphics2D g2d, final int margin, final int tileSize){
 
 	g2d.setColor(tileColor);
 	g2d.fillRect(position.x * (margin + tileSize), position.y * (margin + tileSize), tileSize, tileSize);
@@ -41,7 +41,10 @@ public class Tile
 	return tileType + " ";
     }
 
-
+    /**
+     * Creates a random nuance to the color of the tile
+     * @return a color with a random nuance on all RGB values
+     */
     public Color randomNuance(){
         Color oldColor = getStandardTileColor(tileType);
         return new Color(getRandomColorChannel(oldColor.getRed()),

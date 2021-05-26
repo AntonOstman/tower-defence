@@ -47,7 +47,6 @@ public class StartMenu implements GameListener
 
 	Color background = new Color(100,100,100);
 
-
 	JPanel mainPanel = new JPanel(new GridLayout(2, 1));
 	JPanel header = new JPanel();
 	JPanel mapSelect = new JPanel(new GridLayout(2, 4));
@@ -80,7 +79,7 @@ public class StartMenu implements GameListener
 	    for (int y = 0; y < mapY; y++) {
 		for (int x = 0; x < mapX; x++) {
 		    Tile currentTile = gameMap.getTile(new Point(x, y));
-		    currentTile.drawTile(bg2d, margin, tileSize);
+		    currentTile.draw(bg2d, margin, tileSize);
 		}
 	    }
 	    b.addActionListener(buttonListener);
@@ -126,7 +125,7 @@ public class StartMenu implements GameListener
 	    logger.fine("succesfully loaded maps.json file");
 
 	} catch (IOException ioException) {
-	    // attempt to create new maps file and read it again
+	    // attempt ask the user to try again
 	    // write what has happend and the stacktrace to the log file
 	    // the stacktrace is also found in the console
 	    String ioError = " could not find or read maps.json file, asking user to try again";
