@@ -120,7 +120,8 @@ public class WaveMaker
      * @return how many enemies that of enemytype that will spawn in this level
      */
     private int getSpawningRate(EnemyType enemyType) {
-        // The diffrent phases. Starting from index 0. To add a phase you need to add a number in the list in the enummap spawningrate
+        // The diffrent phases. Starting from index one. To add a phase you need to add a number in the list in the enummap spawningRate
+        // The phase are active in the levels bethween them. Example phaseZero is active until the game is at phaseOne's level.
         final int phaseZero = 0;
         final int phaseOne = 5;
         final int phaseTwo = 10;
