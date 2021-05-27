@@ -14,9 +14,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * StartMenu opens a window where the user can click on on button
- * to choose which map to play on, the class then starts a game
- * on the choosen map.
+
+ * StartMenu creates the first interface the player sees when starting the game.
+ * Using the createStartMenu() method a new start menu is created.
+ * StartMenu also loads the maps.json file by calling GameMap with readNewMap().
+ * Which means StartMenu also handles the eventual exception from reading a resource file.
+ *
+ * The start menu has buttons which starts the game.
+ * All buttons have a map drawn on them, pressing on a button loads GameMap with that map and the
+ * startGame() method initialises a new GameHandler and GameViewer with the GameMap object containing the load game map.
+ * GameHandler and GameViewer are used for game logic and the main graphical user interface respectily.
+ *
  */
 
 public class StartMenu implements GameListener
