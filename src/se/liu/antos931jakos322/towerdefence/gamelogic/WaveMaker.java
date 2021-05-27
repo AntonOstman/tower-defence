@@ -12,9 +12,6 @@ import java.util.EnumMap;
 import java.util.List;
 
 /**
- * WaveMaker creates the enemies and returns the enemies that will be spawned on the map. The class returnes the enemies in waves that
- * depend on the tickcount. WaveMaker is activated every tick by GameHandler.
- * <p>
  * WaveMaker creates all Enemy objects which should be used by GameHandler to play the game. The primary function of WaveMaker is to add
  * enemies to the game in the form of "waves". Each tick of the game wavemaker's update() method should be called and all enemies returned
  * from update() should be added to the game. If there are no enemies then update() returns an empty list.
@@ -159,12 +156,15 @@ public class WaveMaker
     /**
      * Inputs the number of enemies to add during a wave, then adds the enemies evenly during the wave duration.
      *
-     * @param amount    is how many enemies that will be added during the wave
+     * @param amount  is how many enemies that will be added during the wave
      * @param enemyType what type of enemy to add
      */
     private void spawnEnemy(int amount, EnemyType enemyType) {
 	if (amount != 0) {
+	    // spawn speed is how fast the enemies spawn during a wave.
+            // Lower spawnspeed means fast spawning of the enemy
 	    int spawnSpeed = waveActiveTime / amount;
+	    // since spawnspeed is an integer we round it up after the division if it is 0
 	    if (spawnSpeed == 0) {
 		spawnSpeed = 1;
 	    }
