@@ -7,7 +7,9 @@ import java.util.Random;
 
 /**
  * Uses a tileType to decide which type of tile itself is.
- * Depending on what type of tile a tile is it is drawn in different ways
+ * Depending on what type of tile a tile is it is drawn in different ways.
+ *
+ * Tile is used to build every "block" or "tile" of the game map
  */
 
 public class Tile

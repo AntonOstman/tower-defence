@@ -17,15 +17,12 @@ import java.util.logging.Logger;
 
 /**
  *
- * GameViewer controls the main user interface of the game.
- * GameViewer takes input from the user in the form of buttons presses and clicks on its panels
+ * GameViewer controls the main user interface of the game and displays the game.
+ * GameViewer takes input from the user in the form of buttons presses and clicks on its panels.
  * GameViewer can therefore for example decide where game objects should be placed by calculating the pixel to gamescale relation when
  * the player clicks on the game panel
  *
- * GameViewer contains the menus, the panels containg graphical components, and buttons
- * GameViewer also facilitates the game by interacting with GameHandler by for example
- * telling it where the player is trying to place objects
- *
+ * This means the entire game can be played and be seen by the player becuase of gameviewer
  */
 public class GameViewer
 {

@@ -13,8 +13,9 @@ import java.awt.*;
  * That means MapComponent only controls how objects are drawn in relation to eachother but does not contain information
  * on how to draw indivudual objects.
  *
- * MapComponent also implements gameListener which can be used to let mapComponent know of changes made to the game.
+ * MapComponent also implements gameListener which lets MapComponent know of changes made to the game.
  * In which case it needs act on those changes to update the UI.
+ *
  *
  */
 
