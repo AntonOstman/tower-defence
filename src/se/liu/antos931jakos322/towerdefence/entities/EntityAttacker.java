@@ -9,6 +9,8 @@ import java.awt.geom.Point2D;
  * EntityAttackers use the logic in decideTarget(Entity) to choose an Entity target.
  * EntityAttackers can use this in conjunction canAttack(Entity) to check if the specifik target can be attack
  * By default EntityAttacker can not be attacked which is decided by the overridden canBeAttacked() method
+ *
+ * EntityAttacker is primarily used by Towers and Projectiles to attack Enemy objects.
  */
 
 

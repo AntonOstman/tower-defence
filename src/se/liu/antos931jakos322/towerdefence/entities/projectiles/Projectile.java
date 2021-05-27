@@ -9,12 +9,14 @@ import java.awt.geom.Point2D;
 
 
 /**
- * Projectile is the abstract class for all projectiles in the game
- * Projectile represents an object that moves and can do damage to enemies
+ * Projectile is the abstract class for all projectiles in the game. Projectile extends the EntityAttacker class
+ * which means it inherits logic for attacking other Entity objects.
+ *
+ * Projectile represents an object that moves and can do damage to Entity objects
+ *
+ *
  * Projectiles have various unique properties:
  * PenetrationAmount - represents how many times the projectile can do damage before being "destroyed"
- *
- *
  * Example use:
  * 	Projectile gets created by another entity that tells projectile what to target
  * 	when the projectile is near the target it does damage to it.

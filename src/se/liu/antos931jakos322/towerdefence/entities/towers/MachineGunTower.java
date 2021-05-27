@@ -6,7 +6,6 @@ import java.awt.*;
 
 /**
  *  BulletProjectile extends Tower and has no extra functionallity
- *  BulletProjectile is therefore a "stat holder" class
  *
  *  MachineGunTower has high attack speed, low damage, high range and uses Bullet projectiles
  *

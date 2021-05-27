@@ -7,7 +7,8 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 
 /**
- * Entity is an abstract class which represnts a physical thing in the game.
+ * Entity is an abstract class which represnts an entity existing in the game which can be interacted with by the player
+ * or by other Entity objects
  * Entity can be attacked and take damage, move, has an attackpower and health.
  * However Entity's are only supposed to be able to take damage if the canBeAttacked method allows it.
  *

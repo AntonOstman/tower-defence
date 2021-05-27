@@ -4,7 +4,9 @@ import java.awt.*;
 
 /**
  *
- * A standard enemy. StandardEnemy extends the abstract class Enemy
+ * StandardEnemy extends the abstract class Enemy
+ * StandardEnemy is the most basic type of enemy that exists in the game.
+ * It has low health and does not have extra features
  *
  */
 

@@ -11,16 +11,17 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 
 /**
- * Tower is the Abstract class for defensive structures in the game which also extends Entity
+ * Tower is the Abstract class for defensive structures in the game which also extends EntityAttacker. Which means it
+ * inherits logic for attacking other Entity objects
  *
- *  Tower can attack Entities by first deciding what entity to target with decideTarget() then using canAttack()
+ *  Tower can attack Entities by first deciding what entity to target with decideTarget(Entity) then using canAttack(Entity)
  *  to make sure it is following the specific tower's attacking rules.
- *  Then using the createProjectileAttack(enemy) method which returns the projectile that will be shot towards the enemy.
+ *  When the target is decided by decideTarget the method
+ *  createProjectileAttack() can be used to attack the target with a projectile.
  *
  * Towers shoot projectiles and also has various properties
- * These properties are:
  *
- * attackpower - represents how much damage the tower's projectiles do
+ * These properties are:
  * cost - represents how much a tower costs to create
  * attackspeed - how often a tower can shoot a projectile
  * range - how close the tower needs to be a target to shoot a projectile

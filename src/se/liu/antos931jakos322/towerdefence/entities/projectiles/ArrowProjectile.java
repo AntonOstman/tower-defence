@@ -5,8 +5,7 @@ import java.awt.*;
 /**
  *
  * ArrowProjectile is a projectile that is comparatively average when looking at other projectiles.
- * It moves at a medium speed, has a medium size and it penetrates only two enemies.
- * ArrowProjectile extends a Projectile with no extra features and works as a "stat holder"
+ * It moves at a medium speed, has a medium size and it penetrates two enemies.
  *
  */
 

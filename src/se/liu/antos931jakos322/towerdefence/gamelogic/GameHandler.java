@@ -19,11 +19,21 @@ import java.util.List;
  * Gamehandlers main way of running the game is by using the tick() method which is activated by a timer.
  *
  * when the tick() method is called the game progresses one step by calling the methods handeling entity's
- * Since GameHandler controls the game that also means it handles the interactions between the game map and entities.
- * Which means for example GameHandler means GameHandler knows when
+ * Since GameHandler controls the game that also means it handles the interactions between the GameMap and entities.
+ * Which means for example GameHandler knows when
  * enemies have come to the end of the game map and the player should take damage.
  *
- * GameHandler also has information for player health, money and wheter the game is over or not and handles that information.
+ * Therefore GameHandler contains all Enemy, Projectile and Tower objects placed on the map.
+ * These are represented by the fields towers, enemies, and projectiles respectively.
+ * Since these objects are all Entity this could be handled in one list by using polymorphism.
+ * However it was decided it would make the handling
+ * of the objects unnecesarily complex since every Entity type has its own way of being handeld in GameHandler
+ *
+ *
+ * GameHandler also has information for player health, money and wheter the game is over or not.
+ *
+ * GameHandler contains a waveMaker object which creates waves of enemies by returning a list with enemies
+ * if there is a wave happening.
  *
  */
 

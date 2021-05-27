@@ -6,7 +6,6 @@ import java.awt.*;
  *
  * PenetratingProjectile is a projectile that is comparatively strong when looking at other projectiles.
  * It moves at a slow speed, has a large size and it penetrates 20 enemies.
- * PenetratingProjectile extends Projectile with no extra features and works as a "stat holder"
  *
  */
 
