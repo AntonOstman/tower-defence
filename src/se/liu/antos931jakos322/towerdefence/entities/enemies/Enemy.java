@@ -12,8 +12,13 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * An abstract class with the core elements of an enemy
- * An enemy object wanders the map path with the intent of damaging the player
+ * Enemy is the Abstract class for offensive entities (enemies) in the game which also extends Entity
+ *
+ * Enemies moves along a path, when the enemy reaches the end, the flag finished is set to true.
+ * When an anemy is finished GameHandler removes the enemy from the game and give the player damage.
+ *
+ * Before an enemy is removed split() is called. Split creates a set number of new enemies.
+ * By defult the new number of created enemies is 0.
  *
  */
 
