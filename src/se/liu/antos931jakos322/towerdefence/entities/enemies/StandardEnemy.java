@@ -5,7 +5,9 @@ import java.awt.*;
 /**
  *
  * A standard enemy. StandardEnemy extends the abstract class Enemy
- *
+ * StandardEnemy have low/medium health, damage and speed.
+ * Therefor StandardEnemy is used in the first rounds.
+ * StandardEnemy are created by WaveMaker.
  */
 
 public class StandardEnemy extends Enemy

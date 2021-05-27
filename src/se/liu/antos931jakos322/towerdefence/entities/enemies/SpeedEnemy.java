@@ -5,6 +5,7 @@ import java.awt.*;
 /**
  * SpeedEnemy is an enemy type that extends the abstract class Enemy
  * SpeedEnemy have low health but are fast.
+ * SpeedEnemy are created by WaveMaker
  */
 public class SpeedEnemy extends Enemy
 {

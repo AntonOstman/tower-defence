@@ -7,7 +7,7 @@ import java.awt.*;
 /**
  * FlyingEnemy is an Enemy object.
  * FlyingEnemy moves direcetly towards the end of the game path. Ignoring the path
- *
+ * FlyingEnemy are created by WaveMaker
  */
 
 

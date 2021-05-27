@@ -5,6 +5,7 @@ import java.awt.*;
 /**
  * ExplodingEnemy is an enemy type that extends the abstract class Enemy.
  * ExplodingEnemy have low health but when health reaches 0, 4 speedEnemy spawns.
+ * ExplodingEnemy are created by WaveMaker
  */
 public class ExplodingEnemy extends Enemy
 {
