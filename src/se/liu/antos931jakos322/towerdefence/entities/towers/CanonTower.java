@@ -5,11 +5,8 @@ import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileType;
 import java.awt.*;
 
 /**
- *  CanopnTower is a Tower object
- *  CanonTower has the added functionallity of changing its projectiles to ExplosiveProjectiles once it reaches level 3.
- *  CanonTower has low attack speed, extra high damage, medium range and uses Canon projectiles
- *
- *
+ * CanopnTower is a Tower object CanonTower has the added functionallity of changing its projectiles to ExplosiveProjectiles once it reaches
+ * level 3. CanonTower has low attack speed, extra high damage, medium range and uses Canon projectiles
  */
 
 public class CanonTower extends Tower
@@ -31,17 +28,16 @@ public class CanonTower extends Tower
     }
 
     /**
-     * Upgrades the Tower attackpower and increses tower level
-     * When canon tower reaches level 3 it's projecticles are replaced with exploding projectiles
-     *
+     * Upgrades the Tower attackpower and increses tower level When canon tower reaches level 3 it's projecticles are replaced with
+     * exploding projectiles
      */
 
     @Override public void upgrade() {
-        super.upgrade();
-        final int towerLevel = 3;
-        if(level >= towerLevel) {
-            projectileType = ProjectileType.EXPLODING;
-        }
+	super.upgrade();
+	final int towerLevel = 3;
+	if (level >= towerLevel) {
+	    projectileType = ProjectileType.EXPLODING;
+	}
     }
 
 }

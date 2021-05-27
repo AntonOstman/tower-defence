@@ -6,9 +6,8 @@ import java.util.EnumMap;
 import java.util.Random;
 
 /**
- * Uses a tileType to decide which type of tile itself is.
- * Depending on what type of tile a tile is it is drawn in different ways.
- *
+ * Uses a tileType to decide which type of tile itself is. Depending on what type of tile a tile is it is drawn in different ways.
+ * <p>
  * Tile is used to build every "block" or "tile" of the game map
  */
 
@@ -29,8 +28,8 @@ public class Tile
     /**
      * Draws a square on the position of the tile object
      *
-     * @param g2d the grapchis object to draw with
-     * @param margin the margin between each tile
+     * @param g2d      the grapchis object to draw with
+     * @param margin   the margin between each tile
      * @param tileSize The size of the tile
      */
     public void draw(final Graphics2D g2d, final int margin, final int tileSize) {
@@ -56,11 +55,9 @@ public class Tile
     }
 
     /**
-     * Returns a new semi random int.
-     * The new integer is in the span of 50 from the oldColor.
-     * If the integer is less than or equal to 50 then
-     *	This means the integer can be used for RBG values
-     * given an integer from 0-255 will always return a valid rgb value
+     * Returns a new semi random int. The new integer is in the span of 50 from the oldColor. If the integer is less than or equal to 50
+     * then This means the integer can be used for RBG values given an integer from 0-255 will always return a valid rgb value
+     *
      * @param oldColor the integer which should be
      *
      * @return a random int in the span of 50 from the original
@@ -81,6 +78,7 @@ public class Tile
      * Returns the color of the given tileType
      *
      * @param tileType the type of tile
+     *
      * @return The color of the tileType
      */
     private static Color getStandardTileColor(TileType tileType) {

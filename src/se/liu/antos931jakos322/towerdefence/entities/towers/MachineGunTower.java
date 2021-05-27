@@ -5,10 +5,9 @@ import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileType;
 import java.awt.*;
 
 /**
- *  BulletProjectile extends Tower and has no extra functionallity
- *
- *  MachineGunTower has high attack speed, low damage, high range and uses Bullet projectiles
- *
+ * BulletProjectile extends Tower and has no extra functionallity
+ * <p>
+ * MachineGunTower has high attack speed, low damage, high range and uses Bullet projectiles
  */
 
 public class MachineGunTower extends Tower

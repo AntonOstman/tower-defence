@@ -7,16 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- *
- * MapComponent controls the main drawing of objects that exist on the game map
- * MapComponent draws objects by using their own drawing methods
- * That means MapComponent only controls how objects are drawn in relation to eachother but does not contain information
- * on how to draw indivudual objects.
- *
- * MapComponent also implements gameListener which lets MapComponent know of changes made to the game.
- * In which case it needs act on those changes to update the UI.
- *
- *
+ * MapComponent controls the main drawing of objects that exist on the game map MapComponent draws objects by using their own drawing
+ * methods That means MapComponent only controls how objects are drawn in relation to eachother but does not contain information on how to
+ * draw indivudual objects.
+ * <p>
+ * MapComponent also implements gameListener which lets MapComponent know of changes made to the game. In which case it needs act on those
+ * changes to update the UI.
  */
 
 public class GameComponent extends JComponent implements GameListener
@@ -40,11 +36,11 @@ public class GameComponent extends JComponent implements GameListener
     }
 
 
-    public Dimension getPreferredSize(){
+    public Dimension getPreferredSize() {
 
 	int gameWidth = mapWidth * (MARGIN + GAME_SCALE);
 	int gameHeight = mapHeight * (MARGIN + GAME_SCALE);
-        return new Dimension(gameWidth, gameHeight);
+	return new Dimension(gameWidth, gameHeight);
 
     }
 
@@ -68,10 +64,10 @@ public class GameComponent extends JComponent implements GameListener
 	// We do draw every Entity in an independat loop. However a solution which maybe looks nicer is to use
 	// polymorphism by instead getting all Entity objects in Gamehandler and then drawing them.
 	// Then these three for loops would be one and only entity.draw() would have to be written.
-	for(int i = 0; i < gameHandler.getProjectileAmount(); i++ ){
+	for (int i = 0; i < gameHandler.getProjectileAmount(); i++) {
 	    gameHandler.getProjectile(i).draw(g2d, GAME_SCALE);
 	}
-	for(int i = 0; i < gameHandler.getEnemyAmount(); i++){
+	for (int i = 0; i < gameHandler.getEnemyAmount(); i++) {
 	    gameHandler.getEnemy(i).draw(g2d, GAME_SCALE);
 	}
 	for (int i = 0; i < gameHandler.getTowerAmount(); i++) {

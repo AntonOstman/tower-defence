@@ -3,12 +3,9 @@ package se.liu.antos931jakos322.towerdefence.entities.projectiles;
 import java.awt.*;
 
 /**
- *
- * PenetratingProjectile is a projectile that is comparatively strong when looking at other projectiles.
- * It moves at a slow speed, has a large size and it penetrates 20 enemies.
- *
+ * PenetratingProjectile is a projectile that is comparatively strong when looking at other projectiles. It moves at a slow speed, has a
+ * large size and it penetrates 20 enemies.
  */
-
 
 
 public class PenetratingProjectile extends Projectile

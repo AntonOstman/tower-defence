@@ -3,9 +3,8 @@ package se.liu.antos931jakos322.towerdefence.entities.enemies;
 import java.awt.*;
 
 /**
- * SpeedEnemy is an enemy type that extends the abstract class Enemy
- * SpeedEnemy have low health but are fast.
- * SpeedEnemy are created by WaveMaker
+ * SpeedEnemy is an enemy type that extends the abstract class Enemy SpeedEnemy have low health but are fast. SpeedEnemy are created by
+ * WaveMaker
  */
 public class SpeedEnemy extends Enemy
 {

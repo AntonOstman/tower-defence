@@ -1,21 +1,16 @@
 package se.liu.antos931jakos322.towerdefence.entities.towers;
 
 
-
-
 import se.liu.antos931jakos322.towerdefence.entities.projectiles.ProjectileType;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
 
 /**
- *
- *
- * AirplaneTower extends Tower and is a Tower that can move.
- * AirplaneTower moves in circles around the startPosition to represent an airplane flying around.
- *
+ * AirplaneTower extends Tower and is a Tower that can move. AirplaneTower moves in circles around the startPosition to represent an
+ * airplane flying around.
+ * <p>
  * AirplaneTower shoots Missile projectiles and has average stats
- *
  */
 
 
@@ -45,8 +40,7 @@ public class AirplaneTower extends Tower
     }
 
     /**
-     * Airplane tower has the "unique action" of moving in a circle
-     * So activate moves the tower in a circle
+     * Airplane tower has the "unique action" of moving in a circle So activate moves the tower in a circle
      */
 
     @Override public void activate() {
@@ -55,7 +49,6 @@ public class AirplaneTower extends Tower
 
     /**
      * Upgrades the tower but also increases the radius of circle it spins around.
-     *
      */
 
     @Override public void upgrade() {
@@ -66,17 +59,16 @@ public class AirplaneTower extends Tower
 
     /**
      * Moves the tower in a circle around the starting position
-     *
      */
 
     @Override public void move() {
 	angle += SPEED; // in this context speed is a angle speed
 	// use sin and cos combined with the changing angle to circle the tower
 	// around where it was first placed
-        double newX = startPosition.getX() + positionRadius * Math.sin(angle);
-        double newY = startPosition.getY() + positionRadius * Math.cos(angle);
+	double newX = startPosition.getX() + positionRadius * Math.sin(angle);
+	double newY = startPosition.getY() + positionRadius * Math.cos(angle);
 
-        Point2D newPos = new Point2D.Double(newX,newY);
+	Point2D newPos = new Point2D.Double(newX, newY);
 	position = newPos;
     }
 }

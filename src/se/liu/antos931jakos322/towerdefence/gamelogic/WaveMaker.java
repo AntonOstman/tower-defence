@@ -156,13 +156,13 @@ public class WaveMaker
     /**
      * Inputs the number of enemies to add during a wave, then adds the enemies evenly during the wave duration.
      *
-     * @param amount  is how many enemies that will be added during the wave
+     * @param amount    is how many enemies that will be added during the wave
      * @param enemyType what type of enemy to add
      */
     private void spawnEnemy(int amount, EnemyType enemyType) {
 	if (amount != 0) {
 	    // spawn speed is how fast the enemies spawn during a wave.
-            // Lower spawnspeed means fast spawning of the enemy
+	    // Lower spawnspeed means fast spawning of the enemy
 	    int spawnSpeed = waveActiveTime / amount;
 	    // since spawnspeed is an integer we round it up after the division if it is 0
 	    if (spawnSpeed == 0) {

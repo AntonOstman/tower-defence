@@ -16,12 +16,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * GameViewer controls the main user interface of the game and displays the game.
- * GameViewer takes input from the user in the form of buttons presses and clicks on its panels.
- * GameViewer can therefore for example decide where game objects should be placed by calculating the pixel to gamescale relation when
- * the player clicks on the game panel
- *
+ * GameViewer controls the main user interface of the game and displays the game. GameViewer takes input from the user in the form of
+ * buttons presses and clicks on its panels. GameViewer can therefore for example decide where game objects should be placed by calculating
+ * the pixel to gamescale relation when the player clicks on the game panel
+ * <p>
  * This means the entire game can be played and be seen by the player becuase of gameviewer
  */
 public class GameViewer
@@ -38,12 +36,12 @@ public class GameViewer
      * Constructs a GameViewer object which contains the game userinterface
      *
      * @param gameHandler the gamehandler object to play the game on
-     * @param gameScale the graphical scale of the game
+     * @param gameScale   the graphical scale of the game
      */
 
     public GameViewer(GameHandler gameHandler, int gameScale) {
-        this.gameHandler = gameHandler;
-        this.selectedTower = TowerType.NONE;
+	this.gameHandler = gameHandler;
+	this.selectedTower = TowerType.NONE;
 	this.frame = null;
 	this.towerDescription = null;
 	this.clickedTower = null;
@@ -52,12 +50,11 @@ public class GameViewer
 
     /**
      * Creates the entire user interface on which the game is played
-     *
+     * <p>
      * Also shows the frame after completion.
-     *
      */
 
-    public void createInterface(){
+    public void createInterface() {
 	final Color backGroundColor = new Color(92, 184, 92);
 	MenuComponent menuComponent = new MenuComponent(gameHandler);
 	GameComponent gameComponent = new GameComponent(gameHandler);
@@ -69,13 +66,14 @@ public class GameViewer
 	// in the gridlayout
 	// 0 stands for unlimited amount
 	JPanel mainPanel = new JPanel();
-	JPanel gamePanel = new JPanel(new GridLayout(1,1));
-	JPanel mainMenuPanel = new JPanel(new GridLayout(5,1));
+	JPanel gamePanel = new JPanel(new GridLayout(1, 1));
+	JPanel mainMenuPanel = new JPanel(new GridLayout(5, 1));
 	JPanel pauseAndQuitPanel = new JPanel(new GridLayout(2, 0));
 	JPanel towerUpgradesPanel = new JPanel(new BorderLayout());
-	JPanel towerDescriptionPanel = new JPanel(new GridLayout(1,1));
+	JPanel towerDescriptionPanel = new JPanel(new GridLayout(1, 1));
 	JPanel textPanel = new JPanel(new BorderLayout());
-	JScrollPane scrollableInteractivePanel = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	JScrollPane scrollableInteractivePanel =
+		new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	JScrollPane textScrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 	// create the interactive panel
@@ -96,7 +94,7 @@ public class GameViewer
 	final int textSize = 10;
 	towerDescription.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, textSize));
 
-	for (TowerType towerType: towerTypes) {
+	for (TowerType towerType : towerTypes) {
 	    // when the button is clicked -> buttonEvent class is activated
 	    ButtonEvent buttonEvent = new ButtonEvent(towerType, ButtonType.TOWER_BUTTON);
 	    // When a button is activated the other buttons in the same group are deselected
@@ -105,14 +103,13 @@ public class GameViewer
 	    Tower tower = EntityFactory.getTower(towerType);
 	    // Create a drawing area at the size of the tower
 	    //----- There is no problem with null. It is handled so the inspections are incorrent ------
-	    final int bufferedImageWidth = (int) (tower.getSize()*gameScale);
-	    final int bufferedImageHeight = (int) (tower.getSize()*gameScale);
-	    BufferedImage lineImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight,
-							BufferedImage.TYPE_INT_RGB);
+	    final int bufferedImageWidth = (int) (tower.getSize() * gameScale);
+	    final int bufferedImageHeight = (int) (tower.getSize() * gameScale);
+	    BufferedImage lineImage = new BufferedImage(bufferedImageWidth, bufferedImageHeight, BufferedImage.TYPE_INT_RGB);
 	    Graphics2D bg2d = lineImage.createGraphics();
 
-	    double towerOffset = (1/2.0 - tower.getSize()/2);
-	    tower.setPosition(new Point2D.Double(-towerOffset,-towerOffset));
+	    double towerOffset = (1 / 2.0 - tower.getSize() / 2);
+	    tower.setPosition(new Point2D.Double(-towerOffset, -towerOffset));
 	    tower.draw(bg2d, gameScale);
 	    b.addActionListener(buttonEvent);
 	    b.setIcon(new ImageIcon(lineImage));
@@ -120,7 +117,7 @@ public class GameViewer
 	    b.setBackground(backGroundColor);
 	    buttonGroup.add(b);
 	    towerButtonPanel.add(b);
-	    UIManager.put(b.isSelected(),Color.BLACK);
+	    UIManager.put(b.isSelected(), Color.BLACK);
 	}
 
 	//add the text component contaning health, wave level and money
@@ -157,11 +154,11 @@ public class GameViewer
 	pauseAndQuitPanel.add(quitButton);
 
 	// now add all panels we have created to the mainMenuPanel
-	mainMenuPanel.add(menuComponent);		// EX. level, health
-	mainMenuPanel.add(scrollableInteractivePanel);	// The tower buttons
-	mainMenuPanel.add(towerDescriptionPanel);	// the tower description
-	mainMenuPanel.add(towerUpgradesPanel);		// The upgrade button
-	mainMenuPanel.add(pauseAndQuitPanel);		// pasuse and quit button
+	mainMenuPanel.add(menuComponent);                // EX. level, health
+	mainMenuPanel.add(scrollableInteractivePanel);        // The tower buttons
+	mainMenuPanel.add(towerDescriptionPanel);        // the tower description
+	mainMenuPanel.add(towerUpgradesPanel);                // The upgrade button
+	mainMenuPanel.add(pauseAndQuitPanel);                // pasuse and quit button
 	final int widthScale = 4;
 	final int heightScale = 10;
 	int mainMenuWidth = gameScale * widthScale;
@@ -186,18 +183,18 @@ public class GameViewer
     }
 
     public void dispose() {
-        frame.dispose();
+	frame.dispose();
     }
 
-    public class ButtonEvent extends AbstractAction{
+    public class ButtonEvent extends AbstractAction
+    {
 
-        private TowerType towerType;
+	private TowerType towerType;
 	private ButtonType buttonType;
 	private JButton jButton;
 
 	/**
 	 * Constructs a ButtonEvent with a towerType and buttonType
-	 *
 	 */
 	public ButtonEvent(TowerType towerType, ButtonType buttonType) {
 	    this.towerType = towerType;
@@ -221,7 +218,7 @@ public class GameViewer
 	 * Constructs a ButtonEvent with a buttonType and a jButton object
 	 *
 	 * @param buttonType the type of button
-	 * @param jButton the used button
+	 * @param jButton    the used button
 	 */
 	public ButtonEvent(ButtonType buttonType, JButton jButton) {
 	    this.towerType = TowerType.NONE;
@@ -235,48 +232,48 @@ public class GameViewer
 	 * @param e
 	 */
 	@Override public void actionPerformed(final ActionEvent e) {
-	    switch (buttonType){
+	    switch (buttonType) {
 		// if the button is a upgrade button then check if the tower can be upgraded, in that case upgrade the tower
 		// and change the description of the textArea towerDescriton
-	        case UPGRADE:
+		case UPGRADE:
 		    // player is trying to upgrade a tower
-		    if(clickedTower != null) {
+		    if (clickedTower != null) {
 			if (gameHandler.isTowerUpgradable(clickedTower)) {
 			    gameHandler.upgradeTower(clickedTower);
 			    towerDescription.setText(clickedTower.getDescription());
 			}
 		    }
 		    break;
-		    // if the button is a tower button then the player is trying to buy a tower
-			// so set the selected tower and change the tower description to that tower
+		// if the button is a tower button then the player is trying to buy a tower
+		// so set the selected tower and change the tower description to that tower
 		case TOWER_BUTTON:
 		    // player is trying to press a tower on the menu
 		    selectedTower = towerType;
-			//----- There is no problem with null. It is handled so the inspections are incorrent ------
+		    //----- There is no problem with null. It is handled so the inspections are incorrent ------
 		    String towerDesc = EntityFactory.getTower(towerType).getDescription();
 		    towerDescription.setText(towerDesc);
 		    break;
-		    // if the button type is a pause button then pause the game when the player presses it, or resume if it is paused.
+		// if the button type is a pause button then pause the game when the player presses it, or resume if it is paused.
 		case PAUSE:
-		    if (gameHandler.isGamePaused()){
+		    if (gameHandler.isGamePaused()) {
 			jButton.setText("Pause game");
 			gameHandler.startGame();
-		    }
-		    else{
+		    } else {
 			jButton.setText("Start game");
 			gameHandler.pauseGame();
 		    }
 		    break;
-		    // quit the game if the player presses on a quit button
+		// quit the game if the player presses on a quit button
 		case QUIT:
 		    System.exit(0);
 		default:
 		    // give and exception if somehow no valid button type was given.
 		    // the exception does not need to be handeld since it is a IllegalArgumentException and there is something
 		    // wrong with the game code
-		    IllegalArgumentException illegalArgumentException = new IllegalArgumentException("ButtonEvent did not have valid ButtonType");
-		    logger.log(Level.SEVERE, "ButtonEvent in GameViewer did not recognize ButtonType.\nButtonType: " + buttonType +
-					     "\n", illegalArgumentException);
+		    IllegalArgumentException illegalArgumentException =
+			    new IllegalArgumentException("ButtonEvent did not have valid ButtonType");
+		    logger.log(Level.SEVERE, "ButtonEvent in GameViewer did not recognize ButtonType.\nButtonType: " + buttonType + "\n",
+			       illegalArgumentException);
 		    throw illegalArgumentException;
 	    }
 
@@ -284,30 +281,29 @@ public class GameViewer
     }
 
     /**
-     * MouseEvent contains the logic for handelding placing towers and displaying tower info on a specific point.
-     * MouseEvent uses MouseAdapter which contains the logic for mouse listening
+     * MouseEvent contains the logic for handelding placing towers and displaying tower info on a specific point. MouseEvent uses
+     * MouseAdapter which contains the logic for mouse listening
      */
     public class MouseEvent extends MouseAdapter
     {
 	private JTextArea textArea;
 	private ButtonGroup buttonGroup;
 
-	public MouseEvent(JTextArea textArea, ButtonGroup buttonGroup){
+	public MouseEvent(JTextArea textArea, ButtonGroup buttonGroup) {
 	    this.textArea = textArea;
 	    this.buttonGroup = buttonGroup;
 	}
 
 	/**
-	 * Either places a tower on the pressed location
-	 * or displays info of the tower the player has pressed.
+	 * Either places a tower on the pressed location or displays info of the tower the player has pressed.
 	 *
 	 * @param e the MouseEvent object with info about click location
 	 */
 	@Override public void mouseClicked(final java.awt.event.MouseEvent e) {
 	    Point clickedPoint = e.getPoint();
 	    // we get the gameScale and translate from pixel coordinates to map coordinates
-	    int mapPosX = clickedPoint.x/gameScale;
-	    int mapPosY = clickedPoint.y/gameScale;
+	    int mapPosX = clickedPoint.x / gameScale;
+	    int mapPosY = clickedPoint.y / gameScale;
 	    // since we do not want to place the tower "in between" tiles we use a normal point and not Point2D.Double
 	    Point mapPoint = new Point(mapPosX, mapPosY);
 	    // if no tower is selected the player is trying to get info from a tower placed on the map
@@ -321,21 +317,21 @@ public class GameViewer
 	}
 
 	/**
-	 * Displays information of the tower on a specific clicked point.
-	 * Also sets the tower to be selected and deselctes the previous tower
+	 * Displays information of the tower on a specific clicked point. Also sets the tower to be selected and deselctes the previous
+	 * tower
 	 *
 	 * @param clickedPoint the point of the potential tower
 	 */
-	private void displayTowerInfo(Point clickedPoint){
+	private void displayTowerInfo(Point clickedPoint) {
 	    // if the clicked tower is not null, the player has clicked
 	    // on another tower so deselect to current one
-	    if (clickedTower != null){
-	        gameHandler.deselectTower(clickedTower);
+	    if (clickedTower != null) {
+		gameHandler.deselectTower(clickedTower);
 	    }
 	    Tower newClickedTower = gameHandler.getTowerNearPosition(clickedPoint);
 	    // if we did not get a null tower then there was a tower near the location
-	    if (newClickedTower == null){
-	        return;
+	    if (newClickedTower == null) {
+		return;
 	    }
 	    textArea.setText(newClickedTower.getDescription());
 	    clickedTower = newClickedTower;
@@ -347,7 +343,7 @@ public class GameViewer
 	 *
 	 * @param clickedPoint the clicked point to place the tower
 	 */
-	private void placeTower(Point clickedPoint){
+	private void placeTower(Point clickedPoint) {
 	    /*
 	    First check if the selected tower can be placed.
 	    If we cant place it give the player an explination.
@@ -361,12 +357,10 @@ public class GameViewer
 	    boolean canPlaceTower = gameHandler.canPlaceTower(newTower);
 
 	    // check if the game allows placing the selected tower
-	    if (!canPlaceTower){
+	    if (!canPlaceTower) {
 		// if not say tell the player he has done something incorrect
-		JOptionPane.showMessageDialog(frame,"Not enough money or incorrect placement of tower");
-	    }
-
-	    else{
+		JOptionPane.showMessageDialog(frame, "Not enough money or incorrect placement of tower");
+	    } else {
 		// otherwise place the tower for where the player has requested
 		gameHandler.addTower(newTower);
 		// lastely deselct the tower button and set the selcted tower to nothing

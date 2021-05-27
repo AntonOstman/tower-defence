@@ -26,8 +26,7 @@ import java.util.List;
 
 /**
  * EntityGetter is a class with static methods that can return a new Entity object with the Entity specific Enum as argument. Example:
- * EntityGetter.getTower(TowerType.CANON) returns a new CanonTower object.
- * Can also return the list of avaible TowerType's by using
+ * EntityGetter.getTower(TowerType.CANON) returns a new CanonTower object. Can also return the list of avaible TowerType's by using
  * EntityGetter.getAllTowers()
  */
 
@@ -38,6 +37,7 @@ public class EntityFactory
      * Returns a projectile of the specified projectileType
      *
      * @param projectileType the projectile to get
+     *
      * @return a new Projectile object of the specified splitEnemyType
      */
 
@@ -45,7 +45,7 @@ public class EntityFactory
 	// A map might look nicer and be more modular in the future, but this can be added if the future requires it.
 	// A map could be used instead of switch case but this means new objects will be unneccesarily created.
 	// when we only want to return a specific one. So a switch case seems more appropriate in this case
-        switch (projectileType) {
+	switch (projectileType) {
 	    case ARROW:
 		return new ArrowProjectile();
 	    case EXPLODING:
@@ -60,10 +60,12 @@ public class EntityFactory
 		return null;
 	}
     }
+
     /**
      * Returns an enemy of the specified towerType
      *
      * @param enemyType the enemy to get
+     *
      * @return a new Enemy object of the specified splitEnemyType
      */
 
@@ -73,7 +75,7 @@ public class EntityFactory
 	// when we only want to return a specific one. So a switch case seems more appropriate in this case
 	switch (enemyType) {
 	    case FLYING:
-	        return new FlyingEnemy();
+		return new FlyingEnemy();
 	    case BOSS:
 		return new BossEnemy();
 	    case SPEED:
@@ -108,6 +110,7 @@ public class EntityFactory
      * Returns a tower of the specified towerType
      *
      * @param towerType the towerType to get
+     *
      * @return a new Tower object of the specified towerType
      */
     public static Tower getTower(TowerType towerType) {

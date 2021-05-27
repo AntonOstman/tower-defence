@@ -7,11 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- *
- * MenuComponent draws the text graphics for game health, money and wave level
- * MenuComponent implements GameListener which means it can listen to game changes and update the grapchis accordingly
- *
- *
+ * MenuComponent draws the text graphics for game health, money and wave level MenuComponent implements GameListener which means it can
+ * listen to game changes and update the grapchis accordingly
  */
 public class MenuComponent extends JComponent implements GameListener
 {
@@ -26,7 +23,7 @@ public class MenuComponent extends JComponent implements GameListener
 
 
     public MenuComponent(final GameHandler gameHandler) {
-        this.gameHandler = gameHandler;
+	this.gameHandler = gameHandler;
 
     }
 
@@ -38,8 +35,7 @@ public class MenuComponent extends JComponent implements GameListener
     }
 
     /**
-     * Draws the Life, money and wave level text.
-     * Draws it from the up and down.
+     * Draws the Life, money and wave level text. Draws it from the up and down.
      *
      * @param g the graphics object to draw with
      */
@@ -59,7 +55,7 @@ public class MenuComponent extends JComponent implements GameListener
 	final int moneyPositionY = GAME_SCALE + margin;
 	final int levelPositionY = GAME_SCALE + margin * 2;
 	g2d.drawString(health, positionX, healthPositionY);
-    	g2d.drawString(currentMoney, positionX, moneyPositionY);
+	g2d.drawString(currentMoney, positionX, moneyPositionY);
 	g2d.drawString(level, positionX, levelPositionY);
     }
 }
