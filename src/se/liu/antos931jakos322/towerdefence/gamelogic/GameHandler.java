@@ -274,7 +274,7 @@ public class GameHandler
      * @return if the tower can be placed
      */
 
-    public boolean canAffordAndPlaceTower(Tower tower){
+    public boolean canPlaceTower(Tower tower){
         Point2D towerPos = tower.getPosition();
         Point towerPosPoint = new Point((int)towerPos.getX(), (int)towerPos.getY());
 

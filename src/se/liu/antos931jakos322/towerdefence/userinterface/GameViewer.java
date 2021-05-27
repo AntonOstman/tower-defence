@@ -358,7 +358,7 @@ public class GameViewer
 	    Tower newTower = EntityFactory.getTower(selectedTower);
 	    //----- There is no problem with null. It is handled so the inspections are incorrent ------
 	    newTower.setPosition(clickedPoint);
-	    boolean canPlaceTower = gameHandler.canAffordAndPlaceTower(newTower);
+	    boolean canPlaceTower = gameHandler.canPlaceTower(newTower);
 
 	    // check if the game allows placing the selected tower
 	    if (!canPlaceTower){

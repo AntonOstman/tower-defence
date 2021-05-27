@@ -22,7 +22,7 @@ public class Tile
 
     public Tile(Point position, final TileType tileType) {
 	this.tileType = tileType;
-	this.tileColor = randomNuance();
+	this.tileColor = getRandomNuance();
 	this.position = position;
     }
 
@@ -49,7 +49,7 @@ public class Tile
      *
      * @return a color with a random nuance on all RGB values
      */
-    public Color randomNuance() {
+    public Color getRandomNuance() {
 	Color oldColor = getStandardTileColor(tileType);
 	return new Color(getRandomColorChannel(oldColor.getRed()), getRandomColorChannel(oldColor.getGreen()),
 			 getRandomColorChannel(oldColor.getBlue()));
