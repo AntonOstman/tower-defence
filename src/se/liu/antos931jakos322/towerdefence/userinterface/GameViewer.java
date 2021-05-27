@@ -180,6 +180,8 @@ public class GameViewer
 	frame.add(mainPanel);
 	frame.pack();
 	frame.setVisible(true);
+	// set the program to exit when the frame is closed
+	frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
 
