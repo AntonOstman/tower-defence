@@ -1,13 +1,11 @@
 package se.liu.antos931jakos322.towerdefence.entities.enemies;
 
-import se.liu.antos931jakos322.towerdefence.other.HelperFunctions;
-
 import java.awt.*;
 
 /**
  * FlyingEnemy is an Enemy object.
  * FlyingEnemy moves direcetly towards the end of the game path. Ignoring the path
- *
+ * FlyingEnemy are created by WaveMaker
  */
 
 
@@ -36,14 +34,5 @@ public class FlyingEnemy extends Enemy
 	} else {
 	    pathProgress ++;
 	}
-	// finished flag is set because pathprogress is at last position
-	// keep it at finished if we are close to finished, else the enemy are not finished.
-	final double distance = 0.2;
-	if(HelperFunctions.isNear(position, movePosition, distance)){
-	    return;
-	}
-	finished = false;
-
-
     }
 }

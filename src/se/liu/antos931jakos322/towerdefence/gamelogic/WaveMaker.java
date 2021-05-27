@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * WaveMaker creates the enemies and returns the enemies that will
  * be spawned on the map. The class returnes the enemies in waves that depend
- * on the tickcount. WaveMaker should be activated every tick.
+ * on the tickcount. WaveMaker is activated every tick by GameHandler
  */
 public class WaveMaker
 {
@@ -81,7 +81,7 @@ public class WaveMaker
                 activeWaveCounter++;
                 // during a wave createWave is activated every tick
                 // This returns the enemies that will be added
-                return createWave(waveLevel);
+                return createWave();
             }
         }
         // tick up how far the waveMaker has been active when not in active waves
@@ -94,7 +94,7 @@ public class WaveMaker
         return waveLevel;
     }
 
-    private List<Enemy> createWave(int waveLevel){
+    private List<Enemy> createWave(){
         // phases:
         //      1. Generic
         //      2. Generic + speedy + flying + exploding

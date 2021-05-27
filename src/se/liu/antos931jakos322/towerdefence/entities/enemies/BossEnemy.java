@@ -4,7 +4,8 @@ import java.awt.*;
 
 /**
  * BossEnemy is an enemy type that extends the abstract class Enemy.
- * BossEnemy have alot of health but moves slow.
+ * BossEnemy have a lot of health but moves slow.
+ * BossEnemy are created by WaveMaker
  */
 public class BossEnemy extends Enemy
 {
